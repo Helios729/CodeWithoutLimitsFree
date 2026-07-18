@@ -1,0 +1,140 @@
+{
+  "module_id": "edtech-and-learning-science",
+  "module_title": "EdTech and Learning Science-L",
+  "type": "learning",
+  "difficulty": "Beginner",
+  "duration_min": 60,
+  "bloom_levels_covered": [
+    "L1 Remember",
+    "L2 Understand",
+    "L3 Apply"
+  ],
+  "companion_quiz": "EdTech and Learning Science-Q",
+  "sources": [
+    {
+      "id": "S1",
+      "citation": "Bloom et al. Taxonomy 1956; Anderson & Krathwohl 2001.",
+      "url": "https://www.bloomstaxonomy.net",
+      "access": "Free."
+    },
+    {
+      "id": "S2",
+      "citation": "Roediger & Karpicke. Test-Enhanced Learning. Psych Science, 2006.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16507066",
+      "access": "Free via PubMed."
+    },
+    {
+      "id": "S3",
+      "citation": "Ebbinghaus. Memory. 1885.",
+      "url": "http://psychclassics.yorku.ca/Ebbinghaus/memory.htm",
+      "access": "Free \u2014 public domain."
+    },
+    {
+      "id": "S4",
+      "citation": "Sweller. Cognitive Load. Cognitive Science, 1988.",
+      "url": "https://doi.org/10.1207/s15516709cog1202_4",
+      "access": "Free via ResearchGate."
+    },
+    {
+      "id": "S5",
+      "citation": "U.S. Dept. of Education. Evidence-Based Practices in Online Learning. 2010.",
+      "url": "https://www2.ed.gov/rschstat/eval/tech/evidence-based-practices/finalreport.pdf",
+      "access": "Free."
+    }
+  ],
+  "learning_objectives": [
+    "L1: State the six levels of Bloom's Revised Taxonomy and their associated cognitive verbs.",
+    "L1: Define spaced repetition, retrieval practice, and interleaving.",
+    "L1: Identify intrinsic, extraneous, and germane cognitive load.",
+    "L2: Explain why retrieval practice produces stronger retention than re-reading.",
+    "L2: Describe the forgetting curve and how spaced repetition counters it.",
+    "L2: Compare formative and summative assessment.",
+    "L3: Design a five-question mini-quiz covering Bloom's L1, L2, and L3 for a given topic.",
+    "L3: Apply cognitive load theory to evaluate an instructional design."
+  ],
+  "mini_lessons": [
+    {
+      "ml": 1,
+      "title": "Bloom's Revised Taxonomy",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-1",
+      "concepts": [
+        {
+          "title": "The Six Levels",
+          "explanation": "L1 Remember: define, identify, list, state. L2 Understand: explain, describe, classify, compare. L3 Apply: implement, execute, solve, compute. L4 Analyse: differentiate, examine. L5 Evaluate: critique, justify, assess. L6 Create: design, construct, develop. Mini-quizzes target L1\u2013L3.",
+          "worked_example": "Binary Search \u2014 L1: State time complexity. L2: Explain why a sorted array is required. L3: Trace binary search on [2,5,8,12,16,23] for target=12.",
+          "source_refs": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 2,
+      "title": "Memory and Retrieval Practice",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-2",
+      "concepts": [
+        {
+          "title": "Forgetting Curve and Spaced Repetition",
+          "explanation": "Ebbinghaus (1885): memory decays exponentially \u2014 1 day ~33% retained, 1 week ~25%. Each successful retrieval resets curve with shallower slope. Spaced repetition: review at 1, 3, 7, 14, 30 days.",
+          "worked_example": "Cramming 5h: 70% next day, 20% after 2 weeks. Spaced 1h\u00d75: 60% next day, 65% after 2 weeks \u2014 ~3\u00d7 better long-term.",
+          "source_refs": [
+            "S3",
+            "S2"
+          ]
+        },
+        {
+          "title": "The Testing Effect",
+          "explanation": "Retrieval practice produces stronger learning than re-reading. Roediger & Karpicke (2006): study-test group scored ~50% better at 1-week test. Retrieval is effortful \u2014 reconstructing a memory strengthens the encoding.",
+          "worked_example": "This platform: each mini-lesson followed by 5-question mini-quiz (immediate retrieval). SuperQuizzes revisit earlier material (spaced retrieval).",
+          "source_refs": [
+            "S2",
+            "S5"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 3,
+      "title": "Cognitive Load Theory",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-3",
+      "concepts": [
+        {
+          "title": "Three Types of Load",
+          "explanation": "Sweller (1988): working memory has limited capacity. Intrinsic: inherent difficulty \u2014 manage via simple-to-complex sequencing. Extraneous: poor design overhead \u2014 minimise. Germane: schema-building effort \u2014 maximise.",
+          "worked_example": "High extraneous: 200-word preamble, three tables, scrolling required. Low extraneous: concise stem under 50 words, single diagram, four choices visible without scrolling.",
+          "source_refs": [
+            "S4"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 4,
+      "title": "Assessment Design and AI in Education",
+      "bloom": "L2-L3",
+      "companion_mini_quiz": "MQ-4",
+      "concepts": [
+        {
+          "title": "Formative vs Summative",
+          "explanation": "Formative: ongoing, low-stakes feedback \u2014 diagnose gaps, guide instruction. Summative: evaluates learning at end of unit. Formative = assessment FOR learning; summative = assessment OF learning.",
+          "worked_example": "Student fails MQ-3 Q4. Platform shows correct answer + sourced explanation. SuperQuiz B revisits same concept later \u2014 spaced retrieval reinforces corrected understanding.",
+          "source_refs": [
+            "S1",
+            "S5"
+          ]
+        },
+        {
+          "title": "AI in Education",
+          "explanation": "Four applications: (1) Adaptive learning. (2) Intelligent tutoring (Bloom 2-sigma). (3) Automated essay scoring. (4) Learning analytics. Equity concerns: performance gaps, surveillance, unequal access.",
+          "worked_example": "Bloom's 2-sigma: 1-on-1 tutored students score 2 SD above classroom-taught peers. Source: Educational Researcher 13(6). Free: https://www.jstor.org/stable/1175554",
+          "source_refs": [
+            "S5"
+          ]
+        }
+      ]
+    }
+  ]
+}

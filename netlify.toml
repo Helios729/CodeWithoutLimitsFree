@@ -1,0 +1,23 @@
+# Netlify config for the Code Without Limits Expo web build
+# Place this at the ROOT of your GitHub repo so Netlify auto-detects it.
+
+[build]
+  base    = "frontend"
+  command = "npx expo export --platform web --output-dir dist"
+  publish = "dist"
+
+# Proxy /api/* to the FastAPI backend, so the same domain (codewithoutlimits.org)
+# serves both the website and the API for web + native clients.
+# REPLACE the placeholder below with your backend's real host once it's deployed
+# (e.g. Render, Fly.io, Railway).
+[[redirects]]
+  from   = "/api/*"
+  to     = "https://REPLACE-WITH-YOUR-BACKEND-HOST.example.com/api/:splat"
+  status = 200
+  force  = true
+
+# SPA fallback so Expo Router deep-links work on refresh
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200

@@ -1,0 +1,409 @@
+{
+  "module_id": "ai-ethics-and-responsible-use",
+  "module_title": "AI Ethics and Responsible Use of AI-Q",
+  "type": "quiz",
+  "difficulty": "Beginner",
+  "companion_learning": "AI Ethics and Responsible Use of AI-L",
+  "superquiz_pool": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+  ],
+  "bloom_distribution": {
+    "L1_remember": 2,
+    "L2_understand": 2,
+    "L3_apply": 1
+  },
+  "mini_quizzes": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 Core AI Ethics Concepts",
+      "source_lesson": "ML-1",
+      "questions": [
+        {
+          "q_id": "Q03-MQ1-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "Which best defines algorithmic bias in AI systems?",
+          "options": {
+            "A": "The speed penalty incurred by running AI on older hardware",
+            "B": "Systematic, unfair discrimination in AI outputs caused by biased training data, model design, or evaluation metrics",
+            "C": "The tendency of AI systems to prefer alphabetically first answers",
+            "D": "Random variation in model predictions due to stochastic training"
+          },
+          "answer": "B",
+          "explanation": "Algorithmic bias is systematic and unfair \u2014 it consistently disadvantages certain groups. Sources include biased historical data, biased feature selection, or biased evaluation metrics. It is not random noise (Jobin et al., Nature MI, 2019).",
+          "source": "Jobin et al. The global landscape of AI ethics guidelines. Nature Machine Intelligence, 2019. https://arxiv.org/abs/1906.11668"
+        },
+        {
+          "q_id": "Q03-MQ1-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Which of the following is NOT one of the EU High-Level Expert Group's seven requirements for Trustworthy AI?",
+          "options": {
+            "A": "Technical robustness and safety",
+            "B": "Privacy and data governance",
+            "C": "Maximum commercial profitability",
+            "D": "Accountability"
+          },
+          "answer": "C",
+          "explanation": "The EU HLEG's seven requirements are: (1) Human agency & oversight, (2) Technical robustness & safety, (3) Privacy & data governance, (4) Transparency, (5) Diversity, non-discrimination & fairness, (6) Societal & environmental wellbeing, (7) Accountability. Commercial profitability is not among them.",
+          "source": "EU HLEG. Ethics Guidelines for Trustworthy AI. 2019. https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai"
+        },
+        {
+          "q_id": "Q03-MQ1-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why is transparency distinct from explainability in AI ethics?",
+          "options": {
+            "A": "Transparency and explainability are synonyms used interchangeably",
+            "B": "Transparency refers to openness about how a system works at a systemic level; explainability is the ability to provide a human-understandable reason for a specific decision",
+            "C": "Transparency applies only to open-source models; explainability only to commercial models",
+            "D": "Transparency is a legal term; explainability is a technical term with no legal relevance"
+          },
+          "answer": "B",
+          "explanation": "Transparency: stakeholders can understand the overall system \u2014 its data, design, and deployment context. Explainability: a specific output can be interpreted by a human. GDPR Article 22 mandates explainability for automated decisions affecting individuals.",
+          "source": "EU HLEG. Ethics Guidelines for Trustworthy AI. 2019; GDPR Article 22. https://gdpr-info.eu/art-22-gdpr"
+        },
+        {
+          "q_id": "Q03-MQ1-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does individual fairness differ from group fairness (demographic parity) as a definition?",
+          "options": {
+            "A": "Individual fairness applies to humans; group fairness applies only to corporations",
+            "B": "Individual fairness requires similar individuals to be treated similarly regardless of group membership; demographic parity requires equal positive outcome rates across groups",
+            "C": "Individual fairness is always achievable alongside group fairness",
+            "D": "Individual fairness measures accuracy; group fairness measures precision"
+          },
+          "answer": "B",
+          "explanation": "Individual fairness (Dwork et al., 2012): similar individuals \u2192 similar outcomes. Demographic parity: positive prediction rates equal across demographic groups. Chouldechova (2017) proved these are mathematically incompatible when base rates differ \u2014 the Impossibility Theorem.",
+          "source": "Jobin et al. Nature MI, 2019; Chouldechova. Fair prediction with disparate impact. 2017."
+        },
+        {
+          "q_id": "Q03-MQ1-05",
+          "bloom": "L3",
+          "skill": "Analyse",
+          "stem": "The Gender Shades study (Buolamwini & Gebru, 2018) found error rates of ~0.7% for lighter-skinned men and ~34.7% for darker-skinned women. Identify the bias type, root cause, and one technically valid mitigation.",
+          "options": {
+            "A": "Deployment bias; caused by users misusing the tool; fix: write better user manuals",
+            "B": "Representation bias in training data; datasets overrepresented lighter-skinned male faces; fix: curate balanced training datasets across skin tone and gender, re-evaluate with disaggregated metrics",
+            "C": "Measurement bias; thermometers measuring skin tone were faulty; fix: replace hardware",
+            "D": "Feedback loop bias; darker-skinned users submit more images; fix: rate-limit API calls by demographic group"
+          },
+          "answer": "B",
+          "explanation": "Buolamwini & Gebru identified representation bias: training datasets (IJB-A, Adience) skewed heavily toward lighter-skinned males. Fix: (1) balanced dataset curation; (2) disaggregated accuracy reporting by subgroup; (3) ongoing bias audits. Rate-limiting by demographics would itself be discriminatory.",
+          "source": "Buolamwini & Gebru. Gender Shades. PMLR FAccT, 2018. http://proceedings.mlr.press/v81/buolamwini18a.html"
+        }
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 Bias in AI Systems",
+      "source_lesson": "ML-2",
+      "questions": [
+        {
+          "q_id": "Q03-MQ2-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is 'historical bias' in AI training data?",
+          "options": {
+            "A": "Data that is more than 10 years old and therefore outdated",
+            "B": "Bias that arises when training data reflects past societal inequalities or discriminatory practices, encoding them into model predictions",
+            "C": "Errors introduced when digitising historical paper records",
+            "D": "Bias caused by selecting training data in alphabetical order"
+          },
+          "answer": "B",
+          "explanation": "Historical bias occurs when training data reflects past social inequalities \u2014 e.g., hiring data from when women were systematically excluded. Models trained on this data learn and perpetuate those patterns even when protected attributes are removed (Mehrabi et al., 2021).",
+          "source": "Mehrabi et al. A Survey on Bias and Fairness in ML. ACM CSUR, 2021. https://arxiv.org/abs/1908.09635"
+        },
+        {
+          "q_id": "Q03-MQ2-02",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "In Obermeyer et al. (2019), what proxy variable caused racial bias and by how many percentage points were Black patients under-scored?",
+          "options": {
+            "A": "Age as proxy for illness severity; 15 pp",
+            "B": "Healthcare cost as proxy for medical need; Black patients scored 26.3 pp lower than equally ill white patients",
+            "C": "ZIP code as proxy for income; 40 pp",
+            "D": "Insurance type as proxy for health status; 10 pp"
+          },
+          "answer": "B",
+          "explanation": "The algorithm used healthcare cost as a proxy for medical need. Because Black patients historically incurred lower costs due to systemic barriers to care, they were assigned lower risk scores than equally ill white patients \u2014 a 26.3 pp gap. Replacing cost with illness severity reduced the disparity by 84%.",
+          "source": "Obermeyer et al. Dissecting racial bias in an algorithm. Science, 2019. https://pubmed.ncbi.nlm.nih.gov/31649194"
+        },
+        {
+          "q_id": "Q03-MQ2-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why is 'fairness through unawareness' (removing protected attributes) insufficient to eliminate bias?",
+          "options": {
+            "A": "It is sufficient \u2014 removing protected attributes always eliminates all bias",
+            "B": "Other features (ZIP code, education, income) are correlated with protected attributes and serve as proxies, allowing models to infer and discriminate indirectly",
+            "C": "It increases bias because models then rely on random noise",
+            "D": "It violates GDPR by deleting legally required demographic data"
+          },
+          "answer": "B",
+          "explanation": "Proxy discrimination: features correlated with protected attributes (e.g., ZIP code correlated with race due to redlining; names correlated with gender/ethnicity) allow models to discriminate indirectly. True fairness requires causal and counterfactual analysis, not just attribute removal.",
+          "source": "Barocas & Hardt. Fairness in Machine Learning. NIPS Tutorial, 2017. https://fairmlbook.org"
+        },
+        {
+          "q_id": "Q03-MQ2-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "The COMPAS algorithm had equal overall accuracy for Black and white defendants, yet ProPublica found racial bias. How can both claims be simultaneously true?",
+          "options": {
+            "A": "They cannot both be true \u2014 mathematical impossibility",
+            "B": "Both use different fairness metrics: COMPAS optimised for equal overall accuracy; ProPublica measured false positive rates (45% for Black vs 23% for white defendants), revealing disparate error distribution",
+            "C": "ProPublica's analysis was methodologically flawed",
+            "D": "Equal accuracy means no bias by any definition \u2014 the claims contradict each other"
+          },
+          "answer": "B",
+          "explanation": "Chouldechova's Impossibility Theorem (2017): when base rates differ across groups, it is mathematically impossible to simultaneously satisfy equal accuracy, equal FPR, and equal FNR. COMPAS achieved equal overall accuracy at the cost of higher FPR for Black defendants. Both analyses used different, legitimate fairness criteria.",
+          "source": "Angwin et al. Machine Bias. ProPublica, 2016; Chouldechova. Fair prediction with disparate impact. 2017."
+        },
+        {
+          "q_id": "Q03-MQ2-05",
+          "bloom": "L3",
+          "skill": "Evaluate",
+          "stem": "A bank's AI loan model shows 91% overall accuracy but approves 78% of white applicants and only 52% of Black applicants with identical financial profiles. Diagnose the fairness failure and propose two technically valid remediations.",
+          "options": {
+            "A": "The model is fair \u2014 91% accuracy exceeds most regulatory thresholds",
+            "B": "The model exhibits disparate impact (demographic parity violation). Remediations: (1) Apply reweighing or re-sampling to balance approval rates during training; (2) Use adversarial debiasing to penalise predictions correlated with race",
+            "C": "No technical fix exists \u2014 replace with human decision-making",
+            "D": "The disparity is acceptable because financial profiles may differ in uncaptured ways"
+          },
+          "answer": "B",
+          "explanation": "Identical financial profiles + 26 pp approval gap = disparate impact. Technical fixes: (1) Reweighing: higher sample weights for under-represented approval cases; (2) Adversarial debiasing (Zhang et al., 2018): train an adversary to predict race from model outputs and penalise the main model. Both require ongoing disaggregated auditing.",
+          "source": "Mehrabi et al. ACM CSUR, 2021; Zhang et al. Mitigating unwanted biases with adversarial learning. AIES, 2018."
+        }
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 EU Trustworthy AI and AI Act",
+      "source_lesson": "ML-3",
+      "questions": [
+        {
+          "q_id": "Q03-MQ3-01",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Under the EU AI Act (2024), which AI application is classified as 'unacceptable risk' and therefore banned?",
+          "options": {
+            "A": "AI-powered spam filters",
+            "B": "Real-time public facial recognition by law enforcement (with narrow exceptions)",
+            "C": "AI recommendation systems on streaming platforms",
+            "D": "AI-powered grammar checkers"
+          },
+          "answer": "B",
+          "explanation": "The EU AI Act classifies real-time biometric identification in public spaces by law enforcement as unacceptable risk \u2014 prohibited except for narrow exceptions (e.g., searching for missing children, preventing imminent terrorist attacks).",
+          "source": "EU AI Act, Regulation (EU) 2024/1689, Articles 5 & 6. https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689"
+        },
+        {
+          "q_id": "Q03-MQ3-02",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "Which of the four NIST AI RMF functions establishes organisational policies and accountability structures for AI risk management?",
+          "options": {
+            "A": "MAP",
+            "B": "MEASURE",
+            "C": "MANAGE",
+            "D": "GOVERN"
+          },
+          "answer": "D",
+          "explanation": "GOVERN establishes organisational policies, roles, responsibilities, and culture for AI risk management. MAP identifies context and potential harms; MEASURE analyses risks; MANAGE prioritises and treats them. GOVERN is the foundation enabling the other three functions.",
+          "source": "NIST. AI Risk Management Framework 1.0. 2023. https://airc.nist.gov/RMF"
+        },
+        {
+          "q_id": "Q03-MQ3-03",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "How does the EU AI Act's risk-based approach categorise AI systems, and what does 'high-risk' classification impose?",
+          "options": {
+            "A": "All AI systems are treated equally regardless of harm potential",
+            "B": "Systems are classified as unacceptable, high, limited, or minimal risk; high-risk systems require conformity assessment, risk management, data governance, transparency, human oversight, and accuracy documentation before deployment",
+            "C": "Only AI systems handling financial data are regulated",
+            "D": "High-risk classification requires AI systems to be open-source"
+          },
+          "answer": "B",
+          "explanation": "Four-tier risk framework: Unacceptable (banned), High-risk (strict obligations), Limited (transparency obligations), Minimal (no specific obligations). High-risk systems \u2014 Annex III: CV screening, credit scoring, medical devices, law enforcement \u2014 must pass conformity assessment, implement risk management, document training data, and ensure human oversight.",
+          "source": "EU AI Act, Regulation (EU) 2024/1689, Articles 6\u201350 & Annex III. https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689"
+        },
+        {
+          "q_id": "Q03-MQ3-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does the EU HLEG requirement for 'human agency and oversight' differ from 'accountability'?",
+          "options": {
+            "A": "They are identical requirements phrased differently",
+            "B": "Human agency & oversight ensures humans can understand, intervene in, and override AI decisions; accountability assigns responsibility for outcomes to identifiable human actors or organisations",
+            "C": "Human agency applies to users; accountability only to developers",
+            "D": "Accountability is a technical metric; human agency is philosophical with no regulatory force"
+          },
+          "answer": "B",
+          "explanation": "Human agency & oversight: AI must support human decision-making, allow intervention, and include override mechanisms \u2014 critical for high-stakes domains. Accountability: responsibility must be attributable via audit trails and documentation to specific persons or organisations. Both are required; neither subsumes the other.",
+          "source": "EU HLEG. Ethics Guidelines for Trustworthy AI. 2019. https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai"
+        },
+        {
+          "q_id": "Q03-MQ3-05",
+          "bloom": "L3",
+          "skill": "Evaluate",
+          "stem": "A hospital proposes deploying an AI triage system in the emergency department. Using the EU HLEG's seven requirements, identify the three most critical and justify your selection.",
+          "options": {
+            "A": "Commercial profitability, processing speed, and storage efficiency",
+            "B": "Technical robustness & safety (system failures risk patient harm), accountability (responsibility must be attributed if errors cause harm), and human agency & oversight (clinicians must be able to override AI recommendations)",
+            "C": "Diversity & non-discrimination only \u2014 all other requirements are secondary",
+            "D": "Only privacy & data governance matters \u2014 HIPAA compliance is sufficient"
+          },
+          "answer": "B",
+          "explanation": "In a life-critical deployment: (1) Technical robustness & safety: failures or false negatives could cause preventable deaths. (2) Accountability: clear responsibility chains for adverse outcomes. (3) Human agency & oversight: override capability is non-negotiable in emergency medicine. All seven requirements apply, but these three are highest-stakes.",
+          "source": "EU HLEG. Ethics Guidelines for Trustworthy AI. 2019; EU AI Act Annex III. 2024."
+        }
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Responsible AI in Practice",
+      "source_lesson": "ML-4",
+      "questions": [
+        {
+          "q_id": "Q03-MQ4-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is SHAP (SHapley Additive exPlanations) in the context of explainable AI?",
+          "options": {
+            "A": "A regulatory standard for AI model documentation published by NIST",
+            "B": "A post-hoc explainability method that assigns each feature a contribution value to a specific prediction, based on Shapley values from cooperative game theory",
+            "C": "A neural network architecture designed to be inherently transparent",
+            "D": "A data augmentation technique that improves model fairness"
+          },
+          "answer": "B",
+          "explanation": "SHAP (Lundberg & Lee, 2017) uses Shapley values from cooperative game theory to compute each feature's marginal contribution to a specific model prediction. It satisfies efficiency, symmetry, dummy, and additivity axioms. Relevant to GDPR Article 22 for automated decisions.",
+          "source": "Lundberg & Lee. A Unified Approach to Interpreting Model Predictions. NeurIPS, 2017. https://arxiv.org/abs/1705.07874"
+        },
+        {
+          "q_id": "Q03-MQ4-02",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "What is the primary trade-off between model accuracy and explainability in AI system design?",
+          "options": {
+            "A": "More accurate models are always more explainable",
+            "B": "Simple models (linear regression, decision trees) are more explainable but typically less accurate than complex models (deep neural networks) which are harder to interpret",
+            "C": "Explainability has no relationship to model accuracy",
+            "D": "Model accuracy decreases as training data increases"
+          },
+          "answer": "B",
+          "explanation": "The accuracy-explainability trade-off: linear regression and shallow decision trees offer high interpretability at the cost of representational capacity. Deep neural networks achieve state-of-the-art accuracy but are black boxes. Post-hoc tools (SHAP, LIME) partially bridge this gap.",
+          "source": "EU HLEG. Ethics Guidelines for Trustworthy AI. 2019; NIST AI RMF. 2023."
+        },
+        {
+          "q_id": "Q03-MQ4-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why does GDPR Article 22 create a legal obligation relevant to AI explainability in the EU?",
+          "options": {
+            "A": "It bans all automated decision-making in the EU",
+            "B": "It gives individuals the right not to be subject to solely automated decisions with significant effects, and the right to obtain a meaningful explanation of such decisions",
+            "C": "It requires all AI models to be open-source",
+            "D": "It mandates a minimum accuracy threshold of 95% for AI systems affecting EU citizens"
+          },
+          "answer": "B",
+          "explanation": "GDPR Article 22 grants EU data subjects: (1) the right to object to solely automated decisions with significant effects (credit, hiring, insurance); (2) the right to obtain 'meaningful information about the logic involved.' This creates a de facto explainability mandate for high-stakes AI systems in the EU.",
+          "source": "EU GDPR Article 22. https://gdpr-info.eu/art-22-gdpr; Selbst & Barocas. The Intuitive Appeal of Explainable Machines. Fordham Law Review, 2018."
+        },
+        {
+          "q_id": "Q03-MQ4-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "How does the NIST AI RMF's MEASURE function operationalise bias assessment in a deployed AI system?",
+          "options": {
+            "A": "MEASURE requires organisations to delete all training data after model deployment",
+            "B": "MEASURE involves quantitatively analysing AI risks including bias (disparate impact, equal opportunity metrics), robustness, and explainability, using metrics aligned to the system's context and stakeholders",
+            "C": "MEASURE only applies to systems with more than 1 million users",
+            "D": "MEASURE is a one-time audit conducted before deployment only"
+          },
+          "answer": "B",
+          "explanation": "NIST AI RMF MEASURE function: organisations select and apply metrics appropriate to context \u2014 bias metrics (demographic parity difference, equal opportunity difference), robustness metrics (performance under distribution shift), explainability metrics. It is ongoing \u2014 not just pre-deployment \u2014 and feeds into MANAGE for risk prioritisation.",
+          "source": "NIST. AI Risk Management Framework 1.0. 2023. https://airc.nist.gov/RMF"
+        },
+        {
+          "q_id": "Q03-MQ4-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "A CV-screening AI rejects 70% of applications from women vs 30% of men in technical roles. Using NIST AI RMF, outline one concrete action per function (GOVERN, MAP, MEASURE, MANAGE).",
+          "options": {
+            "A": "No action needed \u2014 the disparity reflects real differences in qualified applicants",
+            "B": "GOVERN: appoint an AI ethics officer with authority to halt deployment; MAP: identify affected stakeholders and document high-risk context; MEASURE: compute gender-disaggregated approval rates and equal opportunity difference; MANAGE: retrain with balanced data and set gender-parity constraints",
+            "C": "Only MANAGE is needed \u2014 immediately retrain the model",
+            "D": "Only MEASURE is needed \u2014 publish bias metrics and take no further action"
+          },
+          "answer": "B",
+          "explanation": "All four RMF functions required: GOVERN establishes accountability. MAP contextualises harm \u2014 EU AI Act Annex III: CV screening = high-risk. MEASURE quantifies: equal opportunity difference = TPR_male \u2212 TPR_female; disparate impact = approval_female / approval_male. MANAGE: retraining, fairness constraints, ongoing monitoring, regulatory notification where required.",
+          "source": "NIST. AI Risk Management Framework 1.0. 2023; EU AI Act Annex III. 2024."
+        }
+      ]
+    }
+  ],
+  "table_of_contents": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 Core AI Ethics Concepts",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q03-MQ1-01",
+        "Q03-MQ1-02",
+        "Q03-MQ1-03",
+        "Q03-MQ1-04",
+        "Q03-MQ1-05"
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 Bias in AI Systems",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q03-MQ2-01",
+        "Q03-MQ2-02",
+        "Q03-MQ2-03",
+        "Q03-MQ2-04",
+        "Q03-MQ2-05"
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 EU Trustworthy AI and AI Act",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q03-MQ3-01",
+        "Q03-MQ3-02",
+        "Q03-MQ3-03",
+        "Q03-MQ3-04",
+        "Q03-MQ3-05"
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Responsible AI in Practice",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q03-MQ4-01",
+        "Q03-MQ4-02",
+        "Q03-MQ4-03",
+        "Q03-MQ4-04",
+        "Q03-MQ4-05"
+      ]
+    }
+  ],
+  "totals": {
+    "mini_quizzes": 4,
+    "questions": 20,
+    "L1": 8,
+    "L2": 8,
+    "L3": 4
+  }
+}

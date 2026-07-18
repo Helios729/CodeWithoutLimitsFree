@@ -1,0 +1,48 @@
+{
+  "summary": "Platform-paid free-tier iteration verified end-to-end. Backend: 24/24 pytest tests pass covering new free caps (5 prompts/50k tokens), platform-paid free chat increments daily_usage by 1, 6th call returns 429 with 'free prompts' in message (chat + quiz), BYOK calls never touch platform counters (verified at both fresh and quota-exhausted seed states), and all paid-tier (day_pass / monthly) caps still enforced. Frontend (mobile 390x844): token meter shows '5/5 free prompts today', Studio Run button is ENABLED for fresh free user (aria-disabled=None, opacity=1), Account screen Free tier card shows new perks ('5 AI prompts every day — platform-paid', 'No credit card, no key needed') and the button reads 'Current plan'. Critical fix applied: quota.py referenced FREE_DAILY_PROMPT_CAP / FREE_DAILY_TOKEN_CAP that were never defined — this would NameError on any free-tier /api/usage/me or /api/ai/chat. Added constants (5 and 50_000) at top of quota.py.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "account.tsx (Free tier upgrade card)",
+        "issues": [
+          "Tile title still reads 'Free (BYOK)' — stale copy from previous iteration. Should now be 'Free' or 'Free (Platform-paid)' since BYOK is no longer required. /app/frontend/app/(tabs)/account.tsx:30",
+          "Current-plan banner says 'Free tier — upgrade to run AI features.' for free users, but free tier CAN now run AI features. Update copy to e.g. '5 free prompts/day — upgrade for more.' /app/frontend/app/(tabs)/account.tsx:146"
+        ]
+      }
+    ],
+    "react_native_issues": [
+      {"component": "shadow* style props", "issue": "Console warns 'shadow* style props are deprecated. Use boxShadow.' across multiple screens. Reference: any component using shadowColor/shadowOpacity/shadowRadius styles (search frontend/src for shadowOpacity)."},
+      {"component": "pointerEvents prop", "issue": "Console warns 'props.pointerEvents is deprecated. Use style.pointerEvents'. Likely emitted from a TouchableOpacity/View. Search frontend for `pointerEvents=` prop usage."}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_code_guardian.py",
+    "/app/backend/tests/conftest.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Optional copy polish: rename 'Free (BYOK)' tile title to 'Free' and update 'Free tier — upgrade to run AI features.' banner to reflect that free tier has 5 platform-paid prompts/day.",
+    "Address React Native Web deprecation warnings: migrate shadow* style props to boxShadow and pointerEvents prop to style.pointerEvents."
+  ],
+  "critical_code_review_comments": [
+    "FIXED in this run: quota.py referenced FREE_DAILY_PROMPT_CAP and FREE_DAILY_TOKEN_CAP without defining or importing them — every free-tier path (/api/usage/me, /api/ai/chat, /api/quiz/generate) would raise NameError at runtime. Added module-level constants FREE_DAILY_PROMPT_CAP=5 and FREE_DAILY_TOKEN_CAP=50_000 at /app/backend/quota.py:25-26. Main agent should consider exporting these alongside the day-pass constants for consistency.",
+    "quota.py top-of-file docstring still describes free tier as 'platform LLM disabled (BYOK not in v1; surface upgrade message)'. The behavior is now platform-paid 5/day. Update the docstring to avoid confusing future contributors.",
+    "studio.tsx still surfaces 'Paste your Gemini key below to run on the free tier.' on a 402 response (line 69). Since the backend no longer returns 402 for free tier, this branch is dead code but harmless."
+  ],
+  "updated_files": [
+    "/app/backend/quota.py (added FREE_DAILY_PROMPT_CAP=5, FREE_DAILY_TOKEN_CAP=50_000 constants)",
+    "/app/backend/tests/test_code_guardian.py (rewrote tests for new platform-paid free-tier behavior; 24 tests, all passing)"
+  ],
+  "success_rate": {"backend": "100% (24/24)", "frontend": "100% on tested flows (meter, run-button enablement, account perks)"},
+  "seed_data_creation": "Tests seed fresh per-test users via conftest.seed_user fixture, prefixed user_TEST_ / acct_TEST_, with full teardown. Frontend test seeded user_FE_b8c1d07e / acct_FE_9c761992 (already cleaned up).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend tests run with `cd /app/backend && python -m pytest tests/test_code_guardian.py -v`. The conftest seed_user fixture is now the canonical way to create users at any tier; pass daily_prompts/daily_tokens/monthly_tokens/day_pass_expired kwargs. All tests should still pass — if test_chat_free_no_byok_succeeds_and_increments or test_day_pass_chat_increments_quota fail, check that EMERGENT_LLM_KEY in /app/backend/.env is still valid (real Gemini calls).",
+  "rca_of_issue": "Reverse-engineering the previous iteration's BYOK→platform-paid migration, the developer renamed the free-tier branch in quota.py.snapshot() to reference FREE_DAILY_PROMPT_CAP and FREE_DAILY_TOKEN_CAP but forgot to declare them. Because Python only resolves module-level names at call time inside functions, the import succeeded and the server started cleanly — only the first free-tier request would have crashed. Fix: declared the two constants at the top of quota.py (matching the day-pass/monthly pattern). Verified by all 24 pytest cases (including the explicit free-tier snapshot and 6th-call-429 tests) and by a live mobile-viewport browser session that loaded /api/usage/me and rendered '5/5 free prompts today'."
+}

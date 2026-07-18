@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "description": "Maps module_id -> Google Form URL for post-module surveys. Add entries here as forms get created; the in-app survey button opens the Google Form when a URL is present, otherwise falls back to the native MongoDB survey.",
+  "surveys": [
+    { "module_id": "introduction-to-ai",                "form_url": "https://forms.gle/x5XuawYCBpAAcU5q8" },
+    { "module_id": "edtech-and-learning-science",       "form_url": "https://forms.gle/Zc6CJAgacgrHpMZ56" },
+    { "module_id": "ai-ethics-and-responsible-use",     "form_url": "https://forms.gle/v4T9dyidNHKjt1im6" },
+    { "module_id": "algorithms-and-data-structures",    "form_url": "https://forms.gle/42h6DsjYU2fVjUjcA" },
+    { "module_id": "python-fundamentals",               "form_url": "https://forms.gle/aWDbB6bGic9gYeup6" },
+    { "module_id": "machine-learning",                  "form_url": "https://forms.gle/PgyTQzzoTqQ92hUV7" },
+    { "module_id": "neural-networks-and-deep-learning", "form_url": "https://forms.gle/ULSsytEtasH4ZN3s5" },
+    { "module_id": "natural-language-processing",       "form_url": "https://forms.gle/BhUKaXZp8wuWvksz7" },
+    { "module_id": "robotics-and-autonomous-systems",   "form_url": "https://forms.gle/gEkkkFVZDAVzH4337" },
+    { "module_id": "generative-ai-and-llms",            "form_url": "https://forms.gle/TAGYVYc8he1zDHVBA" },
+    { "module_id": "L10b-html",                         "form_url": "https://forms.gle/1Q7YRrQaaTfY1Yme6" },
+
+    { "module_id": "income__ai-security-red-teaming-and-bias-benchmarking",                          "form_url": "https://forms.gle/ztwSJNm7WH9CGQj5A" },
+    { "module_id": "income__decoupled-web-scraping-and-local-market-aggregation",                    "form_url": "https://forms.gle/391tDSSJySnMV45v8" },
+    { "module_id": "income__multilingual-data-annotation-and-local-language-validation",             "form_url": "https://forms.gle/kxfbBTLKVAn6nLxh9" },
+    { "module_id": "income__ai-assisted-microbusiness-content-studio",                               "form_url": "https://forms.gle/FJ6qx3XkBmncFrZv7" },
+    { "module_id": "income__mobile-cv-scholarship-and-job-application-clinic",                       "form_url": "https://forms.gle/j6ZYwn64BN6qRhVZ7" },
+    { "module_id": "income__voice-note-transcription-translation-and-meeting-summary-service",       "form_url": "https://forms.gle/fda99gwmNziXkNKEA" },
+    { "module_id": "income__community-knowledge-base-and-faq-bot-builder",                           "form_url": "https://forms.gle/DSfXJnFAcLUsgGoZ8" },
+    { "module_id": "income__ai-assisted-agricultural-fishing-or-market-advisory-digest",             "form_url": "https://forms.gle/hZDJdhUaYbfSzA8CA" },
+    { "module_id": "income__ai-bookkeeping-inventory-and-receipt-digitisation-for-microvendors",     "form_url": "https://forms.gle/ZAM8cufRjwo5HozJA" },
+    { "module_id": "income__local-map-directory-and-digital-presence-repair",                        "form_url": "https://forms.gle/8xNR2H8jQtcWyYGR7" },
+    { "module_id": "income__community-research-survey-and-impact-reporting-service",                 "form_url": "https://forms.gle/X7uZxUtrq4SbHAn8A" },
+    { "module_id": "income__hyper-local-data-corpora",                                               "form_url": "https://forms.gle/GtbVfceY57RsrXdA6" },
+    { "module_id": "income__api-driven-fintech-micro-saas",                                          "form_url": "https://forms.gle/G5JDc76QbiiSkpnG9" },
+    { "module_id": "income__geocentric-and-algorithmic-e-commerce-bundles",                          "form_url": "https://forms.gle/dCFb6AGVj7CzGEyF7" },
+    { "module_id": "income__ai-security-red-teaming-and-bias-benchmarking-expanded",                 "form_url": "https://forms.gle/eGRZjsQD61euczrB8" },
+    { "module_id": "income__vector-databases-for-climate-and-agritech",                              "form_url": "https://forms.gle/sDBj64fsQ7vPsU6p6" },
+    { "module_id": "income__asynchronous-edge-crowdsourcing",                                        "form_url": "https://forms.gle/Bo1nQh6XkEgknv1C8" }
+  ]
+}

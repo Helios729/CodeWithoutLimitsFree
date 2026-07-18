@@ -1,0 +1,156 @@
+{
+  "module_id": "robotics-and-autonomous-systems",
+  "module_title": "Robotics and Autonomous Systems-L",
+  "type": "learning",
+  "difficulty": "Advanced",
+  "duration_min": 90,
+  "bloom_levels_covered": [
+    "L1 Remember",
+    "L2 Understand",
+    "L3 Apply"
+  ],
+  "companion_quiz": "Robotics and Autonomous Systems-Q",
+  "sources": [
+    {
+      "id": "S1",
+      "citation": "MIT OCW 6.4210 Robotic Manipulation, Fall 2023.",
+      "url": "https://manipulation.csail.mit.edu",
+      "access": "Free."
+    },
+    {
+      "id": "S2",
+      "citation": "Thrun, Burgard & Fox. Probabilistic Robotics. MIT Press, 2005.",
+      "url": "https://docs.ufpr.br/~danielsantos/ProbabilisticRobotics.pdf",
+      "access": "Free \u2014 full PDF."
+    },
+    {
+      "id": "S3",
+      "citation": "Siciliano et al. Robotics. Springer, 2009.",
+      "url": "https://link.springer.com/book/10.1007/978-1-84628-642-1",
+      "access": "Preview; libraries."
+    },
+    {
+      "id": "S4",
+      "citation": "Sutton & Barto. RL: An Introduction 2nd ed. MIT Press, 2018.",
+      "url": "http://incompleteideas.net/book/the-book-2nd.html",
+      "access": "Free \u2014 full PDF."
+    },
+    {
+      "id": "S5",
+      "citation": "MIT OCW 6.4321 Underactuated Robotics, Spring 2023.",
+      "url": "https://underactuated.csail.mit.edu",
+      "access": "Free."
+    }
+  ],
+  "learning_objectives": [
+    "L1: Define DoF, kinematics, and the sense-plan-act cycle.",
+    "L1: Identify roles of LIDAR, camera, IMU, encoders, and actuators.",
+    "L1: State the difference between localisation, mapping, and SLAM.",
+    "L2: Explain FK and IK and describe where each is used.",
+    "L2: Describe how a particle filter estimates robot position under uncertainty.",
+    "L2: Explain the four AV stack levels: perception, localisation, planning, control.",
+    "L2: Compare deliberative, reactive, and hybrid architectures.",
+    "L3: Design a SLAM pipeline for a differential-drive robot in an unknown indoor environment.",
+    "L3: Evaluate ethical and safety trade-offs of deploying an autonomous system in public."
+  ],
+  "mini_lessons": [
+    {
+      "ml": 1,
+      "title": "Robot Anatomy",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-1",
+      "concepts": [
+        {
+          "title": "DoF and Sense-Plan-Act",
+          "explanation": "DoF: independent parameters to fully describe configuration. Sense-Plan-Act cycle at 10\u20131000 Hz. Safety-critical systems run parallel loops.",
+          "worked_example": "Doorknob=1 DoF, floor robot=3(x,y,\u03b8), drone=6, UR5 arm=6, human arm\u22487 (redundant for obstacle avoidance).",
+          "source_refs": [
+            "S3 Ch.1-2",
+            "S1 Lecture 1"
+          ]
+        },
+        {
+          "title": "Sensors and Actuators",
+          "explanation": "Proprioceptive: encoders (drift), IMU (drift). Exteroceptive: LIDAR (0.01m, 200m, fog issues), camera (lighting issues), radar (all-weather, low res), ultrasonic (short range). AVs fuse all.",
+          "worked_example": "Encoder drifts 1m/10m. Camera fails in low light. GPS fails indoors. Sensor fusion is required.",
+          "source_refs": [
+            "S2 Ch.1-2"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 2,
+      "title": "Kinematics and Motion Planning",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-2",
+      "concepts": [
+        {
+          "title": "FK and IK",
+          "explanation": "FK: joint angles\u2192end-effector pose. Always unique. IK: desired pose\u2192joint angles. 0/1/multiple solutions. IK used in programming: specify where to move, not joint angles.",
+          "worked_example": "UR5: FK confirms reachability; IK computes 6 joint angles. Multiple solutions (elbow-up/down) \u2014 nearest config selected.",
+          "source_refs": [
+            "S3 Ch.2-4"
+          ]
+        },
+        {
+          "title": "RRT and Potential Fields",
+          "explanation": "C-space: robot as point, obstacles as regions. RRT: sample random configs, extend tree \u2014 probabilistically complete. RRT*: asymptotically optimal. Potential fields: fast but local minima risk.",
+          "worked_example": "6-DoF arm: RRT finds path in ~50ms. Smoothed and time-parameterised before execution.",
+          "source_refs": [
+            "S1 Lecture 5"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 3,
+      "title": "Localisation, Mapping, SLAM",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-3",
+      "concepts": [
+        {
+          "title": "Particle Filter Localisation",
+          "explanation": "N weighted particles. Predict (motion model+noise) \u2192 Update (weight by sensor likelihood) \u2192 Resample (proportional to weights). Converges when particles cluster at true pose.",
+          "worked_example": "500 particles. After 3 LIDAR scans: 95% within 0.1m of true position.",
+          "source_refs": [
+            "S2 Ch.4-5"
+          ]
+        },
+        {
+          "title": "SLAM",
+          "explanation": "Build map while localising. Pose graph: nodes=poses, edges=relative measurements. Visual SLAM (ORB-SLAM3): sparse map. LiDAR SLAM (Cartographer): dense map. Loop closure corrects drift.",
+          "worked_example": "Cleaning robot: 10-min SLAM, <0.05m error. Loop closure corrects 0.3m accumulated drift.",
+          "source_refs": [
+            "S2 Ch.10-11"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 4,
+      "title": "AV Stack and Robot Ethics",
+      "bloom": "L2-L3",
+      "companion_mini_quiz": "MQ-4",
+      "concepts": [
+        {
+          "title": "AV Stack",
+          "explanation": "(1) Perception: detect/classify from sensor fusion. (2) Localisation: HD map+SLAM+GPS, cm accuracy. (3) Planning: route (A*), behaviour, motion. (4) Control: PID or MPC. Safety: redundancy and fallback.",
+          "worked_example": "AV at intersection: cyclist at 40m detected \u2192 yield \u2192 decelerate 50\u21920 km/h over 30m.",
+          "source_refs": [
+            "S2 Ch.1",
+            "S1 Lecture 10"
+          ]
+        },
+        {
+          "title": "Robot Ethics",
+          "explanation": "Responsibility gap, trolley problem in AVs, surveillance, labour displacement. Frameworks: IEEE Ethically Aligned Design, ISO 26262, EU AI Act (autonomous mobile robots = high-risk).",
+          "worked_example": "Delivery robot on footpath: EU AI Act high-risk \u2192 conformity assessment and human oversight required.",
+          "source_refs": [
+            "S4 Ch.17"
+          ]
+        }
+      ]
+    }
+  ]
+}

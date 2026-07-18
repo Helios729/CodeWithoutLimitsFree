@@ -1,0 +1,159 @@
+{
+  "module_id": "generative-ai-and-llms",
+  "module_title": "Generative AI and Large Language Models-L",
+  "type": "learning",
+  "difficulty": "Intermediate",
+  "duration_min": 75,
+  "bloom_levels_covered": [
+    "L1 Remember",
+    "L2 Understand",
+    "L3 Apply"
+  ],
+  "companion_quiz": "Generative AI and Large Language Models-Q",
+  "sources": [
+    {
+      "id": "S1",
+      "citation": "Vaswani et al. Attention Is All You Need. NeurIPS, 2017.",
+      "url": "https://arxiv.org/abs/1706.03762",
+      "access": "Free."
+    },
+    {
+      "id": "S2",
+      "citation": "Brown et al. GPT-3. NeurIPS, 2020.",
+      "url": "https://arxiv.org/abs/2005.14165",
+      "access": "Free."
+    },
+    {
+      "id": "S3",
+      "citation": "Ouyang et al. InstructGPT. NeurIPS, 2022.",
+      "url": "https://arxiv.org/abs/2203.02155",
+      "access": "Free."
+    },
+    {
+      "id": "S4",
+      "citation": "Goodfellow et al. GANs. NeurIPS, 2014.",
+      "url": "https://arxiv.org/abs/1406.2661",
+      "access": "Free."
+    },
+    {
+      "id": "S5",
+      "citation": "Ho et al. DDPM. NeurIPS, 2020.",
+      "url": "https://arxiv.org/abs/2006.11239",
+      "access": "Free."
+    },
+    {
+      "id": "S6",
+      "citation": "Hugging Face NLP Course.",
+      "url": "https://huggingface.co/learn/nlp-course/chapter1",
+      "access": "Free."
+    }
+  ],
+  "learning_objectives": [
+    "L1: Define generative AI and distinguish it from discriminative AI.",
+    "L1: Identify the three LLM training stages: pre-training, SFT, and RLHF.",
+    "L1: Name four generative model families: LLMs, GANs, VAEs, diffusion models.",
+    "L1: Define prompt, context window, temperature, and token in LLM context.",
+    "L2: Explain how autoregressive next-token prediction produces coherent text.",
+    "L2: Describe how RLHF aligns LLM outputs with human preferences.",
+    "L2: Explain the role of temperature and top-p sampling in controlling diversity.",
+    "L2: Compare zero-shot, few-shot, and fine-tuning for adapting LLMs to new tasks.",
+    "L3: Write an effective prompt using chain-of-thought and role-prompting techniques.",
+    "L3: Evaluate an LLM output for hallucination, bias, and misuse and propose mitigations."
+  ],
+  "mini_lessons": [
+    {
+      "ml": 1,
+      "title": "What is Generative AI?",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-1",
+      "concepts": [
+        {
+          "title": "Generative vs Discriminative",
+          "explanation": "Discriminative: learn P(y|x) \u2014 classify existing data. Generative: learn P(x) or P(x|y) \u2014 generate new data.",
+          "worked_example": "Discriminative: BERT \u2192 'I loved it' \u2192 POSITIVE. Generative: GPT \u2192 'I loved it because' \u2192 '...the characters felt so real'.",
+          "source_refs": [
+            "S6",
+            "S2"
+          ]
+        },
+        {
+          "title": "Four Generative Families",
+          "explanation": "LLMs: Transformer decoder, autoregressive. GANs: generator vs discriminator \u2014 sharp images, unstable training. VAEs: smooth latent space, blurry. Diffusion: reverse noise \u2014 SOTA image quality.",
+          "worked_example": "StyleGAN: photorealistic faces. Stable Diffusion: diverse high-quality images. DALL-E 3: complex prompt interpretation.",
+          "source_refs": [
+            "S4",
+            "S5"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 2,
+      "title": "How LLMs Work",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-2",
+      "concepts": [
+        {
+          "title": "Autoregressive Generation",
+          "explanation": "Trained on next-token prediction. Context window: 4K\u2013200K tokens. Temperature: T\u21920 deterministic, T\u2192\u221e random. Top-p: sample from smallest set with cumulative prob \u2265p.",
+          "worked_example": "'The capital of France is': Paris=0.91. T=0.1: Paris ~99.9%. T=2.0: more diverse, sometimes wrong.",
+          "source_refs": [
+            "S2",
+            "S1"
+          ]
+        },
+        {
+          "title": "Scale and Emergent Abilities",
+          "explanation": "Scaling laws: performance improves predictably with parameters, data, compute. Emergent abilities appear abruptly at scale \u2014 few-shot learning, chain-of-thought, code generation.",
+          "worked_example": "GPT-2 (1.5B) fails 3-digit addition. GPT-3 (175B) solves reliably with few-shot examples.",
+          "source_refs": [
+            "S2"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 3,
+      "title": "Pre-training, SFT, and RLHF",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-3",
+      "concepts": [
+        {
+          "title": "Three Training Stages",
+          "explanation": "Stage 1 Pre-training: next-token prediction on trillions of tokens \u2014 base model. Stage 2 SFT: train on (prompt, ideal response) pairs. Stage 3 RLHF: rank responses \u2192 reward model \u2192 PPO optimisation.",
+          "worked_example": "RLHF reduced harmful outputs 25\u00d7 vs base model (Ouyang et al., 2022).",
+          "source_refs": [
+            "S3",
+            "S2"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 4,
+      "title": "Prompting and Responsible Use",
+      "bloom": "L2-L3",
+      "companion_mini_quiz": "MQ-4",
+      "concepts": [
+        {
+          "title": "Zero-shot, Few-shot, Fine-tuning",
+          "explanation": "Zero-shot: prompt only. Few-shot: 2\u201310 examples in context. Fine-tuning: update weights \u2014 highest performance. LoRA: train small adapters, 100\u00d7 fewer params. CoT: 'think step by step' improves reasoning.",
+          "worked_example": "Medical coding: zero-shot 61%, few-shot 74%, fine-tuned 91%. CoT zero-shot 69%.",
+          "source_refs": [
+            "S2",
+            "S3"
+          ]
+        },
+        {
+          "title": "Hallucination, Bias, and Governance",
+          "explanation": "Hallucination: fluent but factually wrong. Fix: RAG, self-consistency, citations. Bias: reflects training data. Mitigations: model cards, usage policies, watermarking, output filtering.",
+          "worked_example": "RAG: retrieve central bank document \u2192 answer from retrieved text. Without RAG: cites stale training data.",
+          "source_refs": [
+            "S3",
+            "S6"
+          ]
+        }
+      ]
+    }
+  ]
+}

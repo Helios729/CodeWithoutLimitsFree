@@ -1,0 +1,35 @@
+{
+  "summary": "BYOK iteration: backend 20/20 PASS + frontend BYOK + Account flows PASS. Verified: (1) /api/usage/me free user now returns tier='free' blocked=false (was blocked=true). (2) POST /api/ai/chat as free w/o byok_key → 402 error='byok_required' with helpful message; daily_usage NOT touched. (3) POST /api/quiz/generate as free w/o byok_key → 402 byok_required; daily_usage NOT touched. (4) POST /api/ai/chat as free WITH fake byok_key='AIza_invalid_test_key' → upstream LLM error 4xx/5xx AND db.daily_usage.prompts = 0, db.monthly_usage.tokens = 0 (NO platform quota recorded for BYOK). (5) Static code path confirmed: server.py lines 459 + 611 forward body.byok_key.strip() into _run_gemini(api_key=...). (6) Day-pass chat (no byok_key) → 200 with tokens_charged>0, db.daily_usage.prompts incremented by exactly 1; 7th call at cap returns 429. (7) Monthly at 1,000,000 tokens → 429. (8) Frontend: free user (seeded localStorage.auth_token) sees BYOK panel (testID=byok-panel) on Studio, 'Run with your Gemini key' button is disabled until key saved via byok-input + byok-save-btn, then enabled. (9) Account screen shows 3 tier cards incl. testID=tier-free-btn; tapping Free routes to /studio (NOT Stripe). No regression in paid-tier quota enforcement.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "all", "issues": ["RN Web deprecation warnings (non-blocking): 'shadow*' style props deprecated (use boxShadow); props.pointerEvents deprecated (use style.pointerEvents). Same as previous iteration — no new design issues introduced by BYOK changes."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/conftest.py",
+    "/app/backend/tests/test_code_guardian.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "(Optional, pre-existing) Migrate `shadow*` and `props.pointerEvents` to RN Web boxShadow / style.pointerEvents for Expo 54 cleanliness."
+  ],
+  "critical_code_review_comments": [
+    "server.py: BYOK guard correctly returns 402 with error='byok_required' BEFORE assert_can_call, and skips record_usage entirely when using_byok=True → quota counters never touched for free-tier calls. Verified by DB inspection after invalid-key call.",
+    "_run_gemini accepts optional api_key, falls back to EMERGENT_LLM_KEY only when not BYOK. byok_key never persisted (lives only in request scope).",
+    "quota.py snapshot now reports blocked=False for tier='free' — correct BYOK semantics. Day-pass auto-expiry into free also now returns blocked=False, which is the desired BYOK behavior (downgraded users can still use their own key).",
+    "Frontend Studio: Run button disabled={loading || usage?.blocked || (isFree && !byokKey)} — correct gate; verified via aria-disabled toggling from true → null after byok-save-btn click.",
+    "Frontend Account: checkout('free') short-circuits to router.push('/(tabs)/studio') — verified UI lands on /studio."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_code_guardian.py (rewrote for BYOK assertions; added TestByokFreeTier class with quota-counter inspection)"
+  ],
+  "success_rate": {"backend": "100% (20/20)", "frontend": "100% (BYOK panel + Account 3 tiers + Free→Studio routing)"},
+  "seed_data_creation": "Per-test seed_user fixture (conftest.py) inserts user+account+session+optional usage rows prefixed TEST_ and cleans up in teardown. One additional manual seed (byok_e2e_token_001) for the UI run was cleaned up post-test.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Backend public URL: https://token-limit-enforcer.preview.emergentagent.com/api/*. BYOK contract: free tier requires body.byok_key OR returns 402 {error:'byok_required'}; platform daily_usage/monthly_usage MUST stay 0 for BYOK calls regardless of upstream success/failure. Paid tiers (day_pass/monthly) unchanged — still call assert_can_call → record_usage. For UI testing with a seeded free user, write localStorage.auth_token = <seeded session_token> at /welcome, then navigate to /(tabs)/studio. Free-tier badge reads 'Free · BYOK'. STRIPE_API_KEY is LIVE — never POST card data."
+}

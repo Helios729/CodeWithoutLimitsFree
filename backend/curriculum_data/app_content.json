@@ -1,0 +1,408 @@
+{
+  "schema_version": "1.0",
+  "content_type": "app_content",
+  "title": "Platform Content (everything outside the 18 income modules)",
+  "description": "Curriculum, assessment design, workflow, languages, supplementary modules, and programme structure for the mobile-first, low-bandwidth AI builder app.",
+  "source_document": "JSON_Needed (1).docx",
+  "generated": "2026-06-26",
+  "overview": {
+    "summary": "This application is tailored for mobile users in low-bandwidth environments. The curriculum prioritises local-first strategies, core theoretical concepts, token efficiency, and mobile-friendly offline single-file tools.",
+    "design_principles": [
+      "Mobile-first for low-bandwidth environments",
+      "Local-first strategies",
+      "Core theoretical concepts",
+      "Token efficiency",
+      "Mobile-friendly offline single-file tools"
+    ],
+    "philosophy": "Participants are treated not merely as ‘users’ of AI but as builders of local digital assets: datasets, reports, scripts, translations, templates, research summaries, service menus, and community knowledge products."
+  },
+  "curriculum": {
+    "description": "Four core theory modules, each led by an expert persona. Every module contains eight sequential sub-modules.",
+    "structure_rule": "Each module has eight sections; the eight sections present the sub-modules in sequential format.",
+    "modules": [
+      {
+        "id": 1,
+        "title": "AI Fundamentals",
+        "expert_persona": "The Systems & Architectures Engineer",
+        "focus": "Focuses on the core paradigms, scaling realities, and hardware constraints that dictate how AI functions under the hood.",
+        "sub_modules": [
+          {
+            "id": "1.1",
+            "title": "Core Concepts & the Spectrum of AI",
+            "description": "Distinguishing between Artificial Intelligence (AI), Generative AI, and the theoretical baseline of Artificial General Intelligence (AGI)."
+          },
+          {
+            "id": "1.2",
+            "title": "The Architecture Shift",
+            "description": "Understanding the transition from early rule-based symbolic systems (“AI winters”) to modern probabilistic and statistical machine learning models."
+          },
+          {
+            "id": "1.3",
+            "title": "Transformers & GPT Archetypes",
+            "description": "Demystifying the decoder-only transformer architecture, parallel sequence processing, and token-by-token text generation."
+          },
+          {
+            "id": "1.4",
+            "title": "Hardware Scaling & Compute",
+            "description": "How parallel processing works via massive GPU core clusters and application-specific integrated circuits like Google’s Tensor Processing Units (TPUs)."
+          },
+          {
+            "id": "1.5",
+            "title": "Multi-Dimensional Tensors",
+            "description": "Visualizing data structures from 0D scalars and 1D vectors to n-dimensional tensors that handle modern AI workloads."
+          },
+          {
+            "id": "1.6",
+            "title": "Kaplan vs. Chinchilla Scaling Laws",
+            "description": "Balancing parameters, dataset sizes, and compute-optimal training requirements (~20 tokens per parameter)."
+          },
+          {
+            "id": "1.7",
+            "title": "Mosaic’s Law & Economics",
+            "description": "Navigating the rapid deflation of computing costs (1/4 cost per year for static capabilities) to keep local setups competitive."
+          },
+          {
+            "id": "1.8",
+            "title": "LLMs vs. Small Language Models (SLMs)",
+            "description": "Evaluating resource footprints to choose highly efficient, domain-specific models for edge/mobile devices."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Corpus Stewardship",
+        "expert_persona": "The Intercultural Data Philologist",
+        "focus": "Focuses on linguistic preservation, structuring data repositories, mitigating bias, and commercializing authentic local speech artifacts.",
+        "sub_modules": [
+          {
+            "id": "2.1",
+            "title": "Knowledge Representation & Logic",
+            "description": "Mapping real-world cultural speech nuances into deterministic frameworks and machine-usable formats."
+          },
+          {
+            "id": "2.2",
+            "title": "Ontologies for Authentic Speech",
+            "description": "Building formal specifications of categories, definitions, and linguistic relationships within a specific language or community."
+          },
+          {
+            "id": "2.3",
+            "title": "The Symbol-Grounding Problem",
+            "description": "Overcoming the barrier where models process tokens mechanically without understanding physical or cultural reality."
+          },
+          {
+            "id": "2.4",
+            "title": "Unsupervised Pre-training Patterns",
+            "description": "Understanding how models ingest raw text tokens to discover syntax, grammar, and systemic vocabulary habits."
+          },
+          {
+            "id": "2.5",
+            "title": "SFT & RLHF Alignment",
+            "description": "How Supervised Fine-Tuning and Reinforcement Learning from Human Feedback refine raw predictors into safe, conversational assets."
+          },
+          {
+            "id": "2.6",
+            "title": "Mitigating Cognitive & Cultural Bias",
+            "description": "Practical methods to decouple subjective descriptors and instruct models to evaluate multi-perspective data."
+          },
+          {
+            "id": "2.7",
+            "title": "Echo Chambers vs. Hallucinations",
+            "description": "Identifying statistical failures where models confidently invent data or loops that narrow output diversity."
+          },
+          {
+            "id": "2.8",
+            "title": "IP, Attribution, & Data Sovereignty",
+            "description": "Navigating the ethics of training data, respecting original creators, and commercializing community speech assets safely."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Prompt Efficiency",
+        "expert_persona": "The Cognitive Architect & Token Optimiser",
+        "focus": "Focuses on maximizing contextual output quality while minimising data transmission and operational tokens.",
+        "sub_modules": [
+          {
+            "id": "3.1",
+            "title": "Shot-Prompting Methodologies",
+            "description": "Mastering zero-shot instruction, one-shot patterns, and few-shot structuring to maximize accuracy on the first try."
+          },
+          {
+            "id": "3.2",
+            "title": "Self-Consistency & Meta-Prompting",
+            "description": "Instructing models to evaluate alternative reasoning paths and optimize their own programmatic inputs."
+          },
+          {
+            "id": "3.3",
+            "title": "The RTF Core Framework",
+            "description": "Structuring concise text inputs explicitly around targeted Roles, Tasks, and Formats."
+          },
+          {
+            "id": "3.4",
+            "title": "Deep Dive into CO-STAR",
+            "description": "Standardizing inputs across Context, Objective, Style, Tone, Audience, and Response formats to prevent vague outputs."
+          },
+          {
+            "id": "3.5",
+            "title": "Hybrid Frameworks (ERA, RISE, CREATE)",
+            "description": "Selecting specialized templates for rapid code delegation, multi-step tasks, or business evaluations."
+          },
+          {
+            "id": "3.6",
+            "title": "Troubleshooting Prompts (The RSTI Protocol)",
+            "description": "Debugging and separating broken or circular logic when a model fails to follow parameters."
+          },
+          {
+            "id": "3.7",
+            "title": "Text-Only Cache-Offline Patterns",
+            "description": "Engineering single-exchange prompts to deliver an entire workflow layout in one compressed response."
+          },
+          {
+            "id": "3.8",
+            "title": "Retrieval-Augmented Generation (RAG) vs. Agents",
+            "description": "Distinguishing between searching flat vector databases and running dynamic, loop-driven systems."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Microenterprise",
+        "expert_persona": "The Antifragile Operations Lead",
+        "focus": "Focuses on local data analysis, offline infrastructure deployment, multi-agent logic, and automated client delivery.",
+        "sub_modules": [
+          {
+            "id": "4.1",
+            "title": "Antifragile Operations Strategy",
+            "description": "Building systems that improve through volatility, internet scarcity, and physical infrastructure constraints."
+          },
+          {
+            "id": "4.2",
+            "title": "Local Data Manipulation Stack",
+            "description": "Managing tabular information, relational queries, schemas, and dynamic arrays completely offline."
+          },
+          {
+            "id": "4.3",
+            "title": "Local Lookup Engineering",
+            "description": "Mastering exact-match lookups, array positioning, and cross-source transformations via tools like Power Query."
+          },
+          {
+            "id": "4.4",
+            "title": "Cross-Platform Capability Snapshots",
+            "description": "Choosing the right foundational model family based on their specialised technical or coding strengths."
+          },
+          {
+            "id": "4.5",
+            "title": "Local Model Orchestration (Msty Track)",
+            "description": "Running open-source models completely offline on your own device hardware."
+          },
+          {
+            "id": "4.6",
+            "title": "Multi-Agent Logic & Crews",
+            "description": "Designing personas, discrete tasks, and modular operational pipelines using hierarchical Python structures."
+          },
+          {
+            "id": "4.7",
+            "title": "Secure Tool Handovers",
+            "description": "Decoupling credentials, packaging sensitive values into .env templates, and exporting blueprints as JSON."
+          },
+          {
+            "id": "4.8",
+            "title": "Network Resilience Design",
+            "description": "Structuring automated workflows that save intermediate logs to resume execution instead of suffering expensive cloud restarts."
+          }
+        ]
+      }
+    ]
+  },
+  "system_integration": {
+    "title": "System Integration for Testing & Mobile Coding",
+    "interactive_agent_assessment_loop": {
+      "description": "To test users, the app’s agents execute a text-driven evaluation cycle mapped directly to the active sub-module.",
+      "phases": [
+        {
+          "name": "Question Phase",
+          "description": "The agent serves a single contextual concept or scenario question."
+        },
+        {
+          "name": "User Input Evaluation",
+          "description": "The user provides an open-ended text response."
+        },
+        {
+          "name": "Feedback & Scoring",
+          "description": "The agent scores the accuracy, fixes core misunderstandings, and prompts the user for the next task without using bandwidth-heavy visual components."
+        }
+      ]
+    },
+    "mobile_offline_coding_framework": {
+      "description": "Because users write code directly on their phones in low-bandwidth regions, the agents explicitly train them to output single-file HTML/CSS/JavaScript environments.",
+      "template_language": "HTML",
+      "boilerplate": "<!DOCTYPE html>\n<html>\n<head>\n    <title>Offline Microenterprise Template</title>\n    <style>/* Mobile-first CSS styling */</style>\n</head>\n<body>\n    <script>\n        // Pure JavaScript Logic with localStorage persistence\n    </script>\n</body>\n</html>",
+      "principles": [
+        {
+          "name": "Zero-Server Footprint",
+          "description": "Code requires no external build tools, servers, or packages."
+        },
+        {
+          "name": "Browser-Native Execution",
+          "description": "Users execute their projects locally by saving them on their device storage and opening them through standard mobile web browsers."
+        },
+        {
+          "name": "Persistent Storage",
+          "description": "Data is retained natively on the mobile device via the browser’s local storage capabilities."
+        }
+      ]
+    }
+  },
+  "module_bank_intro": {
+    "summary": "A choose-your-own module bank for a mobile-first AI income programme. The design assumes unreliable electricity, low bandwidth, and intermittent access to paid AI tools.",
+    "rationale": "The model is timely: the World Bank describes ‘Small AI’ as practical AI that can run on everyday devices such as mobile phones, naming connectivity, compute, context/data, and competency/skills as foundations for inclusive AI ecosystems. The economic need is clear: UNCTAD notes that least developed countries remain weakly represented in digitally deliverable service exports, while the Global Findex 2025 reports that 84% of adults in low- and middle-income countries own a mobile phone and 3 billion have smartphones.",
+    "citations": [
+      "worldbank-small-ai",
+      "unctad-digital-economy",
+      "worldbank-global-findex"
+    ]
+  },
+  "shared_energy_to_income_workflow": {
+    "title": "Shared Energy-to-Income Workflow",
+    "stages": [
+      "Off-Peak Solar / Shared Charge",
+      "Offline Capture",
+      "Text-Light AI Processing",
+      "Human Verification",
+      "Asynchronous Cloud Sync",
+      "Mobile Money / Cash / Cooperative Payment"
+    ],
+    "note": "Mobile money is an especially relevant payment pathway in many African contexts because financial inclusion in Sub-Saharan Africa has grown substantially through mobile money account adoption.",
+    "citations": [
+      "worldbank-findex-ssa"
+    ]
+  },
+  "languages": {
+    "instruction_language": "English (default) — with translator mode for community languages",
+    "note": "Code Without Limits is built primarily for use in English, French, Haitian Creole, Brazilian Portuguese, Spanish, Bambara, and Wolof. Lessons can be followed in any of these languages using the in-app translator mode and the open-source language modules.",
+    "translator_mode_core": [
+      "French",
+      "Haitian Creole",
+      "Brazilian Portuguese",
+      "Spanish",
+      "Wolof"
+    ],
+    "translator_mode_best_effort": [
+      "Bambara",
+      "Twi",
+      "Garifuna",
+      "Fon"
+    ],
+    "programme_languages": [
+      "English",
+      "French",
+      "Haitian Creole",
+      "Brazilian Portuguese",
+      "Spanish",
+      "Bambara",
+      "Wolof"
+    ]
+  },
+  "supplementary_modules": {
+    "description": "Extra modules teaching practical mobile/office skills.",
+    "structure_rule": "Each module has eight sections; the eight sections present the sub-sections in sequential format.",
+    "topics": [
+      "Excel: creating spreadsheets and entering formulas",
+      "CSV (comma-separated values)",
+      "How to create databases",
+      "PowerPoint presentations",
+      "Resume design and rationale",
+      "Cover letter",
+      "Compressing files on phones / mobile devices",
+      "HTML"
+    ]
+  },
+  "programme_structure": {
+    "title": "Entrepreneurship Programme Structure",
+    "access_note": "A separate section of the app that can be accessed at any time.",
+    "weeks": [
+      {
+        "week": 1,
+        "title": "Phone as Production Studio",
+        "description": "Battery discipline, offline folders, file naming, compression, CSV basics, mobile money safety, scam awareness."
+      },
+      {
+        "week": 2,
+        "title": "AI Basics",
+        "description": "Prompting, hallucinations, verification, multilingual output, responsible AI."
+      },
+      {
+        "week": 3,
+        "title": "Choose One Income Module",
+        "description": "Each participant selects one income module and creates a first sellable sample."
+      },
+      {
+        "week": 4,
+        "title": "Community Client Pilot",
+        "description": "Participants serve one real local client: vendor, student, cooperative, school, clinic, or NGO."
+      },
+      {
+        "week": 5,
+        "title": "Packaging and Pricing",
+        "description": "Each participant creates a one-page service menu in French, Brazilian Portuguese, Spanish, English, and Wolof."
+      },
+      {
+        "week": 6,
+        "title": "Cooperative Marketplace",
+        "description": "Participants form teams: data team, language team, marketing team, research team, business-support team."
+      }
+    ]
+  },
+  "core_rule": "The goal is not merely to teach people to ‘use AI.’ The goal is to help them create ownable, reusable, locally valuable digital assets from the knowledge, languages, markets, and social realities that already exist in their communities.",
+  "references": [
+    {
+      "key": "worldbank-small-ai",
+      "label": "World Bank",
+      "title": "Digital Progress and Trends Report 2025 — AI foundations",
+      "url": "https://www.worldbank.org/en/publication/dptr2025-ai-foundations"
+    },
+    {
+      "key": "unctad-digital-economy",
+      "label": "UN Trade and Development (UNCTAD)",
+      "title": "Facts and figures: digital economy",
+      "url": "https://unctad.org/press-material/facts-figures-digital-economy"
+    },
+    {
+      "key": "worldbank-global-findex",
+      "label": "World Bank",
+      "title": "Global Findex Database",
+      "url": "https://www.worldbank.org/en/publication/globalfindex"
+    },
+    {
+      "key": "worldbank-findex-ssa",
+      "label": "World Bank",
+      "title": "Financial inclusion in Sub-Saharan Africa overview",
+      "url": "https://www.worldbank.org/en/publication/globalfindex/brief/financial-inclusion-in-sub-saharan-africa-overview"
+    },
+    {
+      "key": "unesco-african-languages",
+      "label": "UNESCO Courier",
+      "title": "African languages: a blind spot in AI",
+      "url": "https://courier.unesco.org/en/articles/african-languages-blind-spot-ai"
+    },
+    {
+      "key": "webdev-pwa",
+      "label": "web.dev",
+      "title": "Progressive Web Apps",
+      "url": "https://web.dev/learn/pwa/progressive-web-apps"
+    },
+    {
+      "key": "webdev-offline-data",
+      "label": "web.dev",
+      "title": "Offline data",
+      "url": "https://web.dev/learn/pwa/offline-data"
+    }
+  ],
+  "conversion_notes": [
+    "The 18 income modules are delivered in the companion file income_modules.json.",
+    "Modules 15 and 18 carried an asterisk in the source and are expanded re-statements of modules 1 and 2 respectively; they are flagged with `expanded_variant_of` in income_modules.json.",
+    "Source inconsistency: Programme Week 3 references ‘one of the 11 modules,’ while the income bank contains 18 entries. Text preserved verbatim; reconcile the count when wiring the app.",
+    "The source contained stray editorial/meta-commentary lines (e.g. a remark about ‘seven substantive modules’ and a missing ‘Module 8’); these were generation artifacts and were not imported as content.",
+    "URL tracking parameters (e.g. ?utm_source=chatgpt.com) were stripped from citations for cleanliness."
+  ]
+}

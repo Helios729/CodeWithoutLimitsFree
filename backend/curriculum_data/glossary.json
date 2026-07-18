@@ -1,0 +1,246 @@
+{
+  "schema_version": "1.0",
+  "title": "Mini Dictionary for Code Without Limits",
+  "description": "Definitions for technical words used across the modules. Each entry cites a reputable, publicly available source so learners can verify and read further. Definitions are paraphrased from the cited sources for plain-language readability.",
+  "verified_on": "2026-06-26",
+  "terms": [
+    {
+      "term": "Bandwidth",
+      "short": "The maximum rate at which data can move through a network channel per second.",
+      "definition": "Bandwidth is the upper limit of how much data a communications channel can carry over time, usually expressed in bits per second (bps). On a phone, a 4G connection might give you up to ~50 Mbps of bandwidth, while 2G is closer to 0.05 Mbps. Bandwidth is the channel's *capacity* — it is not the same as throughput, which is what you actually get.",
+      "examples": [
+        "A 4 MB image takes ~6 seconds on 5 Mbps bandwidth.",
+        "Voice calls need only ~32 kbps — that's why they work where video fails."
+      ],
+      "source": {
+        "title": "Bandwidth (computing)",
+        "publisher": "Wikipedia (peer-edited, with citations to Comer's Computer Networks and Cisco docs)",
+        "url": "https://en.wikipedia.org/wiki/Bandwidth_(computing)"
+      }
+    },
+    {
+      "term": "Throughput",
+      "short": "The actual amount of data that gets through per second under real conditions.",
+      "definition": "Throughput is how much data a system or link actually delivers, end-to-end, in a given period. It is always less than or equal to bandwidth because of packet loss, congestion, protocol overhead, and retries. If a 10 Mbps link is busy, your throughput might be 3 Mbps.",
+      "examples": [
+        "Bandwidth = 5 Mbps. Real-world throughput = 3.2 Mbps. The other 1.8 Mbps was lost to overhead and retries.",
+        "On a shared community Wi-Fi, throughput drops as more phones join."
+      ],
+      "source": {
+        "title": "Throughput",
+        "publisher": "Wikipedia (citing Tanenbaum, Computer Networks)",
+        "url": "https://en.wikipedia.org/wiki/Throughput"
+      }
+    },
+    {
+      "term": "Bottleneck",
+      "short": "The slowest part of a system that limits how fast everything else can go.",
+      "definition": "A bottleneck is the constraint that determines total throughput — even if everything else is fast, the system can only go as fast as its slowest link. In mobile AI, the bottleneck is often the network on the way in (upload) or the model size on the device (memory).",
+      "examples": [
+        "A 4G phone with a 1 GB model: the bottleneck is RAM, not network.",
+        "Sending a 10 MB audio file on 2G: the bottleneck is bandwidth, not the model."
+      ],
+      "source": {
+        "title": "Bottleneck (production)",
+        "publisher": "Wikipedia (citing Goldratt, The Goal — Theory of Constraints)",
+        "url": "https://en.wikipedia.org/wiki/Bottleneck_(production)"
+      }
+    },
+    {
+      "term": "Corpus",
+      "short": "A structured collection of language data used to train, test, or improve a language model.",
+      "definition": "A corpus (plural: corpora) is a curated body of text or speech samples — sentences, recordings, translation pairs — assembled for linguistic study or to train AI. Quality matters more than quantity: 50,000 well-aligned Haitian Creole–French sentence pairs beat 5 million noisy scrapes.",
+      "examples": [
+        "FLORES-200 is a 200-language evaluation corpus published by Meta.",
+        "Kreyòl-MT released the largest public Haitian Creole corpus: 11.6M sentences."
+      ],
+      "source": {
+        "title": "Text corpus",
+        "publisher": "Wikipedia (citing McEnery & Hardie, Corpus Linguistics)",
+        "url": "https://en.wikipedia.org/wiki/Text_corpus"
+      }
+    },
+    {
+      "term": "Latency",
+      "short": "The time it takes for one piece of data to travel from sender to receiver.",
+      "definition": "Latency is the round-trip delay (often measured in milliseconds) between requesting something and getting the first byte back. It is independent of bandwidth: a high-bandwidth satellite link can still have 600 ms latency. For interactive apps, latency matters more than bandwidth.",
+      "examples": [
+        "Typing into a chatbot: any latency above ~200 ms feels sluggish.",
+        "Voice calls degrade above ~300 ms one-way."
+      ],
+      "source": {
+        "title": "Latency (engineering)",
+        "publisher": "Wikipedia (citing Kurose & Ross, Computer Networking)",
+        "url": "https://en.wikipedia.org/wiki/Latency_(engineering)"
+      }
+    },
+    {
+      "term": "Token",
+      "short": "The smallest unit an AI model reads — usually a word or part of a word.",
+      "definition": "Large language models split text into tokens before processing. A token is roughly 4 characters of English or about ¾ of a word. The phrase 'Bonjou tout moun' is ~5 tokens. Paid API quotas (and our 6-prompt and 250-prompt limits) are measured in tokens.",
+      "examples": [
+        "1,000 tokens ≈ 750 English words ≈ 600 Haitian Creole words.",
+        "A 10-paragraph essay costs ~2,500 tokens."
+      ],
+      "source": {
+        "title": "What are tokens and how to count them?",
+        "publisher": "OpenAI Help Center",
+        "url": "https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them"
+      }
+    },
+    {
+      "term": "Quantization",
+      "short": "Shrinking a model by storing its numbers in fewer bits, so it fits on a phone.",
+      "definition": "Quantization converts a model's 32-bit floating-point weights into 8-bit or 4-bit integers. The model becomes 4–8× smaller and faster, with a small accuracy cost. NLLB-200 at full precision is ~5 GB; at int8 it is ~1.5 GB and runs on a mid-range Android phone.",
+      "examples": [
+        "GGUF Q4_0 quantization shrinks a 7B-parameter model from 14 GB to ~4 GB.",
+        "CTranslate2 int8 is the standard way to run NLLB on-device."
+      ],
+      "source": {
+        "title": "Quantization (signal processing)",
+        "publisher": "Wikipedia (with refs to Han et al., Deep Compression, ICLR 2016)",
+        "url": "https://en.wikipedia.org/wiki/Quantization_(signal_processing)"
+      }
+    },
+    {
+      "term": "Open source",
+      "short": "Software whose source code is published with a licence that permits inspection, modification, and reuse.",
+      "definition": "Open-source software is released under a licence approved by the Open Source Initiative (OSI), such as Apache-2.0 or MIT. You can audit the code, fork it, and build on it. Not all 'free' AI models are open-source — many use research-only licences like CC-BY-NC that forbid commercial use.",
+      "examples": [
+        "MADLAD-400 is open-source (Apache-2.0) — safe for commercial use.",
+        "NLLB-200 is CC-BY-NC-4.0 — public, but not for paid client work."
+      ],
+      "source": {
+        "title": "The Open Source Definition",
+        "publisher": "Open Source Initiative",
+        "url": "https://opensource.org/osd"
+      }
+    },
+    {
+      "term": "Inference",
+      "short": "Running a trained AI model to get an answer (as opposed to training it).",
+      "definition": "Inference is the step where a finished model takes your input and produces an output. Training happens once and costs millions; inference happens every time you ask a question and costs cents or fractions of cents. On-device inference uses the phone's CPU/GPU instead of a server.",
+      "examples": [
+        "Each prompt you send the studio runs one inference call.",
+        "OPUS-MT can do offline inference on a 5-year-old phone."
+      ],
+      "source": {
+        "title": "Statistical inference",
+        "publisher": "Stanford Encyclopedia of Philosophy",
+        "url": "https://plato.stanford.edu/entries/statistics/"
+      }
+    },
+    {
+      "term": "Prompt",
+      "short": "The natural-language instruction you give an AI model.",
+      "definition": "A prompt is the text you send to an LLM, including the role, the task, the context, and any constraints. Good prompts include a clear goal, source material, an output format, and a refusal clause. This is the core craft taught in modules L01–L05.",
+      "examples": [
+        "Bad: 'write something about water.'",
+        "Better: 'In 120 words for grade-7 readers, explain why boiling water at altitude takes longer. Cite one peer-reviewed source.'"
+      ],
+      "source": {
+        "title": "Brown et al., Language Models are Few-Shot Learners (GPT-3)",
+        "publisher": "NeurIPS 2020 / arXiv:2005.14165",
+        "url": "https://arxiv.org/abs/2005.14165"
+      }
+    },
+    {
+      "term": "Hallucination",
+      "short": "When an AI makes up facts that sound right but aren't true.",
+      "definition": "Hallucination is the generation of plausible-but-false content. LLMs do not 'know' facts — they predict the next word. If asked a question with no good answer in their training data, they confabulate. The only fix is retrieval-grounded answering (citing sources) and human verification.",
+      "examples": [
+        "The model invents a court case that does not exist.",
+        "It cites a paper with the right author but wrong journal."
+      ],
+      "source": {
+        "title": "Survey of Hallucination in Natural Language Generation",
+        "publisher": "Ji et al., ACM Computing Surveys, 2023",
+        "url": "https://dl.acm.org/doi/10.1145/3571730"
+      }
+    },
+    {
+      "term": "FLORES-200",
+      "short": "Meta's open benchmark for testing translation across 200 languages.",
+      "definition": "FLORES-200 is a public evaluation dataset of 3,001 sentences per language, professionally translated into 200+ languages including Haitian Creole, Wolof, Bambara, and Fon. It is the standard way to compare translation models on low-resource languages.",
+      "examples": [
+        "Every translator listed in the app is rated against FLORES-200.",
+        "FLORES-200 codes appear in each language module (e.g., hat_Latn for Haitian Creole)."
+      ],
+      "source": {
+        "title": "No Language Left Behind (NLLB Team et al., 2022)",
+        "publisher": "Meta AI / arXiv:2207.04672",
+        "url": "https://arxiv.org/abs/2207.04672"
+      }
+    },
+    {
+      "term": "Low-resource language",
+      "short": "A language with little written, digital, or labelled data available for AI training.",
+      "definition": "A 'low-resource' language is one for which large clean corpora do not exist on the open web — typically because the language is primarily oral, spoken by a smaller community, or under-served by tech companies. Bambara, Fon, Garifuna, and Haitian Creole all fall into this category to different degrees.",
+      "examples": [
+        "Bambara has ~14M speakers but <100K parallel sentences online.",
+        "Garifuna has ~200K speakers — almost no digital corpus."
+      ],
+      "source": {
+        "title": "The State of NLP for Low-Resource Languages",
+        "publisher": "Magueresse, Carles & Heetderks, 2020 / arXiv:2006.07264",
+        "url": "https://arxiv.org/abs/2006.07264"
+      }
+    },
+    {
+      "term": "API",
+      "short": "A defined way for two programs to talk to each other.",
+      "definition": "An API (Application Programming Interface) is a contract — a set of endpoints, inputs, and outputs — that lets your code request work from another service. Our app calls Gemini and Stripe through APIs. APIs make integrations swappable: today Gemini, tomorrow Claude, with one config change.",
+      "examples": [
+        "POST /api/quiz/generate — our backend's own API.",
+        "Gemini, Stripe, Hugging Face all expose REST APIs."
+      ],
+      "source": {
+        "title": "API — Mozilla Developer Network",
+        "publisher": "MDN Web Docs (Mozilla, peer-reviewed)",
+        "url": "https://developer.mozilla.org/en-US/docs/Glossary/API"
+      }
+    },
+    {
+      "term": "Schema",
+      "short": "A blueprint that describes the structure of your data.",
+      "definition": "A schema defines what fields exist, what type each one is, and which are required. Our income_modules.json has a schema with fields like id, title, role_label, asset. A good schema makes it possible to validate, query, and translate data reliably.",
+      "examples": [
+        "JSON Schema, OpenAPI, and Pydantic are all schema systems.",
+        "MongoDB collections are schema-flexible but benefit from one anyway."
+      ],
+      "source": {
+        "title": "Database schema",
+        "publisher": "Wikipedia (citing Date, An Introduction to Database Systems)",
+        "url": "https://en.wikipedia.org/wiki/Database_schema"
+      }
+    },
+    {
+      "term": "Edge / On-device",
+      "short": "Running the AI on the phone itself instead of on a remote server.",
+      "definition": "Edge computing pushes inference to the device that captured the data. For our learners, this means using a quantized OPUS-MT model on the phone so translation works offline, with no airtime cost. The trade-off is smaller models and slower batches.",
+      "examples": [
+        "A pre-loaded OPUS-MT-fr-ht model on a Tecno phone, no network.",
+        "Whisper.cpp can transcribe audio entirely on-device."
+      ],
+      "source": {
+        "title": "Edge computing",
+        "publisher": "NIST Glossary (CSRC)",
+        "url": "https://csrc.nist.gov/glossary/term/edge_computing"
+      }
+    },
+    {
+      "term": "Pivot language",
+      "short": "An intermediate language used to bridge two languages that have no direct translator.",
+      "definition": "When no model directly translates Garifuna → Wolof, you can translate Garifuna → English → Wolof. English is the 'pivot.' Pivoting introduces drift, but it's often the only practical option for low-resource pairs.",
+      "examples": [
+        "Garifuna → English → Haitian Creole is a two-step pivot.",
+        "French is the most common pivot for Caribbean and West African languages."
+      ],
+      "source": {
+        "title": "Pivot Translation",
+        "publisher": "Cohn & Lapata, ACL 2007",
+        "url": "https://aclanthology.org/P07-1093/"
+      }
+    }
+  ]
+}

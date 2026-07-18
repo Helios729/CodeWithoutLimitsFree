@@ -1,0 +1,409 @@
+{
+  "module_id": "html-intermediate",
+  "module_title": "HTML Intermediate-Q",
+  "type": "quiz",
+  "difficulty": "Intermediate",
+  "companion_learning": "HTML Intermediate-L",
+  "superquiz_pool": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+  ],
+  "bloom_distribution": {
+    "L1_remember": 2,
+    "L2_understand": 2,
+    "L3_apply": 1
+  },
+  "mini_quizzes": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 HTML Forms",
+      "source_lesson": "ML-1",
+      "questions": [
+        {
+          "q_id": "Q10b2-MQ1-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What are the two most common values for the method attribute on an HTML <form> element, and what is the key difference between them?",
+          "options": {
+            "A": "method='send' appends data to the URL; method='receive' sends data in the body",
+            "B": "method='GET' appends form data to the URL as query parameters (visible, bookmarkable, limited length); method='POST' sends data in the HTTP request body (not visible in URL, no length limit, suitable for sensitive data)",
+            "C": "method='GET' is for file uploads; method='POST' is for text input only",
+            "D": "Both GET and POST are identical \u2014 the browser chooses which to use"
+          },
+          "answer": "B",
+          "explanation": "GET: data in URL (?name=Alice&age=30) \u2014 use for search forms, filters, bookmarkable state. Visible in browser history and server logs \u2014 never use for passwords. URL length limit ~2000 chars. POST: data in request body \u2014 use for login, registration, file upload, any sensitive or large data. Not cached, not bookmarked by default. Forms with enctype='multipart/form-data' for file uploads must use POST.",
+          "source": "MDN Web Docs. Sending form data. https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_and_retrieving_form_data"
+        },
+        {
+          "q_id": "Q10b2-MQ1-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Which HTML element and attribute pair correctly associates a visible label with a form input for accessibility?",
+          "options": {
+            "A": "<label>Email</label><input type='email'>  \u2014 proximity is sufficient",
+            "B": "<label for='email'>Email</label><input type='email' id='email'>  \u2014 the for attribute must match the input's id attribute",
+            "C": "<input type='email' placeholder='Email'>  \u2014 placeholder replaces the need for a label",
+            "D": "<p>Email: <input type='email'></p>  \u2014 wrapping in a paragraph associates them"
+          },
+          "answer": "B",
+          "explanation": "The for attribute on <label> must match the id attribute on the associated input. This creates a programmatic association: (1) clicking the label focuses/activates the input; (2) screen readers announce the label text when the input receives focus. Placeholder text is NOT a label substitute \u2014 it disappears on input and has insufficient contrast. Wrapping input inside <label> (implicit association) also works but explicit for/id is preferred.",
+          "source": "MDN Web Docs. How to structure a web form. https://developer.mozilla.org/en-US/docs/Learn/Forms/How_to_structure_a_web_form; WCAG 2.1. Labels or Instructions (3.3.2)."
+        },
+        {
+          "q_id": "Q10b2-MQ1-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "What is the purpose of the name attribute on form input elements, and what happens if it is omitted?",
+          "options": {
+            "A": "The name attribute controls the visual label shown next to the input",
+            "B": "The name attribute defines the key in the key=value pair submitted with the form data. If omitted, the input's value is not included in the form submission \u2014 the data is silently lost",
+            "C": "The name attribute is only required for password fields",
+            "D": "The name attribute sets the input's placeholder text"
+          },
+          "answer": "B",
+          "explanation": "When a form submits, the browser collects all inputs with a name attribute into key=value pairs: name='email' with value 'alice@example.com' \u2192 email=alice%40example.com. Inputs without name are excluded from submission. The server reads form data by name key. Common mistake: omitting name on radio buttons (all radios in a group must share the same name to function as a group).",
+          "source": "MDN Web Docs. Basic native form controls. https://developer.mozilla.org/en-US/docs/Learn/Forms/Basic_native_form_controls"
+        },
+        {
+          "q_id": "Q10b2-MQ1-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "What is the difference between the required, disabled, and readonly attributes on a form input?",
+          "options": {
+            "A": "All three prevent the user from typing in the field",
+            "B": "required: the field must have a value before the form can be submitted \u2014 triggers browser validation. disabled: the field is non-interactive and its value is NOT submitted with the form. readonly: the field is non-editable but its value IS submitted with the form",
+            "C": "disabled and readonly are identical; required only applies to checkboxes",
+            "D": "required submits the form automatically when filled; disabled hides the field"
+          },
+          "answer": "B",
+          "explanation": "Key distinction: disabled inputs are excluded from form submission (their data is lost); readonly inputs are included. Use disabled for fields that should not be submitted (e.g., calculated display fields). Use readonly for fields the user should see but not change (e.g., auto-populated username). required triggers HTML5 constraint validation \u2014 the browser shows an error and blocks submission if the field is empty.",
+          "source": "MDN Web Docs. HTML attribute: disabled. https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/disabled; MDN. HTML attribute: readonly."
+        },
+        {
+          "q_id": "Q10b2-MQ1-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "Build a minimal accessible login form with email and password fields, a submit button, and correct accessibility attributes. Which HTML is correct?",
+          "options": {
+            "A": "<form><input type='email' placeholder='Email'><input type='password' placeholder='Password'><button>Login</button></form>",
+            "B": "<form method='post' action='/login'><div><label for='email'>Email</label><input type='email' id='email' name='email' required autocomplete='email'></div><div><label for='password'>Password</label><input type='password' id='password' name='password' required autocomplete='current-password'></div><button type='submit'>Log in</button></form>",
+            "C": "<form><label>Email<input type='text' name='email'></label><label>Password<input type='text' name='password'></label><input type='submit'></form>",
+            "D": "<form method='get'><input id='email' type='email'><input id='pass' type='password'><button>Submit</button></form>"
+          },
+          "answer": "B",
+          "explanation": "Option B is correct: method='post' (never GET for passwords); explicit for/id label association; correct input types (email, password); name attributes for submission; required for validation; autocomplete hints (email, current-password) help password managers and browser autofill; type='submit' explicit on button. Option A: placeholder-only labels fail accessibility. Option C: type='text' for password exposes it. Option D: GET method sends password in URL.",
+          "source": "MDN Web Docs. Sending form data. https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_and_retrieving_form_data; WCAG 2.1. 1.3.5 Identify Input Purpose."
+        }
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 HTML Tables",
+      "source_lesson": "ML-2",
+      "questions": [
+        {
+          "q_id": "Q10b2-MQ2-01",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "What are the three structural elements that make up a complete, accessible HTML table?",
+          "options": {
+            "A": "<table>, <row>, and <cell>",
+            "B": "<table> (container), <tr> (table row), and <td> (table data cell) \u2014 with <th> (table header cell) for header cells, and optionally <thead>, <tbody>, <tfoot> for grouping rows",
+            "C": "<table>, <column>, and <data>",
+            "D": "<grid>, <tr>, and <td>"
+          },
+          "answer": "B",
+          "explanation": "Minimal table: <table><tr><td>Cell</td></tr></table>. Accessible table adds: <th scope='col'> for column headers; <th scope='row'> for row headers; <thead>/<tbody>/<tfoot> for semantic grouping (also enables sticky headers in CSS); <caption> for a table title (screen readers announce it first). The scope attribute tells screen readers which cells a header applies to.",
+          "source": "MDN Web Docs. HTML table basics. https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics"
+        },
+        {
+          "q_id": "Q10b2-MQ2-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Which attribute on <th> improves table accessibility by explicitly associating header cells with the data cells they describe?",
+          "options": {
+            "A": "The headers attribute on <td>",
+            "B": "The scope attribute on <th> \u2014 with values 'col' (applies to all cells in its column), 'row' (applies to all cells in its row), 'colgroup', or 'rowgroup'",
+            "C": "The id attribute on <tr>",
+            "D": "The aria-label attribute on <table>"
+          },
+          "answer": "B",
+          "explanation": "scope='col': the <th> is a column header. scope='row': the <th> is a row header. Without scope, screen readers may not correctly associate headers with cells in complex tables. Example: <th scope='col'>Price</th> \u2014 screen readers announce 'Price' before each cell in that column. For very complex tables, use id on <th> and headers='id1 id2' on <td> for explicit multi-header associations.",
+          "source": "MDN Web Docs. HTML table advanced features and accessibility. https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Advanced"
+        },
+        {
+          "q_id": "Q10b2-MQ2-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "When is it appropriate to use an HTML table, and when should tables be avoided?",
+          "options": {
+            "A": "Tables should be used for all page layouts to ensure consistent column alignment",
+            "B": "Tables are appropriate for tabular data \u2014 information with meaningful relationships between rows and columns (price lists, schedules, comparison charts). Tables must never be used for page layout \u2014 use CSS Grid or Flexbox instead, as layout tables break screen reader navigation and responsive design",
+            "C": "Tables are only appropriate for financial data, not other content types",
+            "D": "Tables are preferred over CSS Grid for all multi-column layouts"
+          },
+          "answer": "B",
+          "explanation": "Layout tables (pre-CSS era): nested tables for columns/rows \u2014 break screen reader table mode, prevent responsive design, produce inaccessible DOM order. WCAG 1.3.1 requires that tables used for layout have role='presentation' to hide them from assistive technologies. Correct use: <table> for data where row/column relationships are meaningful. CSS Grid/Flexbox for all visual layouts.",
+          "source": "MDN Web Docs. HTML tables. https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables; WCAG 2.1. 1.3.1 Info and Relationships."
+        },
+        {
+          "q_id": "Q10b2-MQ2-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "What do the colspan and rowspan attributes do on a <td> or <th> element?",
+          "options": {
+            "A": "colspan sets the column width in pixels; rowspan sets the row height in pixels",
+            "B": "colspan='n' makes a cell span n columns horizontally; rowspan='n' makes a cell span n rows vertically \u2014 used for merged cells in complex tables such as grouped headers or summary rows",
+            "C": "colspan and rowspan control text alignment within a cell",
+            "D": "colspan groups columns for sorting; rowspan groups rows for filtering"
+          },
+          "answer": "B",
+          "explanation": "colspan='2': the cell occupies 2 column positions \u2014 adjacent cells in that row must be reduced by 1. rowspan='3': the cell occupies 3 row positions \u2014 the cells that would have appeared in those rows below must be omitted. Common use: a header spanning two sub-columns (<th colspan='2'>Q1 Sales</th> over Jan and Feb columns). Always verify total cell counts per row equal the column count.",
+          "source": "MDN Web Docs. HTML table advanced features. https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Advanced"
+        },
+        {
+          "q_id": "Q10b2-MQ2-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "Create an accessible 2-column table showing two products and their prices, with column headers 'Product' and 'Price', and a table caption.",
+          "options": {
+            "A": "<table><tr><td>Product</td><td>Price</td></tr><tr><td>Widget</td><td>\u00a39.99</td></tr><tr><td>Gadget</td><td>\u00a314.99</td></tr></table>",
+            "B": "<table><caption>Product Price List</caption><thead><tr><th scope='col'>Product</th><th scope='col'>Price</th></tr></thead><tbody><tr><td>Widget</td><td>\u00a39.99</td></tr><tr><td>Gadget</td><td>\u00a314.99</td></tr></tbody></table>",
+            "C": "<table><caption>Product Price List</caption><tr><th>Product</th><th>Price</th></tr><tr><td>Widget</td><td>\u00a39.99</td></tr></table>",
+            "D": "<grid><header><col>Product</col><col>Price</col></header><row><cell>Widget</cell><cell>\u00a39.99</cell></row></grid>"
+          },
+          "answer": "B",
+          "explanation": "Option B is fully correct: <caption> provides a table title announced by screen readers; <thead>/<tbody> semantic grouping; <th scope='col'> explicitly marks column headers with scope for accessibility; <td> for data cells. Option A: uses <td> for headers \u2014 not semantic, screen readers cannot identify them as headers. Option C: missing scope and <thead>/<tbody>. Option D: uses non-existent elements.",
+          "source": "MDN Web Docs. HTML table advanced features and accessibility. https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Advanced"
+        }
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Multimedia, Embedding and Metadata",
+      "source_lesson": "ML-3",
+      "questions": [
+        {
+          "q_id": "Q10b2-MQ3-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is the purpose of the <meta name='viewport'> tag in HTML, and what does content='width=device-width, initial-scale=1' mean?",
+          "options": {
+            "A": "It sets the background colour of the page on mobile devices",
+            "B": "It controls how the browser scales and sizes the page on mobile devices. width=device-width sets the viewport width to match the device screen width; initial-scale=1 sets the initial zoom level to 100% \u2014 preventing mobile browsers from zooming out to fit a desktop-width page",
+            "C": "It tells search engines the preferred screen resolution for the page",
+            "D": "It disables zooming on all devices for consistent display"
+          },
+          "answer": "B",
+          "explanation": "Without the viewport meta tag, mobile browsers render pages at ~980px wide and zoom out to fit the screen \u2014 making text tiny and unreadable. With <meta name='viewport' content='width=device-width, initial-scale=1'>: the page renders at actual device width, enabling responsive CSS media queries to work correctly. Never add user-scalable=no \u2014 it violates WCAG 1.4.4 (Resize Text) by preventing user zoom.",
+          "source": "MDN Web Docs. Responsive design \u2014 The viewport meta tag. https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design"
+        },
+        {
+          "q_id": "Q10b2-MQ3-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Which HTML element embeds a video file with browser-native controls, and what attribute ensures it does not auto-play with sound?",
+          "options": {
+            "A": "<embed src='video.mp4'> with the silent attribute",
+            "B": "<video controls> with multiple <source> child elements for different formats \u2014 and without the autoplay attribute (or with muted autoplay for background videos only)",
+            "C": "<media src='video.mp4' controls>",
+            "D": "<img src='video.mp4' type='video/mp4'>"
+          },
+          "answer": "B",
+          "explanation": "<video controls src='video.mp4'> or with <source> children for format fallback: <video controls><source src='video.webm' type='video/webm'><source src='video.mp4' type='video/mp4'>Your browser does not support video.</video>. controls: shows play/pause/volume UI. autoplay without muted is blocked by most browsers (autoplay policy). muted autoplay is allowed for background/decorative video. Always provide fallback text.",
+          "source": "MDN Web Docs. Video and audio content. https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Video_and_audio_content"
+        },
+        {
+          "q_id": "Q10b2-MQ3-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why should you provide multiple <source> elements inside a <video> or <audio> element rather than a single src attribute?",
+          "options": {
+            "A": "Multiple sources make the video load faster by downloading from multiple servers simultaneously",
+            "B": "Different browsers support different video/audio codecs \u2014 providing multiple formats (WebM/VP9, MP4/H.264) ensures the browser can select the first format it supports, maximising compatibility without relying on a single codec",
+            "C": "Multiple sources are required by WCAG for video accessibility",
+            "D": "The src attribute on <video> is deprecated and no longer supported"
+          },
+          "answer": "B",
+          "explanation": "Codec support varies: Chrome/Firefox support WebM (VP8/VP9, Opus) natively; Safari historically preferred MP4 (H.264, AAC). Providing both: <source src='video.webm' type='video/webm'><source src='video.mp4' type='video/mp4'> \u2014 browser picks the first it can play. The type attribute helps browsers skip formats they cannot play without downloading. Single src works if you only target modern browsers (most now support H.264).",
+          "source": "MDN Web Docs. Video and audio content. https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Video_and_audio_content"
+        },
+        {
+          "q_id": "Q10b2-MQ3-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "What is the Open Graph protocol, and why do web developers add <meta property='og:title'> and related tags to HTML pages?",
+          "options": {
+            "A": "Open Graph is a CSS framework for creating graph visualisations on web pages",
+            "B": "Open Graph (Facebook, 2010) is a protocol using <meta property='og:'> tags to control how a page appears when shared on social media platforms \u2014 defining the title, description, image, and URL shown in link previews on Facebook, Twitter/X, LinkedIn, and messaging apps",
+            "C": "Open Graph tags replace the standard <title> element for SEO purposes",
+            "D": "Open Graph is a browser API for rendering WebGL graphics"
+          },
+          "answer": "B",
+          "explanation": "OG tags: <meta property='og:title' content='Page Title'>, <meta property='og:description' content='...'>, <meta property='og:image' content='https://example.com/image.jpg'>, <meta property='og:url' content='https://example.com/page'>. Without these, platforms scrape the <title> and first paragraph \u2014 often producing poor previews. Twitter/X uses its own twitter:card meta tags. Both are essential for social media distribution.",
+          "source": "Open Graph Protocol. https://ogp.me; MDN Web Docs. Metadata in HTML. https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/The_head_metadata_in_HTML"
+        },
+        {
+          "q_id": "Q10b2-MQ3-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "You are adding an embedded YouTube video to a page. The video must not auto-play, must show controls, and must be accessible. Which approach is most correct?",
+          "options": {
+            "A": "<img src='https://youtube.com/embed/abc123'>",
+            "B": "<iframe width='560' height='315' src='https://www.youtube.com/embed/abc123' title='Video title describing content' allow='accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen loading='lazy'></iframe>",
+            "C": "<video src='https://youtube.com/watch?v=abc123' controls></video>",
+            "D": "<embed src='https://youtube.com/embed/abc123' width='560' height='315'>"
+          },
+          "answer": "B",
+          "explanation": "YouTube embeds use <iframe> with the /embed/ URL format. Key attributes: title \u2014 mandatory for screen reader accessibility (announces what the video is before users enter the iframe); allowfullscreen \u2014 permits full-screen mode; loading='lazy' \u2014 defers iframe load until near viewport (improves page load performance). No autoplay in src URL (?autoplay=1 absent). Option C: <video> cannot directly embed YouTube streams (they are not direct video files).",
+          "source": "YouTube. Embed videos & playlists. https://support.google.com/youtube/answer/171780; MDN Web Docs. <iframe>. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe"
+        }
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Advanced Attributes, ARIA and Validation",
+      "source_lesson": "ML-4",
+      "questions": [
+        {
+          "q_id": "Q10b2-MQ4-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is ARIA (Accessible Rich Internet Applications), and when should ARIA attributes be used in HTML?",
+          "options": {
+            "A": "ARIA is a JavaScript framework for building accessible single-page apps",
+            "B": "ARIA is a set of HTML attributes (role, aria-label, aria-hidden, aria-expanded, etc.) that supplement native semantics to make dynamic and custom UI components accessible to assistive technologies \u2014 to be used only when native HTML semantics are insufficient",
+            "C": "ARIA replaces all semantic HTML elements with div-based equivalents",
+            "D": "ARIA is a CSS specification for high-contrast colour schemes"
+          },
+          "answer": "B",
+          "explanation": "First rule of ARIA: don't use ARIA if a native HTML element provides the same semantics (use <button> not <div role='button'>). ARIA is for custom widgets where no native element exists: role='dialog', role='tabpanel', aria-expanded='true/false' for accordions, aria-live='polite' for dynamic content updates. Key attributes: aria-label (accessible name), aria-hidden='true' (hide from screen readers), aria-describedby (associate description).",
+          "source": "W3C. ARIA Authoring Practices Guide. https://www.w3.org/WAI/ARIA/apg; MDN Web Docs. ARIA. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA"
+        },
+        {
+          "q_id": "Q10b2-MQ4-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "What does the HTML attribute data-* allow developers to do?",
+          "options": {
+            "A": "data-* attributes define CSS data variables for styling elements",
+            "B": "data-* attributes allow developers to store custom private data on HTML elements \u2014 accessible via JavaScript's dataset API \u2014 without using non-standard attributes or hidden inputs",
+            "C": "data-* attributes are used to bind elements to a database",
+            "D": "data-* attributes define the data type of form input values"
+          },
+          "answer": "B",
+          "explanation": "data-* custom attributes: <button data-product-id='42' data-price='9.99'>Add to cart</button>. Accessed in JS: button.dataset.productId (camelCase) \u2192 '42'. Used extensively in JavaScript frameworks and vanilla JS to associate data with DOM elements without polluting the global scope or using hidden inputs. Valid on any HTML element. Name must be lowercase, no uppercase letters after 'data-'.",
+          "source": "MDN Web Docs. Using data attributes. https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes"
+        },
+        {
+          "q_id": "Q10b2-MQ4-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why should developers validate their HTML using the W3C Markup Validation Service, and what types of errors does it catch?",
+          "options": {
+            "A": "HTML validation is purely cosmetic \u2014 invalid HTML renders identically in all browsers",
+            "B": "Browsers silently auto-correct many HTML errors but in inconsistent ways across browsers. Validation catches: unclosed tags, incorrectly nested elements, duplicate id attributes, missing required attributes (alt on img), deprecated elements, and invalid attribute values \u2014 preventing cross-browser inconsistencies and accessibility failures",
+            "C": "W3C validation is only needed for websites targeting IE11",
+            "D": "Validation is only required before submitting a website to Google Search Console"
+          },
+          "answer": "B",
+          "explanation": "Browser error recovery is defined in the HTML5 parsing spec but complex edge cases still differ. Common validation errors with real consequences: duplicate id attributes break JavaScript getElementById and CSS selectors; unclosed <div> causes layout collapse; missing alt fails WCAG 1.1.1; <a> inside <a> breaks click behaviour. The W3C Validator (validator.w3.org) flags all of these. Run validation as part of every project's QA process.",
+          "source": "W3C Markup Validation Service. https://validator.w3.org; MDN Web Docs. Debugging HTML. https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Debugging_HTML"
+        },
+        {
+          "q_id": "Q10b2-MQ4-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "What is the difference between the id and class attributes in HTML, and when should each be used?",
+          "options": {
+            "A": "id and class are identical \u2014 both can be used multiple times on any element",
+            "B": "id must be unique within a page \u2014 used for unique elements (anchor targets, JavaScript getElementById, ARIA references). class can be applied to multiple elements and an element can have multiple classes \u2014 used for reusable CSS styling and JavaScript querySelectorAll",
+            "C": "id is for CSS styling only; class is for JavaScript only",
+            "D": "class must be unique; id can repeat on multiple elements"
+          },
+          "answer": "B",
+          "explanation": "id uniqueness is a hard HTML rule \u2014 duplicate ids cause undefined behaviour in JS (getElementById returns only the first) and break ARIA associations (aria-labelledby, for). class: reusable, multiple classes per element (class='btn btn-primary large'), multiple elements per class. In CSS: #id selector (specificity 0,1,0,0) vs .class (specificity 0,0,1,0). Use id sparingly (landmarks, JS hooks, fragment links); use class for styling.",
+          "source": "MDN Web Docs. HTML attribute: id. https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id"
+        },
+        {
+          "q_id": "Q10b2-MQ4-05",
+          "bloom": "L3",
+          "skill": "Evaluate",
+          "stem": "Review this HTML snippet and identify all accessibility and validity errors: <div onclick='submit()'>Submit</div><img src='logo.png'><input type='text' id='name' id='name'>",
+          "options": {
+            "A": "No errors \u2014 this is valid HTML",
+            "B": "Three errors: (1) <div onclick='submit()'> is not keyboard accessible \u2014 replace with <button type='submit'>; (2) <img src='logo.png'> is missing the required alt attribute \u2014 add alt='Company logo' or alt='' if decorative; (3) duplicate id='name' on the input is invalid \u2014 id must be unique per page",
+            "C": "Only the missing alt attribute is an error; the others are acceptable",
+            "D": "The onclick attribute is the only error \u2014 remove it and use CSS instead"
+          },
+          "answer": "B",
+          "explanation": "(1) <div> with onclick: not focusable by keyboard, no Enter/Space key handling, no ARIA role \u2014 fails WCAG 2.1.1 Keyboard and 4.1.2 Name, Role, Value. Fix: <button>. (2) Missing alt: fails WCAG 1.1.1 Non-text Content \u2014 screen readers announce the filename. (3) Duplicate id: invalid HTML per spec \u2014 getElementById returns the first, breaking any aria-labelledby or label for references to the second. All three are real, distinct errors.",
+          "source": "WCAG 2.1. 1.1.1, 2.1.1, 4.1.2. https://www.w3.org/WAI/WCAG21/quickref; W3C HTML Validator. https://validator.w3.org"
+        }
+      ]
+    }
+  ],
+  "table_of_contents": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 HTML Forms",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q10b2-MQ1-01",
+        "Q10b2-MQ1-02",
+        "Q10b2-MQ1-03",
+        "Q10b2-MQ1-04",
+        "Q10b2-MQ1-05"
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 HTML Tables",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q10b2-MQ2-01",
+        "Q10b2-MQ2-02",
+        "Q10b2-MQ2-03",
+        "Q10b2-MQ2-04",
+        "Q10b2-MQ2-05"
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Multimedia, Embedding and Metadata",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q10b2-MQ3-01",
+        "Q10b2-MQ3-02",
+        "Q10b2-MQ3-03",
+        "Q10b2-MQ3-04",
+        "Q10b2-MQ3-05"
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Advanced Attributes, ARIA and Validation",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q10b2-MQ4-01",
+        "Q10b2-MQ4-02",
+        "Q10b2-MQ4-03",
+        "Q10b2-MQ4-04",
+        "Q10b2-MQ4-05"
+      ]
+    }
+  ],
+  "totals": {
+    "mini_quizzes": 4,
+    "questions": 20,
+    "L1": 8,
+    "L2": 8,
+    "L3": 4
+  }
+}

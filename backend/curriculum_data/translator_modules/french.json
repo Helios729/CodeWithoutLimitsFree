@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.1",
+  "module_type": "translator",
+  "generated": "2026-06-26",
+  "verified_on": "2026-06-26",
+  "verification_policy": "Human verification recommended for any low/very-low-resource output before client delivery.",
+  "language": {
+    "name_en": "French",
+    "autonym": "Français",
+    "iso_639_1": "fr",
+    "iso_639_3": "fra",
+    "flores_200_code": "fra_Latn",
+    "script": "Latin",
+    "regions": [
+      "France",
+      "West & Central Africa",
+      "Haiti",
+      "Caribbean"
+    ],
+    "resource_level": "high"
+  },
+  "default_pivot_languages": [
+    "English"
+  ],
+  "recommended_resources": [
+    {
+      "name": "OPUS-MT (opus-mt-tc-big-en-fr)",
+      "type": "model",
+      "modality": "text",
+      "provider": "Helsinki-NLP",
+      "venue": "Tiedemann & Thottingal, EAMT 2020 (aclanthology.org/2020.eamt-1.61); Tiedemann et al., LRE 2023",
+      "license": "CC-BY-4.0",
+      "commercial_use": true,
+      "huggingface_id": "Helsinki-NLP/opus-mt-tc-big-en-fr",
+      "url": "https://huggingface.co/Helsinki-NLP/opus-mt-tc-big-en-fr",
+      "language_pairs": [
+        "en->fr",
+        "fr->en (opus-mt-tc-big-fr-en)"
+      ],
+      "offline": "Lightweight per-pair Marian-NMT model — among the best for offline mobile.",
+      "notes": "Permissive licence (commercial OK). Reverse direction model also exists.",
+      "verified_on": "2026-06-26"
+    },
+    {
+      "name": "MADLAD-400-3B-MT",
+      "type": "model",
+      "modality": "text",
+      "provider": "Google",
+      "venue": "Kudugunta et al., NeurIPS 2023 (arXiv:2309.04662)",
+      "license": "Apache-2.0",
+      "commercial_use": true,
+      "huggingface_id": "google/madlad400-3b-mt",
+      "url": "https://huggingface.co/google/madlad400-3b-mt",
+      "language_pairs": [
+        "en<->fr",
+        "fr<->many"
+      ],
+      "offline": "GGUF 2–4-bit quantization brings the 3B model under ~1–2 GB.",
+      "notes": "Permissive licence (commercial OK). Prefix input with <2xx> target token.",
+      "verified_on": "2026-06-26"
+    },
+    {
+      "name": "NLLB-200 (distilled 600M)",
+      "type": "model",
+      "modality": "text",
+      "provider": "Meta AI",
+      "venue": "NLLB Team et al., 2022 (arXiv:2207.04672)",
+      "license": "CC-BY-NC-4.0",
+      "commercial_use": false,
+      "huggingface_id": "facebook/nllb-200-distilled-600M",
+      "url": "https://huggingface.co/facebook/nllb-200-distilled-600M",
+      "language_pairs": [
+        "eng_Latn<->fra_Latn",
+        "fra_Latn<->many"
+      ],
+      "offline": "Convert to CTranslate2 / quantize (int8) for low-RAM phones.",
+      "notes": "Strong low-resource coverage; non-commercial licence.",
+      "verified_on": "2026-06-26"
+    }
+  ],
+  "speech_to_text": {
+    "covered_by_seamless_m4t_v2": true,
+    "resources": [
+      {
+        "name": "SeamlessM4T v2 (large)",
+        "type": "model",
+        "modality": "speech+text (ASR, speech→text translation, S2ST, T2ST, T2TT)",
+        "provider": "Meta AI (Seamless Communication)",
+        "venue": "Seamless Communication et al., 2023 (arXiv:2312.05187)",
+        "license": "CC-BY-NC-4.0",
+        "commercial_use": false,
+        "huggingface_id": "facebook/seamless-m4t-v2-large",
+        "url": "https://huggingface.co/facebook/seamless-m4t-v2-large",
+        "language_pairs": [
+          "fr speech->text",
+          "fr speech->en text"
+        ],
+        "offline": "Large multimodal model (~2B+); run server-side or quantize/prune for device. Heavier than text-only MT.",
+        "notes": "Speech recognition + speech translation across ~100 languages; non-commercial licence.",
+        "verified_on": "2026-06-26"
+      }
+    ],
+    "note": "SeamlessM4T v2 supports French speech (ASR + speech translation)."
+  },
+  "integration_notes": "High quality and abundant. For commercial use prefer OPUS-MT or MADLAD-400."
+}

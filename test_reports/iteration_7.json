@@ -1,0 +1,60 @@
+{
+  "summary": "Iteration 7 beta-test of 'Code Without Limits' — all 8 new/changed features verified end-to-end against the public preview origin. BACKEND: 11/11 new pytest tests in /app/backend/tests/test_content_v7.py pass. GET /api/income/modules returns title='Income & Asset Module Bank (Tasks 1–17)' with count=17, total_cards=18, modules length=18, and a non-empty duplication_note mentioning Task 18, Task 2 and community/local economy framing; every module carries id/title/role_label/asset/languages/ai_basics_count. GET /api/income/modules/18 returns the same title as /api/income/modules/2 (intentional duplicate). GET /api/translator returns title containing 'Open-Source Translator', 8 modules each with key/language/iso_639_3/resource_count/speech_to_text_supported, a monetisation_note that contains both 'gap' and 'opportunit' (low-resource corpora framing), plus non-empty licensing_guidance and verified_on. GET /api/translator/haitian_creole returns language.name_en=='Haitian Creole', 3 recommended_resources, speech_to_text.covered_by_seamless_m4t_v2==false, and a verification_policy block. GET /api/translator/does_not_exist returns 404. GET /api/glossary returns 17 terms (>=15) all with term/short/definition + source.url/title; all four required terms (bandwidth, throughput, bottleneck, corpus) are present. GET /api/content/topics returns 56 topics where all four html-advanced__mq1..mq4 carry coming_soon=true and a non-empty teaser ('header, nav, main…', etc.). Regression endpoints (/api/modules/L10b-html with tabs+difficulty, /api/programme with weeks, /api/income/modules/1 with Execution body) all still 200. FRONTEND (mobile 390x844, real EXPO_PUBLIC_BACKEND_URL, no auth): all 10 direct routes render with zero console errors. /welcome shows brand + 'Turn local knowledge into ownable assets.' over the multi-layer Kenscoff mountain silhouette (slate/grey/terracotta layers visible in screenshot — string 'Kenscoff' is visual, not a text label). /income shows 'Income & Asset Bank' header + '17 MONETISABLE DIGITAL-ASSET MODULES' + the green Task 18 callout appears at the bottom right before card #18. /income/1 shows AI Security Red-Teaming + 'The Asset You Build' green card. /income/18 loads (duplicate of #2). /programme shows 'About this programme' + week list + References. /translator shows the orange 'The gap is the opportunity' callout + Licensing card + 8 language cards. /translator/haitian_creole shows the Haitian Creole header with Kreyòl ayisyen subtitle, Kreyòl-MT card, and 'NOT covered by Seamless' is correctly displayed in the Speech-to-text section (verified via 'not in seamlessm4t v2' text). /glossary shows 'Words to know' + search input ('Search words or definitions…' placeholder) + 17 collapsible cards; tapping 'Bandwidth' expands to reveal the full definition, examples, and the source URL link (https://en.wikipedia.org/wiki/Bandwidth_(computing)). /modules/L10b-html shows the 3-tab pill bar (Beginner/Intermediate/Advanced) with no [Beginner] prefix, and 'Reading List Coming Soon' card at the bottom. /mission shows the 'This is a pilot app.' cream/orange callout. The /(tabs)/home route is gated behind the Emergent Google OAuth sign-in wall (the root '/' renders the welcome with 'Sign in with Google' CTA), so the tile grid + sprint/quiz CTAs could not be auto-verified — main agent should self-test that with a signed-in browser session. No mocked APIs.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": [
+      {"component": "shadow* style props", "issue": "Pre-existing RN-Web console warning '\"shadow*\" style props are deprecated. Use \"boxShadow\".' — carry-over from prior iterations, non-blocking per request."},
+      {"component": "pointerEvents prop", "issue": "Pre-existing RN-Web console warning 'props.pointerEvents is deprecated. Use style.pointerEvents instead.' — carry-over from prior iterations, non-blocking per request."}
+    ]
+  },
+  "console_warnings_observed": [
+    "\"shadow*\" style props are deprecated. Use \"boxShadow\".",
+    "props.pointerEvents is deprecated. Use style.pointerEvents instead."
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_content_v7.py",
+    "/app/test_reports/pytest/v7_content_results.xml",
+    "/tmp/iter7/welcome.jpg",
+    "/tmp/iter7/income.jpg",
+    "/tmp/iter7/income_bottom.jpg",
+    "/tmp/iter7/income_1.jpg",
+    "/tmp/iter7/income_18.jpg",
+    "/tmp/iter7/programme.jpg",
+    "/tmp/iter7/translator.jpg",
+    "/tmp/iter7/translator_haitian_creole.jpg",
+    "/tmp/iter7/glossary.jpg",
+    "/tmp/iter7/glossary_bandwidth_expanded.jpg",
+    "/tmp/iter7/modules_L10b_html.jpg",
+    "/tmp/iter7/modules_L10b_html_bottom.jpg",
+    "/tmp/iter7/mission.jpg",
+    "/tmp/iter7/root.jpg"
+  ],
+  "action_items": [
+    "No fixes required for iteration 7 — all 8 features pass backend + frontend smoke checks.",
+    "Carry-over (low priority): replace deprecated React Native Web 'shadow*' props with boxShadow and 'pointerEvents' prop with style.pointerEvents to silence console warnings.",
+    "Self-test (main agent): the /(tabs)/home tile grid (Income Bank / About programme / Translations / Mini dictionary) and the 'Quick 5-minute sprint' + 'Try a 5-question quiz' CTA copy + pilot banner — these are auth-gated behind Emergent Google OAuth and could not be verified by the testing agent in Playwright."
+  ],
+  "critical_code_review_comments": [
+    "GET /api/income/modules title correctly uses an en-dash '1\u201317' (not a hyphen) — matches spec.",
+    "Translator monetisation_note mentions 'gap is also an opportunity' and 'low-resource' + 'corpora' as required.",
+    "Glossary terms cite reputable sources (Wikipedia, Cisco docs etc.) with both source.title and source.url populated — verified visually that the URL link is rendered tappable in the Bandwidth card.",
+    "html-advanced__mq1..mq4 topics correctly carry coming_soon:true AND non-empty 'teaser' strings (e.g., 'header, nav, main…', 'WCAG 2.1 AA contrast…').",
+    "All 8 new/changed endpoints are public (no Bearer), consume zero AI tokens, and stream straight from /app/backend/curriculum_data/*.json via content_extra.py.",
+    "No MongoDB _id leak in any of the new endpoint responses."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_content_v7.py (NEW)"
+  ],
+  "success_rate": {"backend": "100% (11/11 v7 tests pass)", "frontend": "100% (10/10 direct routes render with expected copy; 1 route /(tabs)/home unreachable due to OAuth wall — not a failure)"},
+  "seed_data_creation": "None required — all 8 endpoints are public (no auth). Frontend was navigated by direct URL on the public preview origin.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "All v7 content endpoints (income, translator, glossary, content/topics) are public and served from JSON via /app/backend/content_extra.py. Restart backend (sudo supervisorctl restart backend) to reload JSON edits. The home tab grid is behind Emergent Google OAuth; to test it the agent must seed a session in MongoDB (see /app/memory/test_credentials.md) and inject the Bearer token + cookie before navigating to /(tabs)/home. The misty Kenscoff mountains on /welcome are an SVG silhouette, not a labelled image — verify visually via screenshot, do not grep for the word 'Kenscoff' in DOM text.",
+  "rca_of_issue": "n/a — all features pass."
+}

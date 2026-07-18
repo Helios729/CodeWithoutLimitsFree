@@ -1,0 +1,83 @@
+{
+  "theme": "Light",
+  "archetype": "Archetype 1: Organic & Earthy",
+  "design_philosophy": "Neo-minimalism tailored for low-bandwidth, energy-constrained environments (Africa, Caribbean). The UI prioritizes Calmness, Trust, and High Legibility using 'Organic Imperfection' and structural clarity over heavy assets. We rely on typography, negative space, and CSS-level drawing (SVG/shapes) rather than large images to save data.",
+  "colors": {
+    "background_primary": "#F7F5F0",
+    "background_secondary": "#FFFFFF",
+    "surface_glass": "rgba(255, 255, 255, 0.8)",
+    "text_primary": "#1A1A1A",
+    "text_secondary": "#5C5E54",
+    "brand_primary": "#C84C31",
+    "brand_primary_active": "#A84430",
+    "brand_secondary": "#4A5D4E",
+    "accent_warm": "#E6B87D",
+    "border_subtle": "#E5E2D9"
+  },
+  "typography": {
+    "strategy": "Swiss Brutalist hierarchy meets Soft Utility for max legibility on cheap LCD screens. Banned Inter. Using 'Outfit' for crisp headings and 'DM Sans' for highly readable body text.",
+    "fonts": {
+      "heading": "Outfit",
+      "body": "DM Sans"
+    },
+    "hierarchy": {
+      "h1": "text-4xl font-semibold tracking-tight text-[#1A1A1A]",
+      "h2": "text-2xl font-semibold tracking-tight text-[#1A1A1A]",
+      "h3": "text-xl font-medium tracking-tight text-[#1A1A1A]",
+      "body": "text-base font-normal text-[#5C5E54] leading-relaxed",
+      "small": "text-sm font-normal text-[#5C5E54]",
+      "overline": "text-xs font-bold uppercase tracking-[0.2em] text-[#C84C31]"
+    }
+  },
+  "spacing_layout": {
+    "strategy": "Generous Spacing Philosophy. Bento grid adapted for mobile scrolling.",
+    "padding_screen": "px-6",
+    "padding_card": "p-6",
+    "radius_card": "rounded-3xl",
+    "radius_button": "rounded-full"
+  },
+  "components": {
+    "button_primary": "bg-[#C84C31] rounded-full py-4 px-8 flex items-center justify-center active:opacity-80",
+    "button_primary_text": "text-white text-lg font-medium",
+    "button_secondary": "bg-[#F7F5F0] border border-[#E5E2D9] rounded-full py-4 px-8 flex items-center justify-center active:bg-[#E5E2D9]",
+    "button_secondary_text": "text-[#1A1A1A] text-lg font-medium",
+    "card_base": "bg-white border border-[#E5E2D9] rounded-3xl p-6 shadow-sm",
+    "input_base": "bg-white border border-[#E5E2D9] rounded-2xl p-4 text-base text-[#1A1A1A] focus:border-[#C84C31]"
+  },
+  "icons": {
+    "library": "@phosphor-icons/react-native",
+    "style": "Duotone",
+    "usage": "Use Phosphor icons heavily for the 8 AI Agents instead of images to dramatically reduce app size and bandwidth."
+  },
+  "media": {
+    "strategy": "Limit image usage to save bandwidth. Rely on these optimized selections ONLY when necessary (e.g. Hero banner, welcome screen).",
+    "image_urls": [
+      {
+        "category": "hero_abstract_clay",
+        "description": "Background texture for the Welcome/Auth screen or AI Studio top section. Abstract terracotta geometric shapes.",
+        "url": "https://images.pexels.com/photos/9423069/pexels-photo-9423069.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      },
+      {
+        "category": "network_data_abstract",
+        "description": "Subtle abstract representation of Neural Networks/Algorithms for the Topic Picker.",
+        "url": "https://images.pexels.com/photos/10325707/pexels-photo-10325707.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      },
+      {
+        "category": "student_minimal",
+        "description": "Minimalist student portrait for the learning modules cover or profile placeholder.",
+        "url": "https://images.unsplash.com/photo-1673533582990-3542202b0a8f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzF8MHwxfHNlYXJjaHwzfHxlZHVjYXRpb24lMjBzdHVkZW50JTIwbGVhcm5pbmclMjBtaW5pbWFsJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzgyMDg5NTA0fDA&ixlib=rb-4.1.0&q=85"
+      }
+    ]
+  },
+  "feature_design_instructions": {
+    "token_meter": "Place prominently in the Header. Use a pill-shaped container `rounded-full` with a solid progress bar filled with `#4A5D4E` (Moss Green). Include testID='token-meter' and data-testid='token-meter'.",
+    "ai_studio": "Focus entirely on the input area. Provide a horizontal ScrollView of Agent Cards (using distinct Phosphor Icons instead of heavy imagery). Include testID='prompt-input' and testID='submit-prompt-button'.",
+    "quiz_screen": "Card-based interface. Each question is a card. Source citations MUST be displayed below the question in an 'overline' style block (`bg-[#F7F5F0] text-[#5C5E54] text-xs`). Use Moss Green for correct selections and Terracotta for incorrect.",
+    "paywall": "3 vertical tier cards. Highlight the $10/month tier with an inner border of `#C84C31` and a subtle drop shadow. Free/BYOK is muted. Include testID='tier-free-btn', testID='tier-day-btn', testID='tier-sub-btn'."
+  },
+  "testing_and_accessibility": {
+    "test_attributes": "EVERY interactive element (Buttons, Touchables, Inputs, specific views) MUST have a `testID` (for Native) and `data-testid` (for Web fallback) property. E.g., `testID='login-google-btn'`. Use kebab-case.",
+    "contrast": "Ensure all text against `#C84C31` and `#4A5D4E` is `#FFFFFF`. Text against `#F7F5F0` must be `#1A1A1A` or `#5C5E54`."
+  },
+  "instructions_to_main_agent": "1. Set up Expo with NativeWind for styling. 2. Install @expo-google-fonts/outfit and @expo-google-fonts/dm-sans. 3. Build mobile-first. 4. Use the colors and typography from this JSON. 5. IMPORTANT: Because this is for low-bandwidth contexts, do not add arbitrary images. Use the provided image_urls sparingly, and use @phosphor-icons/react-native for UI graphics and agent avatars."
+}

@@ -1,0 +1,409 @@
+{
+  "module_id": "edtech-and-learning-science",
+  "module_title": "EdTech and Learning Science-Q",
+  "type": "quiz",
+  "difficulty": "Beginner",
+  "companion_learning": "EdTech and Learning Science-L",
+  "superquiz_pool": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+  ],
+  "bloom_distribution": {
+    "L1_remember": 2,
+    "L2_understand": 2,
+    "L3_apply": 1
+  },
+  "mini_quizzes": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 Bloom's Revised Taxonomy",
+      "source_lesson": "ML-1",
+      "questions": [
+        {
+          "q_id": "Q02-MQ1-01",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Which is the correct ascending order of Bloom's Revised Taxonomy?",
+          "options": {
+            "A": "Remember\u2192Understand\u2192Apply\u2192Analyse\u2192Evaluate\u2192Create",
+            "B": "Understand\u2192Remember\u2192Apply\u2192Create\u2192Analyse\u2192Evaluate",
+            "C": "Remember\u2192Apply\u2192Understand\u2192Evaluate\u2192Analyse\u2192Create",
+            "D": "Apply\u2192Remember\u2192Understand\u2192Analyse\u2192Create\u2192Evaluate"
+          },
+          "answer": "A",
+          "explanation": "Anderson & Krathwohl (2001) revised the taxonomy into six ascending cognitive levels: Remember (L1), Understand (L2), Apply (L3), Analyse (L4), Evaluate (L5), Create (L6). Each level presupposes mastery of the level below.",
+          "source": "Anderson & Krathwohl. A Taxonomy for Learning, Teaching, and Assessing. Pearson, 2001. https://www.bloomstaxonomy.net"
+        },
+        {
+          "q_id": "Q02-MQ1-02",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "Which cognitive verbs are associated with Bloom's Level 1 (Remember)?",
+          "options": {
+            "A": "Critique, justify, defend, appraise",
+            "B": "Design, construct, develop, produce",
+            "C": "Define, identify, list, recall, state",
+            "D": "Classify, compare, explain, interpret"
+          },
+          "answer": "C",
+          "explanation": "L1 (Remember) targets retrieval of previously learned information. Associated verbs: define, duplicate, identify, list, memorise, recall, repeat, state. These contrast with L2 verbs (explain, classify) and L3 verbs (execute, solve).",
+          "source": "Anderson & Krathwohl. A Taxonomy for Learning. 2001. https://www.bloomstaxonomy.net"
+        },
+        {
+          "q_id": "Q02-MQ1-03",
+          "bloom": "L2",
+          "skill": "Classify",
+          "stem": "'Explain why a sorted array is required for binary search to work correctly.' At which Bloom level does this question operate?",
+          "options": {
+            "A": "L1 \u2014 binary search is a factual concept to memorise",
+            "B": "L2 \u2014 requires explaining the principle connecting the sorting precondition to the algorithm's logic",
+            "C": "L3 \u2014 requires implementing binary search in code",
+            "D": "L4 \u2014 requires evaluating the efficiency of different search algorithms"
+          },
+          "answer": "B",
+          "explanation": "The verb 'explain' and the demand to connect a precondition (sorted order) to a mechanism (halving the search space) require understanding \u2014 Bloom's L2. No implementation (L3) or comparative evaluation (L4) is asked.",
+          "source": "Anderson & Krathwohl. A Taxonomy for Learning. 2001."
+        },
+        {
+          "q_id": "Q02-MQ1-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How do Bloom's L5 (Evaluate) and L6 (Create) differ in the cognitive demand they place on learners?",
+          "options": {
+            "A": "L5 requires memorisation; L6 requires computation",
+            "B": "L5 requires making judgements based on criteria and evidence; L6 requires synthesising elements into a novel, coherent whole",
+            "C": "Both require only recall from multiple sources",
+            "D": "L5 = procedural knowledge; L6 = declarative knowledge"
+          },
+          "answer": "B",
+          "explanation": "L5 (Evaluate): learners judge, critique, or justify using standards. L6 (Create): learners produce something new by combining knowledge \u2014 the highest cognitive demand in the taxonomy.",
+          "source": "Anderson & Krathwohl. A Taxonomy for Learning. 2001."
+        },
+        {
+          "q_id": "Q02-MQ1-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "Which of the following best exemplifies a Bloom's L3 (Apply) question on gradient descent?",
+          "options": {
+            "A": "Define gradient descent.",
+            "B": "Explain how learning rate affects the convergence of gradient descent.",
+            "C": "Trace three iterations of gradient descent on f(w)=w\u00b2\u22124w+5 starting at w=0 with \u03b1=0.5, showing each weight update and loss value.",
+            "D": "Evaluate whether Adam optimiser is superior to SGD for all deep learning tasks."
+          },
+          "answer": "C",
+          "explanation": "A=L1 (define). B=L2 (explain). D=L5 (evaluate). C requires executing the algorithm step-by-step \u2014 computing \u2202L/\u2202w and applying w\u2190w\u2212\u03b1\u00b7\u2202L/\u2202w \u2014 which is L3 Apply. At w=0: \u2202L/\u2202w=2(0)\u22124=\u22124; w\u2081=0\u22120.5\u00d7(\u22124)=2. At w=2: \u2202L/\u2202w=0; converged.",
+          "source": "Anderson & Krathwohl. 2001; Stanford CS229. https://cs229.stanford.edu"
+        }
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 Memory, Forgetting, and Retrieval Practice",
+      "source_lesson": "ML-2",
+      "questions": [
+        {
+          "q_id": "Q02-MQ2-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What does the Ebbinghaus Forgetting Curve describe?",
+          "options": {
+            "A": "Relationship between study time and exam scores across a semester",
+            "B": "Exponential decay of memory retention over time without rehearsal",
+            "C": "Linear growth of long-term memory through repeated exposure",
+            "D": "Cognitive load imposed by new material in a single session"
+          },
+          "answer": "B",
+          "explanation": "Ebbinghaus (1885) found retention decays exponentially without rehearsal: ~58% retained after 20 minutes, ~44% after 1 hour, ~25% after 1 week. This forms the empirical basis for spaced repetition.",
+          "source": "Ebbinghaus. Memory: A Contribution to Experimental Psychology. 1885. http://psychclassics.yorku.ca/Ebbinghaus/memory.htm"
+        },
+        {
+          "q_id": "Q02-MQ2-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Roediger & Karpicke (2006) found which strategy produced significantly better long-term retention than re-reading?",
+          "options": {
+            "A": "Highlighting key passages in a textbook",
+            "B": "Summarising notes in a different colour pen",
+            "C": "Retrieval practice \u2014 recalling information from memory via testing",
+            "D": "Listening to recorded lectures at 1.5\u00d7 speed"
+          },
+          "answer": "C",
+          "explanation": "The testing effect: students who practised retrieval retained ~50% more material at a 1-week delayed test than those who re-studied. Retrieving strengthens the memory trace more than passive re-exposure.",
+          "source": "Roediger & Karpicke. Psychological Science, 17(3), 2006. https://pubmed.ncbi.nlm.nih.gov/16507066"
+        },
+        {
+          "q_id": "Q02-MQ2-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why does spaced repetition produce better long-term retention than massed practice (cramming), even when total study time is equal?",
+          "options": {
+            "A": "Spaced repetition uses more colourful study materials",
+            "B": "Cramming activates only short-term memory; spaced repetition is impossible to implement digitally",
+            "C": "Each spaced retrieval resets the forgetting curve and strengthens the memory trace; massed practice benefits fade rapidly as forgetting accelerates",
+            "D": "Spaced repetition increases the number of hours studied"
+          },
+          "answer": "C",
+          "explanation": "Each successful retrieval after a delay partially resets the forgetting curve and re-encodes memory more durably. 5\u00d71-hour spaced sessions retain ~3\u00d7 more at 2 weeks than one 5-hour massed session (Ebbinghaus, 1885; Cepeda et al., 2006).",
+          "source": "Ebbinghaus. 1885; Cepeda et al. Distributed practice in verbal recall tasks. Psychological Bulletin, 2006."
+        },
+        {
+          "q_id": "Q02-MQ2-04",
+          "bloom": "L2",
+          "skill": "Interpret",
+          "stem": "A student scores 90% immediately after a lecture but only 40% two weeks later. What does this indicate, and what is the most evidence-based intervention?",
+          "options": {
+            "A": "Learning disability \u2014 recommend specialist assessment",
+            "B": "Quiz too difficult \u2014 reduce question difficulty",
+            "C": "Normal forgetting curve decay; prescribe spaced retrieval practice sessions at day 1, 3, 7, and 14 post-learning",
+            "D": "Student was inattentive \u2014 replay the lecture"
+          },
+          "answer": "C",
+          "explanation": "A 90%\u219240% drop over two weeks is consistent with Ebbinghaus's exponential forgetting curve \u2014 not a disability. The remedy: schedule review sessions at expanding intervals (1, 3, 7, 14 days) to reset the curve before severe forgetting.",
+          "source": "Ebbinghaus. 1885; Roediger & Karpicke. Psychological Science, 2006."
+        },
+        {
+          "q_id": "Q02-MQ2-05",
+          "bloom": "L3",
+          "skill": "Design",
+          "stem": "Designing a spaced repetition schedule for 50 Python syntax rules, 30 min/day for 4 weeks. Which schedule best applies evidence-based spacing principles?",
+          "options": {
+            "A": "Study all 50 rules on Day 1; spend remaining days on other subjects",
+            "B": "Study 12\u201313 new rules each week in a single weekly 30-minute block",
+            "C": "Introduce ~7 rules daily, review previous rules at expanding intervals (Day+1, +3, +7, +14) using flashcard retrieval rather than re-reading",
+            "D": "Read all 50 rules aloud every day for 4 weeks"
+          },
+          "answer": "C",
+          "explanation": "Option C applies: (1) distributed introduction to avoid cognitive overload; (2) expanding-interval spacing to reset forgetting curves; (3) retrieval practice over passive re-reading. Options A/B mass study; D uses passive re-reading with no spacing benefit.",
+          "source": "Roediger & Karpicke. 2006; Cepeda et al. Psychological Bulletin, 2006."
+        }
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Cognitive Load Theory",
+      "source_lesson": "ML-3",
+      "questions": [
+        {
+          "q_id": "Q02-MQ3-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "In Sweller's Cognitive Load Theory, which type of cognitive load refers to the inherent difficulty of the material being learned?",
+          "options": {
+            "A": "Extraneous cognitive load",
+            "B": "Germane cognitive load",
+            "C": "Intrinsic cognitive load",
+            "D": "Transient cognitive load"
+          },
+          "answer": "C",
+          "explanation": "Intrinsic load is determined by the complexity of the content itself \u2014 the number of interacting elements a learner must hold in working memory. Manageable by sequencing simple\u2192complex but cannot be eliminated.",
+          "source": "Sweller. Cognitive Load During Problem Solving. Cognitive Science, 12(2), 1988. https://doi.org/10.1207/s15516709cog1202_4"
+        },
+        {
+          "q_id": "Q02-MQ3-02",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "Which type of cognitive load should instructional designers aim to MINIMISE?",
+          "options": {
+            "A": "Intrinsic load",
+            "B": "Germane load",
+            "C": "Extraneous load",
+            "D": "Affective load"
+          },
+          "answer": "C",
+          "explanation": "Extraneous load is caused by poor instructional design \u2014 irrelevant information, unclear layouts, redundant explanations. It consumes working memory without contributing to schema formation and must be minimised.",
+          "source": "Sweller. Cognitive Science, 12(2), 1988."
+        },
+        {
+          "q_id": "Q02-MQ3-03",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "A tutorial presents a 500-word paragraph, three unrelated code snippets, two pop-up ads, and a scrolling ticker simultaneously. Which load type is imposed and what is its effect?",
+          "options": {
+            "A": "Intrinsic \u2014 programming complexity fills working memory",
+            "B": "Germane \u2014 processing irrelevant content builds useful schemas",
+            "C": "Extraneous \u2014 poor design forces irrelevant processing, consuming working memory and reducing learning",
+            "D": "Affective \u2014 emotional distraction from ads reduces motivation"
+          },
+          "answer": "C",
+          "explanation": "Ads, scrolling text, and unrelated snippets are irrelevant to the learning goal. Processing them imposes extraneous load \u2014 resources spent on irrelevant material reduce capacity for understanding the programming content (Sweller, 1988; Mayer, 2001).",
+          "source": "Sweller. 1988; Mayer. Multimedia Learning. Cambridge UP, 2001."
+        },
+        {
+          "q_id": "Q02-MQ3-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does germane cognitive load differ from extraneous load in its effect on learning?",
+          "options": {
+            "A": "Both are harmful and should be minimised",
+            "B": "Germane promotes schema construction and should be maximised; extraneous wastes working memory on irrelevant processing and should be minimised",
+            "C": "Germane = content difficulty; extraneous = student anxiety",
+            "D": "They are identical constructs with different names"
+          },
+          "answer": "B",
+          "explanation": "Germane load is productive cognitive effort directed at building and automating schemas \u2014 beneficial. Extraneous arises from poor design and wastes capacity. Design goal: minimise extraneous, manage intrinsic, maximise germane.",
+          "source": "Sweller. Cognitive Science. 1988."
+        },
+        {
+          "q_id": "Q02-MQ3-05",
+          "bloom": "L3",
+          "skill": "Evaluate",
+          "stem": "Evaluate this question stem: 'Considering the socioeconomic, historical, technological, geopolitical, and neuroscientific contexts of ML since 1943, explain in 800 words how intrinsic load manifests when novices learn backpropagation.' Identify the primary flaw and propose a fix.",
+          "options": {
+            "A": "No flaw \u2014 rich multi-context maximises germane load for beginners",
+            "B": "Excessive extraneous load: five irrelevant contexts and 800-word demand waste working memory. Fix: 'Describe two ways intrinsic load manifests when a novice first encounters backpropagation.'",
+            "C": "Insufficient intrinsic load \u2014 too easy for advanced learners",
+            "D": "Uses 'explain' instead of 'define' \u2014 wrong Bloom level"
+          },
+          "answer": "B",
+          "explanation": "Five contextual framing elements are extraneous \u2014 irrelevant to the core question about intrinsic load. The 800-word demand adds output pressure. The fix strips extraneous framing, uses a concise stem, and preserves the L2 cognitive demand.",
+          "source": "Sweller. Cognitive Science. 1988."
+        }
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Assessment Design and AI in Education",
+      "source_lesson": "ML-4",
+      "questions": [
+        {
+          "q_id": "Q02-MQ4-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "Which best defines formative assessment?",
+          "options": {
+            "A": "A high-stakes final examination counting toward a student's grade",
+            "B": "Ongoing, low-stakes assessment used to monitor learning progress and provide feedback during instruction",
+            "C": "A standardised national test administered once per year",
+            "D": "A portfolio of student work collected at course end"
+          },
+          "answer": "B",
+          "explanation": "Formative assessment is assessment FOR learning \u2014 occurs during instruction, typically low-stakes, primary purpose is actionable feedback. Contrasts with summative assessment (assessment OF learning) at a course endpoint.",
+          "source": "Black & Wiliam. Inside the Black Box. Phi Delta Kappan, 1998; U.S. Dept. of Education. 2010. https://www2.ed.gov/rschstat/eval/tech/evidence-based-practices/finalreport.pdf"
+        },
+        {
+          "q_id": "Q02-MQ4-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Bloom's 2-sigma problem (1984) found tutored students performed how many standard deviations above classroom-instructed students?",
+          "options": {
+            "A": "0.5 standard deviations",
+            "B": "1.0 standard deviation",
+            "C": "2.0 standard deviations",
+            "D": "3.5 standard deviations"
+          },
+          "answer": "C",
+          "explanation": "Benjamin Bloom (1984) found the average tutored student outperformed 98% of conventionally instructed students \u2014 a 2 standard deviation advantage \u2014 motivating AI-driven adaptive learning at scale.",
+          "source": "Bloom. The 2 Sigma Problem. Educational Researcher, 13(6), 1984. https://www.jstor.org/stable/1175554"
+        },
+        {
+          "q_id": "Q02-MQ4-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why is formative assessment considered more powerful for improving learning than summative assessment alone?",
+          "options": {
+            "A": "Formative assessment is graded more leniently, reducing anxiety",
+            "B": "Formative assessment provides timely, specific feedback that students can act on during learning, closing knowledge gaps before summative evaluation",
+            "C": "Formative assessment requires less instructor preparation time",
+            "D": "Summative assessment is only used in higher education"
+          },
+          "answer": "B",
+          "explanation": "Black & Wiliam's meta-analysis (1998): formative assessment interventions produced effect sizes of 0.4\u20130.7 SD \u2014 among the highest of any educational intervention. Mechanism: specific timely feedback allows correcting misconceptions while content is still being taught.",
+          "source": "Black & Wiliam. Inside the Black Box. Phi Delta Kappan, 80(2), 1998."
+        },
+        {
+          "q_id": "Q02-MQ4-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does an Intelligent Tutoring System (ITS) differ from a static e-learning course in its approach to personalisation?",
+          "options": {
+            "A": "An ITS uses higher-resolution video",
+            "B": "An ITS dynamically adapts content difficulty, pacing, and feedback to each learner's knowledge state; a static course delivers the same sequence to all learners",
+            "C": "A static course is more expensive to develop",
+            "D": "Both deliver identical experiences \u2014 only cost differs"
+          },
+          "answer": "B",
+          "explanation": "An ITS models each student's knowledge state (student model), selects the next optimal instructional action (pedagogical model), and provides immediate targeted feedback \u2014 approximating Bloom's 2-sigma tutoring effect. A static course presents a fixed sequence with no adaptation.",
+          "source": "VanLehn. The Relative Effectiveness of Human Tutoring, Intelligent Tutoring Systems, and Other Tutoring Systems. Educational Psychologist, 2011."
+        },
+        {
+          "q_id": "Q02-MQ4-05",
+          "bloom": "L3",
+          "skill": "Design",
+          "stem": "Designing a 5-question mini-quiz on 'Python list comprehensions' for Beginner level with a 2:2:1 Bloom ratio. Which question set is correctly structured?",
+          "options": {
+            "A": "5 questions: define, state, list, name, recall \u2014 all L1",
+            "B": "Q1: Define list comprehension (L1). Q2: Identify syntax of [x**2 for x in range(5)] (L1). Q3: Explain why comprehensions are faster than for-loops (L2). Q4: Describe a use case where a comprehension improves readability (L2). Q5: Given [1,2,3,4,5,6], write a comprehension returning only even squares (L3).",
+            "C": "5 questions all asking students to write code at L3",
+            "D": "Q1\u2013Q2: Evaluate/Design (L5\u2013L6); Q3\u2013Q5: Recall"
+          },
+          "answer": "B",
+          "explanation": "Option B correctly implements 2:2:1: Q1\u2013Q2 L1, Q3\u2013Q4 L2, Q5 L3. Difficulty escalates appropriately for Beginners. A=all L1; C=all L3 (too hard for beginners); D=L5\u2013L6 inappropriate for Beginner level.",
+          "source": "Anderson & Krathwohl. A Taxonomy for Learning. 2001."
+        }
+      ]
+    }
+  ],
+  "table_of_contents": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 Bloom's Revised Taxonomy",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q02-MQ1-01",
+        "Q02-MQ1-02",
+        "Q02-MQ1-03",
+        "Q02-MQ1-04",
+        "Q02-MQ1-05"
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 Memory, Forgetting & Retrieval Practice",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q02-MQ2-01",
+        "Q02-MQ2-02",
+        "Q02-MQ2-03",
+        "Q02-MQ2-04",
+        "Q02-MQ2-05"
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Cognitive Load Theory",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q02-MQ3-01",
+        "Q02-MQ3-02",
+        "Q02-MQ3-03",
+        "Q02-MQ3-04",
+        "Q02-MQ3-05"
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Assessment Design & AI in Education",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q02-MQ4-01",
+        "Q02-MQ4-02",
+        "Q02-MQ4-03",
+        "Q02-MQ4-04",
+        "Q02-MQ4-05"
+      ]
+    }
+  ],
+  "totals": {
+    "mini_quizzes": 4,
+    "questions": 20,
+    "L1": 8,
+    "L2": 8,
+    "L3": 4
+  }
+}

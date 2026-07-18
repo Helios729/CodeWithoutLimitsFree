@@ -1,0 +1,134 @@
+{
+  "module_id": "machine-learning",
+  "module_title": "Machine Learning-L",
+  "type": "learning",
+  "difficulty": "Intermediate",
+  "duration_min": 75,
+  "bloom_levels_covered": [
+    "L1 Remember",
+    "L2 Understand",
+    "L3 Apply"
+  ],
+  "companion_quiz": "Machine Learning-Q",
+  "sources": [
+    {
+      "id": "S1",
+      "citation": "James et al. ISLR 2nd ed. Springer, 2021.",
+      "url": "https://www.statlearning.com",
+      "access": "Free \u2014 full PDF."
+    },
+    {
+      "id": "S2",
+      "citation": "Murphy. Probabilistic ML. MIT Press, 2022.",
+      "url": "https://probml.github.io/pml-book/book1.html",
+      "access": "Free \u2014 full PDF."
+    },
+    {
+      "id": "S3",
+      "citation": "Stanford CS229 Machine Learning, Andrew Ng, 2022.",
+      "url": "https://cs229.stanford.edu",
+      "access": "Free."
+    },
+    {
+      "id": "S4",
+      "citation": "Scikit-learn User Guide. 2024.",
+      "url": "https://scikit-learn.org/stable/user_guide.html",
+      "access": "Free."
+    }
+  ],
+  "learning_objectives": [
+    "L1: Define supervised, unsupervised, and reinforcement learning with one example each.",
+    "L1: Identify bias, variance, overfitting, and underfitting.",
+    "L1: State the purpose of a train/validation/test split.",
+    "L2: Explain how gradient descent minimises a loss function.",
+    "L2: Describe how a decision tree makes predictions and how random forests improve on single trees.",
+    "L2: Explain what cross-validation measures and why it is preferred over a single train-test split.",
+    "L3: Diagnose overfitting or underfitting from learning curves and prescribe a remedy.",
+    "L3: Implement a complete ML pipeline: load, split, train, evaluate, interpret."
+  ],
+  "mini_lessons": [
+    {
+      "ml": 1,
+      "title": "Supervised Learning Fundamentals",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-1",
+      "concepts": [
+        {
+          "title": "Regression, Classification, Evaluation",
+          "explanation": "Supervised: learn f(X)\u2192y from labelled examples. Regression: y continuous. Classification: y categorical. Metrics \u2014 Regression: RMSE, R\u00b2. Classification: accuracy, precision=TP/(TP+FP), recall=TP/(TP+FN), F1=harmonic mean, AUC-ROC. Use F1 for imbalanced classes.",
+          "worked_example": "Spam with 95% ham: accuracy=95% predicting all ham. F1=0. Use precision-recall curve instead.",
+          "source_refs": [
+            "S1 Ch.2-4",
+            "S3 Lecture 1"
+          ]
+        },
+        {
+          "title": "Train/Validation/Test Split",
+          "explanation": "Train: fit parameters. Validation: tune hyperparameters. Test: final unbiased estimate \u2014 never touch until tuning complete. Data leakage: fit scaler before split contaminates test set. Fix: use sklearn Pipeline.",
+          "worked_example": "Wrong: fit scaler on all data \u2192 split. Right: split first \u2192 fit scaler on train \u2192 transform both.",
+          "source_refs": [
+            "S1 Ch.5"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 2,
+      "title": "Gradient Descent",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-2",
+      "concepts": [
+        {
+          "title": "Gradient Descent and Variants",
+          "explanation": "Update: w \u2190 w \u2212 \u03b1\u00b7\u2202L/\u2202w. Batch GD: full dataset. SGD: one sample. Mini-batch: 32\u2013256 samples. Adam: adaptive per-parameter rates \u2014 most used in deep learning.",
+          "worked_example": "Linear regression MSE: \u03b1=0.01 converges ~1000 steps. \u03b1=1.5 oscillates/diverges.",
+          "source_refs": [
+            "S3 Lecture 2",
+            "S2 Ch.8"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 3,
+      "title": "Bias-Variance and Regularisation",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-3",
+      "concepts": [
+        {
+          "title": "Bias-Variance Trade-off",
+          "explanation": "MSE = Bias\u00b2 + Variance + Irreducible noise. High bias = underfitting. High variance = overfitting. L2 Ridge: adds \u03bb\u03a3w\u00b2. L1 Lasso: sparse/feature selection. K-fold CV: more reliable than single split.",
+          "worked_example": "Train low, val high and diverging \u2192 overfit \u2192 more data, dropout, regularisation. Both high \u2192 underfit \u2192 more features or complex model.",
+          "source_refs": [
+            "S1 Ch.5-6"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 4,
+      "title": "Ensembles and Unsupervised Learning",
+      "bloom": "L2-L3",
+      "companion_mini_quiz": "MQ-4",
+      "concepts": [
+        {
+          "title": "Decision Trees and Random Forests",
+          "explanation": "Decision tree: high variance. Random forest: N trees on bootstrap samples, average predictions \u2014 reduces variance. XGBoost: sequential trees on residuals \u2014 often best on tabular data.",
+          "worked_example": "Credit risk: 100-tree forest, majority vote. Feature importance: debt-to-income and credit score dominate.",
+          "source_refs": [
+            "S1 Ch.8",
+            "S4"
+          ]
+        },
+        {
+          "title": "K-Means and PCA",
+          "explanation": "K-means: assign to nearest centroid, recompute, repeat. Choose k via elbow/silhouette. PCA: orthogonal directions of max variance for dimensionality reduction.",
+          "worked_example": "Customer segmentation: k=4 (elbow). Four segments: occasional high-value, frequent low-value, VIP, at-risk.",
+          "source_refs": [
+            "S1 Ch.10"
+          ]
+        }
+      ]
+    }
+  ]
+}

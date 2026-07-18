@@ -1,0 +1,46 @@
+{
+  "summary": "Prompt-based monthly tier iteration verified end-to-end. Backend: 27/27 pytest tests pass — added 4 new monthly-pool tests covering (a) /api/usage/me returns monthly_prompts_cap=250 and DOES NOT return monthly_tokens_cap, (b) 250-prompt cap blocks with 'shared across your team' in 429 message, (c) two users on the same account_id share the pool and are both blocked at 250 combined prompts, (d) 249 prompts still allows one more, (e) Stripe checkout for plan=monthly returns a valid checkout.stripe.com URL (no purchase completed). Day Pass (6/day) and Free (5/day platform-paid) regression tests still green. Frontend (mobile 390x844, monthly user seeded with prompts=37): TokenMeter shows '213/250 prompts left', Account current-plan card shows '37/250 prompts used this month (shared across your team)', and the Monthly tier upgrade card shows '250 prompts / month — pooled'. All copy from the review request matched exactly. Critical fix applied: quota.py referenced MONTHLY_PROMPT_CAP on line 137 but the constant was never defined — this would NameError on every monthly-tier /api/usage/me and /api/ai/chat call. Added MONTHLY_PROMPT_CAP=250 at /app/backend/quota.py:31.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/billing/checkout (plan=monthly)", "issue": "Stripe line_items product_data.description still reads 'Up to 1,000,000 tokens / month, shared across 3 users.' — should be updated to reflect the 250-prompt cap (e.g. '250 prompts / month, pooled across up to 3 users.'). /app/backend/server.py:679. Note: the URL still returns successfully, so it's user-visible-copy only on the Stripe checkout page."},
+      {"endpoint": "quota.py", "issue": "MONTHLY_TOKEN_CAP=1,000,000 is still defined and imported in server.py:41 but no longer referenced by enforcement logic. Per the spec it should be removed (the spec explicitly says 'MONTHLY_TOKEN_CAP constant is REMOVED'). Currently dead but harmless. /app/backend/quota.py:30, /app/backend/server.py:41."},
+      {"endpoint": "GET /api/usage/me", "issue": "UsageOut model still exposes monthly_tokens_used (analytics-only, optional). Not a bug — useful for cost monitoring — but the spec wording 'Should NOT return monthly_tokens_cap (we removed that)' is satisfied (cap field is absent / returns 0); monthly_tokens_used remains for analytics."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": [
+      {"component": "shadow* style props", "issue": "Pre-existing console warning 'shadow* style props are deprecated. Use boxShadow.' still present from prior iteration. Reference: any component using shadowColor/shadowOpacity/shadowRadius (e.g. /app/frontend/app/(tabs)/account.tsx:249-252 tierCardActive)."},
+      {"component": "pointerEvents prop", "issue": "Pre-existing console warning 'props.pointerEvents is deprecated. Use style.pointerEvents'. Source unchanged from previous iteration."}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_code_guardian.py",
+    "/app/backend/tests/conftest.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Polish: update Stripe monthly checkout product_data.description in /app/backend/server.py:679 from 'Up to 1,000,000 tokens / month, shared across 3 users.' to '250 prompts / month, pooled across up to 3 users.' so the Stripe checkout page matches the in-app copy.",
+    "Clean-up: remove MONTHLY_TOKEN_CAP constant from /app/backend/quota.py and the import in /app/backend/server.py:41 — dead code per the new prompt-based spec.",
+    "Optional doc fix: quota.py docstring lines 8-11 mention day-pass and monthly token caps as 'safety net' — keep or remove for clarity now that token caps are no longer enforced for monthly.",
+    "Optional: address pre-existing React Native Web deprecation warnings (shadow* → boxShadow, pointerEvents prop → style.pointerEvents)."
+  ],
+  "critical_code_review_comments": [
+    "FIXED in this run: quota.py line 137 referenced MONTHLY_PROMPT_CAP without defining it. Every monthly-tier /api/usage/me and /api/ai/chat would have crashed with NameError on the first call. Added MONTHLY_PROMPT_CAP=250 at /app/backend/quota.py:31. Identical pattern to the FREE_DAILY_PROMPT_CAP regression fixed in iteration_3 — main agent should consider a linter rule or a single place-where-all-quota-constants-live module to prevent this recurring class of bug.",
+    "Inconsistency: spec wording is prompt-based monthly, but server.py:679 Stripe description and quota.py top-of-file docstring still say '1,000,000 tokens / month'. Functional behavior is correct; copy is stale.",
+    "Per-call monthly_usage.tokens is still incremented inside record_usage() — that's fine for analytics; just make sure future devs know it's no longer a gate."
+  ],
+  "updated_files": [
+    "/app/backend/quota.py (added MONTHLY_PROMPT_CAP=250 constant + clarifying comment on MONTHLY_TOKEN_CAP being legacy/safety-net)",
+    "/app/backend/tests/test_code_guardian.py (replaced test_usage_me_monthly_caps with prompt-based version; replaced test_monthly_at_token_cap_blocks with 4 new tests: test_monthly_at_prompt_cap_blocks, test_monthly_pooled_across_users_on_same_account, test_monthly_249_prompts_still_allows_one_more, test_monthly_checkout_returns_stripe_url)"
+  ],
+  "success_rate": {"backend": "100% (27/27)", "frontend": "100% on tested flows (monthly TokenMeter copy, Account current-plan stats with pool phrase, Monthly tier card pooled copy)"},
+  "seed_data_creation": "Backend tests seed fresh per-test users via conftest.seed_user fixture (full teardown). Monthly-pool test created a temporary shared account with two users and cleaned up inline. Frontend verification used user_FE_monthly_01 / acct_FE_monthly_01 with monthly_usage.prompts=37 — cleaned up at end of run.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run backend tests with `cd /app/backend && python -m pytest tests/test_code_guardian.py -v`. The conftest seed_user fixture accepts tier= and optional daily_prompts/daily_tokens/monthly_tokens/day_pass_expired kwargs; monthly_usage.prompts must be inserted manually if you need to simulate prompt usage (the fixture only seeds the legacy 'tokens' field). All 27 tests should pass. For frontend, seed any monthly user with monthly_usage.prompts=N then localStorage.setItem('auth_token', '<token>') on the Expo web preview to verify meter/account copy.",
+  "rca_of_issue": "Main agent migrated the monthly tier from token-based (1M tokens) to prompt-based (250 prompts pooled across 3 users) but forgot to declare the MONTHLY_PROMPT_CAP constant the new branch in quota.snapshot() depends on. Same class of regression as iteration_3 (missing FREE_DAILY_*_CAP). Because Python resolves module-level names at function-call time, the import and server boot still worked — only the first monthly-tier request would have raised NameError('MONTHLY_PROMPT_CAP'). Verified the fix by running all 27 pytest tests (including 4 new pool/shared/cap/checkout cases) and by a live mobile-viewport browser session that loaded /api/usage/me as a monthly user with prompts=37 and rendered '213/250 prompts left' / '37/250 prompts used this month (shared across your team)' / '250 prompts / month — pooled'."
+}

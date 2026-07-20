@@ -2,7 +2,7 @@
  * Public data-deletion page — Play Store & GDPR compliant.
  *
  * URL (works from any browser, no app install required):
- *   https://token-limit-enforcer.preview.emergentagent.com/delete-account
+ *   https://codewithoutlimits.org/delete-account
  *
  * Behaviour:
  *   • Anyone can land here.

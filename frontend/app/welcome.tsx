@@ -1,11 +1,10 @@
 import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
-import * as Linking from "expo-linking";
+import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
 import React, { useEffect, useState } from "react";
 import {
   Dimensions,
-  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -22,12 +21,18 @@ import Svg, {
 import { useAuth } from "@/src/context/AuthContext";
 import { colors, radius, spacing } from "@/src/theme";
 
-// Emergent-managed Google auth flow. On web we navigate the whole tab;
-// on native we open an in-app browser session and read the redirect URL
-// from the result (plus a deep-link listener as a fallback).
+// Required once per app for expo-auth-session to correctly close the
+// browser tab/popup and hand control back to this screen after Google
+// redirects back with a result.
+WebBrowser.maybeCompleteAuthSession();
+
+// Direct Google sign-in (no third-party auth broker). Google issues an
+// id_token straight to the app, which we send to our own backend for
+// verification. Client IDs come from Google Cloud Console — see the
+// GOOGLE_CLIENT_ID setup notes in the repo README.
 export default function Welcome() {
   const router = useRouter();
-  const { user, exchangeSessionId, demoSignIn } = useAuth();
+  const { user, signInWithGoogleIdToken, demoSignIn } = useAuth();
   const [busy, setBusy] = useState(false);
   const [demoBusy, setDemoBusy] = useState(false);
   const [error, setError] = useState("");
@@ -36,50 +41,45 @@ export default function Welcome() {
     if (user) router.replace("/");
   }, [user, router]);
 
-  function parseSessionId(url: string): string | null {
-    try {
-      const u = new URL(url);
-      const hash = u.hash.startsWith("#") ? u.hash.slice(1) : u.hash;
-      const fromHash = new URLSearchParams(hash).get("session_id");
-      const fromQuery = u.searchParams.get("session_id");
-      return fromHash || fromQuery;
-    } catch {
-      const m = url.match(/session_id=([^&#]+)/);
-      return m ? decodeURIComponent(m[1]) : null;
-    }
-  }
+  // Client IDs from Google Cloud Console (OAuth 2.0 Client IDs) — one
+  // each for Android, iOS, and Web. See README for how to create these;
+  // they're not secrets (safe to ship in the app), unlike a client secret.
+  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+    androidClientId: process.env.EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID,
+    iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
+    webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
+  });
 
-  async function handleSignIn() {
-    setError("");
-    setBusy(true);
-    try {
-      const redirectUrl =
-        Platform.OS === "web" && typeof window !== "undefined"
-          ? window.location.origin + "/"
-          : Linking.createURL("auth");
-      const authUrl = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(
-        redirectUrl,
-      )}`;
-
-      if (Platform.OS === "web") {
-        if (typeof window !== "undefined") window.location.href = authUrl;
-        return;
-      }
-
-      const result = await WebBrowser.openAuthSessionAsync(authUrl, redirectUrl);
-      if (result.type !== "success" || !result.url) {
-        setBusy(false);
-        return;
-      }
-      const sid = parseSessionId(result.url);
-      if (!sid) throw new Error("No session_id returned");
-      await exchangeSessionId(sid);
-      router.replace("/");
-    } catch (e: any) {
-      setError(e?.message || "Sign-in failed. Please try again.");
-    } finally {
+  useEffect(() => {
+    if (!response) return;
+    if (response.type === "success") {
+      const idToken = response.params.id_token;
+      (async () => {
+        setBusy(true);
+        try {
+          await signInWithGoogleIdToken(idToken);
+          router.replace("/");
+        } catch (e: any) {
+          setError(e?.message || "Sign-in failed. Please try again.");
+        } finally {
+          setBusy(false);
+        }
+      })();
+    } else if (response.type === "error") {
+      setError("Google sign-in failed. Please try again.");
+      setBusy(false);
+    } else if (response.type === "dismiss" || response.type === "cancel") {
       setBusy(false);
     }
+  }, [response]);
+
+  function handleSignIn() {
+    setError("");
+    setBusy(true);
+    promptAsync().catch((e: any) => {
+      setError(e?.message || "Sign-in failed. Please try again.");
+      setBusy(false);
+    });
   }
 
   async function handleDemo() {
@@ -140,7 +140,7 @@ export default function Welcome() {
           <TouchableOpacity
             style={[styles.primaryBtn, busy && styles.disabled]}
             onPress={handleSignIn}
-            disabled={busy || demoBusy}
+            disabled={!request || busy || demoBusy}
             testID="login-google-btn"
             accessibilityLabel="Sign in with Google"
           >

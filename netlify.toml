@@ -1,5 +1,13 @@
 # Netlify config for the Code Without Limits Expo web build
 # Place this at the ROOT of your GitHub repo so Netlify auto-detects it.
+#
+# REQUIRED environment variable — set this in Netlify's dashboard under
+# Site settings -> Environment variables (NOT here, since this file is
+# committed to a public repo and this ID should still be reviewed per-site):
+#   EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID = your Web OAuth Client ID from
+#   Google Cloud Console (ends in .apps.googleusercontent.com)
+# Without it, Google sign-in on the website will fail; the rest of the
+# site (browsing, demo mode) still works fine without it.
 
 [build]
   base    = "frontend"

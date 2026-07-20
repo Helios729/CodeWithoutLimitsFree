@@ -1,0 +1,143 @@
+{
+  "module_id": "ai-ethics-and-responsible-use",
+  "module_title": "AI Ethics and Responsible Use of AI-L",
+  "type": "learning",
+  "difficulty": "Beginner",
+  "duration_min": 60,
+  "bloom_levels_covered": [
+    "L1 Remember",
+    "L2 Understand",
+    "L3 Apply"
+  ],
+  "companion_quiz": "AI Ethics and Responsible Use of AI-Q",
+  "sources": [
+    {
+      "id": "S1",
+      "citation": "EU HLEG. Ethics Guidelines for Trustworthy AI. 2019.",
+      "url": "https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai",
+      "access": "Free."
+    },
+    {
+      "id": "S2",
+      "citation": "Obermeyer et al. Dissecting racial bias. Science, 2019.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31649194",
+      "access": "Free via PubMed."
+    },
+    {
+      "id": "S3",
+      "citation": "Jobin et al. Global landscape of AI ethics guidelines. Nature MI, 2019.",
+      "url": "https://arxiv.org/abs/1906.11668",
+      "access": "Free \u2014 arXiv."
+    },
+    {
+      "id": "S4",
+      "citation": "Buolamwini & Gebru. Gender Shades. PMLR FAccT, 2018.",
+      "url": "http://proceedings.mlr.press/v81/buolamwini18a.html",
+      "access": "Free."
+    },
+    {
+      "id": "S5",
+      "citation": "NIST. AI Risk Management Framework 1.0. 2023.",
+      "url": "https://airc.nist.gov/RMF",
+      "access": "Free."
+    }
+  ],
+  "learning_objectives": [
+    "L1: Define AI bias, fairness, transparency, accountability, and privacy.",
+    "L1: Identify the seven EU Trustworthy AI requirements.",
+    "L1: State the four NIST AI RMF functions: Govern, Map, Measure, Manage.",
+    "L2: Explain how historical bias in training data propagates into model outputs.",
+    "L2: Describe the accuracy-explainability trade-off.",
+    "L2: Compare individual fairness and group fairness as competing definitions.",
+    "L3: Analyse a real-world AI system for bias sources and propose mitigations.",
+    "L3: Evaluate whether a deployment satisfies EU Trustworthy AI criteria."
+  ],
+  "mini_lessons": [
+    {
+      "ml": 1,
+      "title": "Core AI Ethics Concepts",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-1",
+      "concepts": [
+        {
+          "title": "Key Terms",
+          "explanation": "Bias: systematic unfair discrimination. Fairness: equitable outputs \u2014 multiple competing definitions. Transparency: understandable workings. Explainability: human-readable reason for specific decision. Accountability: responsibility assignment. Privacy: right to control personal data.",
+          "worked_example": "Gender Shades (2018): lighter-skinned men error ~0.7%, darker-skinned women ~34.7%. Bias: training datasets overrepresented lighter-skinned faces.",
+          "source_refs": [
+            "S4",
+            "S3"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 2,
+      "title": "Bias in AI Systems",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-2",
+      "concepts": [
+        {
+          "title": "Sources of Bias",
+          "explanation": "Bias enters at every pipeline stage: historical, representation, measurement, aggregation, evaluation, deployment. Feedback loops amplify bias over time.",
+          "worked_example": "Obermeyer et al. (2019): cost proxy underscored Black patients by 26.3 pp. Fix: replace proxy \u2192 gap reduced 84%.",
+          "source_refs": [
+            "S2",
+            "S3"
+          ]
+        },
+        {
+          "title": "Competing Fairness Definitions",
+          "explanation": "Individual fairness, demographic parity, equal opportunity, equalised odds. Impossibility theorem: when base rates differ, satisfying all simultaneously is mathematically impossible.",
+          "worked_example": "COMPAS (ProPublica 2016): equal overall accuracy but FPR Black 45% vs white 23% \u2014 different fairness criteria, both correct.",
+          "source_refs": [
+            "S3",
+            "S5"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 3,
+      "title": "EU Trustworthy AI",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-3",
+      "concepts": [
+        {
+          "title": "Seven Requirements",
+          "explanation": "(1) Human agency & oversight. (2) Technical robustness & safety. (3) Privacy & data governance. (4) Transparency. (5) Diversity, non-discrimination, fairness. (6) Societal & environmental wellbeing. (7) Accountability. Informed EU AI Act (2024).",
+          "worked_example": "Real-time public facial recognition: EU AI Act = unacceptable risk \u2014 banned with narrow exceptions.",
+          "source_refs": [
+            "S1",
+            "S3"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 4,
+      "title": "Responsible AI in Practice",
+      "bloom": "L2-L3",
+      "companion_mini_quiz": "MQ-4",
+      "concepts": [
+        {
+          "title": "NIST AI RMF",
+          "explanation": "GOVERN: policies & accountability. MAP: context & potential harms. MEASURE: bias, robustness, explainability. MANAGE: prioritise and treat risks.",
+          "worked_example": "Hiring algorithm: appoint ethics officer \u2192 audit disparate impact \u2192 retrain with per-group recall thresholds.",
+          "source_refs": [
+            "S5",
+            "S1"
+          ]
+        },
+        {
+          "title": "Explainability vs Accuracy",
+          "explanation": "Linear regression: high explainability, moderate accuracy. Deep NN: low explainability, highest accuracy. Post-hoc: LIME (local model), SHAP (Shapley values). EU AI Act mandates explainability for high-risk systems.",
+          "worked_example": "SHAP loan denial: debt-to-income \u22120.32, credit score \u22120.18. Required under ECOA (US) and GDPR Article 22 (EU).",
+          "source_refs": [
+            "S5",
+            "S1"
+          ]
+        }
+      ]
+    }
+  ]
+}

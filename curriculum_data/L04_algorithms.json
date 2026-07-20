@@ -1,0 +1,125 @@
+{
+  "module_id": "algorithms-and-data-structures",
+  "module_title": "Algorithms and Data Structures-L",
+  "type": "learning",
+  "difficulty": "Intermediate",
+  "duration_min": 75,
+  "bloom_levels_covered": [
+    "L1 Remember",
+    "L2 Understand",
+    "L3 Apply"
+  ],
+  "companion_quiz": "Algorithms and Data Structures-Q",
+  "sources": [
+    {
+      "id": "S1",
+      "citation": "Cormen et al. CLRS 4th ed. MIT Press, 2022.",
+      "url": "https://mitpress.mit.edu/9780262046305",
+      "access": "Preview; full text via libraries."
+    },
+    {
+      "id": "S2",
+      "citation": "MIT OCW 6.006 Algorithms, Fall 2011.",
+      "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011",
+      "access": "Free."
+    },
+    {
+      "id": "S3",
+      "citation": "Sedgewick & Wayne. Algorithms 4th ed. Princeton, 2011.",
+      "url": "https://algs4.cs.princeton.edu/home",
+      "access": "Free \u2014 slides, code, visualisations."
+    },
+    {
+      "id": "S4",
+      "citation": "Stanford CS161 Algorithms, 2023.",
+      "url": "https://web.stanford.edu/class/cs161",
+      "access": "Free \u2014 lecture notes."
+    }
+  ],
+  "learning_objectives": [
+    "L1: Define time and space complexity using Big-O notation.",
+    "L1: Identify complexities for arrays, linked lists, stacks, queues, hash tables, BSTs.",
+    "L1: State divide-and-conquer and name algorithms using it.",
+    "L2: Explain why merge sort is O(n log n) using a recurrence tree.",
+    "L2: Describe how a hash table achieves O(1) average-case lookup.",
+    "L2: Compare DFS and BFS by data structure, order, and use cases.",
+    "L3: Trace insertion sort, merge sort, and binary search on given input.",
+    "L3: Select an appropriate data structure and justify using complexity analysis."
+  ],
+  "mini_lessons": [
+    {
+      "ml": 1,
+      "title": "Big-O and Complexity",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-1",
+      "concepts": [
+        {
+          "title": "Asymptotic Complexity",
+          "explanation": "Big-O: upper bound of growth rate as n\u2192\u221e. O(1) constant, O(log n) logarithmic, O(n) linear, O(n log n) linearithmic, O(n\u00b2) quadratic, O(2\u207f) exponential. Drop constants and lower-order terms.",
+          "worked_example": "Single loop: O(n). Nested loop: O(n\u00b2). Binary search: O(log n). Merge sort: O(n log n). HashMap lookup: O(1) average.",
+          "source_refs": [
+            "S1 Ch.3",
+            "S2 Lecture 1"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 2,
+      "title": "Core Data Structures",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-2",
+      "concepts": [
+        {
+          "title": "Arrays, Lists, Stacks, Queues",
+          "explanation": "Array: O(1) index, O(n) insert/delete middle. Linked list: O(n) access, O(1) head insert/delete. Stack (LIFO): push/pop O(1). Queue (FIFO): enqueue/dequeue O(1).",
+          "worked_example": "Balanced parentheses: push opens onto stack; on close, pop and check match. LIFO mirrors nesting order.",
+          "source_refs": [
+            "S1 Ch.10"
+          ]
+        },
+        {
+          "title": "Hash Tables and BSTs",
+          "explanation": "Hash table: O(1) average insert/delete/lookup. BST: O(log n) balanced. Use hash table for fast lookup; BST when sorted order needed.",
+          "worked_example": "Word frequency counter for 1M words: hash table O(1) per insert. Top-10: iterate O(n) then sort O(n log n).",
+          "source_refs": [
+            "S1 Ch.11-12"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 3,
+      "title": "Sorting Algorithms",
+      "bloom": "L1-L3",
+      "companion_mini_quiz": "MQ-3",
+      "concepts": [
+        {
+          "title": "Insertion and Merge Sort",
+          "explanation": "Insertion sort: O(n\u00b2) worst, O(n) best, O(1) space, stable. Merge sort: T(n)=2T(n/2)+O(n) \u2192 O(n log n) all cases, O(n) space, stable.",
+          "worked_example": "Merge sort [38,27,43,3]: split\u2192[38,27][43,3]\u2192[38][27][43][3]\u2192merge[27,38][3,43]\u2192[3,27,38,43].",
+          "source_refs": [
+            "S1 Ch.2,4"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 4,
+      "title": "Graph Algorithms",
+      "bloom": "L2-L3",
+      "companion_mini_quiz": "MQ-4",
+      "concepts": [
+        {
+          "title": "BFS and DFS",
+          "explanation": "BFS: queue, level-by-level, shortest path in unweighted graphs, O(V+E). DFS: stack/recursion, depth-first, O(V+E). BFS: shortest path. DFS: cycle detection, topological sort.",
+          "worked_example": "Shortest unweighted path: BFS from source, track parent pointers, trace back on reaching destination. BFS guarantees minimum hops.",
+          "source_refs": [
+            "S1 Ch.22",
+            "S2 Lecture 5"
+          ]
+        }
+      ]
+    }
+  ]
+}

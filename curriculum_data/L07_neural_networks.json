@@ -1,0 +1,143 @@
+{
+  "module_id": "neural-networks-and-deep-learning",
+  "module_title": "Neural Networks and Deep Learning-L",
+  "type": "learning",
+  "difficulty": "Advanced",
+  "duration_min": 90,
+  "bloom_levels_covered": [
+    "L1 Remember",
+    "L2 Understand",
+    "L3 Apply"
+  ],
+  "companion_quiz": "Neural Networks and Deep Learning-Q",
+  "sources": [
+    {
+      "id": "S1",
+      "citation": "MIT 6.S191 Intro to Deep Learning, 2024.",
+      "url": "http://introtodeeplearning.com",
+      "access": "Free."
+    },
+    {
+      "id": "S2",
+      "citation": "Goodfellow et al. Deep Learning. MIT Press, 2016.",
+      "url": "https://www.deeplearningbook.org",
+      "access": "Free \u2014 full text online."
+    },
+    {
+      "id": "S3",
+      "citation": "Stanford CS231n: Deep Learning for CV, 2024.",
+      "url": "https://cs231n.stanford.edu",
+      "access": "Free."
+    },
+    {
+      "id": "S4",
+      "citation": "Vaswani et al. Attention Is All You Need. NeurIPS, 2017.",
+      "url": "https://arxiv.org/abs/1706.03762",
+      "access": "Free \u2014 arXiv."
+    }
+  ],
+  "learning_objectives": [
+    "L1: Identify neuron components: weights, bias, activation function.",
+    "L1: Name three activation functions and state where each is used.",
+    "L1: Define forward pass, backward pass, and gradient descent in NN training.",
+    "L1: State the purpose of conv layers, pooling layers, and FC layers in a CNN.",
+    "L2: Explain how backpropagation computes gradients using the chain rule.",
+    "L2: Describe the vanishing gradient problem and how ReLU and BatchNorm address it.",
+    "L2: Explain how Transformer self-attention computes query-key-value representations.",
+    "L3: Design a CNN architecture for image classification and justify each choice.",
+    "L3: Diagnose overfitting from loss curves and propose three remediation strategies."
+  ],
+  "mini_lessons": [
+    {
+      "ml": 1,
+      "title": "Neurons, Layers, Forward Pass",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-1",
+      "concepts": [
+        {
+          "title": "The Artificial Neuron",
+          "explanation": "output = activation(\u03a3 w\u1d62x\u1d62 + b). Sigmoid: (0,1), binary output, vanishing gradients in deep nets. Tanh: (\u22121,1), zero-centred. ReLU: max(0,z), fast, default hidden. Softmax: multi-class output.",
+          "worked_example": "x=[2,3], w=[0.5,\u22120.1], b=0.1 \u2192 z=0.8. ReLU(0.8)=0.8. Sigmoid(0.8)=0.69.",
+          "source_refs": [
+            "S1 Lecture 1",
+            "S2 Ch.6"
+          ]
+        },
+        {
+          "title": "Layers and Forward Pass",
+          "explanation": "Forward pass: compute predictions layer by layer. Loss: MSE for regression, cross-entropy for classification.",
+          "worked_example": "MNIST: 784\u2192128 ReLU\u219264 ReLU\u219210 Softmax. Forward pass outputs probability over 10 digit classes.",
+          "source_refs": [
+            "S1 Lecture 1"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 2,
+      "title": "Backpropagation and Training",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-2",
+      "concepts": [
+        {
+          "title": "Chain Rule and Vanishing Gradients",
+          "explanation": "\u2202L/\u2202w\u2081 via chain rule. Sigmoid derivatives \u22640.25 \u2014 gradients shrink exponentially. Fix: ReLU, skip connections, BatchNorm.",
+          "worked_example": "2-layer sigmoid: 0.2\u2192\u00d70.25=0.05\u2192\u00d70.25=0.0125. After 10 layers: ~0.000002. With ReLU: 0.2 unchanged.",
+          "source_refs": [
+            "S2 Ch.6-8"
+          ]
+        },
+        {
+          "title": "Regularisation and BatchNorm",
+          "explanation": "Dropout: zero fraction p neurons during training. L2: adds \u03bb\u2016w\u2016\u00b2. BatchNorm: normalise layer inputs within mini-batch \u2014 ~3\u20135\u00d7 faster convergence.",
+          "worked_example": "Without BatchNorm: activations span [0.001,1000]. With BatchNorm: each layer input ~N(0,1).",
+          "source_refs": [
+            "S2 Ch.8"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 3,
+      "title": "Convolutional Neural Networks",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-3",
+      "concepts": [
+        {
+          "title": "CNN Architecture",
+          "explanation": "Conv: K filters F\u00d7F detect local patterns. Pool: reduces spatial size. Pattern: [Conv\u2192ReLU\u2192Pool]\u00d7N \u2192 Flatten \u2192 FC \u2192 Softmax. Transfer learning: ImageNet weights, replace FC, fine-tune.",
+          "worked_example": "MNIST CNN: 28\u00d728\u2192Conv(32,3\u00d73)\u2192Pool\u2192Conv(64,3\u00d73)\u2192Pool\u2192FC(128)\u2192FC(10)\u2192Softmax. ~421K params, 99.2%.",
+          "source_refs": [
+            "S3",
+            "S2 Ch.9"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 4,
+      "title": "Transformers and Overfitting",
+      "bloom": "L2-L3",
+      "companion_mini_quiz": "MQ-4",
+      "concepts": [
+        {
+          "title": "Self-Attention Mechanism",
+          "explanation": "Q=XW\u1d3c, K=XW\u1d37, V=XW\u1d5b. Attention(Q,K,V)=softmax(QK\u1d40/\u221ad\u2096)V. Each token attends all others. Multi-head: h parallel heads. Block = multi-head attn + LayerNorm + FFN + residuals.",
+          "worked_example": "'The cat sat': 'cat' attends The(0.2), cat(0.5), sat(0.3) \u2014 contextual mix. No vanishing gradient across distance.",
+          "source_refs": [
+            "S4",
+            "S1 Lecture 9"
+          ]
+        },
+        {
+          "title": "Diagnosing Overfitting",
+          "explanation": "Train low / val high and diverging \u2192 overfitting. Both high \u2192 underfitting. Remedies: more data, dropout, L2, early stopping, reduce capacity, BatchNorm.",
+          "worked_example": "Train 99%, val 72% at epoch 15. Add dropout(0.5)+augmentation \u2192 train 96%, val 91%. Gap: 27%\u21925%.",
+          "source_refs": [
+            "S2 Ch.7"
+          ]
+        }
+      ]
+    }
+  ]
+}

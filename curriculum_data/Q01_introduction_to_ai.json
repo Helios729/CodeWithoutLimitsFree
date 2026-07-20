@@ -1,0 +1,409 @@
+{
+  "module_id": "introduction-to-ai",
+  "module_title": "Introduction to AI-Q",
+  "type": "quiz",
+  "difficulty": "Beginner",
+  "companion_learning": "Introduction to AI-L",
+  "superquiz_pool": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+  ],
+  "bloom_distribution": {
+    "L1_remember": 2,
+    "L2_understand": 2,
+    "L3_apply": 1
+  },
+  "mini_quizzes": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 Defining AI",
+      "source_lesson": "ML-1",
+      "questions": [
+        {
+          "q_id": "Q01-MQ1-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "Which best defines Artificial Intelligence?",
+          "options": {
+            "A": "A branch of mathematics focused on symbolic logic",
+            "B": "The science and engineering of making machines that exhibit intelligent behaviour",
+            "C": "A database system for large datasets",
+            "D": "Software automating office tasks via macros"
+          },
+          "answer": "B",
+          "explanation": "Russell & Norvig (AIMA 4th ed.) define AI as 'the science and engineering of making intelligent machines', encompassing perception, reasoning, learning, and action.",
+          "source": "Russell & Norvig. AIMA 4th ed. MIT Press, 2020. https://aima.cs.berkeley.edu"
+        },
+        {
+          "q_id": "Q01-MQ1-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Which framework organises AI definitions into a 2\u00d72 matrix of thinking/acting vs human/rational?",
+          "options": {
+            "A": "The Turing Test framework",
+            "B": "The PEAS framework",
+            "C": "The Russell & Norvig four-definition framework",
+            "D": "The NIST AI RMF"
+          },
+          "answer": "C",
+          "explanation": "Russell & Norvig organise AI along two axes: thinking vs acting and human vs rational standard (AIMA Ch.1).",
+          "source": "Russell & Norvig. AIMA 4th ed. Ch.1. https://aima.cs.berkeley.edu"
+        },
+        {
+          "q_id": "Q01-MQ1-03",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "Why is the Turing Test an insufficient sole criterion for machine intelligence?",
+          "options": {
+            "A": "It requires physical robotic embodiment",
+            "B": "It only evaluates mathematical problem-solving",
+            "C": "It is anthropocentric and can be passed by systems with no genuine understanding, as Searle's Chinese Room argues",
+            "D": "It measures processing speed rather than knowledge"
+          },
+          "answer": "C",
+          "explanation": "Searle's Chinese Room (1980) shows a system may produce correct responses via syntactic rule-following with no semantic understanding. The test is also anthropocentric \u2014 human-like behaviour \u2260 rational intelligence.",
+          "source": "Russell & Norvig. AIMA 4th ed. Ch.1; Turing. Computing Machinery and Intelligence. Mind, 1950."
+        },
+        {
+          "q_id": "Q01-MQ1-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does narrow AI differ from AGI?",
+          "options": {
+            "A": "Narrow AI uses neural networks; AGI uses symbolic logic only",
+            "B": "Narrow AI is task-specific and exists today; AGI replicates flexible human-level cognition and does not yet exist",
+            "C": "Narrow AI runs on cloud servers; AGI on dedicated hardware",
+            "D": "Narrow AI is supervised; AGI is always unsupervised"
+          },
+          "answer": "B",
+          "explanation": "Narrow AI excels at one domain (e.g., image classification, chess). AGI would match human cognitive flexibility across arbitrary tasks. As of 2026, AGI remains an open research goal.",
+          "source": "Russell & Norvig. AIMA 4th ed. Ch.1; Stanford HAI. https://hai.stanford.edu"
+        },
+        {
+          "q_id": "Q01-MQ1-05",
+          "bloom": "L3",
+          "skill": "Classify",
+          "stem": "ELIZA (1966) used pattern-matching substitution rules with no internal world model. Which AIMA definition does it best exemplify, and why does it fall short of rational standards?",
+          "options": {
+            "A": "Thinking humanly \u2014 models cognition via substitution",
+            "B": "Acting humanly \u2014 mimics conversational output but has no reasoning or world model",
+            "C": "Thinking rationally \u2014 applies formal logic",
+            "D": "Acting rationally \u2014 maximises a performance measure"
+          },
+          "answer": "B",
+          "explanation": "ELIZA produces human-like text (acting humanly) via substitution \u2014 no inference, no world model \u2014 failing rational standards. Weizenbaum's surprise at user credulity illustrates the gap between surface behaviour and genuine understanding.",
+          "source": "Russell & Norvig. AIMA 4th ed. Ch.1; MIT OCW 6.034. https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010"
+        }
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 History of AI",
+      "source_lesson": "ML-2",
+      "questions": [
+        {
+          "q_id": "Q01-MQ2-01",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "In which year was 'Artificial Intelligence' coined at the Dartmouth Conference?",
+          "options": {
+            "A": "1943",
+            "B": "1950",
+            "C": "1956",
+            "D": "1969"
+          },
+          "answer": "C",
+          "explanation": "John McCarthy organised the Dartmouth Summer Research Project in 1956 where 'Artificial Intelligence' was formally proposed as a field name.",
+          "source": "Russell & Norvig. AIMA 4th ed. Ch.1. https://aima.cs.berkeley.edu"
+        },
+        {
+          "q_id": "Q01-MQ2-02",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "Which 2012 event launched the modern deep learning era?",
+          "options": {
+            "A": "IBM Deep Blue defeating Kasparov",
+            "B": "AlexNet winning ImageNet LSVRC by a large margin",
+            "C": "DeepMind publishing the AlphaGo paper",
+            "D": "OpenAI releasing GPT-2"
+          },
+          "answer": "B",
+          "explanation": "AlexNet (Krizhevsky et al.) achieved top-5 error of 15.3% on ImageNet 2012 \u2014 ~10pp below the next competitor \u2014 catalysing the deep learning revolution.",
+          "source": "Krizhevsky et al. NeurIPS 2012. https://papers.nips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html"
+        },
+        {
+          "q_id": "Q01-MQ2-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "What were the two principal causes of the AI Winters of the 1970s and 1980s?",
+          "options": {
+            "A": "Lack of programming languages and insufficient electricity",
+            "B": "Overpromised results outpacing hardware, data, and algorithms, leading to funding withdrawal",
+            "C": "Government bans on AI research",
+            "D": "Biological neuroscience diverting funding"
+          },
+          "answer": "B",
+          "explanation": "Both winters resulted from hype-disappointment cycles: expert systems were brittle; compute and data were insufficient. The Lighthill Report (1973) and DARPA cuts exemplify the pattern.",
+          "source": "Russell & Norvig. AIMA 4th ed. Ch.1. https://aima.cs.berkeley.edu"
+        },
+        {
+          "q_id": "Q01-MQ2-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "Why did expert systems like MYCIN fail to achieve widespread deployment despite impressive accuracy?",
+          "options": {
+            "A": "Too much electricity required",
+            "B": "Blocked by software patents",
+            "C": "Knowledge-acquisition bottleneck, brittleness outside rule base, liability concerns, inability to learn from new data",
+            "D": "Physicians refused computer tools before 2000"
+          },
+          "answer": "C",
+          "explanation": "MYCIN achieved 65\u201370% diagnostic accuracy but was never deployed: knowledge-engineering bottleneck, brittleness, legal liability, and hospital integration barriers all prevented real-world use.",
+          "source": "Russell & Norvig. AIMA 4th ed. Ch.1. https://aima.cs.berkeley.edu"
+        },
+        {
+          "q_id": "Q01-MQ2-05",
+          "bloom": "L3",
+          "skill": "Analyse",
+          "stem": "Classify AlphaFold 2 (2020) by: (a) AI paradigm, (b) learning type, (c) narrow vs general AI, with justification.",
+          "options": {
+            "A": "Rule-based; unsupervised; narrow",
+            "B": "Deep learning; supervised; narrow AI \u2014 accurate at protein folding but cannot perform other cognitive tasks",
+            "C": "Deep learning; reinforcement; AGI \u2014 surpasses human experts",
+            "D": "Symbolic AI; self-supervised; narrow"
+          },
+          "answer": "B",
+          "explanation": "AlphaFold 2 uses a deep transformer trained on labelled protein sequences (supervised). It is narrow AI \u2014 superhuman at one task with no capability outside that domain. Surpassing experts in a single domain does not constitute AGI.",
+          "source": "Jumper et al. Nature, 2021. https://www.nature.com/articles/s41586-021-03819-2"
+        }
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Learning Paradigms",
+      "source_lesson": "ML-3",
+      "questions": [
+        {
+          "q_id": "Q01-MQ3-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "Which correctly defines supervised learning?",
+          "options": {
+            "A": "Agent learns from rewards and penalties",
+            "B": "Model learns f(X)\u2192y from labelled input-output pairs",
+            "C": "Model discovers hidden structure in unlabelled data",
+            "D": "Model generates synthetic data by learning its distribution"
+          },
+          "answer": "B",
+          "explanation": "Supervised learning trains a function mapping inputs X to labels y using labelled (input, output) pairs. The label is provided for every training example.",
+          "source": "Russell & Norvig. AIMA 4th ed. Ch.19. https://aima.cs.berkeley.edu"
+        },
+        {
+          "q_id": "Q01-MQ3-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "GPT's pre-training on next-token prediction \u2014 generating its own labels from raw text \u2014 exemplifies which paradigm?",
+          "options": {
+            "A": "Supervised",
+            "B": "Unsupervised",
+            "C": "Self-supervised",
+            "D": "Reinforcement"
+          },
+          "answer": "C",
+          "explanation": "Self-supervised learning generates supervision signals from the data itself (e.g., masking tokens or predicting the next token). No human-annotated labels are required.",
+          "source": "LeCun et al. Meta AI Blog, 2021. https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence"
+        },
+        {
+          "q_id": "Q01-MQ3-03",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "Which best distinguishes reinforcement learning from supervised learning?",
+          "options": {
+            "A": "RL always requires more data",
+            "B": "In RL, an agent learns from delayed scalar rewards via trial and error; supervised learning trains on labelled pairs with immediate per-example feedback",
+            "C": "Supervised is classification-only; RL is regression-only",
+            "D": "RL requires no model; supervised always needs a neural network"
+          },
+          "answer": "B",
+          "explanation": "Key distinction: supervised receives a correct label per example (dense, immediate); RL receives a scalar reward that may be delayed and sparse, requiring exploration and credit assignment across action sequences.",
+          "source": "Sutton & Barto. RL: An Introduction 2nd ed. Ch.1. http://incompleteideas.net/book/the-book-2nd.html"
+        },
+        {
+          "q_id": "Q01-MQ3-04",
+          "bloom": "L2",
+          "skill": "Classify",
+          "stem": "A fraud-detection system is trained on 10M transactions labelled 'fraudulent' or 'legitimate'. Which paradigm and primary challenge apply?",
+          "options": {
+            "A": "Unsupervised \u2014 finding cluster centroids",
+            "B": "Reinforcement \u2014 defining a reward signal",
+            "C": "Supervised classification \u2014 severe class imbalance (fraud is rare)",
+            "D": "Self-supervised \u2014 generating synthetic labels"
+          },
+          "answer": "C",
+          "explanation": "Labelled data \u2192 supervised classification. Primary challenge: class imbalance \u2014 fraud <0.1% of transactions. A na\u00efve model achieves 99.9% accuracy but zero fraud recall. Techniques: SMOTE, class-weighted loss, precision-recall AUC.",
+          "source": "James et al. ISLR 2nd ed. Ch.4. https://www.statlearning.com"
+        },
+        {
+          "q_id": "Q01-MQ3-05",
+          "bloom": "L3",
+          "skill": "Implement",
+          "stem": "You have 50,000 customer purchase records with no labels and want to segment customers for targeted marketing. Which paradigm and algorithm should you use?",
+          "options": {
+            "A": "Supervised \u2014 logistic regression for probability scores",
+            "B": "Reinforcement \u2014 Q-learning for long-term reward",
+            "C": "Unsupervised \u2014 k-means clustering to discover natural groupings",
+            "D": "Self-supervised \u2014 BERT fine-tuning for contextual embeddings"
+          },
+          "answer": "C",
+          "explanation": "No labels \u2192 supervised inapplicable. Goal is discovering structure \u2192 unsupervised. K-means partitions customers into k clusters minimising within-cluster variance. Choose k via elbow method or silhouette score.",
+          "source": "James et al. ISLR 2nd ed. Ch.10. https://www.statlearning.com"
+        }
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Intelligent Agents and PEAS",
+      "source_lesson": "ML-4",
+      "questions": [
+        {
+          "q_id": "Q01-MQ4-01",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "In PEAS, what does 'E' represent?",
+          "options": {
+            "A": "Evaluation function",
+            "B": "Environment",
+            "C": "Efficiency",
+            "D": "Encoding"
+          },
+          "answer": "B",
+          "explanation": "PEAS: Performance measure, Environment, Actuators, Sensors. Environment = the external context the agent perceives and acts upon.",
+          "source": "Russell & Norvig. AIMA 4th ed. Ch.2. https://aima.cs.berkeley.edu"
+        },
+        {
+          "q_id": "Q01-MQ4-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Which agent type maintains an internal state to handle partial observability?",
+          "options": {
+            "A": "Simple reflex agent",
+            "B": "Model-based reflex agent",
+            "C": "Goal-based agent",
+            "D": "Utility-based agent"
+          },
+          "answer": "B",
+          "explanation": "A model-based reflex agent maintains an internal world model for partially observable environments. Simple reflex agents react only to the current percept with no memory.",
+          "source": "Russell & Norvig. AIMA 4th ed. Ch.2. https://aima.cs.berkeley.edu"
+        },
+        {
+          "q_id": "Q01-MQ4-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why is a utility-based agent more flexible than a goal-based agent?",
+          "options": {
+            "A": "Utility agents learn faster via gradient descent",
+            "B": "Utility agents handle trade-offs by assigning numeric utility to states; goal agents only distinguish goal from non-goal states",
+            "C": "Utility agents require less memory",
+            "D": "Utility agents operate in fully observable environments only"
+          },
+          "answer": "B",
+          "explanation": "Goal agents classify outcomes as goal/not-goal \u2014 binary. Utility agents assign real-valued utility, enabling nuanced trade-offs \u2014 e.g., a self-driving car balancing speed, safety, and comfort simultaneously.",
+          "source": "Russell & Norvig. AIMA 4th ed. Ch.2. https://aima.cs.berkeley.edu"
+        },
+        {
+          "q_id": "Q01-MQ4-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "A chess-playing agent knows the complete board state; each move has a deterministic outcome; decisions are sequential. How should this environment be characterised?",
+          "options": {
+            "A": "Partially observable, stochastic, continuous, multi-agent",
+            "B": "Fully observable, deterministic, discrete, two-agent (adversarial)",
+            "C": "Partially observable, deterministic, episodic, single-agent",
+            "D": "Fully observable, stochastic, sequential, single-agent"
+          },
+          "answer": "B",
+          "explanation": "Chess is fully observable (complete board visible), deterministic (certain outcomes), discrete (finite positions), sequential (each move affects future), adversarial (two opposing players).",
+          "source": "Russell & Norvig. AIMA 4th ed. Ch.2 & Ch.5. https://aima.cs.berkeley.edu"
+        },
+        {
+          "q_id": "Q01-MQ4-05",
+          "bloom": "L3",
+          "skill": "Design",
+          "stem": "Design a PEAS specification for an AI medical diagnosis assistant. Which option is most complete and accurate?",
+          "options": {
+            "A": "P: speed; E: internet; A: keyboard; S: microphone",
+            "B": "P: diagnostic accuracy, patient safety, explanation quality; E: EHRs, symptom inputs, lab results; A: diagnoses, confidence scores, referral flags; S: text/structured data from clinician or patient portal",
+            "C": "P: revenue generated; E: billing system; A: invoice generator; S: insurance codes",
+            "D": "P: patients seen; E: waiting room; A: scheduler; S: check-in kiosk"
+          },
+          "answer": "B",
+          "explanation": "Rigorous PEAS: Performance = accuracy, safety, explainability. Environment = EHRs, labs, imaging, symptoms. Actuators = ranked diagnoses, confidence intervals, referral triggers. Sensors = structured clinical data and NLP inputs from patient portals.",
+          "source": "Russell & Norvig. AIMA 4th ed. Ch.2; EU AI Act Annex III. https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689"
+        }
+      ]
+    }
+  ],
+  "table_of_contents": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 Defining AI",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q01-MQ1-01",
+        "Q01-MQ1-02",
+        "Q01-MQ1-03",
+        "Q01-MQ1-04",
+        "Q01-MQ1-05"
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 History of AI",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q01-MQ2-01",
+        "Q01-MQ2-02",
+        "Q01-MQ2-03",
+        "Q01-MQ2-04",
+        "Q01-MQ2-05"
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Learning Paradigms",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q01-MQ3-01",
+        "Q01-MQ3-02",
+        "Q01-MQ3-03",
+        "Q01-MQ3-04",
+        "Q01-MQ3-05"
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Intelligent Agents & PEAS",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q01-MQ4-01",
+        "Q01-MQ4-02",
+        "Q01-MQ4-03",
+        "Q01-MQ4-04",
+        "Q01-MQ4-05"
+      ]
+    }
+  ],
+  "totals": {
+    "mini_quizzes": 4,
+    "questions": 20,
+    "L1": 8,
+    "L2": 8,
+    "L3": 4
+  }
+}

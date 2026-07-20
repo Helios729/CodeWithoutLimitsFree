@@ -1,0 +1,409 @@
+{
+  "module_id": "ai-in-business-and-strategy",
+  "module_title": "AI in Business and Strategy-Q",
+  "type": "quiz",
+  "difficulty": "Beginner",
+  "companion_learning": "AI in Business and Strategy-L",
+  "superquiz_pool": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+  ],
+  "bloom_distribution": {
+    "L1_remember": 2,
+    "L2_understand": 2,
+    "L3_apply": 1
+  },
+  "mini_quizzes": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 AI Value Creation in Business",
+      "source_lesson": "ML-1",
+      "questions": [
+        {
+          "q_id": "Q10-MQ1-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "Which best defines 'AI-driven process automation' in a business context?",
+          "options": {
+            "A": "Replacing all human workers with robots in a factory",
+            "B": "Using AI to automate repetitive, rule-based, or data-intensive business tasks \u2014 such as invoice processing, customer query routing, or demand forecasting \u2014 to reduce cost and increase throughput",
+            "C": "Purchasing new enterprise software for HR management",
+            "D": "Outsourcing business processes to a third-party provider"
+          },
+          "answer": "B",
+          "explanation": "AI process automation encompasses RPA (Robotic Process Automation) enhanced with ML/NLP \u2014 enabling automation of tasks requiring document understanding, pattern recognition, or language processing that traditional rule-based automation cannot handle. McKinsey estimates AI could automate 45% of current work activities (McKinsey Global Institute, 2023).",
+          "source": "McKinsey Global Institute. The Economic Potential of Generative AI. 2023. https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai"
+        },
+        {
+          "q_id": "Q10-MQ1-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Amazon's recommendation engine ('Customers who bought X also bought Y') is estimated to drive what proportion of its revenue?",
+          "options": {
+            "A": "~5%",
+            "B": "~15%",
+            "C": "~35%",
+            "D": "~60%"
+          },
+          "answer": "C",
+          "explanation": "Amazon's collaborative filtering recommendation engine is estimated to drive approximately 35% of total revenue by surfacing relevant products, increasing basket size and repeat purchases. Netflix similarly attributes ~80% of content consumed to its recommendation algorithm \u2014 illustrating AI's direct commercial impact.",
+          "source": "McKinsey. How retailers can keep up with consumers. 2013; Gomez-Uribe & Hunt. The Netflix Recommender System. ACM TMIS, 2016."
+        },
+        {
+          "q_id": "Q10-MQ1-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why do data network effects create a self-reinforcing competitive advantage for AI-first companies?",
+          "options": {
+            "A": "Data network effects are a myth \u2014 more data does not improve AI performance",
+            "B": "As more users interact with an AI product, more training data is generated, which improves model performance, which attracts more users \u2014 creating a virtuous cycle that compounds over time and is difficult for new entrants to replicate without an equivalent data asset",
+            "C": "Data network effects benefit all companies equally regardless of data volume",
+            "D": "Data network effects only apply to social media platforms"
+          },
+          "answer": "B",
+          "explanation": "Data network effects (Andrew Ng's 'AI moat'): Google Maps improves with more navigation data; Spotify recommendations improve with more listening data; Tesla Autopilot improves with more driving miles. The incumbent's data advantage widens as the user base grows \u2014 creating a structural barrier to entry that capital alone cannot quickly overcome.",
+          "source": "Ng. AI is the New Electricity. Stanford GSB, 2017; Parker et al. Platform Revolution. Norton, 2016."
+        },
+        {
+          "q_id": "Q10-MQ1-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does an AI-enabled personalisation strategy differ from traditional mass-market segmentation in customer targeting?",
+          "options": {
+            "A": "They are identical \u2014 both use the same demographic groupings",
+            "B": "Mass-market segmentation groups customers into broad demographic or behavioural clusters and applies the same message to each segment. AI personalisation generates individualised recommendations, pricing, or content for each customer in real time based on their unique behavioural history and context",
+            "C": "AI personalisation is less accurate than traditional segmentation",
+            "D": "Traditional segmentation requires more data than AI personalisation"
+          },
+          "answer": "B",
+          "explanation": "Traditional segmentation: 5\u201320 customer archetypes \u2192 same message per segment. AI personalisation: segment-of-one \u2014 each customer receives unique recommendations (Netflix, Spotify, Amazon), dynamic pricing (airlines, Uber surge), or personalised email content. Requires real-time ML inference at scale and raises ethical questions around price discrimination and filter bubbles.",
+          "source": "Chaffey & Ellis-Chadwick. Digital Marketing 7th ed. Pearson, 2019; McKinsey. The value of getting personalization right. 2021."
+        },
+        {
+          "q_id": "Q10-MQ1-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "A retail bank wants to use AI to reduce customer churn. Which end-to-end implementation plan is most strategically sound?",
+          "options": {
+            "A": "Send all customers the same promotional email every month",
+            "B": "(1) Define churn (e.g., account closure or inactivity >90 days); (2) build a gradient boosting churn prediction model on 24 months of transaction, product, and engagement data; (3) score all active customers monthly; (4) trigger personalised retention interventions (targeted offers, relationship manager outreach) for top-20% churn risk; (5) A/B test interventions; (6) measure lift in 90-day retention rate",
+            "C": "Hire more customer service agents to handle complaints",
+            "D": "Reduce product fees by 50% for all customers"
+          },
+          "answer": "B",
+          "explanation": "Churn ML pipeline: (1) clear business metric definition; (2) feature engineering from transaction data (recency, frequency, product breadth, service usage); (3) gradient boosting (XGBoost) typically achieves AUC 0.75\u20130.85 for retail banking churn; (4) targeted intervention preserves margin vs blanket fee cuts; (5) A/B test isolates AI impact from confounders; (6) business KPI (retention rate) closes the value loop.",
+          "source": "McKinsey. The value of getting personalization right. 2021; G\u00e9ron. Hands-On ML 3rd ed. 2022."
+        }
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 AI Strategy and Organisational Readiness",
+      "source_lesson": "ML-2",
+      "questions": [
+        {
+          "q_id": "Q10-MQ2-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is an 'AI Centre of Excellence' (CoE) in an organisational context?",
+          "options": {
+            "A": "A physical server room housing AI computing infrastructure",
+            "B": "A centralised team or function that sets AI standards, curates shared tools and platforms, builds internal AI capability, and coordinates AI initiatives across business units",
+            "C": "An external consulting firm specialising in AI implementation",
+            "D": "A regulatory body that approves AI models before deployment"
+          },
+          "answer": "B",
+          "explanation": "An AI CoE provides: (1) governance \u2014 standards, ethics review, model validation; (2) shared infrastructure \u2014 MLOps platforms, data lakes; (3) capability building \u2014 training programmes, talent retention; (4) portfolio coordination \u2014 prioritising AI investments by value and feasibility. McKinsey (2023) found companies with formal AI CoEs achieve 2\u00d7 faster AI deployment and higher ROI.",
+          "source": "McKinsey. The state of AI in 2023. https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023"
+        },
+        {
+          "q_id": "Q10-MQ2-02",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "In the AI maturity model, which stage describes an organisation that has deployed AI in production, measures business impact, and iterates models based on live performance?",
+          "options": {
+            "A": "Stage 1 \u2014 AI Aware: leadership has heard of AI but no projects exist",
+            "B": "Stage 2 \u2014 AI Experimenting: isolated pilots in one or two departments",
+            "C": "Stage 3 \u2014 AI Scaling: AI in production across multiple business units with ROI measurement and continuous improvement",
+            "D": "Stage 0 \u2014 Pre-AI: no data infrastructure exists"
+          },
+          "answer": "C",
+          "explanation": "AI maturity stages (varies by framework, e.g., McKinsey, Gartner): (1) Aware, (2) Experimenting (PoC), (3) Scaling (production, multi-BU, ROI measured), (4) Transforming (AI-native, competitive differentiation). Stage 3 is characterised by MLOps pipelines, model monitoring, business KPI tracking, and cross-functional AI teams.",
+          "source": "McKinsey. The state of AI in 2023; Gartner. AI Maturity Model. 2022."
+        },
+        {
+          "q_id": "Q10-MQ2-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why do most enterprise AI projects fail to reach production, and what organisational factors most commonly cause failure?",
+          "options": {
+            "A": "AI projects fail due to insufficient computing hardware",
+            "B": "Gartner estimates 85% of AI projects fail to reach production. Root causes: (1) poorly defined business problem; (2) data quality and accessibility issues; (3) lack of cross-functional alignment between data science and business teams; (4) no MLOps infrastructure for deployment and monitoring; (5) change management failure \u2014 end users not adopting AI outputs",
+            "C": "AI projects fail because the algorithms are not mature enough",
+            "D": "Most AI projects succeed \u2014 the 85% failure statistic is inaccurate"
+          },
+          "answer": "B",
+          "explanation": "Gartner (2022): 85% of AI projects fail to move beyond PoC. RAND (2021) analysis of US government AI: primary failures were organisational, not technical. Key fix: start with a well-scoped business problem, ensure data readiness before modelling, build MLOps from day one, and co-design with end users to ensure adoption.",
+          "source": "Gartner. Top Trends in Data and Analytics, 2022; RAND. The 2021 RAND Artificial Intelligence Decision Support Assessment Framework."
+        },
+        {
+          "q_id": "Q10-MQ2-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "What is MLOps and why is it essential for sustainable AI deployment in enterprises?",
+          "options": {
+            "A": "MLOps is a programming language for machine learning",
+            "B": "MLOps (Machine Learning Operations) applies DevOps principles to ML \u2014 automating model training, validation, deployment, monitoring, and retraining pipelines to ensure models remain accurate, reproducible, and governable in production",
+            "C": "MLOps is only relevant for cloud-native companies",
+            "D": "MLOps replaces the need for data scientists"
+          },
+          "answer": "B",
+          "explanation": "Without MLOps: models degrade silently (data drift), deployments are manual and error-prone, experiments are not reproducible, and governance is absent. MLOps stack: feature stores, model registries, CI/CD pipelines for models, monitoring dashboards (data drift, model performance), automated retraining triggers. Tools: MLflow, Kubeflow, SageMaker, Vertex AI.",
+          "source": "Sculley et al. Hidden Technical Debt in Machine Learning Systems. NeurIPS, 2015; Kreuzberger et al. MLOps: Overview, Definition, and Architecture. IEEE Access, 2023."
+        },
+        {
+          "q_id": "Q10-MQ2-05",
+          "bloom": "L3",
+          "skill": "Design",
+          "stem": "A logistics company wants to deploy an AI demand forecasting model across 50 distribution centres. What governance and MLOps framework should they implement?",
+          "options": {
+            "A": "Deploy one model manually to all 50 centres and monitor manually",
+            "B": "(1) Feature store: centralise demand signals (orders, promotions, seasonality, macroeconomic indicators); (2) Model registry: version-controlled models with champion/challenger tracking; (3) CI/CD pipeline: automated retraining triggered by data drift (PSI > 0.2); (4) Monitoring: per-centre MAPE and bias alerts; (5) Governance: model cards documenting training data, known limitations, and bias checks; (6) Rollout: canary deployment \u2014 test at 5 centres before full rollout",
+            "C": "Use a single Excel spreadsheet for all 50 centres",
+            "D": "Deploy without monitoring \u2014 retrain only when managers complain"
+          },
+          "answer": "B",
+          "explanation": "Enterprise MLOps for 50-centre deployment: feature store prevents training-serving skew; model registry enables rollback; automated retraining responds to distribution shift (Population Stability Index); per-centre monitoring detects localised degradation; model cards support audit and explainability; canary deployment limits blast radius of errors. Standard architecture for large-scale operational AI.",
+          "source": "Sculley et al. NeurIPS, 2015; Kreuzberger et al. IEEE Access, 2023."
+        }
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 AI in Finance and Operations",
+      "source_lesson": "ML-3",
+      "questions": [
+        {
+          "q_id": "Q10-MQ3-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is algorithmic trading in financial markets?",
+          "options": {
+            "A": "Using AI to advise human traders who execute orders manually",
+            "B": "Using computer algorithms to automatically execute buy and sell orders based on predefined rules or ML-generated signals \u2014 operating at speeds and volumes impossible for human traders",
+            "C": "Regulating stock exchanges using AI oversight systems",
+            "D": "Using AI to create new financial instruments"
+          },
+          "answer": "B",
+          "explanation": "Algorithmic trading (algo trading): computer programs execute trades based on price, volume, timing, or ML-generated signals with no human intervention. High-frequency trading (HFT) operates at microsecond timescales. Accounts for ~60\u201373% of US equity trading volume. ML applications: momentum strategies, statistical arbitrage, NLP-based sentiment trading.",
+          "source": "Aldridge. High-Frequency Trading 2nd ed. Wiley, 2013; SEC. Equity Market Structure Literature Review. 2020."
+        },
+        {
+          "q_id": "Q10-MQ3-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Which ML technique is most commonly used for credit scoring to predict the probability of loan default?",
+          "options": {
+            "A": "K-means clustering",
+            "B": "Gradient boosting models (XGBoost, LightGBM) or logistic regression \u2014 trained on historical loan repayment data to predict P(default) for new applicants",
+            "C": "Principal component analysis",
+            "D": "Generative adversarial networks"
+          },
+          "answer": "B",
+          "explanation": "Credit scoring: supervised classification \u2014 label = defaulted/repaid. Logistic regression: interpretable, regulatory-friendly (can explain decisions). Gradient boosting (XGBoost): higher AUC (typically 0.75\u20130.85 on retail credit), captures non-linear interactions. Regulatory constraint: models must be explainable under ECOA (Equal Credit Opportunity Act) and GDPR Art. 22.",
+          "source": "Baesens et al. Credit Risk Analytics. Wiley, 2016; Federal Reserve. SR 11-7: Guidance on Model Risk Management. 2011."
+        },
+        {
+          "q_id": "Q10-MQ3-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "How do AI-powered demand forecasting models create operational value in supply chain management?",
+          "options": {
+            "A": "They replace warehouse workers with robots",
+            "B": "ML demand forecasting (gradient boosting, LSTM, Prophet) incorporates external signals (weather, promotions, macroeconomic indicators, social media trends) that traditional statistical methods (ARIMA) ignore \u2014 reducing forecast error, lowering inventory holding costs, preventing stockouts, and improving supplier lead-time planning",
+            "C": "They eliminate the need for safety stock entirely",
+            "D": "They automate the physical movement of goods between warehouses"
+          },
+          "answer": "B",
+          "explanation": "Traditional ARIMA forecasts on historical sales only. ML models incorporate: seasonality, promotions, price elasticity, weather, competitor actions, web search trends. Amazon's demand forecasting ML reduced forecast error by 10\u201315%, reducing excess inventory. Each 1% reduction in forecast error translates to ~0.2% reduction in working capital for large retailers.",
+          "source": "Carbonneau et al. Application of ML techniques to supply chain demand forecasting. European Journal of Operational Research, 2008; Amazon Science. Demand Forecasting. https://www.amazon.science/blog"
+        },
+        {
+          "q_id": "Q10-MQ3-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does AI fraud detection differ from rule-based fraud detection in financial services?",
+          "options": {
+            "A": "Rule-based systems are more accurate than AI for fraud detection",
+            "B": "Rule-based systems use fixed threshold rules (e.g., transaction > $10K flagged) \u2014 transparent and auditable but easily circumvented by fraudsters adapting behaviour. AI models (anomaly detection, gradient boosting) learn complex, evolving fraud patterns from millions of transactions and adapt to new fraud typologies",
+            "C": "AI fraud detection cannot process real-time transactions",
+            "D": "They are identical in accuracy and adaptability"
+          },
+          "answer": "B",
+          "explanation": "Rule-based: high false positive rate (alert fatigue), easily gamed by sophisticated fraudsters. ML fraud detection: Visa's AI system processes 500+ transaction features in <100ms, reducing false positives by 30% while increasing fraud catch rate. Unsupervised anomaly detection (Isolation Forest, Autoencoder) catches novel fraud patterns not seen in labelled training data.",
+          "source": "Phua et al. Comprehensive survey of data mining-based fraud detection research. 2010; Visa Inc. AI fraud detection. 2022."
+        },
+        {
+          "q_id": "Q10-MQ3-05",
+          "bloom": "L3",
+          "skill": "Evaluate",
+          "stem": "A bank's AI credit scoring model has AUC=0.82 overall but approves only 54% of minority applicants vs 79% of white applicants with equivalent financial profiles. The risk team argues the model is 'technically sound.' Evaluate this claim.",
+          "options": {
+            "A": "The risk team is correct \u2014 AUC=0.82 demonstrates technical soundness",
+            "B": "The claim is technically incomplete and legally insufficient. A 25pp approval disparity with equivalent profiles constitutes disparate impact under ECOA and Fair Housing Act. Required response: (1) audit for proxy variables (ZIP code, employer); (2) compute equal opportunity difference and disparate impact ratio; (3) apply bias mitigation (reweighing, adversarial debiasing); (4) document under SR 11-7 model risk management; (5) notify regulators if bias cannot be remediated",
+            "C": "The disparity is acceptable if it is profitable for the bank",
+            "D": "Replace the AI model with human underwriters only"
+          },
+          "answer": "B",
+          "explanation": "ECOA (15 U.S.C. \u00a71691) prohibits credit discrimination on basis of race. Disparate impact = approval_minority / approval_white = 54/79 = 0.68 \u2014 well below the 4/5ths (0.80) rule threshold triggering CFPB investigation. SR 11-7 requires model validation including fairness testing. Ongoing CFPB and OCC scrutiny makes biased credit AI a significant legal and reputational risk.",
+          "source": "Federal Reserve. SR 11-7. 2011; CFPB. Using AI in Credit Underwriting. 2022; ECOA 15 U.S.C. \u00a71691."
+        }
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 AI Leadership, Change Management and Future of Work",
+      "source_lesson": "ML-4",
+      "questions": [
+        {
+          "q_id": "Q10-MQ4-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What does 'human-in-the-loop' (HITL) mean in the context of AI deployment?",
+          "options": {
+            "A": "A fully automated AI system with no human involvement",
+            "B": "An AI workflow design where human judgment is required to review, validate, or override AI outputs at defined decision points \u2014 maintaining human accountability for consequential decisions",
+            "C": "A software testing methodology where humans test AI code",
+            "D": "A training approach where humans label all data manually"
+          },
+          "answer": "B",
+          "explanation": "HITL: humans remain accountable for high-stakes decisions by reviewing AI recommendations before action. Contrasts with fully automated ('human-out-of-the-loop') systems. Spectrum: human-in-the-loop \u2192 human-on-the-loop (monitors, can override) \u2192 human-out-of-the-loop. EU AI Act mandates HITL for high-risk AI systems. Critical for medical diagnosis, credit decisions, and criminal justice AI.",
+          "source": "EU AI Act Articles 14 & 22. 2024; Amershi et al. Software Engineering for Machine Learning. ICSE-SEIP, 2019."
+        },
+        {
+          "q_id": "Q10-MQ4-02",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "According to the World Economic Forum's Future of Jobs Report 2023, which skill category is projected to grow most in demand due to AI adoption?",
+          "options": {
+            "A": "Manual dexterity and physical stamina",
+            "B": "Analytical and critical thinking, AI and data literacy, and creative problem-solving \u2014 'cognitive' skills that complement AI capabilities rather than compete with them",
+            "C": "Data entry and routine administrative processing",
+            "D": "Basic numeracy and literacy"
+          },
+          "answer": "B",
+          "explanation": "WEF Future of Jobs 2023: top rising skills include analytical thinking, creative thinking, AI and big data literacy, and technology literacy. Jobs most at risk: data entry clerks, accounting bookkeepers, administrative and executive secretaries. Jobs growing: AI and ML specialists, data analysts, cybersecurity professionals \u2014 requiring skills AI augments rather than replaces.",
+          "source": "World Economic Forum. Future of Jobs Report 2023. https://www.weforum.org/reports/the-future-of-jobs-report-2023"
+        },
+        {
+          "q_id": "Q10-MQ4-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why is change management as critical as technical execution for successful enterprise AI adoption?",
+          "options": {
+            "A": "Change management is unnecessary \u2014 good AI systems are self-adopting",
+            "B": "Even technically excellent AI systems fail if end users distrust, misunderstand, or actively resist them. Change management addresses: stakeholder communication, user training, workflow redesign, incentive alignment, and building psychological safety \u2014 the human factors that determine whether AI delivers business value",
+            "C": "Change management only applies to non-technical staff",
+            "D": "AI adoption is primarily a hardware procurement challenge"
+          },
+          "answer": "B",
+          "explanation": "Prosci's ADKAR model: Awareness, Desire, Knowledge, Ability, Reinforcement. Gartner (2022): 70% of digital transformation failures are people/process, not technology. Clinician resistance to AI diagnostics, analyst distrust of ML forecasts, and manager circumvention of AI recommendations all destroy ROI regardless of model accuracy.",
+          "source": "Hiatt. ADKAR: A Model for Change. Prosci, 2006; Gartner. Why Digital Transformations Fail. 2022."
+        },
+        {
+          "q_id": "Q10-MQ4-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "What is 'AI augmentation' and how does it differ from AI replacement in the future of work literature?",
+          "options": {
+            "A": "They are identical \u2014 augmentation is just a euphemism for replacement",
+            "B": "AI augmentation: AI handles routine, data-intensive sub-tasks, freeing humans to focus on judgment, creativity, relationships, and ethics \u2014 increasing worker productivity and job quality. AI replacement: AI fully substitutes human labour in a role. Most near-term AI impact is augmentation; full replacement is concentrated in highly routine, repetitive tasks",
+            "C": "AI augmentation applies only to white-collar knowledge workers",
+            "D": "AI replacement increases worker productivity more than augmentation"
+          },
+          "answer": "B",
+          "explanation": "Brynjolfsson & McAfee (2014): AI complements human cognitive tasks rather than uniformly substituting. Radiologist augmentation (AI flags anomalies for review) vs. radiologist replacement (AI reads all scans autonomously) \u2014 current state is augmentation. MIT Work of the Future (2020): augmentation preserves human agency and typically improves job quality; replacement eliminates roles.",
+          "source": "Brynjolfsson & McAfee. The Second Machine Age. Norton, 2014; MIT Work of the Future. Automation and the Future of Work. 2020."
+        },
+        {
+          "q_id": "Q10-MQ4-05",
+          "bloom": "L3",
+          "skill": "Design",
+          "stem": "As Chief AI Officer of a 5,000-employee financial services firm, design a 12-month AI strategy roadmap covering capability building, governance, and value delivery.",
+          "options": {
+            "A": "Purchase AI software licenses and deploy with no training or governance",
+            "B": "Q1: AI literacy training for all staff + establish AI CoE + data audit; Q2: launch 3 high-value pilots (fraud detection, churn prediction, document processing) with clear KPIs; Q3: build MLOps infrastructure + AI ethics review board + model governance framework; Q4: scale 2 successful pilots enterprise-wide + establish AI Centre of Excellence with 20 FTE + report business value to board",
+            "C": "Hire 200 data scientists and let them self-organise",
+            "D": "Wait for competitors to demonstrate AI ROI before investing"
+          },
+          "answer": "B",
+          "explanation": "Best-practice AI roadmap: Q1 foundations (literacy, governance, data readiness) prevent costly rework. Q2 pilots with measurable KPIs (AUC, cost savings, time reduction) generate evidence for scaling investment. Q3 MLOps infrastructure ensures pilots can scale reliably. Q4 enterprise rollout with CoE sustains capability. Board reporting builds executive confidence and secures ongoing investment.",
+          "source": "McKinsey. The state of AI in 2023; Davenport & Ronanki. Artificial Intelligence for the Real World. HBR, 2018."
+        }
+      ]
+    }
+  ],
+  "table_of_contents": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 AI Value Creation in Business",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q10-MQ1-01",
+        "Q10-MQ1-02",
+        "Q10-MQ1-03",
+        "Q10-MQ1-04",
+        "Q10-MQ1-05"
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 AI Strategy and Organisational Readiness",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q10-MQ2-01",
+        "Q10-MQ2-02",
+        "Q10-MQ2-03",
+        "Q10-MQ2-04",
+        "Q10-MQ2-05"
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 AI in Finance and Operations",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q10-MQ3-01",
+        "Q10-MQ3-02",
+        "Q10-MQ3-03",
+        "Q10-MQ3-04",
+        "Q10-MQ3-05"
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 AI Leadership, Change Management and Future of Work",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q10-MQ4-01",
+        "Q10-MQ4-02",
+        "Q10-MQ4-03",
+        "Q10-MQ4-04",
+        "Q10-MQ4-05"
+      ]
+    }
+  ],
+  "totals": {
+    "mini_quizzes": 4,
+    "questions": 20,
+    "L1": 8,
+    "L2": 8,
+    "L3": 4
+  }
+}

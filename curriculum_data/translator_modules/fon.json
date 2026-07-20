@@ -1,0 +1,122 @@
+{
+  "schema_version": "1.1",
+  "module_type": "translator",
+  "generated": "2026-06-26",
+  "verified_on": "2026-06-26",
+  "verification_policy": "Human verification recommended for any low/very-low-resource output before client delivery.",
+  "language": {
+    "name_en": "Fon",
+    "autonym": "Fɔngbè",
+    "iso_639_1": null,
+    "iso_639_3": "fon",
+    "flores_200_code": "fon_Latn",
+    "script": "Latin",
+    "regions": [
+      "Benin",
+      "Togo",
+      "Nigeria"
+    ],
+    "resource_level": "low"
+  },
+  "default_pivot_languages": [
+    "French",
+    "English"
+  ],
+  "recommended_resources": [
+    {
+      "name": "MAFAND-MT (lafand-mt)",
+      "type": "dataset",
+      "modality": "text",
+      "provider": "Masakhane",
+      "venue": "Adelani et al., NAACL 2022 (aclanthology.org/2022.naacl-main.223)",
+      "license": "CC-BY-NC-4.0",
+      "commercial_use": false,
+      "huggingface_id": "masakhane/mafand",
+      "url": "https://github.com/masakhane-io/lafand-mt",
+      "language_pairs": [
+        "fon<->fra",
+        "fon<->eng"
+      ],
+      "offline": "News-domain parallel sentences for fine-tuning / evaluation; not a runtime model.",
+      "notes": "Human-translated benchmark; repo includes MT5/mBART/M2M-100 fine-tuning recipes.",
+      "verified_on": "2026-06-26"
+    },
+    {
+      "name": "FFR Dataset (Fon-French)",
+      "type": "dataset",
+      "modality": "text",
+      "provider": "Dossou & Emezue",
+      "venue": "Emezue & Dossou, WiNLP 2020 (aclanthology.org/2020.winlp-1.21; arXiv:2006.09217)",
+      "license": "Open (see repo)",
+      "commercial_use": null,
+      "huggingface_id": null,
+      "url": "https://github.com/bonaventuredossou/ffr-v1",
+      "language_pairs": [
+        "fon<->fra"
+      ],
+      "offline": "117,029 Fon-French parallel sentences for fine-tuning / evaluation.",
+      "notes": "Largest dedicated Fon-French corpus; complements MAFAND-MT.",
+      "verified_on": "2026-06-26"
+    },
+    {
+      "name": "NLLB-200 (distilled 600M)",
+      "type": "model",
+      "modality": "text",
+      "provider": "Meta AI",
+      "venue": "NLLB Team et al., 2022 (arXiv:2207.04672)",
+      "license": "CC-BY-NC-4.0",
+      "commercial_use": false,
+      "huggingface_id": "facebook/nllb-200-distilled-600M",
+      "url": "https://huggingface.co/facebook/nllb-200-distilled-600M",
+      "language_pairs": [
+        "fon_Latn<->fra_Latn",
+        "fon_Latn<->eng_Latn"
+      ],
+      "offline": "Convert to CTranslate2 / quantize (int8) for low-RAM phones.",
+      "notes": "Strong low-resource coverage; non-commercial licence.",
+      "verified_on": "2026-06-26"
+    },
+    {
+      "name": "MADLAD-400-3B-MT",
+      "type": "model",
+      "modality": "text",
+      "provider": "Google",
+      "venue": "Kudugunta et al., NeurIPS 2023 (arXiv:2309.04662)",
+      "license": "Apache-2.0",
+      "commercial_use": true,
+      "huggingface_id": "google/madlad400-3b-mt",
+      "url": "https://huggingface.co/google/madlad400-3b-mt",
+      "language_pairs": [
+        "fon<->fr",
+        "fon<->en"
+      ],
+      "offline": "GGUF 2–4-bit quantization brings the 3B model under ~1–2 GB.",
+      "notes": "Permissive licence (commercial OK). Prefix input with <2xx> target token.",
+      "verified_on": "2026-06-26"
+    }
+  ],
+  "speech_to_text": {
+    "covered_by_seamless_m4t_v2": false,
+    "resources": [
+      {
+        "name": "OkwuGbé (End-to-End Speech Recognition for Fon and Igbo)",
+        "type": "asr-model+paper",
+        "modality": "speech-to-text (ASR)",
+        "provider": "Dossou & Emezue",
+        "venue": "Dossou & Emezue, 2021 (AfricaNLP / EMNLP 2021)",
+        "license": "See authors' repo",
+        "commercial_use": null,
+        "huggingface_id": null,
+        "url": "https://bonaventuredossou.github.io/",
+        "language_pairs": [
+          "fon speech -> fon text"
+        ],
+        "offline": "Research ASR system; not a packaged mobile model.",
+        "notes": "Dedicated Fon speech recognition. Confirm the current code/checkpoint on the authors' page before integration; pair with FFR/MAFAND for Fon->French text.",
+        "verified_on": "2026-06-26"
+      }
+    ],
+    "note": "Not in SeamlessM4T v2, but OkwuGbé is a dedicated Fon ASR option. SeamlessM4T v2 does NOT list this language. Use the text pipeline with human transcription of voice notes, or a community ASR model verified before use."
+  },
+  "integration_notes": "Low-resource. French is the strongest pivot; human verification recommended."
+}

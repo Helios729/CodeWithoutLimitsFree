@@ -1,0 +1,143 @@
+{
+  "module_id": "html-intermediate",
+  "module_title": "HTML Intermediate-L",
+  "type": "learning",
+  "difficulty": "Intermediate",
+  "duration_min": 75,
+  "bloom_levels_covered": [
+    "L1 Remember",
+    "L2 Understand",
+    "L3 Apply"
+  ],
+  "companion_quiz": "HTML Intermediate-Q",
+  "sources": [
+    {
+      "id": "S1",
+      "citation": "MDN Web Docs. HTML.",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTML",
+      "access": "Free."
+    },
+    {
+      "id": "S2",
+      "citation": "web.dev. Learn HTML. Google, 2023.",
+      "url": "https://web.dev/learn/html",
+      "access": "Free."
+    },
+    {
+      "id": "S3",
+      "citation": "MDN Web Docs. HTML Tables.",
+      "url": "https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables",
+      "access": "Free."
+    },
+    {
+      "id": "S4",
+      "citation": "MDN Web Docs. HTML5 Audio and Video.",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video",
+      "access": "Free."
+    },
+    {
+      "id": "S5",
+      "citation": "W3C. WCAG 2.1.",
+      "url": "https://www.w3.org/TR/WCAG21",
+      "access": "Free."
+    }
+  ],
+  "learning_objectives": [
+    "L1: Identify table structural elements: table, thead, tbody, tfoot, tr, th, td.",
+    "L1: State the purpose of colspan, rowspan, scope, and caption.",
+    "L1: Name HTML5 media elements and their key attributes.",
+    "L2: Explain how ARIA roles and labels improve accessibility.",
+    "L2: Describe how data-* enables custom data storage in HTML.",
+    "L2: Explain relative, absolute, and root-relative URL paths.",
+    "L3: Build an accessible responsive table with merged cells, caption, and column headers.",
+    "L3: Mark up a form with correct ARIA labels and error-message associations."
+  ],
+  "mini_lessons": [
+    {
+      "ml": 1,
+      "title": "HTML Tables",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-1",
+      "concepts": [
+        {
+          "title": "Table Structure",
+          "explanation": "<table>, <caption> (required for accessibility), <thead>/<tbody>/<tfoot>, <tr>, <th scope='col|row'>, <td>, colspan/rowspan. Never use tables for layout.",
+          "worked_example": "<table><caption>Q1 Sales</caption><thead><tr><th scope='col'>Region</th><th scope='col'>Sales</th></tr></thead><tbody><tr><td>North</td><td>$42,000</td></tr></tbody><tfoot><tr><th scope='row'>Total</th><td>$42,000</td></tr></tfoot></table>",
+          "source_refs": [
+            "S3",
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 2,
+      "title": "Media and URL Paths",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-2",
+      "concepts": [
+        {
+          "title": "Audio, Video, iframe",
+          "explanation": "<video controls width='640'>. <source>: multiple formats. <track kind='subtitles'>: WCAG AA required. <iframe title='...'>: title mandatory.",
+          "worked_example": "<video controls width='640' poster='thumb.jpg'><source src='demo.mp4' type='video/mp4'><track kind='subtitles' src='demo.vtt' srclang='en'></video>",
+          "source_refs": [
+            "S4",
+            "S1"
+          ]
+        },
+        {
+          "title": "URL Path Types",
+          "explanation": "Absolute: full URL. Root-relative: starts with / \u2014 portable. Relative: from current file. Use relative for local assets; absolute for external.",
+          "worked_example": "/pages/about.html \u2192 /assets/logo.png: relative='../assets/logo.png', root-relative='/assets/logo.png'.",
+          "source_refs": [
+            "S1",
+            "S2"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 3,
+      "title": "Accessible Forms",
+      "bloom": "L2-L3",
+      "companion_mini_quiz": "MQ-3",
+      "concepts": [
+        {
+          "title": "ARIA and Form Accessibility",
+          "explanation": "aria-label, aria-labelledby, aria-describedby, aria-required, aria-invalid, role='alert'. <fieldset>+<legend> for groups.",
+          "worked_example": "<input id='u' aria-describedby='hint err' aria-required='true' aria-invalid='false'><span id='hint'>4\u201320 chars.</span><span id='err' role='alert' hidden>Username taken.</span>",
+          "source_refs": [
+            "S5",
+            "S2"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 4,
+      "title": "data-* and Meta Tags",
+      "bloom": "L2-L3",
+      "companion_mini_quiz": "MQ-4",
+      "concepts": [
+        {
+          "title": "data-* Custom Attributes",
+          "explanation": "Store custom data in HTML for JS. Syntax: data-anything='value'. Access: element.dataset.anything. Never store sensitive data.",
+          "worked_example": "<button data-product-id='42' data-price='9.99'>Add to Cart</button> \u2192 e.target.dataset.productId // '42'",
+          "source_refs": [
+            "S1",
+            "S2"
+          ]
+        },
+        {
+          "title": "Head Meta Tags",
+          "explanation": "<meta name='description'>: 150\u2013160 chars. <meta name='viewport'>: essential for mobile. Open Graph: og:title/description/image. <link rel='canonical'>: prevents duplicate content.",
+          "worked_example": "<meta name='viewport' content='width=device-width, initial-scale=1'>\n<meta property='og:image' content='https://example.com/og.png'>",
+          "source_refs": [
+            "S2",
+            "S1"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,409 @@
+{
+  "module_id": "natural-language-processing",
+  "module_title": "Natural Language Processing-Q",
+  "type": "quiz",
+  "difficulty": "Beginner",
+  "companion_learning": "Natural Language Processing-L",
+  "superquiz_pool": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+  ],
+  "bloom_distribution": {
+    "L1_remember": 2,
+    "L2_understand": 2,
+    "L3_apply": 1
+  },
+  "mini_quizzes": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 Text Preprocessing and Representation",
+      "source_lesson": "ML-1",
+      "questions": [
+        {
+          "q_id": "Q07-MQ1-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What does TF-IDF measure in the context of text representation?",
+          "options": {
+            "A": "The total frequency of a word in a document collection",
+            "B": "A word's importance to a document relative to a corpus \u2014 high if frequent in the document but rare across the corpus",
+            "C": "The semantic similarity between two documents",
+            "D": "The number of unique tokens in a vocabulary"
+          },
+          "answer": "B",
+          "explanation": "TF-IDF = TF(t,d) \u00d7 IDF(t). TF: how often term t appears in document d. IDF = log(N/df(t)): penalises terms common across all N documents. High TF-IDF indicates a term is distinctive to that document. Used in search engines and classical text classification.",
+          "source": "Manning et al. Introduction to Information Retrieval. Cambridge UP, 2008. Ch.6. https://nlp.stanford.edu/IR-book"
+        },
+        {
+          "q_id": "Q07-MQ1-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Which tokenisation approach splits text into subword units to handle out-of-vocabulary words, and is used by BERT and GPT?",
+          "options": {
+            "A": "Whitespace tokenisation",
+            "B": "Character-level tokenisation",
+            "C": "Byte-Pair Encoding (BPE) or WordPiece subword tokenisation",
+            "D": "Sentence-level tokenisation"
+          },
+          "answer": "C",
+          "explanation": "BPE (Sennrich et al., 2016) iteratively merges the most frequent character pairs into subword tokens. WordPiece (used in BERT) is similar. Both handle OOV words by decomposing them into known subword units (e.g., 'unhappiness' \u2192 'un', '##happi', '##ness'). GPT uses BPE; BERT uses WordPiece.",
+          "source": "Sennrich et al. Neural Machine Translation of Rare Words with Subword Units. ACL, 2016. https://arxiv.org/abs/1508.07909"
+        },
+        {
+          "q_id": "Q07-MQ1-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why do dense word embeddings (Word2Vec, GloVe) outperform one-hot encoding for most NLP tasks?",
+          "options": {
+            "A": "One-hot vectors are larger, making them slower to compute",
+            "B": "Dense embeddings encode semantic similarity in a continuous vector space \u2014 synonyms have similar vectors, enabling generalisation; one-hot vectors are orthogonal and encode no semantic relationships",
+            "C": "One-hot encoding cannot represent words with more than 26 letters",
+            "D": "Dense embeddings reduce vocabulary size"
+          },
+          "answer": "B",
+          "explanation": "One-hot: V-dimensional sparse binary vector \u2014 every word is equidistant. Word2Vec/GloVe: d-dimensional dense vectors (d=100\u2013300) trained so similar words have high cosine similarity (e.g., king\u2212man+woman\u2248queen). This semantic geometry enables generalisation across related words \u2014 a critical advantage for downstream tasks.",
+          "source": "Mikolov et al. Distributed Representations of Words. NeurIPS, 2013. https://arxiv.org/abs/1301.3781; Pennington et al. GloVe. EMNLP, 2014."
+        },
+        {
+          "q_id": "Q07-MQ1-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How do static word embeddings (Word2Vec, GloVe) differ from contextualised embeddings (BERT, ELMo) in handling polysemy?",
+          "options": {
+            "A": "Static and contextualised embeddings are identical \u2014 both produce one vector per word",
+            "B": "Static embeddings assign a single fixed vector per word regardless of context; contextualised embeddings produce different vectors for the same word depending on its surrounding tokens, correctly distinguishing senses (e.g., 'bank' in financial vs river contexts)",
+            "C": "Contextualised embeddings are only available for English",
+            "D": "Static embeddings are more accurate for polysemous words"
+          },
+          "answer": "B",
+          "explanation": "Word2Vec/GloVe: one vector per word type \u2014 'bank' (financial) and 'bank' (river) share one embedding. ELMo (Peters et al., 2018) and BERT produce token-level contextualised embeddings \u2014 the representation of 'bank' changes based on surrounding tokens. Critical for disambiguation and downstream task performance.",
+          "source": "Peters et al. Deep Contextualised Word Representations (ELMo). NAACL, 2018. https://arxiv.org/abs/1802.05365"
+        },
+        {
+          "q_id": "Q07-MQ1-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "You have 50,000 product reviews for sentiment classification. Which text representation pipeline is most appropriate for fine-tuning a pre-trained BERT model?",
+          "options": {
+            "A": "TF-IDF vectorisation \u2192 logistic regression (no BERT fine-tuning)",
+            "B": "BERT WordPiece tokenisation \u2192 truncate/pad to 512 tokens \u2192 add [CLS] token \u2192 fine-tune encoder with classification head using AdamW optimiser",
+            "C": "Word2Vec embeddings \u2192 average pooling \u2192 SVM classifier",
+            "D": "Character-level one-hot encoding \u2192 LSTM \u2192 softmax"
+          },
+          "answer": "B",
+          "explanation": "BERT fine-tuning pipeline: (1) WordPiece tokeniser with [CLS] and [SEP] tokens; (2) max 512 token limit with padding/truncation; (3) extract [CLS] embedding from final encoder layer; (4) add linear classification head; (5) fine-tune all layers with AdamW (weight decay decoupled) at lr=2e-5 for 3\u20135 epochs. Standard achieves ~94% on SST-2.",
+          "source": "Devlin et al. BERT. NAACL, 2019. https://arxiv.org/abs/1810.04805"
+        }
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 Core NLP Tasks",
+      "source_lesson": "ML-2",
+      "questions": [
+        {
+          "q_id": "Q07-MQ2-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is Named Entity Recognition (NER) in NLP?",
+          "options": {
+            "A": "Classifying the overall sentiment of a document as positive or negative",
+            "B": "Identifying and classifying named entities (persons, organisations, locations, dates) in text",
+            "C": "Translating text from one language to another",
+            "D": "Generating a shorter version of a document"
+          },
+          "answer": "B",
+          "explanation": "NER is a sequence labelling task: for each token, assign an entity class (PER, ORG, LOC, DATE, MISC) or O (outside). Modern NER uses transformer-based models (BERT + token classification head) achieving F1>90% on CoNLL-2003. Applications: information extraction, knowledge graph construction, search.",
+          "source": "Manning et al. Introduction to Information Retrieval. 2008; Devlin et al. BERT. 2019."
+        },
+        {
+          "q_id": "Q07-MQ2-02",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "Which metric is standard for evaluating machine translation quality, and what does it measure?",
+          "options": {
+            "A": "ROUGE \u2014 measures recall of n-gram overlap between output and reference",
+            "B": "BLEU (Bilingual Evaluation Understudy) \u2014 measures precision of n-gram overlap between the machine translation output and one or more human reference translations",
+            "C": "Accuracy \u2014 measures the proportion of exactly correct translations",
+            "D": "Perplexity \u2014 measures the probability the model assigns to the test set"
+          },
+          "answer": "B",
+          "explanation": "BLEU (Papineni et al., 2002): computes modified n-gram precision (n=1\u20134) between hypothesis and references, with a brevity penalty to discourage short outputs. BLEU\u2208[0,1]; higher=better. Limitations: does not capture meaning or fluency. ROUGE is used for summarisation (recall-oriented).",
+          "source": "Papineni et al. BLEU: a Method for Automatic Evaluation of Machine Translation. ACL, 2002. https://aclanthology.org/P02-1040"
+        },
+        {
+          "q_id": "Q07-MQ2-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why is the sequence-to-sequence (seq2seq) architecture with attention preferred over a basic encoder-decoder for long-sequence machine translation?",
+          "options": {
+            "A": "Seq2seq with attention uses fewer parameters",
+            "B": "Basic encoder-decoder compresses the entire source sentence into a single fixed-length context vector \u2014 an information bottleneck for long sequences. Attention allows the decoder to dynamically focus on relevant source positions at each decoding step",
+            "C": "Attention mechanisms eliminate the need for an encoder",
+            "D": "Basic encoder-decoder is preferred \u2014 attention only helps for short sequences"
+          },
+          "answer": "B",
+          "explanation": "Bahdanau et al. (2015): the fixed context vector bottleneck causes performance degradation for sentences >30 tokens. Attention computes a context vector c\u209c = \u03a3\u1d62 \u03b1\u209c\u1d62h\u1d62 at each decoder step, where \u03b1\u209c\u1d62 = softmax(score(s\u209c\u208b\u2081, h\u1d62)) \u2014 selectively attending to relevant encoder states. This directly motivated the Transformer's self-attention.",
+          "source": "Bahdanau et al. Neural Machine Translation by Jointly Learning to Align and Translate. ICLR, 2015. https://arxiv.org/abs/1409.0473"
+        },
+        {
+          "q_id": "Q07-MQ2-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does extractive summarisation differ from abstractive summarisation, and what are the trade-offs?",
+          "options": {
+            "A": "Extractive uses neural networks; abstractive uses rule-based methods",
+            "B": "Extractive selects and concatenates sentences verbatim from the source \u2014 factually faithful but less fluent; abstractive generates new text using seq2seq/transformers \u2014 more fluent and concise but prone to hallucination",
+            "C": "Abstractive is always more accurate than extractive",
+            "D": "Both approaches produce identical output quality"
+          },
+          "answer": "B",
+          "explanation": "Extractive: sentences scored by importance (TextRank, BERT-based) and top-k selected verbatim \u2014 no hallucination risk, but may be repetitive or miss cross-sentence synthesis. Abstractive (BART, T5, PEGASUS): generates novel summary sentences \u2014 more coherent but may introduce factual errors (hallucination). Critical distinction for high-stakes applications (legal, medical).",
+          "source": "Lewis et al. BART. ACL, 2020. https://arxiv.org/abs/1910.13461; Zhang et al. PEGASUS. ICML, 2020."
+        },
+        {
+          "q_id": "Q07-MQ2-05",
+          "bloom": "L3",
+          "skill": "Evaluate",
+          "stem": "A BERT-based NER model achieves 92% overall accuracy on a test set but only 61% F1 on the DISEASE entity class (5% of tokens). Diagnose and propose two remediations.",
+          "options": {
+            "A": "92% accuracy is excellent \u2014 no improvement needed",
+            "B": "Class imbalance: DISEASE entities are rare (5%), so the model under-predicts them. High overall accuracy masks poor minority-class F1. Remediations: (1) oversample DISEASE-tagged sentences or apply class-weighted loss; (2) augment training data with domain-specific medical corpora (e.g., fine-tune on i2b2/NCBI Disease corpus)",
+            "C": "Reduce the model size to improve minority-class performance",
+            "D": "Switch from F1 to accuracy as the evaluation metric"
+          },
+          "answer": "B",
+          "explanation": "DISEASE = 5% of tokens \u2192 severe imbalance. Model defaults to predicting O (outside) for ambiguous tokens. Fix 1: class-weighted cross-entropy \u2014 upweight DISEASE class loss. Fix 2: domain adaptation \u2014 pre-train or fine-tune on biomedical text (BioBERT, PubMedBERT) which has seen medical entity patterns. Both are validated in the clinical NLP literature.",
+          "source": "Lee et al. BioBERT. Bioinformatics, 2020. https://arxiv.org/abs/1901.08746; Uzuner et al. i2b2 NLP Challenge. JAMIA, 2011."
+        }
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Large Language Models",
+      "source_lesson": "ML-3",
+      "questions": [
+        {
+          "q_id": "Q07-MQ3-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is 'hallucination' in the context of large language models?",
+          "options": {
+            "A": "The model generating text that is grammatically incorrect",
+            "B": "The model confidently generating factually incorrect or fabricated information not supported by its training data or the provided context",
+            "C": "The model refusing to answer a question",
+            "D": "The model producing outputs that are too short"
+          },
+          "answer": "B",
+          "explanation": "LLM hallucination: the model generates plausible-sounding but factually incorrect statements \u2014 fabricated citations, wrong dates, invented statistics. Caused by the model optimising for fluency/coherence rather than factual accuracy. Key safety concern for high-stakes applications (medical, legal, financial).",
+          "source": "Ji et al. Survey of Hallucination in Natural Language Generation. ACM CSUR, 2023. https://arxiv.org/abs/2202.03629"
+        },
+        {
+          "q_id": "Q07-MQ3-02",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "What does RLHF (Reinforcement Learning from Human Feedback) achieve in LLM training?",
+          "options": {
+            "A": "It increases the model's parameter count",
+            "B": "It aligns LLM outputs with human preferences by training a reward model on human comparisons, then fine-tuning the LLM using PPO to maximise the reward \u2014 reducing harmful, toxic, or unhelpful outputs",
+            "C": "It reduces the computational cost of pre-training",
+            "D": "It enables the model to browse the internet in real time"
+          },
+          "answer": "B",
+          "explanation": "RLHF pipeline (InstructGPT, Ouyang et al., 2022): (1) supervised fine-tuning on demonstrations; (2) train reward model on human preference rankings; (3) RL fine-tuning (PPO) to maximise reward. Result: models that follow instructions, refuse harmful requests, and produce more helpful responses. Used in GPT-4, Claude, Gemini.",
+          "source": "Ouyang et al. Training language models to follow instructions with human feedback (InstructGPT). NeurIPS, 2022. https://arxiv.org/abs/2203.02155"
+        },
+        {
+          "q_id": "Q07-MQ3-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why does increasing context window length (e.g., from 4K to 128K tokens) significantly increase the computational cost of Transformer inference?",
+          "options": {
+            "A": "Longer contexts require more training epochs",
+            "B": "Self-attention complexity is O(n\u00b2) in sequence length n \u2014 quadrupling context length increases attention computation 16\u00d7, and KV-cache memory grows linearly with context length",
+            "C": "Longer contexts require larger embedding dimensions",
+            "D": "Context length has no effect on computational cost"
+          },
+          "answer": "B",
+          "explanation": "Self-attention: for each of n tokens, compute attention over all n tokens \u2192 O(n\u00b2) time and memory. At n=4K: 16M operations. At n=128K: 16B operations \u2014 1,000\u00d7 increase. KV-cache: stores n key-value pairs per layer per request \u2014 memory grows linearly. Solutions: FlashAttention, sliding window attention (Longformer), sparse attention.",
+          "source": "Vaswani et al. NeurIPS, 2017; Dao et al. FlashAttention. NeurIPS, 2022. https://arxiv.org/abs/2205.14135"
+        },
+        {
+          "q_id": "Q07-MQ3-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "How does Retrieval-Augmented Generation (RAG) reduce LLM hallucination compared to purely parametric generation?",
+          "options": {
+            "A": "RAG reduces hallucination by increasing the LLM's parameter count",
+            "B": "RAG retrieves relevant documents from an external knowledge base at inference time and conditions the LLM's generation on those documents \u2014 grounding responses in verifiable source text rather than relying solely on memorised training data",
+            "C": "RAG eliminates the need for pre-training",
+            "D": "RAG reduces hallucination by filtering outputs through a grammar checker"
+          },
+          "answer": "B",
+          "explanation": "RAG (Lewis et al., 2020): query \u2192 dense retrieval (DPR/vector DB) \u2192 top-k documents \u2192 LLM generates conditioned on retrieved context. Benefits: (1) grounds responses in source documents; (2) knowledge can be updated without retraining; (3) sources can be cited. Hallucination risk remains if retrieved documents are irrelevant or the model ignores them.",
+          "source": "Lewis et al. Retrieval-Augmented Generation. NeurIPS, 2020. https://arxiv.org/abs/2005.11401"
+        },
+        {
+          "q_id": "Q07-MQ3-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "You are building a customer support chatbot using an LLM. The bot must answer questions about your company's products using only the official product documentation. Which architecture best prevents hallucination?",
+          "options": {
+            "A": "Fine-tune GPT-4 on product documentation and deploy without retrieval",
+            "B": "Implement RAG: embed product documentation in a vector database, retrieve top-3 relevant chunks per query, prompt the LLM with retrieved context and an explicit instruction to answer only from provided documents, and return source citations",
+            "C": "Use a rule-based chatbot with no LLM",
+            "D": "Use an LLM with no grounding \u2014 its training data likely includes product information"
+          },
+          "answer": "B",
+          "explanation": "Fine-tuning (A) bakes knowledge into weights but still hallucinates and cannot be updated without retraining. RAG (B): retrieval grounds each response in current documentation; system prompt instruction ('answer only from context') further constrains generation; citations allow users to verify. Best practice for enterprise knowledge-base applications. Update docs \u2192 update vector DB, no retraining needed.",
+          "source": "Lewis et al. RAG. NeurIPS, 2020; Gao et al. Retrieval-Augmented Generation for Knowledge-Intensive NLP. 2023. https://arxiv.org/abs/2312.10997"
+        }
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Prompt Engineering and LLM Evaluation",
+      "source_lesson": "ML-4",
+      "questions": [
+        {
+          "q_id": "Q07-MQ4-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is few-shot prompting in the context of LLMs?",
+          "options": {
+            "A": "Training the LLM on a small dataset of labelled examples",
+            "B": "Including a small number of input-output examples in the prompt to demonstrate the desired task format and behaviour, without updating model weights",
+            "C": "Reducing the model's output length to a few sentences",
+            "D": "Using a smaller, distilled version of the LLM"
+          },
+          "answer": "B",
+          "explanation": "Few-shot prompting (Brown et al., GPT-3, 2020): provide k examples of (input, output) pairs in the context window before the query. The model infers the task pattern from examples without gradient updates \u2014 'in-context learning'. Contrasts with zero-shot (no examples) and fine-tuning (weight updates).",
+          "source": "Brown et al. Language Models are Few-Shot Learners (GPT-3). NeurIPS, 2020. https://arxiv.org/abs/2005.14165"
+        },
+        {
+          "q_id": "Q07-MQ4-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Which prompting technique asks the LLM to explicitly reason step-by-step before producing a final answer, improving performance on multi-step reasoning tasks?",
+          "options": {
+            "A": "Zero-shot prompting",
+            "B": "Chain-of-Thought (CoT) prompting",
+            "C": "Temperature scaling",
+            "D": "Top-p sampling"
+          },
+          "answer": "B",
+          "explanation": "Chain-of-Thought prompting (Wei et al., 2022): add 'Let's think step by step' or provide reasoning examples. The model externalises intermediate reasoning steps before the final answer. Significantly improves accuracy on arithmetic, logical, and commonsense reasoning benchmarks (e.g., +20pp on GSM8K).",
+          "source": "Wei et al. Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. NeurIPS, 2022. https://arxiv.org/abs/2201.11903"
+        },
+        {
+          "q_id": "Q07-MQ4-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "What does the temperature parameter control in LLM text generation, and what are the effects of setting it to 0 vs 1?",
+          "options": {
+            "A": "Temperature controls the model's training speed \u2014 higher values train faster",
+            "B": "Temperature scales the logits before softmax, controlling output randomness. Temperature=0: greedy decoding \u2014 always selects the highest-probability token (deterministic, repetitive). Temperature=1: samples proportionally to model probabilities (creative, diverse). Temperature>1: increasingly random.",
+            "C": "Temperature controls the context window length",
+            "D": "Temperature has no effect on output diversity"
+          },
+          "answer": "B",
+          "explanation": "Softmax with temperature: P(token) = exp(logit/T) / \u03a3exp(logits\u2c7c/T). T\u21920: near-one-hot distribution \u2192 greedy selection. T=1: standard softmax. T>1: flatter distribution \u2192 more diversity. In practice: T=0 for factual tasks, T=0.7\u20131.0 for creative tasks, top-p (nucleus) sampling combined with temperature for best results.",
+          "source": "Holtzman et al. The Curious Case of Neural Text Degeneration. ICLR, 2020. https://arxiv.org/abs/1904.09751"
+        },
+        {
+          "q_id": "Q07-MQ4-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does ROUGE-L differ from ROUGE-1 as an evaluation metric for text summarisation?",
+          "options": {
+            "A": "ROUGE-1 and ROUGE-L are identical metrics",
+            "B": "ROUGE-1 measures unigram recall/precision between hypothesis and reference; ROUGE-L measures the longest common subsequence (LCS), capturing sentence-level structural similarity beyond individual word overlap",
+            "C": "ROUGE-L measures semantic similarity; ROUGE-1 measures syntactic similarity",
+            "D": "ROUGE-1 is used for machine translation; ROUGE-L for summarisation"
+          },
+          "answer": "B",
+          "explanation": "ROUGE-1: recall = |overlap unigrams| / |reference unigrams|. ROUGE-L: based on LCS length \u2014 rewards hypotheses that preserve the order of words in the reference even without exact contiguous matches. ROUGE-L is more sensitive to fluency and coherence than ROUGE-1.",
+          "source": "Lin. ROUGE: A Package for Automatic Evaluation of Summaries. ACL Workshop, 2004. https://aclanthology.org/W04-1013"
+        },
+        {
+          "q_id": "Q07-MQ4-05",
+          "bloom": "L3",
+          "skill": "Design",
+          "stem": "Design a prompt to extract structured JSON from this text: 'Dr. Sarah Chen joined MedTech Inc. as CTO on March 15, 2024.' Which prompt best applies structured output extraction principles?",
+          "options": {
+            "A": "'Tell me about Dr. Sarah Chen.'",
+            "B": "'Extract the person name, organisation, role, and date from the following text and return ONLY valid JSON with keys: name, organisation, role, date. Text: \"Dr. Sarah Chen joined MedTech Inc. as CTO on March 15, 2024.\"'",
+            "C": "'Summarise the text in one sentence.'",
+            "D": "'What year did Dr. Chen join MedTech?'"
+          },
+          "answer": "B",
+          "explanation": "Structured extraction prompt best practices: (1) specify exact output format (JSON) and key names; (2) instruct 'ONLY valid JSON' to prevent prose wrapping; (3) provide the text explicitly in the prompt; (4) enumerate required fields. Expected output: {\"name\":\"Dr. Sarah Chen\",\"organisation\":\"MedTech Inc.\",\"role\":\"CTO\",\"date\":\"March 15, 2024\"}. Options A/C/D are unstructured and produce unpredictable formats.",
+          "source": "Brown et al. GPT-3. NeurIPS, 2020; Wei et al. CoT. NeurIPS, 2022."
+        }
+      ]
+    }
+  ],
+  "table_of_contents": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 Text Preprocessing and Representation",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q07-MQ1-01",
+        "Q07-MQ1-02",
+        "Q07-MQ1-03",
+        "Q07-MQ1-04",
+        "Q07-MQ1-05"
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 Core NLP Tasks",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q07-MQ2-01",
+        "Q07-MQ2-02",
+        "Q07-MQ2-03",
+        "Q07-MQ2-04",
+        "Q07-MQ2-05"
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Large Language Models",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q07-MQ3-01",
+        "Q07-MQ3-02",
+        "Q07-MQ3-03",
+        "Q07-MQ3-04",
+        "Q07-MQ3-05"
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Prompt Engineering and LLM Evaluation",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q07-MQ4-01",
+        "Q07-MQ4-02",
+        "Q07-MQ4-03",
+        "Q07-MQ4-04",
+        "Q07-MQ4-05"
+      ]
+    }
+  ],
+  "totals": {
+    "mini_quizzes": 4,
+    "questions": 20,
+    "L1": 8,
+    "L2": 8,
+    "L3": 4
+  }
+}

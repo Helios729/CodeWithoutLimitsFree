@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "title": "Reading List & Open Online Courses",
+  "description": "Hand-picked free resources to ground the foundational concepts. More to come as Community Changers vets new sources. No commercial affiliation with any platform listed.",
+  "verified_on": "2026-06-26",
+  "reading_list": {
+    "title": "Reading List (more to come)",
+    "subtitle": "Free textbooks and reference works. Read in browser or download as PDF/HTML.",
+    "items": [
+      {
+        "title": "Automate the Boring Stuff with Python",
+        "author": "Al Sweigart",
+        "url": "https://automatetheboringstuff.com/",
+        "topic": "Python · Beginner",
+        "note": "Practical Python through everyday automation tasks. Read free in browser."
+      },
+      {
+        "title": "Introduction to Programming Using Java, Eighth Edition",
+        "author": "David J. Eck",
+        "url": "https://open.umn.edu/opentextbooks/textbooks/419",
+        "topic": "Java · Foundations",
+        "note": "Open textbook hosted by the University of Minnesota Libraries."
+      },
+      {
+        "title": "The Modern JavaScript Tutorial",
+        "author": "javascript.info contributors",
+        "url": "https://javascript.info/",
+        "topic": "JavaScript · Beginner to Advanced",
+        "note": "Hands-on, modern, free. Excellent companion to L10b HTML."
+      },
+      {
+        "title": "Deep Learning",
+        "author": "Ian Goodfellow, Yoshua Bengio & Aaron Courville",
+        "url": "https://www.deeplearningbook.org/",
+        "topic": "AI · Advanced",
+        "note": "The standard graduate-level reference. Free HTML, read chapter by chapter."
+      },
+      {
+        "title": "Free Programming Books (curated index)",
+        "author": "GitHub EbookFoundation",
+        "url": "https://github.com/EbookFoundation/free-programming-books/blob/main/books/free-programming-books-subjects.md",
+        "topic": "All languages · Index",
+        "note": "Massive maintained list of free programming books across dozens of languages."
+      }
+    ]
+  },
+  "open_online_courses": {
+    "title": "Open Online Courses",
+    "subtitle": "Free coursework from leading universities and open-learning platforms. Certification, where offered, is optional and paid directly to the platform — Community Changers has no affiliation with any of them.",
+    "groups": [
+      {
+        "group": "University open-learning",
+        "items": [
+          {
+            "name": "Carnegie Mellon Open Learning Initiative",
+            "url": "https://oli.cmu.edu/independent-learner-courses/",
+            "note": "Self-paced courses across statistics, biology, language, and more."
+          },
+          {
+            "name": "MIT OpenCourseWare",
+            "url": "https://ocw.mit.edu/",
+            "note": "Full course materials from MIT — lecture notes, problem sets, video."
+          },
+          {
+            "name": "Harvard — Free AI Courses (edX)",
+            "url": "https://www.edx.org/courses?q=free+ai+courses",
+            "note": "Audit Harvard's AI courses on edX for free. Pay only if you want a certificate."
+          }
+        ]
+      },
+      {
+        "group": "Python",
+        "items": [
+          {
+            "name": "AskPython — Plus-equal operator (and 100s more)",
+            "url": "https://www.askpython.com/python/examples/plus-equal-operator",
+            "note": "Tutorial-style Python explainers."
+          },
+          {
+            "name": "python.org (official)",
+            "url": "https://www.python.org/",
+            "note": "The official docs and downloads — the source of truth for Python itself."
+          },
+          {
+            "name": "Codefinity",
+            "url": "https://codefinity.com",
+            "note": "Interactive in-browser coding tracks (free tier available)."
+          }
+        ]
+      },
+      {
+        "group": "Java & others",
+        "items": [
+          {
+            "name": "Alison",
+            "url": "https://alison.com/",
+            "note": "Free Java and broad IT/business courses. Certification is paid; learning is free."
+          }
+        ]
+      },
+      {
+        "group": "HTML & front-end",
+        "items": [
+          {
+            "name": "Coddy",
+            "url": "https://coddy.tech/",
+            "note": "Hands-on HTML, CSS, and front-end practice."
+          }
+        ]
+      }
+    ]
+  },
+  "footnote": "Inclusion does not imply endorsement of any platform's commercial offerings. All links verified live on the verified_on date. If a link rots, tell us through the in-module survey."
+}

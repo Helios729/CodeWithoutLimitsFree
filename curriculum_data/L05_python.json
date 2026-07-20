@@ -1,0 +1,119 @@
+{
+  "module_id": "python-fundamentals",
+  "module_title": "Python-L",
+  "type": "learning",
+  "difficulty": "Beginner",
+  "duration_min": 60,
+  "bloom_levels_covered": [
+    "L1 Remember",
+    "L2 Understand",
+    "L3 Apply"
+  ],
+  "companion_quiz": "Python-Q",
+  "sources": [
+    {
+      "id": "S1",
+      "citation": "Python Software Foundation. The Python Tutorial. 2024.",
+      "url": "https://docs.python.org/3/tutorial",
+      "access": "Free."
+    },
+    {
+      "id": "S2",
+      "citation": "Lutz. Learning Python 5th ed. O'Reilly, 2013.",
+      "url": "https://www.oreilly.com/library/view/learning-python-5th/9781449355722",
+      "access": "Preview; full via library."
+    },
+    {
+      "id": "S3",
+      "citation": "MIT OCW 6.0001 Intro to CS in Python, Fall 2016.",
+      "url": "https://ocw.mit.edu/courses/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016",
+      "access": "Free."
+    },
+    {
+      "id": "S4",
+      "citation": "VanderPlas. A Whirlwind Tour of Python. O'Reilly, 2016.",
+      "url": "https://jakevdp.github.io/WhirlwindTourOfPython",
+      "access": "Free \u2014 full text on GitHub."
+    }
+  ],
+  "learning_objectives": [
+    "L1: Identify Python built-in types: int, float, str, bool, list, tuple, dict, set.",
+    "L1: State the purpose of def, return, if/elif/else, for, while, import.",
+    "L1: Define function, parameter, argument, scope, and module.",
+    "L2: Explain mutable vs immutable types with examples.",
+    "L2: Describe how for loops iterate over list vs range.",
+    "L2: Compare list comprehensions with for loops for readability and performance.",
+    "L3: Write a Python function returning mean, median, and mode of a number list.",
+    "L3: Debug a Python function with off-by-one, NameError, or TypeError."
+  ],
+  "mini_lessons": [
+    {
+      "ml": 1,
+      "title": "Types, Variables, Operators",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-1",
+      "concepts": [
+        {
+          "title": "Built-in Data Types",
+          "explanation": "int: arbitrary precision. float: 64-bit IEEE 754. str: immutable Unicode. bool: True/False. list: mutable ordered []. tuple: immutable ordered (). dict: mutable key-value {}. set: mutable unordered unique. None: null singleton.",
+          "worked_example": "nums=[1,2,3] is mutable: nums[0]=99 works. point=(3,4) is immutable: point[0]=99 raises TypeError.",
+          "source_refs": [
+            "S1 Ch.3",
+            "S4"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 2,
+      "title": "Control Flow",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-2",
+      "concepts": [
+        {
+          "title": "Conditions and Loops",
+          "explanation": "if/elif/else, for item in iterable, range(start,stop,step) \u2014 stop exclusive. while, break, continue.",
+          "worked_example": "FizzBuzz: for i in range(1,101): print('FizzBuzz' if i%15==0 else 'Fizz' if i%3==0 else 'Buzz' if i%5==0 else i)",
+          "source_refs": [
+            "S1 Ch.4",
+            "S3 Lecture 2"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 3,
+      "title": "Functions and Scope",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-3",
+      "concepts": [
+        {
+          "title": "Defining Functions",
+          "explanation": "def name(params): block; return value. Default params, *args (tuple), **kwargs (dict). Scope LEGB: Local, Enclosing, Global, Built-in. Functions are first-class objects.",
+          "worked_example": "def mean(nums): return sum(nums)/len(nums) if nums else 0  # guards ZeroDivisionError",
+          "source_refs": [
+            "S1 Ch.4",
+            "S4"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 4,
+      "title": "Lists, Dicts, Comprehensions",
+      "bloom": "L2-L3",
+      "companion_mini_quiz": "MQ-4",
+      "concepts": [
+        {
+          "title": "Comprehensions",
+          "explanation": "List: [expr for item in iterable if condition]. Dict: {k:v for k,v in iterable}. Faster and more readable than equivalent for loop.",
+          "worked_example": "[x**2 for x in range(10) if x%2==0] \u2192 [0,4,16,36,64]",
+          "source_refs": [
+            "S1 Ch.5",
+            "S4"
+          ]
+        }
+      ]
+    }
+  ]
+}

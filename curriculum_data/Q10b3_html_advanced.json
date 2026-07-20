@@ -1,0 +1,39 @@
+{
+  "module_id": "html-advanced",
+  "module_title": "HTML Advanced",
+  "type": "quiz",
+  "difficulty": "advanced",
+  "companion_lesson_id": "L10b_adv_html",
+  "status": "coming_soon",
+  "teaser": "Build the upper-floor of the web stack.",
+  "mini_quizzes": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 Semantic HTML5",
+      "status": "coming_soon",
+      "teaser": "header, nav, main, article, section, aside, footer \u2014 plus when to use <figure>, <dialog>, <details>, and <time>.",
+      "questions": []
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 Forms & Validation",
+      "status": "coming_soon",
+      "teaser": "client-side constraints, pattern, autocomplete, multi-step forms, FormData, and progressive enhancement when JS is blocked.",
+      "questions": []
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Accessibility (WCAG & ARIA)",
+      "status": "coming_soon",
+      "teaser": "WCAG 2.1 AA contrast, focus order, live regions, role/aria-*, screen-reader testing on a real phone.",
+      "questions": []
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 APIs & Advanced Features",
+      "status": "coming_soon",
+      "teaser": "fetch + Service Workers, IndexedDB, Web Components, <slot>, custom elements, and offline-first PWAs.",
+      "questions": []
+    }
+  ]
+}

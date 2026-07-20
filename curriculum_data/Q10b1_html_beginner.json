@@ -1,0 +1,409 @@
+{
+  "module_id": "html-beginner",
+  "module_title": "HTML Beginner-Q",
+  "type": "quiz",
+  "difficulty": "Beginner",
+  "companion_learning": "HTML Beginner-L",
+  "superquiz_pool": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+  ],
+  "bloom_distribution": {
+    "L1_remember": 2,
+    "L2_understand": 2,
+    "L3_apply": 1
+  },
+  "mini_quizzes": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 HTML Foundations",
+      "source_lesson": "ML-1",
+      "questions": [
+        {
+          "q_id": "Q10b1-MQ1-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What does HTML stand for, and what is its primary purpose?",
+          "options": {
+            "A": "Hypertext Markup Language \u2014 defines the structure and meaning of web content using elements and tags",
+            "B": "High-Level Transfer Markup Language \u2014 transfers data between servers",
+            "C": "Hypertext Management Language \u2014 manages web server configurations",
+            "D": "Hypermedia Text Markup Language \u2014 styles the visual appearance of web pages"
+          },
+          "answer": "A",
+          "explanation": "HTML (HyperText Markup Language) is the standard language for structuring web content. It uses elements represented by tags (e.g., <p>, <h1>, <a>) to give meaning to content \u2014 defining headings, paragraphs, links, images, and more. HTML is responsible for structure and semantics; CSS handles presentation; JavaScript handles behaviour.",
+          "source": "MDN Web Docs. Introduction to HTML. https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML; W3C. HTML Living Standard. https://html.spec.whatwg.org"
+        },
+        {
+          "q_id": "Q10b1-MQ1-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Which of the following is the correct basic structure of an HTML document?",
+          "options": {
+            "A": "<html><title>Page</title><body>Content</body></html>",
+            "B": "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Page</title></head><body>Content</body></html>",
+            "C": "<document><head><title>Page</title></head><main>Content</main></document>",
+            "D": "<webpage><header>Page</header><content>Content</content></webpage>"
+          },
+          "answer": "B",
+          "explanation": "A valid HTML document requires: (1) <!DOCTYPE html> \u2014 declares HTML5; (2) <html lang='en'> \u2014 root element with language attribute; (3) <head> \u2014 metadata container with <meta charset='UTF-8'> and <title>; (4) <body> \u2014 visible page content. The <!DOCTYPE> declaration prevents browsers from entering quirks mode, which can cause unexpected rendering differences.",
+          "source": "MDN Web Docs. Anatomy of an HTML document. https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started"
+        },
+        {
+          "q_id": "Q10b1-MQ1-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why is it important to include <!DOCTYPE html> at the very start of an HTML file?",
+          "options": {
+            "A": "It tells the browser which CSS stylesheet to load",
+            "B": "It instructs the browser to render the page using standards mode (HTML5) rather than quirks mode \u2014 preventing inconsistent legacy rendering behaviour across different browsers",
+            "C": "It is optional and has no effect on modern browsers",
+            "D": "It defines the character encoding of the document"
+          },
+          "answer": "B",
+          "explanation": "Browsers have two rendering modes: standards mode (predictable, spec-compliant) and quirks mode (emulates bugs from the 1990s for legacy compatibility). Without <!DOCTYPE html>, browsers may enter quirks mode, causing layout inconsistencies \u2014 for example, different box model behaviour in IE. <!DOCTYPE html> is the shortest valid doctype and triggers standards mode in all modern browsers.",
+          "source": "MDN Web Docs. Quirks mode and standards mode. https://developer.mozilla.org/en-US/docs/Web/HTML/Quirks_Mode_and_Standards_Mode"
+        },
+        {
+          "q_id": "Q10b1-MQ1-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "What is the difference between the <head> and <body> elements in an HTML document?",
+          "options": {
+            "A": "<head> contains the visible page title; <body> contains navigation links only",
+            "B": "<head> contains metadata about the document (title, charset, linked stylesheets, scripts) that is not directly visible on the page; <body> contains all content that is rendered and visible to users in the browser viewport",
+            "C": "<head> and <body> are interchangeable \u2014 content can go in either",
+            "D": "<body> contains SEO metadata; <head> contains the main page content"
+          },
+          "answer": "B",
+          "explanation": "<head> metadata: <title> (browser tab and SEO), <meta charset>, <meta name='viewport'>, <link rel='stylesheet'>, <script defer>. None of this is directly rendered in the page. <body> contains everything the user sees and interacts with: headings, paragraphs, images, forms, navigation. This separation keeps document metadata cleanly separate from content.",
+          "source": "MDN Web Docs. What's in the head? Metadata in HTML. https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/The_head_metadata_in_HTML"
+        },
+        {
+          "q_id": "Q10b1-MQ1-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "You are creating a webpage about your favourite book. Write the minimal valid HTML5 skeleton with a meaningful page title and a visible heading that says 'My Favourite Book'. Which option is correct?",
+          "options": {
+            "A": "<title>My Favourite Book</title><h1>My Favourite Book</h1>",
+            "B": "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>My Favourite Book</title></head><body><h1>My Favourite Book</h1></body></html>",
+            "C": "<html><body><title>My Favourite Book</title><h1>My Favourite Book</h1></body></html>",
+            "D": "<!DOCTYPE html><head><title>My Favourite Book</title></head><h1>My Favourite Book</h1>"
+          },
+          "answer": "B",
+          "explanation": "Option B is the only fully valid HTML5 document: <!DOCTYPE html> triggers standards mode; <html lang='en'> declares language for accessibility and SEO; <meta charset='UTF-8'> prevents character encoding issues; <title> in <head> sets the browser tab name; <h1> in <body> is the visible rendered heading. All other options are missing required structural elements.",
+          "source": "MDN Web Docs. Getting started with HTML. https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started"
+        }
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 Text, Headings and Lists",
+      "source_lesson": "ML-2",
+      "questions": [
+        {
+          "q_id": "Q10b1-MQ2-01",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "HTML provides six heading levels. Which element represents the most important (highest-level) heading, and which represents the least important?",
+          "options": {
+            "A": "<h6> is the most important; <h1> is the least important",
+            "B": "<h1> is the most important (largest, highest in hierarchy); <h6> is the least important (smallest, lowest in hierarchy)",
+            "C": "<heading> is the most important; <subheading> is the least important",
+            "D": "All heading levels are equally important \u2014 only size differs"
+          },
+          "answer": "B",
+          "explanation": "HTML headings <h1> through <h6> create a document outline. <h1> is the top-level heading \u2014 there should be exactly one per page for SEO and accessibility (screen readers use it to announce the page topic). <h2> introduces major sections; <h3> subsections within those, and so on down to <h6>. Never skip heading levels (e.g., <h1> \u2192 <h3>) as this breaks the document outline for assistive technologies.",
+          "source": "MDN Web Docs. HTML text fundamentals. https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/HTML_text_fundamentals"
+        },
+        {
+          "q_id": "Q10b1-MQ2-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Which HTML element creates an unordered (bulleted) list, and which creates an ordered (numbered) list?",
+          "options": {
+            "A": "<ul> for ordered; <ol> for unordered",
+            "B": "<ul> (unordered list) for bulleted lists; <ol> (ordered list) for numbered lists \u2014 both use <li> (list item) elements as children",
+            "C": "<list> for unordered; <numlist> for ordered",
+            "D": "<bl> for bulleted; <nl> for numbered"
+          },
+          "answer": "B",
+          "explanation": "<ul>: unordered list \u2014 rendered as bullet points by default. Use for items with no meaningful sequence (shopping list, navigation links). <ol>: ordered list \u2014 rendered as numbers by default. Use when sequence matters (recipe steps, ranked results). Both require <li> children. Nested lists are created by placing a <ul> or <ol> inside an <li> element.",
+          "source": "MDN Web Docs. HTML text fundamentals \u2014 Lists. https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/HTML_text_fundamentals#Lists"
+        },
+        {
+          "q_id": "Q10b1-MQ2-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "What is the semantic difference between <strong> and <b>, and between <em> and <i> in HTML?",
+          "options": {
+            "A": "They are completely identical \u2014 <strong>/<b> and <em>/<i> are interchangeable",
+            "B": "<strong> conveys semantic importance (screen readers may stress it); <b> is purely stylistic bold with no semantic meaning. <em> conveys emphasis that changes meaning (screen readers may stress it); <i> is stylistic italic used for technical terms, foreign words, or titles \u2014 no emphasis meaning",
+            "C": "<b> conveys importance; <strong> is purely decorative",
+            "D": "<em> makes text bold; <i> makes text italic"
+          },
+          "answer": "B",
+          "explanation": "Semantic elements carry meaning beyond appearance. <strong>: the content is of strong importance \u2014 assistive technologies may convey this. <b>: draw visual attention without implying importance (e.g., keywords in a review). <em>: stress emphasis that changes sentence meaning ('I did NOT say he stole it'). <i>: idiomatic text, technical terms, foreign phrases, fictional character thoughts. Use semantic elements whenever meaning is intended.",
+          "source": "MDN Web Docs. Advanced text formatting. https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Advanced_text_formatting"
+        },
+        {
+          "q_id": "Q10b1-MQ2-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "When should you use a <p> element versus a <br> element to separate text content?",
+          "options": {
+            "A": "<p> and <br> are interchangeable for creating visual space between text",
+            "B": "<p> wraps a distinct paragraph of content \u2014 a thematic unit of text with semantic meaning, margin above and below. <br> creates a single line break within flowing text \u2014 appropriate for addresses, poetry, or lyrics where line breaks are part of the content, not a new paragraph",
+            "C": "<br> should be used for paragraphs; <p> should only be used for headings",
+            "D": "Multiple <br> tags are the correct way to add space between sections"
+          },
+          "answer": "B",
+          "explanation": "<p> is a block-level element that groups a thematic unit of text \u2014 browsers add default top and bottom margins. Use for body text paragraphs. <br> is an inline void element that forces a line break within the same flow \u2014 used inside <p> for addresses (123 Main St<br>London) or verse. Anti-pattern: using multiple <br><br> for spacing \u2014 use CSS margin/padding instead.",
+          "source": "MDN Web Docs. HTML text fundamentals. https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/HTML_text_fundamentals"
+        },
+        {
+          "q_id": "Q10b1-MQ2-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "Mark up a recipe introduction with: a main heading 'Classic Pancakes', a paragraph describing the recipe, and an ordered list of three steps: 'Mix ingredients', 'Heat pan', 'Cook until golden'. Which HTML is correct?",
+          "options": {
+            "A": "<h1>Classic Pancakes</h1><p>A simple recipe.</p><ul><li>Mix ingredients</li><li>Heat pan</li><li>Cook until golden</li></ul>",
+            "B": "<h1>Classic Pancakes</h1><p>A simple recipe.</p><ol><li>Mix ingredients</li><li>Heat pan</li><li>Cook until golden</li></ol>",
+            "C": "<title>Classic Pancakes</title><p>A simple recipe.</p><ol><li>Mix ingredients</li><li>Heat pan</li><li>Cook until golden</li></ol>",
+            "D": "<h1>Classic Pancakes</h1><p>A simple recipe.</p><list><item>Mix ingredients</item><item>Heat pan</item><item>Cook until golden</item></list>"
+          },
+          "answer": "B",
+          "explanation": "Option B is correct: <h1> for the main heading; <p> for the introductory paragraph; <ol> for the ordered (numbered) steps because recipe steps have a meaningful sequence \u2014 step 2 must follow step 1. Option A uses <ul> (unordered) which does not convey sequence. Option C uses <title> which belongs in <head>, not <body>. Option D uses non-existent <list> and <item> elements.",
+          "source": "MDN Web Docs. HTML text fundamentals. https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/HTML_text_fundamentals"
+        }
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Links, Images and Attributes",
+      "source_lesson": "ML-3",
+      "questions": [
+        {
+          "q_id": "Q10b1-MQ3-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is an HTML attribute, and give an example of an attribute on an anchor element?",
+          "options": {
+            "A": "An attribute is a CSS property applied to an HTML element",
+            "B": "An attribute provides additional information about an HTML element, written as name='value' pairs inside the opening tag. Example: <a href='https://example.com'>Link</a> \u2014 href is the attribute name, the URL is its value",
+            "C": "An attribute is a JavaScript function attached to an element",
+            "D": "An attribute is the visible text content inside an HTML element"
+          },
+          "answer": "B",
+          "explanation": "HTML attributes: written in the opening tag as name='value'. Common attributes: href (link destination), src (image source), alt (image alternative text), class (CSS selector), id (unique identifier), type (input type). Boolean attributes have no value: <input disabled>. Attribute values should always be quoted (single or double quotes \u2014 consistent throughout the document).",
+          "source": "MDN Web Docs. HTML attributes. https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started#attributes"
+        },
+        {
+          "q_id": "Q10b1-MQ3-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Which attribute is mandatory on every <img> element, and why?",
+          "options": {
+            "A": "The title attribute \u2014 provides a tooltip on hover",
+            "B": "The alt attribute \u2014 provides alternative text that screen readers announce when the image cannot be seen, and browsers display when the image fails to load",
+            "C": "The width attribute \u2014 controls the display size of the image",
+            "D": "The class attribute \u2014 required for CSS styling of images"
+          },
+          "answer": "B",
+          "explanation": "alt is mandatory for accessibility (WCAG 2.1 criterion 1.1.1). Rules: descriptive alt for content images (alt='A golden retriever puppy playing in the park'); empty alt='' for decorative images (screen readers skip them); never omit alt entirely (screen readers announce the filename instead). <img src='dog.jpg' alt='Golden retriever puppy'> \u2014 also always include width and height to prevent layout shift (CLS).",
+          "source": "MDN Web Docs. Images in HTML. https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Images_in_HTML; WCAG 2.1. Success Criterion 1.1.1. https://www.w3.org/WAI/WCAG21/quickref/#non-text-content"
+        },
+        {
+          "q_id": "Q10b1-MQ3-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "What is the difference between an absolute URL and a relative URL in an href attribute, and when should each be used?",
+          "options": {
+            "A": "Absolute URLs are for images; relative URLs are for links",
+            "B": "Absolute URL: full address including protocol and domain (https://example.com/page) \u2014 use for linking to external websites. Relative URL: path relative to the current file (/about or ../images/photo.jpg) \u2014 use for linking to pages and assets within the same website, as it works regardless of domain name",
+            "C": "Relative URLs always start with http://; absolute URLs start with /",
+            "D": "Both types are identical \u2014 browsers treat them the same way"
+          },
+          "answer": "B",
+          "explanation": "Absolute URL: https://www.example.com/contact \u2014 always works from any context but brittle during development (domain changes break links). Relative URL: contact.html or ../contact.html \u2014 relative to the current document's location. Root-relative URL: /contact.html \u2014 relative to the website root, works from any page. Best practice: root-relative URLs for internal navigation; absolute URLs for external links.",
+          "source": "MDN Web Docs. Creating hyperlinks. https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Creating_hyperlinks"
+        },
+        {
+          "q_id": "Q10b1-MQ3-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "Why should external links in HTML include the attribute target='_blank' rel='noopener noreferrer'?",
+          "options": {
+            "A": "target='_blank' makes the link open in a new tab; rel='noopener noreferrer' prevents the new tab from accessing the original page via window.opener \u2014 closing a security vulnerability and protecting user privacy by not sending the referrer URL",
+            "B": "target='_blank' applies bold styling; rel='noopener' adds an underline",
+            "C": "Both attributes are required for links to load faster",
+            "D": "rel='noopener' is only needed for image links, not text links"
+          },
+          "answer": "A",
+          "explanation": "target='_blank': opens link in new tab. Security risk without rel='noopener': the opened page can access window.opener and redirect the original page (reverse tabnapping attack). rel='noopener': severs the opener relationship. rel='noreferrer': additionally prevents sending the Referer HTTP header \u2014 protecting the user's navigation history from the destination site. Always combine both for external _blank links.",
+          "source": "MDN Web Docs. Creating hyperlinks \u2014 Security. https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Creating_hyperlinks#e-mail_links"
+        },
+        {
+          "q_id": "Q10b1-MQ3-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "Write the correct HTML to display an image of a cat (file: cat.jpg, in an 'images' subfolder) with descriptive alt text, a width of 400px, and wrap it in a link to https://www.cats.com that opens in a new tab safely.",
+          "options": {
+            "A": "<a href='https://www.cats.com'><img src='cat.jpg' /></a>",
+            "B": "<a href='https://www.cats.com' target='_blank' rel='noopener noreferrer'><img src='images/cat.jpg' alt='A fluffy orange cat sitting on a windowsill' width='400' height='300' loading='lazy'></a>",
+            "C": "<link href='https://www.cats.com'><image src='images/cat.jpg' alt='cat'></link>",
+            "D": "<a href='https://www.cats.com' target='new'><img src='images/cat.jpg'></a>"
+          },
+          "answer": "B",
+          "explanation": "Option B is correct: rel='noopener noreferrer' with target='_blank' for safe external link; src='images/cat.jpg' uses relative path to the subfolder; alt text is descriptive (not 'cat' or empty); width and height specified to prevent layout shift; loading='lazy' defers off-screen loading. Option A: missing alt, rel, target. Option C: <link> and <image> are incorrect elements. Option D: target='new' creates a named window, not a new tab.",
+          "source": "MDN Web Docs. Images in HTML. https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Images_in_HTML"
+        }
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Semantic HTML and Accessibility Basics",
+      "source_lesson": "ML-4",
+      "questions": [
+        {
+          "q_id": "Q10b1-MQ4-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is semantic HTML?",
+          "options": {
+            "A": "HTML that uses only <div> and <span> elements for all page structure",
+            "B": "HTML that uses elements whose names describe the meaning and role of the content they contain \u2014 such as <header>, <nav>, <main>, <article>, <section>, <aside>, and <footer> \u2014 rather than generic containers",
+            "C": "HTML that includes inline CSS styling on every element",
+            "D": "HTML that is written with a specific font and colour scheme"
+          },
+          "answer": "B",
+          "explanation": "Semantic elements communicate meaning to browsers, search engines, and assistive technologies. <header>: introductory content or navigation. <nav>: navigation links. <main>: primary content (one per page). <article>: self-contained content (blog post, news item). <section>: thematic grouping. <aside>: tangentially related content. <footer>: footer. Contrast with <div> (no meaning) and <span> (no meaning). Semantic HTML improves SEO, accessibility, and maintainability.",
+          "source": "MDN Web Docs. HTML layout elements in more detail. https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure"
+        },
+        {
+          "q_id": "Q10b1-MQ4-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Which HTML element should wrap the primary, unique content of a webpage \u2014 and how many times should it appear per page?",
+          "options": {
+            "A": "<section> \u2014 can appear multiple times per page",
+            "B": "<main> \u2014 exactly once per page, containing the dominant content unique to that page, excluding repeated elements like headers and footers",
+            "C": "<div id='main'> \u2014 the id attribute makes any div the main element",
+            "D": "<body> \u2014 contains all content so it serves as the main element"
+          },
+          "answer": "B",
+          "explanation": "<main> identifies the dominant content of the <body> \u2014 unique to the page, not repeated across pages. ARIA landmark: screen readers can jump directly to <main> via keyboard shortcut, skipping repeated navigation. Only one <main> per page (unless others have hidden attribute). The 'skip to main content' accessibility link targets <main>. Common mistake: wrapping everything in <main> \u2014 keep <header>, <nav>, <footer> outside it.",
+          "source": "MDN Web Docs. <main>. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/main; WCAG 2.1. Bypass Blocks (2.4.1). https://www.w3.org/WAI/WCAG21/quickref/#bypass-blocks"
+        },
+        {
+          "q_id": "Q10b1-MQ4-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why does using semantic HTML elements like <nav>, <main>, and <article> benefit users who rely on screen readers?",
+          "options": {
+            "A": "Semantic elements make text larger, which helps visually impaired users",
+            "B": "Semantic elements create ARIA landmark regions that screen readers expose to users \u2014 allowing them to navigate directly to the header, navigation, main content, or footer by keyboard shortcut, rather than reading through the entire page linearly",
+            "C": "Screen readers only work with websites that use semantic HTML exclusively",
+            "D": "Semantic elements are needed only for mobile accessibility, not desktop"
+          },
+          "answer": "B",
+          "explanation": "Screen readers (NVDA, JAWS, VoiceOver) map semantic HTML to ARIA landmarks: <header>\u2192banner, <nav>\u2192navigation, <main>\u2192main, <footer>\u2192contentinfo, <aside>\u2192complementary. Users can pull up a landmarks list and jump instantly to any region \u2014 critical for productivity. A page using only <div> elements has no landmarks \u2014 users must arrow through every element to find content. This is why semantic HTML is a WCAG 2.1 requirement.",
+          "source": "WebAIM. Semantic Structure: Regions, Headings, and Lists. https://webaim.org/techniques/semanticstructure; WCAG 2.1. Info and Relationships (1.3.1)."
+        },
+        {
+          "q_id": "Q10b1-MQ4-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "What is the difference between <section> and <article> in HTML5?",
+          "options": {
+            "A": "<section> and <article> are identical \u2014 use either for any grouped content",
+            "B": "<article> represents self-contained, independently distributable content (a blog post, news story, product card) that makes sense on its own. <section> represents a thematic grouping of content within a larger document \u2014 it requires surrounding context to make sense",
+            "C": "<section> is for text content; <article> is for images only",
+            "D": "<article> must always contain a <header>; <section> cannot"
+          },
+          "answer": "B",
+          "explanation": "Litmus test for <article>: 'Would this content still make sense if extracted and syndicated in an RSS feed or a different page?' If yes \u2192 <article>. Examples: blog post, news article, forum post, product review. <section>: 'About Us', 'Our Services', 'Chapter 3' \u2014 meaningful only in context of the surrounding page. Articles can contain sections; sections can contain articles. Both should typically have a heading.",
+          "source": "MDN Web Docs. <article>. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article; HTML Living Standard. https://html.spec.whatwg.org/multipage/sections.html"
+        },
+        {
+          "q_id": "Q10b1-MQ4-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "Refactor this non-semantic HTML into semantic HTML: <div id='header'><div id='nav'>...</div></div><div id='main'><div class='post'>...</div></div><div id='footer'>...</div>",
+          "options": {
+            "A": "<header><nav>...</nav></header><main><div class='post'>...</div></main><footer>...</footer>",
+            "B": "<header><nav>...</nav></header><main><article>...</article></main><footer>...</footer>",
+            "C": "<div class='header'><nav>...</nav></div><div class='main'><article>...</article></div><div class='footer'>...</div>",
+            "D": "<top><links>...</links></top><content><post>...</post></content><bottom>...</bottom>"
+          },
+          "answer": "B",
+          "explanation": "Option B is the most semantically correct: <header> replaces <div id='header'>; <nav> inside it (was already semantic but wrapped in a div); <main> replaces <div id='main'> (id-based targeting is not semantic); <article> replaces <div class='post'> because a blog post is self-contained distributable content; <footer> replaces <div id='footer'>. Option A is also valid but uses a generic <div> for the post \u2014 B is more precise. Option C uses div with class \u2014 still non-semantic.",
+          "source": "MDN Web Docs. Document and website structure. https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure"
+        }
+      ]
+    }
+  ],
+  "table_of_contents": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 HTML Foundations",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q10b1-MQ1-01",
+        "Q10b1-MQ1-02",
+        "Q10b1-MQ1-03",
+        "Q10b1-MQ1-04",
+        "Q10b1-MQ1-05"
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 Text, Headings and Lists",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q10b1-MQ2-01",
+        "Q10b1-MQ2-02",
+        "Q10b1-MQ2-03",
+        "Q10b1-MQ2-04",
+        "Q10b1-MQ2-05"
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Links, Images and Attributes",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q10b1-MQ3-01",
+        "Q10b1-MQ3-02",
+        "Q10b1-MQ3-03",
+        "Q10b1-MQ3-04",
+        "Q10b1-MQ3-05"
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Semantic HTML and Accessibility Basics",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q10b1-MQ4-01",
+        "Q10b1-MQ4-02",
+        "Q10b1-MQ4-03",
+        "Q10b1-MQ4-04",
+        "Q10b1-MQ4-05"
+      ]
+    }
+  ],
+  "totals": {
+    "mini_quizzes": 4,
+    "questions": 20,
+    "L1": 8,
+    "L2": 8,
+    "L3": 4
+  }
+}

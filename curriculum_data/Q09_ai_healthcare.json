@@ -1,0 +1,409 @@
+{
+  "module_id": "ai-in-healthcare",
+  "module_title": "AI in Healthcare-Q",
+  "type": "quiz",
+  "difficulty": "Beginner",
+  "companion_learning": "AI in Healthcare-L",
+  "superquiz_pool": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+  ],
+  "bloom_distribution": {
+    "L1_remember": 2,
+    "L2_understand": 2,
+    "L3_apply": 1
+  },
+  "mini_quizzes": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 AI in Clinical Diagnostics",
+      "source_lesson": "ML-1",
+      "questions": [
+        {
+          "q_id": "Q09-MQ1-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is the primary regulatory pathway in the United States for AI/ML-based Software as a Medical Device (SaMD)?",
+          "options": {
+            "A": "ISO 27001 information security certification",
+            "B": "FDA 510(k) clearance, De Novo classification, or PMA (Premarket Approval) depending on risk level, with additional AI/ML-specific guidance under the FDA's action plan for AI/ML-based SaMD",
+            "C": "CE marking under the EU Medical Device Regulation only",
+            "D": "IRB approval is sufficient for commercial deployment"
+          },
+          "answer": "B",
+          "explanation": "FDA regulates AI/ML medical software as SaMD. Risk-stratified pathways: 510(k) for low-to-moderate risk (substantial equivalence to predicate); De Novo for novel low-risk; PMA for high-risk (Class III). FDA's 2021 AI/ML Action Plan introduced the Predetermined Change Control Plan (PCCP) for adaptive AI systems.",
+          "source": "FDA. Artificial Intelligence/Machine Learning-Based Software as a Medical Device Action Plan. 2021. https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-and-machine-learning-aiml-enabled-medical-devices"
+        },
+        {
+          "q_id": "Q09-MQ1-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "The IDx-DR system (2018) was significant in AI medical history because it was:",
+          "options": {
+            "A": "The first AI system to perform robotic surgery autonomously",
+            "B": "The first FDA-authorized AI diagnostic device to provide a screening decision without requiring clinician interpretation \u2014 detecting diabetic retinopathy from retinal images",
+            "C": "The first AI system approved for drug discovery",
+            "D": "The first EHR system with integrated AI decision support"
+          },
+          "answer": "B",
+          "explanation": "IDx-DR (Digital Diagnostics) received FDA De Novo authorization in April 2018 \u2014 the first AI device authorised to make a clinical decision (refer/no-refer for diabetic retinopathy) without a clinician reviewing the output. Validated on 900 patients across 10 primary care sites; sensitivity 87.2%, specificity 90.7%.",
+          "source": "FDA. De Novo Authorization: IDx-DR. 2018. https://www.accessdata.fda.gov/cdrh_docs/reviews/DEN180001.pdf; Abr\u00e0moff et al. NPJ Digital Medicine, 2018."
+        },
+        {
+          "q_id": "Q09-MQ1-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why is dataset shift a critical challenge when deploying AI diagnostic models across different hospitals?",
+          "options": {
+            "A": "Different hospitals use different computer operating systems",
+            "B": "AI models trained on data from one institution may perform significantly worse at another due to differences in imaging equipment, patient demographics, clinical workflows, and labelling practices \u2014 causing model predictions to degrade on out-of-distribution data",
+            "C": "Dataset shift only affects text-based AI, not medical imaging",
+            "D": "Hospitals share standardised data, making dataset shift unlikely"
+          },
+          "answer": "B",
+          "explanation": "Dataset shift: the joint distribution P(X,Y) differs between training and deployment. In medical AI: CT scanner model/brand affects pixel distributions; population demographics differ by region; radiologist labelling styles vary. Zech et al. (2018) showed a pneumonia CNN achieved AUC=0.931 at its training hospital but AUC=0.792\u20130.887 at external sites \u2014 a clinically significant gap.",
+          "source": "Zech et al. Variable generalization performance of a deep learning model to detect pneumonia in chest radiographs. PLOS Medicine, 2018. https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1002686"
+        },
+        {
+          "q_id": "Q09-MQ1-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does AI-assisted diagnosis differ from autonomous AI diagnosis in terms of clinical workflow and regulatory requirements?",
+          "options": {
+            "A": "They are identical \u2014 both require no clinician involvement",
+            "B": "AI-assisted: AI provides decision support (flags, highlights, risk scores) reviewed by a clinician who makes the final decision \u2014 lower regulatory threshold, preserves physician liability. Autonomous: AI makes the clinical decision without clinician review \u2014 higher regulatory burden (FDA PMA/De Novo), requires higher evidence bar",
+            "C": "Autonomous AI is less regulated than AI-assisted",
+            "D": "AI-assisted diagnosis is only allowed for low-stakes conditions"
+          },
+          "answer": "B",
+          "explanation": "Most deployed AI diagnostics are assistive \u2014 the clinician retains decision authority and liability. Autonomous systems (like IDx-DR) require stronger regulatory evidence and raise questions about liability when errors occur. The EU AI Act classifies both as high-risk; FDA SaMD framework uses intended use and risk level to determine the appropriate pathway.",
+          "source": "FDA. SaMD Action Plan. 2021; Topol. High-performance medicine: the convergence of human and artificial intelligence. Nature Medicine, 2019."
+        },
+        {
+          "q_id": "Q09-MQ1-05",
+          "bloom": "L3",
+          "skill": "Evaluate",
+          "stem": "A deep learning model for pneumonia detection achieves AUC=0.96 on the internal test set but AUC=0.78 on external validation across three hospitals. The development team proposes deploying the internal model with a disclaimer. Evaluate this decision.",
+          "options": {
+            "A": "AUC=0.78 is acceptable \u2014 deploy immediately",
+            "B": "The 18-point AUC gap indicates significant dataset shift and likely poor generalisation. Deployment with a disclaimer is clinically and ethically insufficient. Required steps: (1) investigate root causes (scanner type, demographic differences); (2) collect and retrain on multi-site data; (3) prospective clinical validation at target sites; (4) FDA 510(k)/De Novo submission before deployment",
+            "C": "Deploy and monitor post-market \u2014 regulatory approval is not needed for AI software",
+            "D": "Increase the decision threshold to compensate for lower AUC"
+          },
+          "answer": "B",
+          "explanation": "AUC=0.78 at external sites means ~22% of the ranking discriminability is lost \u2014 at clinical decision thresholds, this translates to unacceptable false negative rates for missed pneumonia. A disclaimer does not mitigate patient harm. FDA requires external validation data in 510(k)/De Novo submissions. Responsible deployment requires multi-site prospective validation.",
+          "source": "FDA. SaMD Action Plan. 2021; Zech et al. PLOS Medicine, 2018."
+        }
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 AI in Drug Discovery and Genomics",
+      "source_lesson": "ML-2",
+      "questions": [
+        {
+          "q_id": "Q09-MQ2-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What problem did AlphaFold2 (DeepMind, 2021) solve that had challenged biochemistry for over 50 years?",
+          "options": {
+            "A": "Synthesising novel protein sequences from scratch",
+            "B": "Predicting a protein's 3D structure from its amino acid sequence \u2014 the protein folding problem \u2014 achieving near-experimental accuracy (median GDT_TS > 90) across most protein families",
+            "C": "Designing personalised cancer vaccines",
+            "D": "Sequencing the human genome at lower cost"
+          },
+          "answer": "B",
+          "explanation": "The protein folding problem: given the 1D amino acid sequence, predict the 3D tertiary structure. AlphaFold2 (Jumper et al., Nature 2021) used an Evoformer attention network and structure module to achieve a median GDT_TS score of 92.4 at CASP14 \u2014 surpassing all previous methods. DeepMind released predictions for 200M+ proteins in the AlphaFold Protein Structure Database.",
+          "source": "Jumper et al. Highly accurate protein structure prediction with AlphaFold. Nature, 2021. https://www.nature.com/articles/s41586-021-03819-2"
+        },
+        {
+          "q_id": "Q09-MQ2-02",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "What type of AI model architecture underpins most modern genomic sequence analysis tools for tasks like variant calling and gene expression prediction?",
+          "options": {
+            "A": "Classical rule-based expert systems",
+            "B": "Deep learning models \u2014 particularly CNNs (for local sequence motifs) and Transformers (for long-range genomic dependencies) \u2014 trained on large genomic datasets",
+            "C": "Linear regression models trained on demographic data",
+            "D": "Decision trees applied to SNP arrays"
+          },
+          "answer": "B",
+          "explanation": "Genomic deep learning: CNNs (DeepBind, Basset) detect transcription factor binding motifs in short DNA sequences. Transformers (Enformer, Nucleotide Transformer) model long-range enhancer-promoter interactions. For variant calling, Google's DeepVariant uses a CNN on read pileup images to achieve state-of-the-art accuracy on Illumina sequencing data.",
+          "source": "Avsec et al. Effective gene expression prediction from sequence by integrating long-range interactions (Enformer). Nature Methods, 2021; Poplin et al. DeepVariant. Nature Biotechnology, 2018."
+        },
+        {
+          "q_id": "Q09-MQ2-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "How do generative AI models accelerate de novo drug candidate design compared to traditional high-throughput screening?",
+          "options": {
+            "A": "Generative AI is slower \u2014 traditional screening remains the only viable approach",
+            "B": "Traditional HTS physically screens millions of compounds at high cost and time. Generative models (VAEs, graph neural networks) learn the chemical space distribution and generate novel molecular structures with desired properties in silico \u2014 drastically reducing the candidate search space before physical synthesis",
+            "C": "Generative AI replaces clinical trials",
+            "D": "Generative models only work for antibody design, not small molecules"
+          },
+          "answer": "B",
+          "explanation": "Traditional HTS: synthesise and test millions of compounds \u2192 ~$1B, 10-15 years to market. Generative AI (e.g., Insilico Medicine's Chemistry42, Recursion Pharmaceuticals): sample novel molecules from learned chemical space distributions, filter by predicted ADMET properties, docking scores, and synthesisability before lab synthesis. Insilico's INS018_055 reached Phase II trials in 30 months \u2014 a record.",
+          "source": "Insilico Medicine. Generative AI for drug discovery. Nature Biotechnology, 2023; Stokes et al. A Deep Learning Approach to Antibiotic Discovery. Cell, 2020."
+        },
+        {
+          "q_id": "Q09-MQ2-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "What is federated learning and why is it particularly valuable for training AI models on healthcare data?",
+          "options": {
+            "A": "Federated learning pools all patient data from multiple hospitals into a central server for training",
+            "B": "Federated learning trains models locally at each site \u2014 only model weight updates (gradients) are shared centrally, not patient data \u2014 enabling multi-institution collaboration without violating HIPAA/GDPR patient privacy requirements",
+            "C": "Federated learning is a data augmentation technique for medical images",
+            "D": "Federated learning requires all hospitals to use identical imaging equipment"
+          },
+          "answer": "B",
+          "explanation": "Federated learning (McMahan et al., Google, 2017): each hospital trains locally on its data, sends only model gradients to a central aggregator (FedAvg), receives the updated global model. Patient data never leaves the institution \u2014 preserving HIPAA/GDPR compliance. HealthChain (AP-HP, 2019) demonstrated federated chest X-ray classification across 5 hospitals without data sharing.",
+          "source": "McMahan et al. Communication-Efficient Learning of Deep Networks from Decentralized Data. AISTATS, 2017; Rieke et al. The future of digital health with federated learning. NPJ Digital Medicine, 2020."
+        },
+        {
+          "q_id": "Q09-MQ2-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "A pharmaceutical company wants to train a cancer mutation classifier using genomic data from 8 hospitals across 4 countries. GDPR and HIPAA prohibit sharing patient data across borders. Which architecture should they use and what are its limitations?",
+          "options": {
+            "A": "Centralise all data in a US server \u2014 GDPR does not apply to genomic data",
+            "B": "Federated learning: train locally at each of the 8 sites, aggregate gradients centrally (FedAvg). Limitations: (1) gradient leakage attacks can partially reconstruct training data; (2) data heterogeneity across sites (non-IID) may slow convergence; (3) communication overhead across 8 sites; mitigate with differential privacy noise addition to gradients",
+            "C": "Use transfer learning from a public genomic dataset \u2014 no multi-site collaboration needed",
+            "D": "Only use data from one country to avoid cross-border regulations"
+          },
+          "answer": "B",
+          "explanation": "Federated learning is the standard solution for multi-jurisdiction healthcare AI. Known limitations: (1) gradient inversion attacks (Geiping et al., 2020) can reconstruct training images from gradients \u2014 mitigate with differential privacy (\u03b5-DP noise); (2) non-IID data: genomic variant frequencies differ by ancestry/geography \u2014 FedProx or personalised FL variants help; (3) regulatory: even gradient sharing may require Data Processing Agreements under GDPR Article 28.",
+          "source": "McMahan et al. AISTATS, 2017; Geiping et al. Inverting Gradients. NeurIPS, 2020; Rieke et al. NPJ Digital Medicine, 2020."
+        }
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 AI in Clinical Decision Support",
+      "source_lesson": "ML-3",
+      "questions": [
+        {
+          "q_id": "Q09-MQ3-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is a Clinical Decision Support System (CDSS)?",
+          "options": {
+            "A": "A system that replaces physician decision-making with automated diagnoses",
+            "B": "A health information technology system that provides clinicians with patient-specific assessments, recommendations, or alerts to assist clinical decision-making at the point of care",
+            "C": "An electronic health record database system",
+            "D": "A system that calculates hospital billing codes automatically"
+          },
+          "answer": "B",
+          "explanation": "CDSS: provides actionable, patient-specific decision support at the point of care \u2014 drug-drug interaction alerts, sepsis early warning scores, diagnostic differentials. Ranges from simple rule-based alerts (medication dosing) to ML-based predictive models (30-day readmission risk). Distinguished from pure documentation systems (EHR).",
+          "source": "Shortliffe & Sep\u00falveda. Clinical Decision Support in the Era of Artificial Intelligence. JAMA, 2018; Berner. Clinical Decision Support Systems. Springer, 2007."
+        },
+        {
+          "q_id": "Q09-MQ3-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "What is 'alert fatigue' in the context of clinical decision support systems?",
+          "options": {
+            "A": "Patient anxiety caused by medical alarm sounds",
+            "B": "Clinician desensitisation to CDSS alerts due to high volume of low-specificity warnings \u2014 leading to routine overriding of alerts including clinically important ones",
+            "C": "Technical failure of CDSS alert delivery systems",
+            "D": "Fatigue in AI models caused by processing too many patient records"
+          },
+          "answer": "B",
+          "explanation": "Alert fatigue is a major patient safety concern: physicians override 49\u201396% of drug alerts in EHR systems (van der Sijs et al., JAMIA 2006). When alert specificity is low (many false positives), clinicians habituate and begin ignoring all alerts \u2014 including critical drug interaction or allergy warnings. Solution: high-specificity ML models and tiered alert prioritisation.",
+          "source": "van der Sijs et al. Overriding of drug safety alerts in computerized physician order entry. JAMIA, 2006; Topol. Nature Medicine, 2019."
+        },
+        {
+          "q_id": "Q09-MQ3-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why is it important that AI clinical decision support systems provide explanations alongside their recommendations?",
+          "options": {
+            "A": "Explanations are not needed \u2014 clinicians should trust AI outputs unconditionally",
+            "B": "Clinicians must understand the reasoning to critically evaluate recommendations, catch model errors, maintain accountability for decisions, and comply with GDPR Article 22 and FDA guidance requiring meaningful explanations for automated clinical decisions",
+            "C": "Explanations are only required for billing purposes",
+            "D": "AI explanations are optional and provide no clinical benefit"
+          },
+          "answer": "B",
+          "explanation": "Explainability in clinical AI: (1) safety \u2014 clinicians can detect when model reasoning is spurious; (2) accountability \u2014 physician retains decision responsibility; (3) regulatory \u2014 GDPR Art. 22 right to explanation; FDA guidance recommends transparency for SaMD. SHAP/LIME provide feature-level explanations; attention visualisation shows image regions driving predictions.",
+          "source": "Shortliffe & Sep\u00falveda. JAMA, 2018; GDPR Article 22; FDA SaMD Action Plan. 2021."
+        },
+        {
+          "q_id": "Q09-MQ3-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does an early warning score (EWS) based on simple vital sign thresholds differ from an ML-based sepsis prediction model in performance and interpretability?",
+          "options": {
+            "A": "Both have identical sensitivity, specificity, and interpretability",
+            "B": "Rule-based EWS (e.g., NEWS2): transparent, interpretable, consistent; typically lower sensitivity/specificity (AUROC ~0.70\u20130.75 for sepsis). ML models (e.g., Epic Sepsis Model, InSight): higher AUROC (~0.74\u20130.85) by capturing non-linear interactions between features, but less transparent and subject to institutional bias",
+            "C": "ML models always outperform EWS by >20 AUROC points",
+            "D": "EWS is more accurate than ML models for all patient populations"
+          },
+          "answer": "B",
+          "explanation": "NEWS2 (Royal College of Physicians): 6 vital signs \u2192 integer score. Transparent, implemented in paper form. Epic Sepsis Model: 40+ EHR features \u2192 gradient boosted tree (AUROC 0.76 in external validation, Wong et al. 2021). The Epic model generated high alert volume with 18% sensitivity for actual sepsis at one validation \u2014 illustrating that higher AUROC does not always translate to better clinical utility.",
+          "source": "Wong et al. External validation of a widely implemented proprietary sepsis prediction model. JAMA Internal Medicine, 2021; Royal College of Physicians. NEWS2. 2017."
+        },
+        {
+          "q_id": "Q09-MQ3-05",
+          "bloom": "L3",
+          "skill": "Design",
+          "stem": "You are designing an ML-based 24-hour ICU mortality prediction system. Which design choices address the key clinical AI deployment requirements?",
+          "options": {
+            "A": "Maximise AUC only \u2014 no other requirements matter",
+            "B": "(1) Train on multi-site ICU data (MIMIC-IV + eICU) for generalisability; (2) use SHAP values to explain each prediction to clinicians; (3) calibrate model probabilities (Platt scaling) so P=0.8 truly means 80% risk; (4) set threshold using clinical cost-benefit analysis (FN cost >> FP cost for ICU mortality); (5) prospective clinical trial before deployment",
+            "C": "Deploy immediately after achieving AUC>0.85 on a single-site test set",
+            "D": "Use a black-box deep learning model with no explanations to maximise AUC"
+          },
+          "answer": "B",
+          "explanation": "ICU mortality prediction requirements: (1) Generalisation: MIMIC-IV (n=76K) + eICU (n=200K) provide diverse populations; (2) Explainability: SHAP top features (lactate, age, SOFA) per patient; (3) Calibration: well-calibrated probabilities enable risk communication; (4) Threshold: ICU FN >> FP cost \u2192 high recall threshold; (5) Prospective validation: randomised controlled trial for clinical impact evidence (e.g., MIMIC-CDSS RCT design).",
+          "source": "Johnson et al. MIMIC-IV. Scientific Data, 2023; Harutyunyan et al. Multitask learning for EHR. Scientific Data, 2019."
+        }
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 AI Ethics and Governance in Healthcare",
+      "source_lesson": "ML-4",
+      "questions": [
+        {
+          "q_id": "Q09-MQ4-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What does 'informed consent' require when a patient's data is used to train an AI diagnostic model?",
+          "options": {
+            "A": "No consent is needed \u2014 anonymised data is freely usable",
+            "B": "Patients must be informed about how their data will be used (including AI training), the risks involved, and must provide voluntary, specific consent \u2014 or a lawful basis under GDPR (Article 9 for health data) and HIPAA must be established",
+            "C": "Only the hospital CEO's signature is required",
+            "D": "Consent is only needed for data from patients over 65"
+          },
+          "answer": "B",
+          "explanation": "GDPR Article 9 classifies health data as special category \u2014 requires explicit consent or another lawful basis (e.g., public interest, Article 9(2)(h)/(j)). HIPAA requires a signed authorisation for non-treatment uses. De-identification (Safe Harbor or Expert Determination) can enable use without consent but does not eliminate re-identification risk for genomic data.",
+          "source": "GDPR Articles 6 & 9. https://gdpr-info.eu/art-9-gdpr; HHS HIPAA Privacy Rule. 45 CFR \u00a7164.514."
+        },
+        {
+          "q_id": "Q09-MQ4-02",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "The Obermeyer et al. (2019) study found that an algorithm used by US health systems to identify high-risk patients had racial bias. What was the root cause?",
+          "options": {
+            "A": "The algorithm intentionally discriminated by including race as a feature",
+            "B": "The algorithm used healthcare cost as a proxy for medical need; due to systemic inequities, Black patients historically incurred lower costs than equally ill white patients, causing them to be assigned lower risk scores",
+            "C": "The training dataset only included white patients",
+            "D": "The algorithm was trained on European health data"
+          },
+          "answer": "B",
+          "explanation": "Proxy discrimination: healthcare cost \u2248 medical need (the proxy) was racially confounded \u2014 equal illness severity generated different costs due to structural barriers to care for Black patients. Replacing cost with illness severity directly reduced the measured racial disparity by 84%. Illustrates how bias can arise without explicitly including protected attributes.",
+          "source": "Obermeyer et al. Dissecting racial bias in an algorithm used to manage the health of populations. Science, 2019. https://pubmed.ncbi.nlm.nih.gov/31649194"
+        },
+        {
+          "q_id": "Q09-MQ4-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why must healthcare AI systems undergo prospective clinical validation rather than relying solely on retrospective test-set performance?",
+          "options": {
+            "A": "Retrospective performance is always sufficient for clinical deployment",
+            "B": "Retrospective metrics measure performance on historical data under controlled conditions; prospective trials measure real-world clinical impact \u2014 accounting for alert fatigue, workflow integration, clinician behaviour changes, and temporal distribution shift that retrospective studies cannot capture",
+            "C": "Prospective validation is only required for surgical AI",
+            "D": "Retrospective studies are more rigorous than prospective trials"
+          },
+          "answer": "B",
+          "explanation": "Key gap: a model may achieve AUC=0.85 retrospectively but fail to improve outcomes prospectively if clinicians ignore alerts, if workflow integration is poor, or if the model is deployed on a shifted patient population. Prospective RCTs (e.g., Sendak et al. on sepsis AI) are the gold standard for demonstrating clinical benefit and safety.",
+          "source": "Topol. Nature Medicine, 2019; Sendak et al. Real-World Integration of a Sepsis DL Technology into Clinical Practice. NEJM Catalyst, 2020."
+        },
+        {
+          "q_id": "Q09-MQ4-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How do HIPAA's de-identification standards differ in their approach, and what residual risk does each carry?",
+          "options": {
+            "A": "HIPAA has only one de-identification standard",
+            "B": "Safe Harbor: remove 18 specified identifiers (name, DOB, ZIP, etc.) \u2014 simple but does not account for re-identification via combinations of quasi-identifiers. Expert Determination: statistical expert certifies re-identification risk is very small \u2014 more rigorous but still imperfect, especially for rare conditions or genomic data",
+            "C": "Both standards completely eliminate re-identification risk",
+            "D": "Expert Determination is less rigorous than Safe Harbor"
+          },
+          "answer": "B",
+          "explanation": "Safe Harbor (45 CFR \u00a7164.514(b)): remove 18 identifiers. Risk: quasi-identifier combinations (ZIP + DOB + sex) can uniquely identify 87% of the US population (Sweeney, 2000). Expert Determination (\u00a7164.514(b)(1)): statistical analysis of re-identification risk \u2014 more thorough. Genomic data is never truly de-identifiable \u2014 a genome is inherently a unique identifier.",
+          "source": "HHS HIPAA Privacy Rule. 45 CFR \u00a7164.514; Sweeney. Simple demographics often identify people uniquely. Health Security, 2000."
+        },
+        {
+          "q_id": "Q09-MQ4-05",
+          "bloom": "L3",
+          "skill": "Evaluate",
+          "stem": "An AI triage system deployed in an emergency department shows significantly lower accuracy for elderly patients (>75 years) than for middle-aged adults, despite good overall performance. The vendor argues overall accuracy is within spec. Evaluate this argument and propose a governance response.",
+          "options": {
+            "A": "The vendor is correct \u2014 overall accuracy is the only relevant metric",
+            "B": "The vendor's argument is ethically and legally insufficient. Subgroup performance disparities violate equity principles and may constitute age discrimination under the Equality Act/ADA. Governance response: (1) mandate disaggregated performance reporting by age, sex, and comorbidity at procurement; (2) require retraining or recalibration for the elderly subgroup; (3) implement human override requirements for patients >75; (4) report to FDA/competent authority as a device performance issue",
+            "C": "Accept the system but restrict deployment to patients under 75",
+            "D": "No action needed until a patient harm event occurs"
+          },
+          "answer": "B",
+          "explanation": "Subgroup disparities in life-critical triage are patient safety issues, not merely statistical artefacts. EU AI Act Art. 9 requires risk management for high-risk AI. FDA post-market surveillance requirements mandate reporting of performance degradation. Procurement contracts should specify disaggregated performance thresholds. The ADA and Equality Act prohibit age-based discrimination in healthcare services, including AI-mediated ones.",
+          "source": "EU AI Act Articles 9 & 15. 2024; FDA. Postmarket Management of Cybersecurity in Medical Devices. 2023; Obermeyer et al. Science, 2019."
+        }
+      ]
+    }
+  ],
+  "table_of_contents": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 AI in Clinical Diagnostics",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q09-MQ1-01",
+        "Q09-MQ1-02",
+        "Q09-MQ1-03",
+        "Q09-MQ1-04",
+        "Q09-MQ1-05"
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 AI in Drug Discovery and Genomics",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q09-MQ2-01",
+        "Q09-MQ2-02",
+        "Q09-MQ2-03",
+        "Q09-MQ2-04",
+        "Q09-MQ2-05"
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 AI in Clinical Decision Support",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q09-MQ3-01",
+        "Q09-MQ3-02",
+        "Q09-MQ3-03",
+        "Q09-MQ3-04",
+        "Q09-MQ3-05"
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 AI Ethics and Governance in Healthcare",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q09-MQ4-01",
+        "Q09-MQ4-02",
+        "Q09-MQ4-03",
+        "Q09-MQ4-04",
+        "Q09-MQ4-05"
+      ]
+    }
+  ],
+  "totals": {
+    "mini_quizzes": 4,
+    "questions": 20,
+    "L1": 8,
+    "L2": 8,
+    "L3": 4
+  }
+}

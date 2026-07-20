@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.1",
+  "content_type": "translator_module_index",
+  "title": "Open-Source Translator Modules",
+  "generated": "2026-06-26",
+  "verified_on": "2026-06-26",
+  "description": "One module per language pointing to verified open-source translation resources from reputable venues, with a SeamlessM4T v2 speech-to-text fallback where the language is supported.",
+  "licensing_guidance": {
+    "commercial_safe": [
+      "MADLAD-400 (Apache-2.0)",
+      "OPUS-MT (CC-BY-4.0)"
+    ],
+    "non_commercial_only": [
+      "NLLB-200 (CC-BY-NC-4.0)",
+      "MAFAND-MT (CC-BY-NC-4.0)",
+      "SeamlessM4T v2 (CC-BY-NC-4.0)"
+    ],
+    "verify_before_commercial": [
+      "garifuna-nllb (card says MIT but base is NLLB CC-BY-NC)",
+      "Kreyòl-MT (dataset licence 'other')"
+    ],
+    "note": "For paid client work prefer Apache-2.0 / CC-BY resources. CC-BY-NC resources are excellent for learning, evaluation, and building your own data assets."
+  },
+  "speech_to_text_summary": {
+    "seamless_m4t_v2_covers": [
+      "French",
+      "Brazilian Portuguese",
+      "Latin American Spanish",
+      "Wolof"
+    ],
+    "seamless_m4t_v2_does_not_cover": [
+      "Haitian Creole",
+      "Bambara",
+      "Garifuna",
+      "Fon"
+    ],
+    "dedicated_alternatives": {
+      "Fon": "OkwuGbé ASR (Dossou & Emezue, 2021)"
+    },
+    "note": "For languages Seamless does not cover, transcribe voice notes by hand or use a verified community ASR."
+  },
+  "offline_guidance": "OPUS-MT = lightest for on-device text MT. NLLB / MADLAD-400 should be quantized (CTranslate2 int8 or GGUF 2–4-bit). SeamlessM4T v2 is large — prefer server-side or aggressive quantization.",
+  "modules": [
+    {
+      "key": "french",
+      "file": "french.json",
+      "language": "French",
+      "iso_639_3": "fra",
+      "flores_200_code": "fra_Latn",
+      "resource_level": "high"
+    },
+    {
+      "key": "haitian_creole",
+      "file": "haitian_creole.json",
+      "language": "Haitian Creole",
+      "iso_639_3": "hat",
+      "flores_200_code": "hat_Latn",
+      "resource_level": "low-medium"
+    },
+    {
+      "key": "brazilian_portuguese",
+      "file": "brazilian_portuguese.json",
+      "language": "Brazilian Portuguese",
+      "iso_639_3": "por",
+      "flores_200_code": "por_Latn",
+      "resource_level": "high"
+    },
+    {
+      "key": "bambara",
+      "file": "bambara.json",
+      "language": "Bambara",
+      "iso_639_3": "bam",
+      "flores_200_code": "bam_Latn",
+      "resource_level": "low"
+    },
+    {
+      "key": "latin_american_spanish",
+      "file": "latin_american_spanish.json",
+      "language": "Spanish (Latin America)",
+      "iso_639_3": "spa",
+      "flores_200_code": "spa_Latn",
+      "resource_level": "high"
+    },
+    {
+      "key": "garifuna",
+      "file": "garifuna.json",
+      "language": "Garifuna",
+      "iso_639_3": "cab",
+      "flores_200_code": null,
+      "resource_level": "very-low"
+    },
+    {
+      "key": "wolof",
+      "file": "wolof.json",
+      "language": "Wolof",
+      "iso_639_3": "wol",
+      "flores_200_code": "wol_Latn",
+      "resource_level": "low"
+    },
+    {
+      "key": "fon",
+      "file": "fon.json",
+      "language": "Fon",
+      "iso_639_3": "fon",
+      "flores_200_code": "fon_Latn",
+      "resource_level": "low"
+    }
+  ],
+  "verification": {
+    "method": "Each model/dataset link, provider, venue, and licence was checked against live Hugging Face / GitHub / ACL Anthology pages on the verified_on date.",
+    "checked": [
+      "facebook/nllb-200-distilled-600M — OK (CC-BY-NC-4.0)",
+      "google/madlad400-3b-mt — OK (Apache-2.0)",
+      "Helsinki-NLP/opus-mt-tc-big-en-fr / -en-pt / -en-es — OK (CC-BY-4.0)",
+      "masakhane/mafand + github masakhane-io/lafand-mt — OK (NAACL 2022, CC-BY-NC-4.0)",
+      "jhu-clsp/kreyol-mt (+ -pubtrain, -scratch) + github JHU-CLSP/Kreyol-MT — OK (NAACL 2024); covers cab (Garifuna)",
+      "github bonaventuredossou/ffr-v1 — OK (WiNLP 2020; 117,029 Fon-Fr sentences)",
+      "arnoldramo/garifuna-nllb — OK; CORRECTION: card declares MIT (base NLLB is CC-BY-NC); cab_Latn; experimental",
+      "facebook/seamless-m4t-v2-large — OK (CC-BY-NC-4.0); covers fr/pt/es/wo, NOT ht/bm/fon/cab"
+    ],
+    "corrections_from_previous_version": [
+      "Garifuna model licence changed from 'inherits NLLB CC-BY-NC' to declared MIT (with base-model caveat).",
+      "Added Kreyòl-MT to the Garifuna module (it supports cab).",
+      "Refined FFR venue to WiNLP 2020.",
+      "Added SeamlessM4T v2 speech-to-text where supported; added OkwuGbé ASR for Fon."
+    ]
+  },
+  "primary_venues_referenced": [
+    "Meta AI — NLLB-200 (arXiv:2207.04672)",
+    "Meta AI — SeamlessM4T v2 (arXiv:2312.05187)",
+    "Google — MADLAD-400 (NeurIPS 2023, arXiv:2309.04662)",
+    "Helsinki-NLP — OPUS-MT (EAMT 2020; LRE 2023)",
+    "Masakhane — MAFAND-MT (NAACL 2022)",
+    "JHU — Kreyòl-MT (NAACL 2024, arXiv:2405.05376)",
+    "Dossou & Emezue — FFR (WiNLP 2020) and OkwuGbé Fon/Igbo ASR (2021)"
+  ]
+}

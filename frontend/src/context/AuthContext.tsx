@@ -6,7 +6,6 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { Platform } from "react-native";
 
 import { api, clearToken, getToken, setToken, unwrap } from "@/src/lib/api";
 
@@ -38,7 +37,7 @@ type Ctx = {
   loading: boolean;
   refresh: () => Promise<void>;
   refreshUsage: () => Promise<void>;
-  exchangeSessionId: (sessionId: string) => Promise<User>;
+  signInWithGoogleIdToken: (idToken: string) => Promise<User>;
   demoSignIn: () => Promise<User>;
   signOut: () => Promise<void>;
 };
@@ -83,11 +82,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [refreshUsage]);
 
-  const exchangeSessionId = useCallback(
-    async (sessionId: string) => {
+  const signInWithGoogleIdToken = useCallback(
+    async (idToken: string) => {
       const { data } = await api.post<{ token: string; user: User }>(
         "/auth/session",
-        { session_id: sessionId },
+        { id_token: idToken },
       );
       await setToken(data.token);
       setUser(data.user);
@@ -121,28 +120,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    // Web: also pick up session_id from URL hash/query on first mount.
-    if (Platform.OS === "web" && typeof window !== "undefined") {
-      const hash = window.location.hash || "";
-      const search = window.location.search || "";
-      const m =
-        hash.match(/session_id=([^&]+)/) ||
-        search.match(/session_id=([^&]+)/);
-      if (m && m[1]) {
-        const sid = decodeURIComponent(m[1]);
-        exchangeSessionId(sid)
-          .catch(() => {})
-          .finally(() => {
-            try {
-              window.history.replaceState(null, "", window.location.pathname);
-            } catch {}
-            setLoading(false);
-          });
-        return;
-      }
-    }
     refresh();
-  }, [refresh, exchangeSessionId]);
+  }, [refresh]);
 
   const value = useMemo(
     () => ({
@@ -151,11 +130,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       loading,
       refresh,
       refreshUsage,
-      exchangeSessionId,
+      signInWithGoogleIdToken,
       demoSignIn,
       signOut,
     }),
-    [user, usage, loading, refresh, refreshUsage, exchangeSessionId, demoSignIn, signOut],
+    [user, usage, loading, refresh, refreshUsage, signInWithGoogleIdToken, demoSignIn, signOut],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

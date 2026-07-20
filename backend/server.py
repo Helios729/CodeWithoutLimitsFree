@@ -4,9 +4,9 @@ Small AI Asset Studio / Code Without Limits — FastAPI backend.
 What this file wires together:
 1. Emergent Google Auth session validation + Bearer-token API auth.
 2. Strict pre-call quota enforcement (see quota.py).
-3. Gemini 2.5 Pro via emergentintegrations.LlmChat — quiz generation
-   and agent chat. Real token counts come from the model's usage
-   metadata and are persisted before the response is returned.
+3. Gemini 2.5 Pro via litellm.acompletion — quiz generation and agent
+   chat. Real token counts come from the model's usage metadata and
+   are persisted before the response is returned.
 4. Web scraping with cache + robots.txt + allowlist (see scraper.py).
 5. Stripe Checkout (Day Pass / Monthly Sub) + webhook to flip tier.
 
@@ -25,7 +25,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Optional
 
-import httpx
+from google.auth.transport.requests import Request as GoogleAuthRequest
+from google.oauth2 import id_token as google_id_token
 import stripe
 from bs4 import BeautifulSoup  # noqa: F401  (used indirectly via scraper)
 from dotenv import load_dotenv
@@ -35,7 +36,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel, Field
 from starlette.middleware.cors import CORSMiddleware
 
-from emergentintegrations.llm.chat import LlmChat, UserMessage
+import litellm
 
 import quiz_pool
 from content_extra import (
@@ -80,6 +81,7 @@ mongo = AsyncIOMotorClient(mongo_url)
 db = mongo[os.environ["DB_NAME"]]
 
 EMERGENT_LLM_KEY = os.environ.get("EMERGENT_LLM_KEY", "")
+GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", "")
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-pro")
 FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000")
 STRIPE_API_KEY = os.environ.get("STRIPE_API_KEY", "")
@@ -93,8 +95,8 @@ api = APIRouter(prefix="/api")
 
 
 # ---------- models ----------
-class SessionIn(BaseModel):
-    session_id: str
+class GoogleTokenIn(BaseModel):
+    id_token: str
 
 
 class UserOut(BaseModel):
@@ -122,7 +124,7 @@ class UsageOut(BaseModel):
 class QuizGenerateIn(BaseModel):
     topic_id: str
     # Free tier: learner pastes their own Gemini key for this single call.
-    # Never stored — passed straight into emergentintegrations and discarded.
+    # Never stored — passed straight into the litellm call and discarded.
     byok_key: Optional[str] = None
 
 
@@ -184,28 +186,29 @@ async def root():
 
 # ---------- routes: auth ----------
 @api.post("/auth/session")
-async def auth_session(body: SessionIn):
-    """Exchange Emergent session_id (from the auth redirect) for a
-    persistent session_token. Upserts the user by email so repeated
-    sign-ins never create duplicates."""
+async def auth_session(body: GoogleTokenIn):
+    """Exchange a Google-issued ID token (obtained client-side via
+    expo-auth-session's Google sign-in) for a persistent session_token.
+    Verifies the token's signature and audience directly against Google —
+    no third-party auth broker involved. Upserts the user by email so
+    repeated sign-ins never create duplicates."""
+    if not GOOGLE_CLIENT_ID:
+        raise HTTPException(500, "Server is not configured with GOOGLE_CLIENT_ID")
     try:
-        async with httpx.AsyncClient(timeout=15) as c:
-            r = await c.get(
-                "https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data",
-                headers={"X-Session-ID": body.session_id},
-            )
-            if r.status_code != 200:
-                raise HTTPException(401, "Invalid session_id")
-            data = r.json()
-    except HTTPException:
-        raise
+        data = google_id_token.verify_oauth2_token(
+            body.id_token, GoogleAuthRequest(), GOOGLE_CLIENT_ID
+        )
+    except ValueError as e:
+        raise HTTPException(401, f"Invalid Google ID token: {e}")
     except Exception as e:
-        logger.exception("Emergent auth exchange failed")
-        raise HTTPException(502, f"Auth provider unreachable: {e}")
+        logger.exception("Google token verification failed")
+        raise HTTPException(502, f"Google verification unreachable: {e}")
 
     email = data.get("email")
     if not email:
-        raise HTTPException(400, "No email in session")
+        raise HTTPException(400, "No email in Google token")
+    if not data.get("email_verified", False):
+        raise HTTPException(400, "Google account email is not verified")
 
     now = datetime.now(timezone.utc)
     existing = await db.users.find_one({"email": email}, {"_id": 0})
@@ -245,7 +248,7 @@ async def auth_session(body: SessionIn):
             "created_at": now,
         })
 
-    session_token = data.get("session_token") or uuid.uuid4().hex
+    session_token = uuid.uuid4().hex
     await db.user_sessions.insert_one({
         "session_token": session_token,
         "user_id": user_id,
@@ -558,23 +561,21 @@ async def topic_detail(topic_id: str, user=Depends(get_current_user)):
 
 
 # ---------- LLM helpers ----------
-def _extract_usage_tokens(chat: LlmChat, fallback_text: str) -> int:
-    """Best-effort token extraction from the LiteLLM ModelResponse the
-    chat object stashes after send_message(). We try a few field names
-    because providers/SDK versions vary, and fall back to a conservative
-    char-based estimate so quota tracking is never silently zero."""
+def _extract_usage_tokens(response, fallback_text: str) -> int:
+    """Best-effort token extraction from a litellm ModelResponse. We try a
+    couple of field shapes because providers/SDK versions vary, and fall
+    back to a conservative char-based estimate so quota tracking is never
+    silently zero."""
     try:
-        raw = getattr(chat, "_last_response", None) or getattr(chat, "last_response", None)
-        if raw is not None:
-            usage = getattr(raw, "usage", None)
-            if usage is not None:
-                total = getattr(usage, "total_tokens", None)
-                if total:
-                    return int(total)
-                prompt = getattr(usage, "prompt_tokens", 0) or 0
-                comp = getattr(usage, "completion_tokens", 0) or 0
-                if prompt or comp:
-                    return int(prompt) + int(comp)
+        usage = getattr(response, "usage", None)
+        if usage is not None:
+            total = getattr(usage, "total_tokens", None)
+            if total:
+                return int(total)
+            prompt = getattr(usage, "prompt_tokens", 0) or 0
+            comp = getattr(usage, "completion_tokens", 0) or 0
+            if prompt or comp:
+                return int(prompt) + int(comp)
     except Exception:
         pass
     # Fallback: ~4 chars per token; never returns 0 for non-empty output.
@@ -597,17 +598,15 @@ async def _run_gemini(
     if not key:
         raise HTTPException(500, "No LLM key available")
     model = "gemini-2.5-flash" if api_key else GEMINI_MODEL
-    chat = (
-        LlmChat(
-            api_key=key,
-            session_id=f"sess_{uuid.uuid4().hex[:10]}",
-            system_message=system,
-        )
-        .with_model("gemini", model)
-    )
-    msg = UserMessage(text=user_msg)
     try:
-        text = await chat.send_message(msg)
+        response = await litellm.acompletion(
+            model=f"gemini/{model}",
+            api_key=key,
+            messages=[
+                {"role": "system", "content": system},
+                {"role": "user", "content": user_msg},
+            ],
+        )
     except Exception as e:
         # Surface a clean, actionable error instead of a raw 500.
         err = str(e)
@@ -622,9 +621,9 @@ async def _run_gemini(
                 "That Gemini API key was rejected by Google. Double-check it at https://aistudio.google.com/app/apikey.",
             )
         raise HTTPException(502, f"Gemini call failed: {err[:300]}")
-    # Pull usage out of the chat object's last response if available.
-    tokens = _extract_usage_tokens(chat, (text or "") + system + user_msg)
-    return text or "", tokens
+    text = (response.choices[0].message.content or "") if response.choices else ""
+    tokens = _extract_usage_tokens(response, text + system + user_msg)
+    return text, tokens
 
 
 # ---------- routes: quiz ----------

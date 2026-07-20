@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 CACHE_TTL_DAYS = 30
 MAX_CHARS = 6000
 USER_AGENT = (
-    "SmallAIAssetStudioBot/1.0 (+https://token-limit-enforcer.preview.emergentagent.com; "
+    "SmallAIAssetStudioBot/1.0 (+https://codewithoutlimits.org; "
     "educational research scraper)"
 )
 

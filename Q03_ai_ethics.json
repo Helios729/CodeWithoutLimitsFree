@@ -1,0 +1,144 @@
+{
+  "module_id": "html-advanced",
+  "module_title": "HTML Advanced-L",
+  "type": "learning",
+  "difficulty": "Advanced",
+  "duration_min": 90,
+  "bloom_levels_covered": [
+    "L1 Remember",
+    "L2 Understand",
+    "L3 Apply"
+  ],
+  "companion_quiz": "HTML Advanced-Q",
+  "sources": [
+    {
+      "id": "S1",
+      "citation": "MDN Web Docs. HTML.",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTML",
+      "access": "Free."
+    },
+    {
+      "id": "S2",
+      "citation": "web.dev. Learn HTML. Google, 2023.",
+      "url": "https://web.dev/learn/html",
+      "access": "Free."
+    },
+    {
+      "id": "S3",
+      "citation": "W3C. WCAG 2.1.",
+      "url": "https://www.w3.org/TR/WCAG21",
+      "access": "Free."
+    },
+    {
+      "id": "S4",
+      "citation": "MDN Web Docs. Web Components.",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components",
+      "access": "Free."
+    },
+    {
+      "id": "S5",
+      "citation": "MDN Web Docs. HTML Microdata and Schema.org.",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Microdata",
+      "access": "Free."
+    }
+  ],
+  "learning_objectives": [
+    "L1: Define Shadow DOM, custom elements, and HTML templates as Web Components standards.",
+    "L1: Identify structured data formats: JSON-LD, Microdata, RDFa.",
+    "L1: State the purpose of template, slot, and portal elements.",
+    "L2: Explain how Shadow DOM achieves CSS and JS encapsulation.",
+    "L2: Describe how JSON-LD enables rich search results.",
+    "L2: Explain how lazy loading and resource hints affect performance.",
+    "L2: Compare picture and srcset for responsive images.",
+    "L3: Build a reusable Web Component with encapsulated styles and attribute-based API.",
+    "L3: Audit a page for WCAG 2.1 AA compliance and produce a prioritised remediation plan."
+  ],
+  "mini_lessons": [
+    {
+      "ml": 1,
+      "title": "Web Components",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-1",
+      "concepts": [
+        {
+          "title": "Custom Elements and Shadow DOM",
+          "explanation": "(1) Custom Elements: class MyCard extends HTMLElement; customElements.define('my-card',MyCard). (2) Shadow DOM: isolated subtree \u2014 internal CSS doesn't leak; external CSS can't override. (3) Templates: <template> inert until cloned. <slot>: named insertion points.",
+          "worked_example": "class TooltipButton extends HTMLElement { connectedCallback() { const s=this.attachShadow({mode:'open'}); s.innerHTML=`<style>button{background:teal}</style><button><slot>Click</slot></button>`; } }\ncustomElements.define('tooltip-button',TooltipButton);",
+          "source_refs": [
+            "S4",
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 2,
+      "title": "Responsive Images and Performance",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-2",
+      "concepts": [
+        {
+          "title": "srcset, sizes, and picture",
+          "explanation": "srcset: multiple resolutions \u2014 browser picks best. <picture>: art direction \u2014 different crops or formats per breakpoint.",
+          "worked_example": "<picture><source media='(max-width:600px)' srcset='hero-mobile.avif' type='image/avif'><img src='hero.jpg' alt='Mountain sunrise' width='1200' height='600' loading='lazy'></picture>",
+          "source_refs": [
+            "S1",
+            "S2"
+          ]
+        },
+        {
+          "title": "Resource Hints",
+          "explanation": "<link rel='preload' as='font'>: fetch critical early. <link rel='preconnect'>: TCP/TLS early (~100-300ms saved). loading='lazy': defer until near viewport. fetchpriority='high': prioritise LCP image.",
+          "worked_example": "Preload hero + preconnect CDN + fetchpriority='high' on LCP img: LCP 3.2s\u21921.4s.",
+          "source_refs": [
+            "S2",
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 3,
+      "title": "Structured Data and SEO",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-3",
+      "concepts": [
+        {
+          "title": "JSON-LD and Schema.org",
+          "explanation": "JSON-LD (Google recommended): <script type='application/ld+json'>. Schema.org: Article, Product, Recipe, FAQPage. Enables rich results. Validate with Google Rich Results Test.",
+          "worked_example": "<script type='application/ld+json'>{\"@context\":\"https://schema.org\",\"@type\":\"Course\",\"name\":\"HTML Advanced\",\"provider\":{\"@type\":\"Organization\",\"name\":\"Example Academy\"}}</script>",
+          "source_refs": [
+            "S5",
+            "S2"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 4,
+      "title": "WCAG 2.1 AA and Progressive Enhancement",
+      "bloom": "L2-L3",
+      "companion_mini_quiz": "MQ-4",
+      "concepts": [
+        {
+          "title": "WCAG 2.1 AA \u2014 POUR Principles",
+          "explanation": "POUR: Perceivable, Operable, Understandable, Robust. Key AA: 1.1.1 alt text; 1.4.3 contrast 4.5:1; 2.1.1 keyboard accessible; 2.4.7 focus visible; 4.1.2 name/role/value.",
+          "worked_example": "Audit: (1) missing alt \u2192 add. (2) icon button no label \u2192 aria-label='Close'. (3) <div> dropdown \u2192 role='listbox'. (4) red-only error \u2192 aria-invalid+aria-describedby. (5) modal \u2192 focus trap.",
+          "source_refs": [
+            "S3",
+            "S2"
+          ]
+        },
+        {
+          "title": "Progressive Enhancement",
+          "explanation": "Build core in plain HTML first. Layer CSS, then JS. HTML validation (W3C Validator): catches missing closing tags, invalid nesting, duplicate IDs.",
+          "worked_example": "Form with JS validation: without JS, native HTML5 constraints (required, type='email') still work. JS is enhancement, not dependency.",
+          "source_refs": [
+            "S3",
+            "S1"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.1",
+  "module_type": "translator",
+  "generated": "2026-06-26",
+  "verified_on": "2026-06-26",
+  "verification_policy": "Human verification recommended for any low/very-low-resource output before client delivery.",
+  "language": {
+    "name_en": "Garifuna",
+    "autonym": "Garifuna",
+    "iso_639_1": null,
+    "iso_639_3": "cab",
+    "flores_200_code": null,
+    "model_code_seen": "cab_Latn",
+    "script": "Latin",
+    "regions": [
+      "Honduras",
+      "Belize",
+      "Guatemala",
+      "Nicaragua",
+      "US diaspora"
+    ],
+    "language_family": "Arawakan",
+    "resource_level": "very-low"
+  },
+  "default_pivot_languages": [
+    "Spanish",
+    "English"
+  ],
+  "recommended_resources": [
+    {
+      "name": "Kreyòl-MT",
+      "type": "model+dataset",
+      "modality": "text",
+      "provider": "Johns Hopkins University (Robinson et al.)",
+      "venue": "Robinson et al., NAACL 2024 (arXiv:2405.05376)",
+      "license": "Model fine-tuned from mBART-50; dataset licence: 'other' (see card)",
+      "commercial_use": null,
+      "huggingface_id": "jhu-clsp/kreyol-mt (also -pubtrain = public-data-only, -scratch)",
+      "url": "https://huggingface.co/jhu-clsp/kreyol-mt",
+      "language_pairs": [
+        "cab<->eng",
+        "cab<->spa",
+        "cab<->fra (via many-to-many)"
+      ],
+      "offline": "Many-to-many mBART-50 fine-tune; dataset = largest public Creole MT corpus (11.6M public sentences).",
+      "notes": "Kreyòl-MT's language set includes Garifuna (cab) — the most reputable (peer-reviewed) option found.",
+      "verified_on": "2026-06-26"
+    },
+    {
+      "name": "garifuna-nllb (community fine-tune of NLLB-200 600M)",
+      "type": "model",
+      "modality": "text",
+      "provider": "Community contributor (Hugging Face: arnoldramo)",
+      "venue": "Hugging Face model hub (community-contributed, not peer-reviewed)",
+      "license": "Declared MIT on the model card (NOTE: base NLLB-200 is CC-BY-NC-4.0 — verify compatibility)",
+      "commercial_use": null,
+      "huggingface_id": "arnoldramo/garifuna-nllb",
+      "url": "https://huggingface.co/arnoldramo/garifuna-nllb",
+      "language_pairs": [
+        "spa_Latn<->cab_Latn",
+        "eng_Latn<->cab_Latn"
+      ],
+      "offline": "Fine-tuned NLLB 600M checkpoint; quantize for device use.",
+      "notes": "Trilingual ES/EN/Garifuna. Experimental (~12 downloads/month). Evaluate quality and confirm licence before any paid use.",
+      "verified_on": "2026-06-26"
+    }
+  ],
+  "speech_to_text": {
+    "covered_by_seamless_m4t_v2": false,
+    "resources": [],
+    "note": "Not in SeamlessM4T v2 and no known robust open Garifuna ASR. Use human transcription of voice notes. SeamlessM4T v2 does NOT list this language. Use the text pipeline with human transcription of voice notes, or a community ASR model verified before use."
+  },
+  "integration_notes": "Very low-resource: not in NLLB-200 / MADLAD-400 core sets. Treat machine output as draft-only with mandatory verification by fluent speakers. Building a small verified Garifuna corpus is itself Income Module 3 / 12 in the app."
+}

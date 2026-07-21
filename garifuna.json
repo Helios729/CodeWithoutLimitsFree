@@ -1,0 +1,409 @@
+{
+  "module_id": "generative-ai-and-llms",
+  "module_title": "Generative AI and LLMs-Q",
+  "type": "quiz",
+  "difficulty": "Intermediate",
+  "companion_learning": "Generative AI and LLMs-L",
+  "superquiz_pool": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+  ],
+  "bloom_distribution": {
+    "L1_remember": 2,
+    "L2_understand": 2,
+    "L3_apply": 1
+  },
+  "mini_quizzes": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 Foundations of Generative AI",
+      "source_lesson": "ML-1",
+      "questions": [
+        {
+          "q_id": "Q10a-MQ1-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What distinguishes a generative AI model from a discriminative AI model?",
+          "options": {
+            "A": "Generative models only work on text; discriminative models only work on images",
+            "B": "Generative models learn the joint distribution P(X,Y) and can produce new data samples; discriminative models learn P(Y|X) \u2014 the conditional probability of a label given input \u2014 and classify but do not generate new content",
+            "C": "Generative models are always larger than discriminative models",
+            "D": "Discriminative models require no training data"
+          },
+          "answer": "B",
+          "explanation": "Discriminative models (logistic regression, SVM, BERT for classification) learn decision boundaries \u2014 P(Y|X). Generative models (GPT, DALL-E, VAEs, GANs) learn the underlying data distribution P(X) or P(X,Y) and can sample new instances. This enables text generation, image synthesis, audio creation, and drug molecule design.",
+          "source": "Goodfellow et al. Deep Learning. MIT Press, 2016. Ch.16. https://www.deeplearningbook.org; Ng & Jordan. On Discriminative vs Generative Classifiers. NeurIPS, 2001."
+        },
+        {
+          "q_id": "Q10a-MQ1-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "What is a Large Language Model (LLM)?",
+          "options": {
+            "A": "A database storing large volumes of text documents",
+            "B": "A deep learning model \u2014 typically a Transformer \u2014 trained on massive text corpora with billions of parameters, capable of generating, summarising, translating, and reasoning about text",
+            "C": "A rule-based grammar checker for word processors",
+            "D": "A small specialised model trained on domain-specific legal text only"
+          },
+          "answer": "B",
+          "explanation": "LLMs: Transformer-based neural networks trained on web-scale text (hundreds of billions to trillions of tokens). Examples: GPT-4 (~1.8T parameters estimated), LLaMA 3 (8B\u2013405B), Gemini 1.5, Claude 3. Capabilities emerge at scale: few-shot learning, chain-of-thought reasoning, code generation \u2014 behaviours not explicitly trained for.",
+          "source": "Vaswani et al. Attention Is All You Need. NeurIPS, 2017. https://arxiv.org/abs/1706.03762; Wei et al. Emergent Abilities of LLMs. TMLR, 2022. https://arxiv.org/abs/2206.07682"
+        },
+        {
+          "q_id": "Q10a-MQ1-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why does the Transformer architecture enable LLMs to handle long-range dependencies in text better than recurrent neural networks (RNNs)?",
+          "options": {
+            "A": "Transformers process text faster because they use fewer parameters than RNNs",
+            "B": "Self-attention allows every token to directly attend to every other token in O(1) steps regardless of distance; RNNs must pass information through sequential hidden states \u2014 causing gradient vanishing over long sequences",
+            "C": "Transformers only work on short sequences; RNNs handle longer text",
+            "D": "RNNs and Transformers have identical long-range dependency handling"
+          },
+          "answer": "B",
+          "explanation": "RNN path length between tokens i and j: O(n) sequential steps \u2014 gradients decay exponentially. Transformer self-attention: O(1) direct connection between any two tokens via Attention(Q,K,V) = softmax(QK\u1d40/\u221ad\u2096)V. Cost is O(n\u00b2d) per layer \u2014 quadratic in sequence length \u2014 but modern techniques (FlashAttention, sparse attention) manage this. This is why GPT-4 can maintain coherence across 128K+ token contexts.",
+          "source": "Vaswani et al. NeurIPS, 2017; Hochreiter & Schmidhuber. LSTM. Neural Computation, 1997."
+        },
+        {
+          "q_id": "Q10a-MQ1-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "What is the pre-training objective of GPT-style (decoder-only) LLMs, and how does it differ from BERT's training objective?",
+          "options": {
+            "A": "Both GPT and BERT use identical masked language modelling objectives",
+            "B": "GPT uses causal (autoregressive) language modelling \u2014 predict the next token given all previous tokens, left-to-right. BERT uses masked language modelling (MLM) \u2014 predict randomly masked tokens using bidirectional context. GPT is generative; BERT is optimised for understanding tasks",
+            "C": "BERT predicts the next token; GPT predicts masked tokens",
+            "D": "GPT uses supervised classification; BERT uses reinforcement learning"
+          },
+          "answer": "B",
+          "explanation": "GPT (decoder-only): P(x\u209c|x\u2081,...,x\u209c\u208b\u2081) \u2014 next-token prediction, causal attention mask. Enables open-ended generation. BERT (encoder-only): 15% of tokens masked \u2192 predict them using left AND right context. Bidirectional \u2014 excellent for classification, NER, QA. GPT-style: generate. BERT-style: understand. T5/BART: encoder-decoder \u2014 translate, summarise.",
+          "source": "Devlin et al. BERT. NAACL, 2019. https://arxiv.org/abs/1810.04805; Radford et al. GPT-2. OpenAI, 2019. https://openai.com/research/language-unsupervised"
+        },
+        {
+          "q_id": "Q10a-MQ1-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "You need to build a customer support chatbot that answers questions about a company's product documentation (500 PDF pages). You have a limited budget and cannot fine-tune an LLM. Which architecture should you use?",
+          "options": {
+            "A": "Train a new LLM from scratch on the 500 pages",
+            "B": "Retrieval-Augmented Generation (RAG): embed the documentation into a vector database, retrieve the top-k relevant chunks at query time, and inject them into the LLM prompt as context \u2014 combining retrieval precision with LLM fluency without fine-tuning",
+            "C": "Use keyword search only \u2014 LLMs are not needed for document Q&A",
+            "D": "Fine-tune BERT on the 500 pages for generation tasks"
+          },
+          "answer": "B",
+          "explanation": "RAG (Lewis et al., 2020): (1) chunk documents \u2192 embed with text-embedding-3 or similar \u2192 store in vector DB (Pinecone, FAISS, Chroma); (2) at query time, embed query \u2192 retrieve top-k chunks by cosine similarity; (3) inject chunks into LLM prompt \u2192 generate grounded answer. Advantages: no fine-tuning cost, knowledge updatable without retraining, citations possible. Used by Bing AI, Perplexity, and most enterprise AI assistants.",
+          "source": "Lewis et al. Retrieval-Augmented Generation for Knowledge-Intensive NLP. NeurIPS, 2020. https://arxiv.org/abs/2005.11401"
+        }
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 Training, Fine-Tuning and Alignment",
+      "source_lesson": "ML-2",
+      "questions": [
+        {
+          "q_id": "Q10a-MQ2-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is RLHF (Reinforcement Learning from Human Feedback) and which model first made it widely known?",
+          "options": {
+            "A": "A technique for training robots to walk using human motion capture data",
+            "B": "A training pipeline where human raters rank model outputs, a reward model is trained on those rankings, and the LLM is fine-tuned via PPO to maximise the reward \u2014 aligning outputs with human preferences. Made widely known by InstructGPT/ChatGPT (OpenAI, 2022)",
+            "C": "A method for compressing LLMs to run on mobile devices",
+            "D": "A technique for filtering toxic content from training datasets"
+          },
+          "answer": "B",
+          "explanation": "RLHF pipeline (Christiano et al., 2017; Ouyang et al., 2022): (1) supervised fine-tuning (SFT) on high-quality demonstrations; (2) human raters rank pairs of model outputs \u2192 train reward model; (3) PPO (Proximal Policy Optimisation) fine-tunes the LLM to maximise reward while staying close to the SFT model (KL divergence penalty). InstructGPT showed RLHF dramatically improved helpfulness and reduced harmful outputs vs GPT-3.",
+          "source": "Ouyang et al. Training language models to follow instructions with human feedback. NeurIPS, 2022. https://arxiv.org/abs/2203.02155"
+        },
+        {
+          "q_id": "Q10a-MQ2-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "What is parameter-efficient fine-tuning (PEFT), and which technique is most widely used?",
+          "options": {
+            "A": "Training all parameters of an LLM on a new task from scratch",
+            "B": "Fine-tuning methods that update only a small fraction of model parameters \u2014 reducing compute and memory cost. The most widely used technique is LoRA (Low-Rank Adaptation), which injects trainable low-rank matrices into each Transformer layer while freezing the original weights",
+            "C": "Reducing model size by removing layers before deployment",
+            "D": "Compressing the vocabulary to reduce embedding matrix size"
+          },
+          "answer": "B",
+          "explanation": "Full fine-tuning a 70B model requires 70B \u00d7 4 bytes \u00d7 optimiser states \u2248 500GB+ GPU memory. LoRA (Hu et al., 2021): freeze W, add \u0394W = AB where A\u2208\u211d^(d\u00d7r), B\u2208\u211d^(r\u00d7k), r\u226ad. Trains only 0.1\u20131% of parameters. QLoRA (Dettmers et al., 2023) quantises base model to 4-bit, enabling 70B fine-tuning on a single 48GB GPU. Industry standard for domain adaptation.",
+          "source": "Hu et al. LoRA: Low-Rank Adaptation of Large Language Models. ICLR, 2022. https://arxiv.org/abs/2106.09685; Dettmers et al. QLoRA. NeurIPS, 2023."
+        },
+        {
+          "q_id": "Q10a-MQ2-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why do LLMs 'hallucinate' \u2014 generate plausible-sounding but factually incorrect statements \u2014 and what are the main mitigation strategies?",
+          "options": {
+            "A": "Hallucinations occur because LLMs are intentionally programmed to be creative",
+            "B": "LLMs are trained to predict the next most likely token, not to verify factual accuracy. They interpolate from training patterns \u2014 generating fluent text that fits the context even when no reliable training signal exists for a specific fact. Mitigations: RAG (grounding in retrieved sources), chain-of-thought prompting, fine-tuning on factual data, calibration, and confidence scoring",
+            "C": "Hallucinations only occur in smaller models and disappear at scale",
+            "D": "Hallucinations are caused by incorrect tokenisation"
+          },
+          "answer": "B",
+          "explanation": "Root cause: next-token prediction objective maximises fluency, not factuality. LLMs have no explicit knowledge store \u2014 facts are implicitly encoded in weights. When queried on uncommon facts, low-frequency training signal, or post-training-cutoff events, the model 'confabulates' plausible continuations. Scaling helps but does not eliminate hallucination (GPT-4 still hallucinates ~20% on challenging factual benchmarks). RAG is the most reliable mitigation.",
+          "source": "Maynez et al. On Faithfulness and Factuality in Abstractive Summarisation. ACL, 2020; Ji et al. Survey of Hallucination in NLG. ACM Computing Surveys, 2023. https://arxiv.org/abs/2202.03629"
+        },
+        {
+          "q_id": "Q10a-MQ2-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does prompt engineering differ from fine-tuning as a method for adapting LLM behaviour to a specific task?",
+          "options": {
+            "A": "They are identical \u2014 prompt engineering and fine-tuning produce the same results",
+            "B": "Prompt engineering: craft input instructions/examples to guide model behaviour without updating weights \u2014 fast, cheap, flexible, but limited by context window and prompt brittleness. Fine-tuning: update model weights on task-specific data \u2014 higher performance, consistent behaviour, no prompt overhead, but requires data, compute, and risks catastrophic forgetting",
+            "C": "Fine-tuning is always cheaper and faster than prompt engineering",
+            "D": "Prompt engineering modifies model weights; fine-tuning does not"
+          },
+          "answer": "B",
+          "explanation": "Prompt engineering (zero-shot, few-shot, chain-of-thought): no GPU required, rapid iteration, works with API-accessed closed models. Limitations: performance ceiling, prompt sensitivity, context window costs. Fine-tuning: surpasses few-shot for specialised tasks when 100s-1000s of examples available. LoRA/QLoRA make it accessible. Best practice: start with prompt engineering, fine-tune when performance gap is unacceptable.",
+          "source": "Brown et al. GPT-3: Few-Shot Learners. NeurIPS, 2020. https://arxiv.org/abs/2005.14165; Wei et al. Chain-of-Thought Prompting. NeurIPS, 2022."
+        },
+        {
+          "q_id": "Q10a-MQ2-05",
+          "bloom": "L3",
+          "skill": "Design",
+          "stem": "A legal firm wants an LLM to draft contracts using jurisdiction-specific clauses. They have 2,000 labelled contract examples. Design the optimal adaptation strategy.",
+          "options": {
+            "A": "Use zero-shot prompting \u2014 no adaptation needed for legal text",
+            "B": "(1) Start with a capable base model (GPT-4o, LLaMA 3 70B); (2) apply LoRA fine-tuning on the 2,000 contract examples with instruction format; (3) augment with RAG over a jurisdiction clause library for grounding; (4) evaluate with domain experts on contract accuracy, clause completeness, and jurisdictional correctness; (5) add human-in-the-loop review before any contract is sent",
+            "C": "Train a new LLM from scratch on the 2,000 examples",
+            "D": "Use keyword substitution templates \u2014 LLMs are not suitable for legal drafting"
+          },
+          "answer": "B",
+          "explanation": "2,000 examples: sufficient for LoRA fine-tuning (instruction-format SFT), not enough for full fine-tuning. RAG over clause library grounds outputs in verified legal text \u2014 critical for jurisdiction accuracy. Human review is mandatory for legal documents (professional liability, hallucination risk). This is the standard enterprise legal AI architecture (Harvey AI, CoCounsel).",
+          "source": "Hu et al. LoRA. ICLR, 2022; Lewis et al. RAG. NeurIPS, 2020."
+        }
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Prompting Techniques and LLM Capabilities",
+      "source_lesson": "ML-3",
+      "questions": [
+        {
+          "q_id": "Q10a-MQ3-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is chain-of-thought (CoT) prompting?",
+          "options": {
+            "A": "A technique that chains multiple LLMs together in a pipeline",
+            "B": "A prompting strategy where the model is instructed or shown examples of step-by-step reasoning before producing a final answer \u2014 significantly improving performance on multi-step arithmetic, logical, and commonsense reasoning tasks",
+            "C": "A method for compressing long prompts into shorter ones",
+            "D": "A technique for connecting an LLM to external APIs"
+          },
+          "answer": "B",
+          "explanation": "CoT (Wei et al., NeurIPS 2022): adding 'Let's think step by step' or few-shot reasoning examples causes LLMs to externalise intermediate reasoning steps before answering. On GSM8K (grade school maths), CoT improved GPT-3 accuracy from 17% to 58%. Works best in models >100B parameters. Variants: zero-shot CoT ('Let's think step by step'), few-shot CoT (worked examples), self-consistency CoT (majority vote across multiple reasoning paths).",
+          "source": "Wei et al. Chain-of-Thought Prompting Elicits Reasoning in LLMs. NeurIPS, 2022. https://arxiv.org/abs/2201.11903"
+        },
+        {
+          "q_id": "Q10a-MQ3-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "What does the 'temperature' parameter control in LLM text generation?",
+          "options": {
+            "A": "The physical temperature of the GPU during inference",
+            "B": "The randomness of token sampling: low temperature (\u21920) makes output deterministic and repetitive; high temperature (\u21922) increases diversity and creativity but risks incoherence. Controls the sharpness of the softmax probability distribution over next tokens",
+            "C": "The maximum number of tokens the model can generate",
+            "D": "The speed of text generation measured in tokens per second"
+          },
+          "answer": "B",
+          "explanation": "Sampling: logits \u2192 divide by temperature T \u2192 softmax \u2192 sample. T\u21920: argmax (greedy, deterministic). T=1: standard softmax. T>1: flatter distribution, more diversity. Top-p (nucleus) sampling (Holtzman et al., 2020): sample from the smallest set of tokens whose cumulative probability exceeds p \u2014 more coherent than pure temperature sampling. For factual tasks: T=0\u20130.3. For creative tasks: T=0.7\u20131.2.",
+          "source": "Holtzman et al. The Curious Case of Neural Text Degeneration. ICLR, 2020. https://arxiv.org/abs/1904.09751"
+        },
+        {
+          "q_id": "Q10a-MQ3-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why does few-shot prompting improve LLM task performance compared to zero-shot prompting?",
+          "options": {
+            "A": "Few-shot prompting updates the model's weights at inference time",
+            "B": "Providing input-output examples in the prompt activates in-context learning \u2014 the model infers the task format, output style, and reasoning pattern from the examples without any gradient updates, effectively 'conditioning' the generative distribution on the demonstrated pattern",
+            "C": "Few-shot prompting reduces hallucinations to zero",
+            "D": "Few-shot examples are stored in the model's long-term memory"
+          },
+          "answer": "B",
+          "explanation": "In-context learning (ICL): LLMs implicitly implement a form of gradient descent in the forward pass (Aky\u00fcrek et al., 2022). Examples narrow the predictive distribution to the demonstrated pattern. GPT-3 (Brown et al., 2020) showed dramatic few-shot gains on translation, QA, and classification \u2014 matching fine-tuned models in some tasks using 8\u201332 examples. Limitation: sensitive to example order, selection, and label balance.",
+          "source": "Brown et al. GPT-3. NeurIPS, 2020. https://arxiv.org/abs/2005.14165; Aky\u00fcrek et al. What Learning Algorithm is In-Context Learning? ICLR, 2023."
+        },
+        {
+          "q_id": "Q10a-MQ3-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "What is a 'system prompt' in an LLM API, and why is it important for product deployments?",
+          "options": {
+            "A": "A system prompt is a hardware instruction that optimises GPU memory allocation",
+            "B": "A system prompt is a hidden instruction prepended to every conversation that sets the model's persona, behaviour constraints, output format, and domain scope \u2014 invisible to end users but controlling how the model interprets and responds to all subsequent user messages",
+            "C": "A system prompt is a user-visible welcome message displayed in chatbot UIs",
+            "D": "A system prompt automatically fine-tunes the model for the deployment context"
+          },
+          "answer": "B",
+          "explanation": "System prompts (OpenAI API: 'role: system') define: persona ('You are a helpful medical assistant'), constraints ('Never provide dosing advice'), format ('Always respond in JSON'), and scope ('Only answer questions about our product'). Critical for safety (jailbreak resistance), consistency, and brand voice. Well-designed system prompts are treated as trade secrets by major AI product companies.",
+          "source": "OpenAI. Chat Completions API Documentation. 2024. https://platform.openai.com/docs/guides/text-generation"
+        },
+        {
+          "q_id": "Q10a-MQ3-05",
+          "bloom": "L3",
+          "skill": "Evaluate",
+          "stem": "A user reports that an LLM-powered coding assistant confidently suggested code containing a security vulnerability (SQL injection risk). The vendor says the model 'performs well on benchmarks.' Evaluate this response and propose a remediation.",
+          "options": {
+            "A": "Benchmark performance is sufficient \u2014 no action required",
+            "B": "Benchmark performance on general coding tasks does not measure security-specific correctness. Proposed remediations: (1) add a security-focused system prompt instructing the model to flag potential vulnerabilities; (2) integrate static analysis tools (Semgrep, CodeQL) as a post-generation validation layer; (3) fine-tune on secure coding datasets (CWE examples); (4) implement human code review for security-sensitive code paths; (5) update benchmarks to include security-specific evaluations (SecurityEval)",
+            "C": "Ask users to manually check all generated code for security issues",
+            "D": "Switch to a rule-based code generator with no LLM component"
+          },
+          "answer": "B",
+          "explanation": "LLMs trained on public code inherit vulnerabilities present in that code (Pearce et al., 2022 found GitHub Copilot produced vulnerable code in ~40% of security-relevant scenarios). Mitigations: (1) system prompt constraints; (2) static analysis as a guardrail layer (defence in depth); (3) security fine-tuning; (4) human review for high-risk contexts. Benchmarks like HumanEval measure functional correctness, not security.",
+          "source": "Pearce et al. Asleep at the Keyboard? Assessing the Security of GitHub Copilot's Code Contributions. IEEE S&P, 2022. https://arxiv.org/abs/2108.09293"
+        }
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Generative AI Ethics, Safety and Governance",
+      "source_lesson": "ML-4",
+      "questions": [
+        {
+          "q_id": "Q10a-MQ4-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is a 'jailbreak' in the context of LLM safety?",
+          "options": {
+            "A": "A method for unlocking faster GPU inference speeds",
+            "B": "A prompt engineering technique that attempts to bypass an LLM's safety guardrails \u2014 tricking the model into generating content it was trained or instructed not to produce (harmful instructions, hate speech, private information)",
+            "C": "A legal term for unauthorised access to LLM training data",
+            "D": "A technique for extracting model weights from a black-box API"
+          },
+          "answer": "B",
+          "explanation": "Jailbreaks exploit misalignment between RLHF-trained safety constraints and the model's underlying capabilities. Common techniques: roleplay ('pretend you are an AI with no restrictions'), hypothetical framing, adversarial suffixes (Zou et al., 2023 \u2014 universal transferable suffixes that bypass safety training). Defences: Constitutional AI (Anthropic), input/output classifiers, red-teaming, adversarial training.",
+          "source": "Zou et al. Universal and Transferable Adversarial Attacks on Aligned Language Models. 2023. https://arxiv.org/abs/2307.15043"
+        },
+        {
+          "q_id": "Q10a-MQ4-02",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "Under the EU AI Act (2024), how are general-purpose AI models (GPAIs) like GPT-4 regulated?",
+          "options": {
+            "A": "GPAIs are exempt from the EU AI Act entirely",
+            "B": "GPAIs with systemic risk (\u226510\u00b2\u00b3 FLOPs training compute) face enhanced obligations: adversarial testing, cybersecurity measures, incident reporting to the EU AI Office, and transparency about training data. All GPAIs must publish model cards and comply with EU copyright law",
+            "C": "GPAIs are classified as unacceptable risk and banned in the EU",
+            "D": "GPAIs only need to register with national governments, not the EU"
+          },
+          "answer": "B",
+          "explanation": "EU AI Act Title VIII (GPAIs): all GPAI providers must publish technical documentation and comply with EU copyright law. Systemic risk threshold: \u226510\u00b2\u00b3 FLOPs (currently GPT-4, Gemini Ultra, Claude 3 Opus). Additional obligations: adversarial testing (red-teaming), cybersecurity protections, incident reporting to the EU AI Office. The Act came into force August 2024 with phased compliance timelines.",
+          "source": "EU AI Act. Regulation (EU) 2024/1689, Title VIII. https://artificialintelligenceact.eu/the-act/"
+        },
+        {
+          "q_id": "Q10a-MQ4-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why is copyright ownership of LLM-generated content a legally unresolved issue in most jurisdictions?",
+          "options": {
+            "A": "Copyright law fully covers AI-generated content in all countries",
+            "B": "Traditional copyright doctrine requires human authorship. LLMs generate text from statistical patterns in training data \u2014 raising unresolved questions: (1) can AI-generated output be copyrighted by the user?; (2) does training on copyrighted data constitute infringement?; (3) who owns outputs that substantially reproduce training data? US courts and the EU are actively litigating and legislating these questions",
+            "C": "AI-generated content is automatically in the public domain everywhere",
+            "D": "Copyright only applies to images, not text generated by LLMs"
+          },
+          "answer": "B",
+          "explanation": "US Copyright Office (2023): AI-generated content without human creative input is not copyrightable. Training data lawsuits: NYT v. OpenAI (2023), Getty Images v. Stability AI (2023) \u2014 alleging training on copyrighted works constitutes infringement. EU AI Act requires GPAI providers to publish copyright compliance summaries. Legally, the safest position: assume LLM outputs may have unclear IP status for commercial use.",
+          "source": "US Copyright Office. Copyright and Artificial Intelligence. 2023. https://www.copyright.gov/ai; NYT v. OpenAI. SDNY, Case 1:23-cv-11195."
+        },
+        {
+          "q_id": "Q10a-MQ4-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does Constitutional AI (Anthropic) differ from standard RLHF as an alignment approach?",
+          "options": {
+            "A": "Constitutional AI and RLHF are identical techniques with different branding",
+            "B": "Standard RLHF relies on human raters to rank model outputs \u2014 expensive and inconsistent at scale. Constitutional AI (CAI) uses a written set of principles (a 'constitution') to have the model critique and revise its own outputs via AI feedback, then trains on those revised outputs \u2014 reducing human annotation cost while encoding explicit ethical principles",
+            "C": "Constitutional AI removes all safety constraints from Claude models",
+            "D": "RLHF uses a constitution; Constitutional AI uses human raters"
+          },
+          "answer": "B",
+          "explanation": "CAI (Bai et al., Anthropic, 2022): (1) SFT on helpful demonstrations; (2) model generates responses, then self-critiques against the constitution ('Does this response contain harmful content?'), then revises; (3) AI feedback generates preference data \u2192 train reward model \u2192 PPO. Advantages: scalable, explicit principles auditable, less reliant on human rater consistency. Used in Claude model training.",
+          "source": "Bai et al. Constitutional AI: Harmlessness from AI Feedback. Anthropic, 2022. https://arxiv.org/abs/2212.08073"
+        },
+        {
+          "q_id": "Q10a-MQ4-05",
+          "bloom": "L3",
+          "skill": "Evaluate",
+          "stem": "A news organisation wants to use an LLM to auto-generate breaking news articles. Evaluate the key risks and design a responsible deployment framework.",
+          "options": {
+            "A": "No risks \u2014 LLMs are factually accurate for news generation",
+            "B": "Key risks: (1) hallucination \u2014 fabricated facts, quotes, statistics; (2) bias amplification from training data; (3) copyright \u2014 reproducing source articles; (4) speed incentivising accuracy shortcuts. Responsible framework: LLM drafts from verified wire feeds only (not open web); mandatory human journalist review and sign-off; factual claims auto-verified against trusted databases; AI-authorship disclosed to readers (EU AI Act Art. 50); zero-tolerance policy for unverified quotes",
+            "C": "Use LLMs only if they achieve >95% accuracy on a news benchmark",
+            "D": "Fully automate publishing \u2014 human review adds unacceptable latency"
+          },
+          "answer": "B",
+          "explanation": "News AI risks: hallucination in factual reporting causes reputational and legal harm (defamation). Responsible framework: RAG over verified sources (AP, Reuters wire) limits hallucination; human editorial sign-off preserves journalistic accountability; AI disclosure required under EU AI Act Art. 50 for synthetic media; speed-accuracy trade-off must be resolved in favour of accuracy for news. AP has published internal AI use standards as a model.",
+          "source": "EU AI Act Art. 50. 2024; AP. AP's approach to artificial intelligence. https://www.ap.org/about/news-values-and-principles/telling-the-story/artificial-intelligence; Ji et al. Survey of Hallucination. ACM, 2023."
+        }
+      ]
+    }
+  ],
+  "table_of_contents": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 Foundations of Generative AI",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q10a-MQ1-01",
+        "Q10a-MQ1-02",
+        "Q10a-MQ1-03",
+        "Q10a-MQ1-04",
+        "Q10a-MQ1-05"
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 Training, Fine-Tuning and Alignment",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q10a-MQ2-01",
+        "Q10a-MQ2-02",
+        "Q10a-MQ2-03",
+        "Q10a-MQ2-04",
+        "Q10a-MQ2-05"
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Prompting Techniques and LLM Capabilities",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q10a-MQ3-01",
+        "Q10a-MQ3-02",
+        "Q10a-MQ3-03",
+        "Q10a-MQ3-04",
+        "Q10a-MQ3-05"
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Generative AI Ethics, Safety and Governance",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q10a-MQ4-01",
+        "Q10a-MQ4-02",
+        "Q10a-MQ4-03",
+        "Q10a-MQ4-04",
+        "Q10a-MQ4-05"
+      ]
+    }
+  ],
+  "totals": {
+    "mini_quizzes": 4,
+    "questions": 20,
+    "L1": 8,
+    "L2": 8,
+    "L3": 4
+  }
+}

@@ -1,0 +1,409 @@
+{
+  "module_id": "computer-vision",
+  "module_title": "Computer Vision-Q",
+  "type": "quiz",
+  "difficulty": "Beginner",
+  "companion_learning": "Computer Vision-L",
+  "superquiz_pool": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+  ],
+  "bloom_distribution": {
+    "L1_remember": 2,
+    "L2_understand": 2,
+    "L3_apply": 1
+  },
+  "mini_quizzes": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 Image Fundamentals and Classical CV",
+      "source_lesson": "ML-1",
+      "questions": [
+        {
+          "q_id": "Q08-MQ1-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "In digital imaging, what does a pixel value represent in a greyscale image, and what is the standard 8-bit range?",
+          "options": {
+            "A": "The 3D depth of the scene; range 0\u2013360",
+            "B": "The intensity of light at that location; range 0 (black) to 255 (white)",
+            "C": "The colour hue encoded as a frequency; range 0\u20131",
+            "D": "The gradient magnitude at that location; range \u2212128 to 127"
+          },
+          "answer": "B",
+          "explanation": "An 8-bit greyscale pixel stores luminance intensity as an unsigned integer 0\u2013255. 0=black, 255=white. Colour images (RGB) store three channels, each 0\u2013255, giving 16.7M possible colours. Normalising to [0,1] by dividing by 255 is standard preprocessing before neural network input.",
+          "source": "Szeliski. Computer Vision: Algorithms and Applications 2nd ed. Springer, 2022. Ch.2. https://szeliski.org/Book"
+        },
+        {
+          "q_id": "Q08-MQ1-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Which classical image processing operation uses a small matrix (kernel) slid across an image to detect edges or blur it?",
+          "options": {
+            "A": "Histogram equalisation",
+            "B": "Convolution with a filter kernel",
+            "C": "Morphological dilation",
+            "D": "Colour space conversion"
+          },
+          "answer": "B",
+          "explanation": "Convolution: output pixel = sum of element-wise products of the kernel and the overlapping image patch. A Gaussian kernel smooths/blurs. A Sobel kernel detects horizontal or vertical edges by approximating the image gradient. This is the mathematical foundation of convolutional layers in CNNs.",
+          "source": "Szeliski. Computer Vision. 2022. Ch.3; Gonzalez & Woods. Digital Image Processing 4th ed. Pearson, 2018."
+        },
+        {
+          "q_id": "Q08-MQ1-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why does histogram equalisation improve the visual quality of a low-contrast image?",
+          "options": {
+            "A": "It increases image resolution by interpolating new pixels",
+            "B": "It redistributes pixel intensities to span the full available range (0\u2013255), increasing contrast by spreading the histogram uniformly \u2014 making dark and bright details more distinguishable",
+            "C": "It removes noise by averaging adjacent pixels",
+            "D": "It converts the image from RGB to greyscale"
+          },
+          "answer": "B",
+          "explanation": "Low-contrast images have pixel values clustered in a narrow intensity range. Histogram equalisation computes the cumulative distribution function (CDF) of pixel intensities and applies a monotonic mapping so the output histogram is approximately uniform across 0\u2013255. This maximises global contrast without changing image content.",
+          "source": "Gonzalez & Woods. Digital Image Processing 4th ed. 2018. Ch.3; Szeliski. Computer Vision. 2022."
+        },
+        {
+          "q_id": "Q08-MQ1-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does the Canny edge detector differ from simply applying a Sobel filter to detect edges?",
+          "options": {
+            "A": "They are identical \u2014 Canny is just a renamed Sobel filter",
+            "B": "Sobel computes gradient magnitude at each pixel \u2014 sensitive to noise, produces thick edges; Canny applies Gaussian smoothing first, then Sobel gradients, then non-maximum suppression (thin edges) and hysteresis thresholding (reduce false positives), producing clean, thin, well-localised edges",
+            "C": "Canny detects only horizontal edges; Sobel detects all directions",
+            "D": "Sobel is more accurate than Canny for natural images"
+          },
+          "answer": "B",
+          "explanation": "Canny (1986) pipeline: (1) Gaussian blur \u2014 reduces noise; (2) Sobel gradient magnitude and direction; (3) non-maximum suppression \u2014 keeps only local gradient maxima \u2192 thin edges; (4) double hysteresis thresholding \u2014 strong edges kept, weak edges kept only if connected to strong. Sobel alone produces thick, noisy edge maps.",
+          "source": "Canny. A Computational Approach to Edge Detection. IEEE TPAMI, 8(6), 1986; Szeliski. Computer Vision. 2022."
+        },
+        {
+          "q_id": "Q08-MQ1-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "You need to detect whether a manufacturing component image is defective by comparing it to a template image. Which classical CV pipeline is most appropriate?",
+          "options": {
+            "A": "Train a ResNet-50 from scratch on 10 defect images",
+            "B": "Align the test image to the template using feature matching (SIFT/ORB keypoints + RANSAC homography), compute pixel-wise absolute difference, threshold the difference map, and flag regions exceeding the threshold as defects",
+            "C": "Apply k-means clustering to segment the image into colour regions",
+            "D": "Use histogram equalisation and report the mean pixel value"
+          },
+          "answer": "B",
+          "explanation": "Template matching pipeline: (1) SIFT/ORB keypoint detection and descriptor matching \u2192 robust to scale/rotation; (2) RANSAC homography \u2014 filters outlier matches; (3) warp test image to template alignment; (4) |test\u2212template| > threshold \u2192 defect mask. Practical for small datasets where DL training data is unavailable.",
+          "source": "Lowe. SIFT. IJCV, 2004; Szeliski. Computer Vision. 2022. Ch.7."
+        }
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 Deep Learning for Computer Vision",
+      "source_lesson": "ML-2",
+      "questions": [
+        {
+          "q_id": "Q08-MQ2-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What architectural innovation did ResNet introduce to enable training of very deep networks (100+ layers)?",
+          "options": {
+            "A": "Replacing all activation functions with linear units",
+            "B": "Skip connections (residual connections) that add the input of a block directly to its output \u2014 F(x)+x \u2014 allowing gradients to flow directly through the network and avoiding vanishing gradients",
+            "C": "Using larger convolutional filters (11\u00d711) in all layers",
+            "D": "Removing pooling layers entirely"
+          },
+          "answer": "B",
+          "explanation": "He et al. (2015): ResNet introduced residual blocks where the output is F(x)+x. If F(x)=0, the block becomes an identity function \u2014 the network can learn to bypass layers it doesn't need. Skip connections provide gradient highways, enabling 152-layer ResNets to train effectively (won ImageNet 2015 with 3.57% top-5 error).",
+          "source": "He et al. Deep Residual Learning for Image Recognition. CVPR, 2016. https://arxiv.org/abs/1512.03385"
+        },
+        {
+          "q_id": "Q08-MQ2-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "What task does object detection perform that image classification alone does not?",
+          "options": {
+            "A": "Object detection classifies the entire image into one category",
+            "B": "Object detection localises objects by predicting bounding boxes and class labels for multiple objects simultaneously within an image",
+            "C": "Object detection only works on binary (two-class) problems",
+            "D": "Object detection segments each pixel into a class"
+          },
+          "answer": "B",
+          "explanation": "Image classification: one label per image. Object detection: multiple objects per image, each with a bounding box (x, y, w, h) and class label. Semantic segmentation assigns a class to every pixel. Instance segmentation (Mask R-CNN) combines detection with per-instance pixel masks.",
+          "source": "Ren et al. Faster R-CNN. NeurIPS, 2015; Redmon et al. YOLO. CVPR, 2016."
+        },
+        {
+          "q_id": "Q08-MQ2-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why does data augmentation (random cropping, flipping, colour jitter) improve CNN generalisation?",
+          "options": {
+            "A": "Data augmentation increases the model's parameter count",
+            "B": "Augmentation artificially expands the effective training set by creating diverse variants of each image, reducing overfitting by preventing the model from memorising exact pixel patterns and improving robustness to real-world variation",
+            "C": "Data augmentation reduces training time by simplifying images",
+            "D": "Augmentation improves accuracy only for binary classification tasks"
+          },
+          "answer": "B",
+          "explanation": "CNNs can overfit exact training images. Random horizontal flip, crop, rotation, colour jitter, and cutout create new training examples that expose the model to natural appearance variation. This is equivalent to training on a larger, more diverse dataset, reducing the generalisation gap between train and test performance.",
+          "source": "Shorten & Khoshgoftaar. A Survey on Image Data Augmentation for Deep Learning. J Big Data, 2019; He et al. CVPR, 2016."
+        },
+        {
+          "q_id": "Q08-MQ2-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does semantic segmentation differ from instance segmentation?",
+          "options": {
+            "A": "They are identical \u2014 both assign one label per image",
+            "B": "Semantic segmentation assigns a class label to every pixel but does not distinguish between different instances of the same class; instance segmentation both assigns pixel classes and distinguishes between individual object instances",
+            "C": "Instance segmentation only detects bounding boxes",
+            "D": "Semantic segmentation requires more computation than instance segmentation"
+          },
+          "answer": "B",
+          "explanation": "Semantic segmentation (FCN, DeepLab): every pixel classified as car/road/person/background \u2014 all cars are the same 'car' class. Instance segmentation (Mask R-CNN): each individual car gets its own mask \u2014 two cars adjacent are labelled separately. Panoptic segmentation unifies both: per-pixel labels + instance distinction for countable objects.",
+          "source": "He et al. Mask R-CNN. ICCV, 2017. https://arxiv.org/abs/1703.06870; Long et al. Fully Convolutional Networks. CVPR, 2015."
+        },
+        {
+          "q_id": "Q08-MQ2-05",
+          "bloom": "L3",
+          "skill": "Evaluate",
+          "stem": "A YOLO object detector achieves mAP@50=0.87 on your test set but misses 40% of small objects (<32\u00d732 pixels). Diagnose and propose two improvements.",
+          "options": {
+            "A": "The model is performing well \u2014 no small-object issues exist",
+            "B": "Multi-scale detection failure: small objects are lost after aggressive downsampling. Improvements: (1) use a Feature Pyramid Network (FPN) to detect at multiple resolution scales; (2) add a dedicated small-object detection head using higher-resolution feature maps from earlier layers",
+            "C": "Reduce input image resolution to improve small-object detection",
+            "D": "Replace YOLO with image classification \u2014 detection is too complex"
+          },
+          "answer": "B",
+          "explanation": "Small objects occupy few pixels after CNN downsampling \u2014 their features are diluted in deep, low-resolution feature maps. FPN (Lin et al., 2017) creates a multi-scale feature pyramid with lateral connections, fusing semantics from deep layers with spatial resolution from shallow layers. YOLOv5/v8 and Detectron2 implement FPN natively for this reason.",
+          "source": "Lin et al. Feature Pyramid Networks. CVPR, 2017. https://arxiv.org/abs/1612.03144; Redmon & Farhadi. YOLOv3. 2018."
+        }
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Generative Models in Computer Vision",
+      "source_lesson": "ML-3",
+      "questions": [
+        {
+          "q_id": "Q08-MQ3-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "In a Generative Adversarial Network (GAN), what are the roles of the generator and the discriminator?",
+          "options": {
+            "A": "Generator classifies real vs fake; discriminator creates synthetic images",
+            "B": "Generator creates synthetic images from random noise; discriminator classifies images as real or generated \u2014 both are trained adversarially until the generator fools the discriminator",
+            "C": "Both the generator and discriminator classify images",
+            "D": "The generator encodes images; the discriminator decodes them"
+          },
+          "answer": "B",
+          "explanation": "GAN minimax game (Goodfellow et al., 2014): Generator G(z) maps random noise z to synthetic images. Discriminator D(x) outputs P(real|x). Training: D maximises log D(x)+log(1\u2212D(G(z))); G minimises log(1\u2212D(G(z))). Nash equilibrium: G produces indistinguishable images; D outputs 0.5 for all inputs.",
+          "source": "Goodfellow et al. Generative Adversarial Networks. NeurIPS, 2014. https://arxiv.org/abs/1406.2661"
+        },
+        {
+          "q_id": "Q08-MQ3-02",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "What is the core mechanism of diffusion models (e.g., DALL-E 2, Stable Diffusion) for image generation?",
+          "options": {
+            "A": "Diffusion models use a GAN discriminator to select the best of 1,000 generated candidates",
+            "B": "Diffusion models learn to reverse a gradual noising process \u2014 they are trained to predict and remove noise added at each step of a forward Markov chain, enabling generation by iteratively denoising pure Gaussian noise",
+            "C": "Diffusion models compress images using variational autoencoders only",
+            "D": "Diffusion models generate images by sampling from a fixed Gaussian distribution without iteration"
+          },
+          "answer": "B",
+          "explanation": "DDPM (Ho et al., 2020): forward process gradually adds Gaussian noise over T steps (T=1000) until the image is pure noise. Reverse process: a U-Net learns to predict and remove noise at each step. Generation: start from pure noise, iteratively denoise T times. Conditioning on text (CLIP embeddings) enables text-to-image generation.",
+          "source": "Ho et al. Denoising Diffusion Probabilistic Models. NeurIPS, 2020. https://arxiv.org/abs/2006.11239"
+        },
+        {
+          "q_id": "Q08-MQ3-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why do GANs suffer from mode collapse, and what is one architectural remedy?",
+          "options": {
+            "A": "Mode collapse occurs when the discriminator is too weak",
+            "B": "Mode collapse: the generator finds a small subset of outputs that consistently fool the discriminator and collapses to producing only those \u2014 ignoring the full data distribution. Remedy: Wasserstein GAN (WGAN) replaces the discriminator with a critic using Earth Mover Distance, providing a more stable training signal that prevents collapse",
+            "C": "Mode collapse is caused by using ReLU activations",
+            "D": "Mode collapse only occurs with small datasets \u2014 no architectural fix exists"
+          },
+          "answer": "B",
+          "explanation": "Standard GAN: once G finds outputs fooling D, gradient signal for exploring new modes vanishes. WGAN (Arjovsky et al., 2017): uses Wasserstein-1 distance \u2014 a smooth metric proportional to the 'effort' to transform one distribution into another. The critic is trained to convergence, providing meaningful gradients throughout training. Also: minibatch discrimination, spectral normalisation.",
+          "source": "Arjovsky et al. Wasserstein GAN. ICML, 2017. https://arxiv.org/abs/1701.07875"
+        },
+        {
+          "q_id": "Q08-MQ3-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "How does a Variational Autoencoder (VAE) differ from a standard autoencoder in its latent space representation?",
+          "options": {
+            "A": "VAEs use convolutional encoders; standard autoencoders use fully connected layers",
+            "B": "Standard autoencoders encode inputs to a fixed point in latent space; VAEs encode inputs as a distribution (mean \u03bc and variance \u03c3\u00b2), sampling z~N(\u03bc,\u03c3\u00b2) during training \u2014 producing a smooth, continuous latent space that enables generative sampling",
+            "C": "VAEs cannot be used for image generation",
+            "D": "Standard autoencoders have a lower reconstruction error than VAEs"
+          },
+          "answer": "B",
+          "explanation": "Kingma & Welling (2013): VAE encoder outputs \u03bc and log \u03c3\u00b2 rather than a point. Reparameterisation trick: z = \u03bc + \u03c3\u00b7\u03b5, \u03b5~N(0,I) \u2014 makes sampling differentiable. Loss = reconstruction error + KL divergence (forces latent to be close to N(0,I)). Continuous latent space: interpolation between two encoded images produces realistic intermediate images.",
+          "source": "Kingma & Welling. Auto-Encoding Variational Bayes. ICLR, 2014. https://arxiv.org/abs/1312.6114"
+        },
+        {
+          "q_id": "Q08-MQ3-05",
+          "bloom": "L3",
+          "skill": "Evaluate",
+          "stem": "You are generating synthetic training images of rare medical anomalies using a GAN, but evaluation shows the GAN produces only 3 visually distinct anomaly types despite 20 known types. Diagnose and propose two remediations.",
+          "options": {
+            "A": "The GAN is performing well \u2014 3 types is sufficient for training",
+            "B": "Mode collapse: the GAN has converged to 3 modes ignoring 17 anomaly types. Remediations: (1) switch to a conditional GAN (cGAN) with class conditioning \u2014 train a separate generation pathway per anomaly type; (2) use a diffusion model (DDPM) which is more robust to mode collapse due to its iterative denoising objective",
+            "C": "Increase the discriminator learning rate to fix mode collapse",
+            "D": "Reduce the number of training epochs"
+          },
+          "answer": "B",
+          "explanation": "Classic mode collapse on a multi-modal medical distribution. Fix 1: cGAN (Mirza & Osindero, 2014) \u2014 condition G and D on class label, forcing generation across all 20 classes. Fix 2: Diffusion models (Ho et al., 2020) are inherently less prone to mode collapse because every training step uses a different noise level, maintaining diverse gradient signal. Both validated for medical image synthesis.",
+          "source": "Mirza & Osindero. Conditional Generative Adversarial Nets. 2014. https://arxiv.org/abs/1411.1784; Ho et al. DDPM. NeurIPS, 2020."
+        }
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Vision Transformers and Multimodal AI",
+      "source_lesson": "ML-4",
+      "questions": [
+        {
+          "q_id": "Q08-MQ4-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "How does a Vision Transformer (ViT) represent an image before applying Transformer self-attention?",
+          "options": {
+            "A": "It applies a 1\u00d71 convolution across the full image",
+            "B": "It divides the image into fixed-size non-overlapping patches (e.g., 16\u00d716 pixels), linearly embeds each patch into a vector, prepends a [CLS] token, adds positional embeddings, and passes the sequence through a standard Transformer encoder",
+            "C": "It applies max pooling to reduce the image to a 1D vector",
+            "D": "It converts the image to greyscale and processes rows as sequence tokens"
+          },
+          "answer": "B",
+          "explanation": "ViT (Dosovitskiy et al., 2020): a 224\u00d7224 image with 16\u00d716 patches \u2192 196 patch tokens + 1 [CLS] token = 197 sequence length. Each patch is flattened (768D for ViT-Base) and linearly projected. Positional embeddings added. Standard Transformer encoder applied. [CLS] token output \u2192 classification head. ViT-L/16 achieved 88.6% top-1 on ImageNet.",
+          "source": "Dosovitskiy et al. An Image is Worth 16\u00d716 Words. ICLR, 2021. https://arxiv.org/abs/2010.11929"
+        },
+        {
+          "q_id": "Q08-MQ4-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "What does CLIP (Contrastive Language-Image Pretraining) learn, and what capability does this enable?",
+          "options": {
+            "A": "CLIP learns to generate images from text descriptions",
+            "B": "CLIP learns aligned image and text embeddings by training on 400M image-text pairs using contrastive loss \u2014 enabling zero-shot image classification by comparing image embeddings to text label embeddings",
+            "C": "CLIP is a speech-to-text model trained on audio-image pairs",
+            "D": "CLIP trains a GAN to generate photorealistic images"
+          },
+          "answer": "B",
+          "explanation": "CLIP (Radford et al., OpenAI 2021): dual encoder (image + text) trained with InfoNCE contrastive loss \u2014 matching image embeddings to their caption embeddings in a shared space. At inference: encode image + all class label texts; classify as the label with highest cosine similarity. Zero-shot: no task-specific fine-tuning required. Foundation of DALL-E 2, Stable Diffusion guidance.",
+          "source": "Radford et al. Learning Transferable Visual Models From Natural Language Supervision (CLIP). ICML, 2021. https://arxiv.org/abs/2103.00020"
+        },
+        {
+          "q_id": "Q08-MQ4-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why do Vision Transformers (ViT) generally require more training data than CNNs to achieve comparable performance?",
+          "options": {
+            "A": "ViTs have fewer parameters than CNNs, limiting capacity",
+            "B": "CNNs have strong inductive biases (locality, translation invariance) built into their architecture; ViTs lack these priors and must learn spatial relationships purely from data \u2014 requiring larger datasets (e.g., JFT-300M) to discover structure CNNs assume by design",
+            "C": "ViTs use a higher learning rate, causing overfitting on small datasets",
+            "D": "CNNs are pre-trained; ViTs are always trained from scratch"
+          },
+          "answer": "B",
+          "explanation": "CNN inductive biases: (1) local receptive fields \u2014 nearby pixels are related; (2) shared weights \u2014 translation invariance. These are correct priors for images, enabling data-efficient learning. ViT self-attention is permutation-invariant and must learn spatial structure from data. Dosovitskiy et al. (2021) showed ViT-L underperforms ResNets on ImageNet alone but surpasses them when pre-trained on JFT-300M.",
+          "source": "Dosovitskiy et al. ICLR, 2021; D'Ascoli et al. ConViT: Improving Vision Transformers with Soft Convolutional Inductive Biases. ICML, 2021."
+        },
+        {
+          "q_id": "Q08-MQ4-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does a multimodal model like GPT-4V differ from a text-only LLM in its input processing?",
+          "options": {
+            "A": "GPT-4V converts images to text descriptions before processing \u2014 identical to a text-only LLM",
+            "B": "GPT-4V encodes images using a vision encoder (e.g., CLIP-style) producing visual tokens that are concatenated with text tokens and jointly processed by the LLM, enabling cross-modal reasoning over both image and text inputs",
+            "C": "Text-only LLMs and multimodal models use identical architectures",
+            "D": "GPT-4V processes only images and cannot handle text"
+          },
+          "answer": "B",
+          "explanation": "Multimodal LLMs (GPT-4V, LLaVA, Gemini): visual encoder (ViT or CLIP) produces patch embeddings \u2192 projected to LLM token dimension via a linear layer \u2192 concatenated with text token embeddings \u2192 fed to the LLM decoder. The LLM learns to attend across both modalities, enabling visual question answering, chart understanding, and image captioning.",
+          "source": "OpenAI. GPT-4 Technical Report. 2023. https://arxiv.org/abs/2303.08774; Liu et al. LLaVA. NeurIPS, 2023."
+        },
+        {
+          "q_id": "Q08-MQ4-05",
+          "bloom": "L3",
+          "skill": "Design",
+          "stem": "You are building a system to automatically describe radiology images in plain English for patient reports. Which architecture and training strategy is most appropriate?",
+          "options": {
+            "A": "Fine-tune a text-only GPT model on radiology reports \u2014 no image encoder needed",
+            "B": "Use a multimodal architecture: fine-tune a pre-trained vision-language model (e.g., LLaVA or Med-PaLM 2) on a dataset of (radiology image, expert report) pairs, using RLHF or instruction tuning to ensure clinically accurate, plain-English output; validate with radiologist review",
+            "C": "Apply classical image processing to segment anatomical regions and label them with a lookup table",
+            "D": "Use GAN to generate radiology images and train a classifier on synthetic data"
+          },
+          "answer": "B",
+          "explanation": "Medical image captioning requires: (1) visual understanding of anatomical structures and pathologies (vision encoder); (2) medically accurate natural language generation (LLM); (3) domain alignment (fine-tuning on radiology image-report pairs). RLHF with radiologist feedback ensures clinical accuracy and appropriate plain-English translation. Med-PaLM 2 (Tu et al., 2023) achieved expert-level performance on medical QA using this approach.",
+          "source": "Tu et al. Towards Generalist Biomedical AI (Med-PaLM 2). 2023. https://arxiv.org/abs/2305.09617; Liu et al. LLaVA. NeurIPS, 2023."
+        }
+      ]
+    }
+  ],
+  "table_of_contents": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 Image Fundamentals and Classical CV",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q08-MQ1-01",
+        "Q08-MQ1-02",
+        "Q08-MQ1-03",
+        "Q08-MQ1-04",
+        "Q08-MQ1-05"
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 Deep Learning for Computer Vision",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q08-MQ2-01",
+        "Q08-MQ2-02",
+        "Q08-MQ2-03",
+        "Q08-MQ2-04",
+        "Q08-MQ2-05"
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Generative Models in Computer Vision",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q08-MQ3-01",
+        "Q08-MQ3-02",
+        "Q08-MQ3-03",
+        "Q08-MQ3-04",
+        "Q08-MQ3-05"
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Vision Transformers and Multimodal AI",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q08-MQ4-01",
+        "Q08-MQ4-02",
+        "Q08-MQ4-03",
+        "Q08-MQ4-04",
+        "Q08-MQ4-05"
+      ]
+    }
+  ],
+  "totals": {
+    "mini_quizzes": 4,
+    "questions": 20,
+    "L1": 8,
+    "L2": 8,
+    "L3": 4
+  }
+}

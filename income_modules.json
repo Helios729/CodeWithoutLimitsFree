@@ -1,0 +1,409 @@
+{
+  "module_id": "neural-networks-and-deep-learning",
+  "module_title": "Neural Networks and Deep Learning-Q",
+  "type": "quiz",
+  "difficulty": "Beginner",
+  "companion_learning": "Neural Networks and Deep Learning-L",
+  "superquiz_pool": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+  ],
+  "bloom_distribution": {
+    "L1_remember": 2,
+    "L2_understand": 2,
+    "L3_apply": 1
+  },
+  "mini_quizzes": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 Biological and Artificial Neurons",
+      "source_lesson": "ML-1",
+      "questions": [
+        {
+          "q_id": "Q06-MQ1-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "Which best describes the role of an activation function in an artificial neuron?",
+          "options": {
+            "A": "It stores the model's learned weights",
+            "B": "It introduces non-linearity by transforming the weighted sum of inputs into an output signal",
+            "C": "It calculates the loss between predictions and true labels",
+            "D": "It normalises the input data before training"
+          },
+          "answer": "B",
+          "explanation": "Without an activation function, stacking multiple linear layers produces only another linear transformation. Non-linear activations (ReLU, sigmoid, tanh) allow networks to approximate any continuous function (Universal Approximation Theorem, Cybenko 1989).",
+          "source": "Goodfellow et al. Deep Learning. MIT Press, 2016. Ch.6. https://www.deeplearningbook.org"
+        },
+        {
+          "q_id": "Q06-MQ1-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "Which activation function outputs values in the range (0, 1) and is commonly used in binary classification output layers?",
+          "options": {
+            "A": "ReLU",
+            "B": "Tanh",
+            "C": "Sigmoid",
+            "D": "Softmax"
+          },
+          "answer": "C",
+          "explanation": "Sigmoid: \u03c3(z) = 1/(1+e\u207b\u1dbb) \u2208 (0,1). Maps any real input to a probability-like output. Used in binary classification output layers. Tanh outputs (\u22121,1). ReLU outputs [0,\u221e). Softmax produces a probability distribution over K classes (multi-class).",
+          "source": "Goodfellow et al. Deep Learning. MIT Press, 2016. Ch.6. https://www.deeplearningbook.org"
+        },
+        {
+          "q_id": "Q06-MQ1-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why did ReLU largely replace sigmoid and tanh as the preferred hidden-layer activation function in deep networks?",
+          "options": {
+            "A": "ReLU outputs values between 0 and 1, making gradients stable",
+            "B": "ReLU avoids the vanishing gradient problem: its gradient is 1 for positive inputs (vs sigmoid's maximum gradient of 0.25), enabling effective gradient flow through many layers during backpropagation",
+            "C": "ReLU is differentiable everywhere, making it easier to optimise",
+            "D": "ReLU produces negative outputs that help regularise the network"
+          },
+          "answer": "B",
+          "explanation": "Sigmoid and tanh saturate \u2014 gradients approach zero for large inputs, causing the vanishing gradient problem in deep networks. ReLU (max(0,z)) has gradient 1 for z>0, allowing gradients to flow unchanged through many layers. This enables training of much deeper architectures (Glorot & Bengio, 2010).",
+          "source": "Glorot & Bengio. Understanding the difficulty of training deep feedforward neural networks. AISTATS, 2010; Goodfellow et al. Deep Learning. 2016."
+        },
+        {
+          "q_id": "Q06-MQ1-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does a multi-layer perceptron (MLP) differ from a single-layer perceptron in representational capacity?",
+          "options": {
+            "A": "They have identical representational capacity \u2014 adding layers adds no capability",
+            "B": "A single-layer perceptron can only learn linearly separable functions; an MLP with one or more hidden layers and non-linear activations can approximate any continuous function (Universal Approximation Theorem)",
+            "C": "An MLP uses convolutional filters; a perceptron uses fully connected layers",
+            "D": "A single-layer perceptron is faster but more accurate than an MLP"
+          },
+          "answer": "B",
+          "explanation": "Minsky & Papert (1969) showed single-layer perceptrons cannot solve XOR. The Universal Approximation Theorem (Cybenko, 1989; Hornik, 1991) proves that an MLP with at least one hidden layer and a non-linear activation can approximate any continuous function on a compact domain to arbitrary precision.",
+          "source": "Goodfellow et al. Deep Learning. 2016. Ch.6; Cybenko. Approximation by superpositions of a sigmoidal function. Mathematics of Control, 1989."
+        },
+        {
+          "q_id": "Q06-MQ1-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "A neural network for 10-class image classification has an input layer of 784 nodes, two hidden layers of 256 and 128 nodes (ReLU), and an output layer. Which output layer configuration and loss function are correct?",
+          "options": {
+            "A": "Output: 1 node, sigmoid activation; Loss: binary cross-entropy",
+            "B": "Output: 10 nodes, softmax activation; Loss: categorical cross-entropy",
+            "C": "Output: 10 nodes, ReLU activation; Loss: MSE",
+            "D": "Output: 784 nodes, tanh activation; Loss: MAE"
+          },
+          "answer": "B",
+          "explanation": "Multi-class classification over K=10 classes: output layer has K=10 nodes. Softmax normalises outputs to a probability distribution summing to 1. Categorical cross-entropy loss: L = \u2212\u03a3 y\u1d62\u00b7log(\u0177\u1d62). Binary cross-entropy is for binary classification only. MSE is a regression loss \u2014 inappropriate here.",
+          "source": "Goodfellow et al. Deep Learning. 2016. Ch.6; LeCun et al. Gradient-Based Learning Applied to Document Recognition. IEEE, 1998."
+        }
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 Backpropagation and Gradient Descent",
+      "source_lesson": "ML-2",
+      "questions": [
+        {
+          "q_id": "Q06-MQ2-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What is the purpose of backpropagation in training a neural network?",
+          "options": {
+            "A": "To initialise the network weights before training begins",
+            "B": "To efficiently compute the gradient of the loss with respect to every weight in the network using the chain rule of calculus",
+            "C": "To normalise activations between layers during the forward pass",
+            "D": "To randomly shuffle training examples before each epoch"
+          },
+          "answer": "B",
+          "explanation": "Backpropagation (Rumelhart, Hinton & Williams, 1986) applies the chain rule to compute \u2202L/\u2202w\u1d62\u2c7c for every weight in O(n) time \u2014 the same cost as a forward pass. Without backprop, computing gradients for millions of weights would be computationally intractable.",
+          "source": "Rumelhart et al. Learning representations by back-propagating errors. Nature, 1986; Goodfellow et al. Deep Learning. 2016. Ch.6."
+        },
+        {
+          "q_id": "Q06-MQ2-02",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "In gradient descent, what does the learning rate (\u03b1) control?",
+          "options": {
+            "A": "The number of training epochs",
+            "B": "The step size of each weight update: w \u2190 w \u2212 \u03b1\u00b7\u2202L/\u2202w",
+            "C": "The proportion of training data used per batch",
+            "D": "The depth of the neural network"
+          },
+          "answer": "B",
+          "explanation": "Learning rate \u03b1 scales the gradient step: w \u2190 w \u2212 \u03b1\u00b7\u2202L/\u2202w. Too large: overshoots the minimum (diverges). Too small: extremely slow convergence. Standard starting values: \u03b1=0.001 for Adam, \u03b1=0.01 for SGD. Tuned via learning rate schedulers (warm-up, cosine decay).",
+          "source": "Goodfellow et al. Deep Learning. 2016. Ch.8. https://www.deeplearningbook.org"
+        },
+        {
+          "q_id": "Q06-MQ2-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why does mini-batch gradient descent typically outperform both full-batch gradient descent and stochastic gradient descent (SGD)?",
+          "options": {
+            "A": "Mini-batch always converges to a lower loss than full-batch or SGD",
+            "B": "Mini-batch balances computational efficiency (vectorised GPU operations on batches) with noisy gradient estimates that help escape local minima \u2014 avoiding full-batch's slow updates and SGD's extreme gradient noise",
+            "C": "Mini-batch uses less memory than SGD",
+            "D": "Mini-batch computes exact gradients, unlike SGD which uses approximations"
+          },
+          "answer": "B",
+          "explanation": "Full-batch: exact gradient but slow (full dataset per update); poor GPU utilisation for large datasets. SGD (batch=1): fast updates but extreme noise \u2014 unstable convergence. Mini-batch (32\u2013512): leverages GPU parallelism, noisy enough to escape sharp minima, converges reliably. Standard in all modern deep learning frameworks.",
+          "source": "Goodfellow et al. Deep Learning. 2016. Ch.8; LeCun et al. Efficient BackProp. Neural Networks: Tricks of the Trade, 2012."
+        },
+        {
+          "q_id": "Q06-MQ2-04",
+          "bloom": "L2",
+          "skill": "Describe",
+          "stem": "How does the Adam optimiser differ from vanilla SGD, and why is it preferred for most deep learning tasks?",
+          "options": {
+            "A": "Adam uses a fixed learning rate for all weights; SGD adapts per-parameter rates",
+            "B": "Adam maintains adaptive per-parameter learning rates using estimates of first (mean) and second (variance) gradient moments, providing faster convergence and robustness to learning rate choice compared to vanilla SGD",
+            "C": "SGD uses momentum; Adam does not",
+            "D": "Adam is only suitable for convolutional networks; SGD is general-purpose"
+          },
+          "answer": "B",
+          "explanation": "Adam (Kingma & Ba, 2014): m\u209c = \u03b2\u2081m\u209c\u208b\u2081 + (1\u2212\u03b2\u2081)g\u209c (first moment); v\u209c = \u03b2\u2082v\u209c\u208b\u2081 + (1\u2212\u03b2\u2082)g\u209c\u00b2 (second moment); w \u2190 w \u2212 \u03b1\u00b7m\u0302\u209c/\u221a(v\u0302\u209c+\u03b5). Adaptive rates per weight. Defaults (\u03b1=0.001, \u03b2\u2081=0.9, \u03b2\u2082=0.999) work across most architectures without tuning.",
+          "source": "Kingma & Ba. Adam: A Method for Stochastic Optimization. ICLR, 2015. https://arxiv.org/abs/1412.6980"
+        },
+        {
+          "q_id": "Q06-MQ2-05",
+          "bloom": "L3",
+          "skill": "Apply",
+          "stem": "During training, the loss decreases steadily for 10 epochs, then stops decreasing and begins to increase on the validation set while training loss continues to fall. What is happening and what is the standard remedy?",
+          "options": {
+            "A": "Underfitting \u2014 increase the number of layers",
+            "B": "Overfitting detected via diverging train/val loss curves. Standard remedy: implement early stopping (halt training when val loss has not improved for N consecutive epochs) and restore the best-performing checkpoint",
+            "C": "The learning rate is too low \u2014 increase it",
+            "D": "The batch size is too large \u2014 reduce it to 1"
+          },
+          "answer": "B",
+          "explanation": "Diverging train/val loss after epoch 10 = classic overfitting onset. Early stopping: monitor val loss, set patience=5\u201310 epochs, restore weights from the epoch with minimum val loss. Additional remedies: L2 weight decay, dropout, data augmentation. This is the standard training loop in PyTorch/TensorFlow/Keras.",
+          "source": "Goodfellow et al. Deep Learning. 2016. Ch.7; G\u00e9ron. Hands-On ML 3rd ed. 2022."
+        }
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Convolutional Neural Networks",
+      "source_lesson": "ML-3",
+      "questions": [
+        {
+          "q_id": "Q06-MQ3-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What property of convolutional layers makes them particularly suited to image data?",
+          "options": {
+            "A": "They process all pixels simultaneously using fully connected weights",
+            "B": "They exploit spatial locality and translation invariance via learned filters that detect features regardless of their position in the image",
+            "C": "They reduce image resolution by averaging pixel values",
+            "D": "They convert images to one-dimensional vectors before processing"
+          },
+          "answer": "B",
+          "explanation": "Convolutional layers: (1) local receptive fields \u2014 each filter connects to a small spatial region; (2) shared weights \u2014 the same filter slides across the entire image (translation invariance); (3) drastically fewer parameters than a fully connected layer over the same input. These properties make CNNs highly parameter-efficient for visual tasks.",
+          "source": "LeCun et al. Gradient-Based Learning Applied to Document Recognition. IEEE, 1998; Goodfellow et al. Deep Learning. 2016. Ch.9."
+        },
+        {
+          "q_id": "Q06-MQ3-02",
+          "bloom": "L1",
+          "skill": "Identify",
+          "stem": "What is the role of a pooling layer (e.g., max pooling) in a CNN?",
+          "options": {
+            "A": "To add non-linearity between convolutional layers",
+            "B": "To reduce the spatial dimensions of feature maps, decreasing computational cost and providing a degree of translation invariance",
+            "C": "To increase the number of feature channels",
+            "D": "To normalise activations across a mini-batch"
+          },
+          "answer": "B",
+          "explanation": "Max pooling (and average pooling) downsamples feature maps by taking the maximum (or average) value in each pooling window. Effects: (1) reduces spatial resolution \u2192 fewer parameters in subsequent layers; (2) small translations of input produce similar pooled outputs (limited translation invariance). Batch normalisation, not pooling, normalises activations.",
+          "source": "Goodfellow et al. Deep Learning. 2016. Ch.9. https://www.deeplearningbook.org"
+        },
+        {
+          "q_id": "Q06-MQ3-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why does a 3\u00d73 convolutional filter with stride 1 and no padding reduce the spatial dimensions of an input feature map?",
+          "options": {
+            "A": "It does not reduce dimensions \u2014 stride 1 always preserves spatial size",
+            "B": "Without padding, a 3\u00d73 filter applied with stride 1 reduces each spatial dimension by (kernel_size\u22121) = 2 pixels (from n to n\u22122), because the filter cannot extend beyond the input boundary",
+            "C": "Stride 1 doubles spatial dimensions",
+            "D": "Spatial dimensions are only reduced when pooling layers are used"
+          },
+          "answer": "B",
+          "explanation": "Output size formula: out = (in \u2212 kernel + 2\u00b7pad) / stride + 1. With kernel=3, stride=1, pad=0: out = (n\u22123+0)/1+1 = n\u22122. To preserve size: add padding=1 ('same' padding). Without padding (padding=0 = 'valid'), each 3\u00d73 conv reduces each spatial dimension by 2.",
+          "source": "Goodfellow et al. Deep Learning. 2016. Ch.9; CS231n. Convolutional Neural Networks for Visual Recognition. https://cs231n.github.io"
+        },
+        {
+          "q_id": "Q06-MQ3-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does transfer learning with a pre-trained CNN (e.g., ResNet-50) differ from training a CNN from scratch for a medical imaging task with 5,000 labelled images?",
+          "options": {
+            "A": "Transfer learning always produces lower accuracy than training from scratch",
+            "B": "Transfer learning: freeze early layers containing generic features (edges, textures), fine-tune later layers on the target task. With only 5,000 images, this typically outperforms training from scratch, which requires millions of images to avoid overfitting",
+            "C": "Transfer learning is only applicable to NLP tasks, not image classification",
+            "D": "Training from scratch is preferred when the target domain differs significantly from ImageNet"
+          },
+          "answer": "B",
+          "explanation": "Pre-trained CNNs (trained on ImageNet's 1.2M images) learn universal low-level features (edges, textures, shapes) in early layers. Fine-tuning re-uses these features and adapts task-specific layers to the new domain. With 5,000 medical images, training from scratch severely overfits; transfer learning typically achieves 5\u201320pp accuracy gains (Raghu et al., 2019).",
+          "source": "Goodfellow et al. Deep Learning. 2016; Raghu et al. Transfusion: Understanding Transfer Learning for Medical Imaging. NeurIPS, 2019."
+        },
+        {
+          "q_id": "Q06-MQ3-05",
+          "bloom": "L3",
+          "skill": "Design",
+          "stem": "You are building a CNN to classify chest X-rays as normal or pneumonia using 8,000 labelled images. Which architecture decision best applies the principles of transfer learning and regularisation?",
+          "options": {
+            "A": "Train a 50-layer CNN from random initialisation with no regularisation",
+            "B": "Load ResNet-50 pre-trained on ImageNet, freeze the first 40 layers, replace the final classification layer with a 2-node sigmoid output, apply dropout (p=0.5) before the final layer, and fine-tune with a low learning rate (1e-4)",
+            "C": "Use a 3-layer MLP on flattened pixel values with no pre-training",
+            "D": "Use k-means clustering to segment X-rays before feeding to a linear classifier"
+          },
+          "answer": "B",
+          "explanation": "Option B applies: (1) Transfer learning \u2014 ResNet-50 ImageNet weights provide strong low-level feature initialisation; (2) Freezing early layers \u2014 prevents catastrophic forgetting of generic features; (3) Task-specific output \u2014 2-node sigmoid for binary classification; (4) Dropout p=0.5 \u2014 regularises the high-capacity final layers; (5) Low learning rate \u2014 fine-tunes without destroying pre-trained representations. Standard approach validated in medical imaging literature.",
+          "source": "Raghu et al. NeurIPS, 2019; G\u00e9ron. Hands-On ML 3rd ed. 2022."
+        }
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Recurrent Networks and Transformers",
+      "source_lesson": "ML-4",
+      "questions": [
+        {
+          "q_id": "Q06-MQ4-01",
+          "bloom": "L1",
+          "skill": "Define",
+          "stem": "What problem do Long Short-Term Memory (LSTM) networks solve that vanilla RNNs cannot?",
+          "options": {
+            "A": "LSTMs process images faster than RNNs",
+            "B": "LSTMs use gating mechanisms (input, forget, output gates) to selectively retain or discard information over long sequences, overcoming the vanishing gradient problem that prevents vanilla RNNs from learning long-range dependencies",
+            "C": "LSTMs require less memory than vanilla RNNs",
+            "D": "LSTMs can process sequences in parallel, unlike RNNs"
+          },
+          "answer": "B",
+          "explanation": "Vanilla RNNs: gradient vanishes through long sequences as \u2202L/\u2202h\u2080 \u221d (\u2202h\u209c/\u2202h\u209c\u208b\u2081)\u1d40 \u2192 0 for T large. LSTMs (Hochreiter & Schmidhuber, 1997) introduce a cell state with additive gradient flow and three gates controlling information retention \u2014 enabling dependencies across hundreds of timesteps.",
+          "source": "Hochreiter & Schmidhuber. Long Short-Term Memory. Neural Computation, 9(8), 1997; Goodfellow et al. Deep Learning. 2016. Ch.10."
+        },
+        {
+          "q_id": "Q06-MQ4-02",
+          "bloom": "L1",
+          "skill": "State",
+          "stem": "What is the key innovation of the Transformer architecture introduced in 'Attention Is All You Need' (Vaswani et al., 2017)?",
+          "options": {
+            "A": "Replacing attention mechanisms with convolutional layers for faster processing",
+            "B": "Replacing recurrence entirely with self-attention, allowing parallel processing of all sequence positions and direct modelling of long-range dependencies",
+            "C": "Using recurrent layers with larger hidden states to capture longer dependencies",
+            "D": "Introducing batch normalisation before each attention layer"
+          },
+          "answer": "B",
+          "explanation": "Vaswani et al. (2017): the Transformer eliminates recurrence and convolution entirely, relying solely on self-attention. Self-attention computes Q, K, V = XW_Q, XW_K, XW_V; Attention(Q,K,V) = softmax(QK\u1d40/\u221ad\u2096)V. All positions attend to all others in O(1) operations, enabling parallelisation and direct long-range dependency modelling.",
+          "source": "Vaswani et al. Attention Is All You Need. NeurIPS, 2017. https://arxiv.org/abs/1706.03762"
+        },
+        {
+          "q_id": "Q06-MQ4-03",
+          "bloom": "L2",
+          "skill": "Explain",
+          "stem": "Why are Transformers more parallelisable during training than LSTM-based architectures?",
+          "options": {
+            "A": "Transformers use fewer parameters, making them faster to train",
+            "B": "LSTMs process tokens sequentially (each hidden state depends on the previous), preventing parallelisation across timesteps; Transformers process all tokens simultaneously via matrix operations in self-attention",
+            "C": "Transformers use convolutional operations which are inherently parallel",
+            "D": "LSTMs require gradient clipping; Transformers do not"
+          },
+          "answer": "B",
+          "explanation": "LSTM: h\u209c = f(h\u209c\u208b\u2081, x\u209c) \u2014 sequential dependency means token t cannot be computed until token t\u22121 is complete. This serialises training across sequence length T. Transformers compute attention for all positions simultaneously via batched matrix multiplications, enabling full GPU utilisation. This made training GPT/BERT on billions of tokens feasible.",
+          "source": "Vaswani et al. NeurIPS, 2017; Goodfellow et al. Deep Learning. 2016. Ch.10."
+        },
+        {
+          "q_id": "Q06-MQ4-04",
+          "bloom": "L2",
+          "skill": "Compare",
+          "stem": "How does BERT's pre-training objective differ from GPT's, and what downstream tasks is each better suited for?",
+          "options": {
+            "A": "BERT and GPT use identical pre-training objectives \u2014 they differ only in parameter count",
+            "B": "BERT uses masked language modelling (bidirectional context); better suited for classification, NER, and Q&A. GPT uses causal language modelling (left-to-right); better suited for text generation and completion",
+            "C": "GPT uses bidirectional attention; BERT uses unidirectional attention",
+            "D": "BERT is a decoder-only model; GPT is an encoder-only model"
+          },
+          "answer": "B",
+          "explanation": "BERT (Devlin et al., 2018): masked LM \u2014 predicts randomly masked tokens using full bidirectional context. Encoder-only architecture \u2014 excellent for understanding tasks (sentiment, NER, SQuAD). GPT (Radford et al., 2018): causal LM \u2014 predicts next token given left context only. Decoder-only \u2014 excellent for generation. GPT-4/Claude/Gemini are all GPT-family decoder-only models.",
+          "source": "Devlin et al. BERT. NAACL, 2019. https://arxiv.org/abs/1810.04805; Radford et al. GPT. OpenAI, 2018."
+        },
+        {
+          "q_id": "Q06-MQ4-05",
+          "bloom": "L3",
+          "skill": "Evaluate",
+          "stem": "You must choose between fine-tuning BERT and fine-tuning GPT-2 for a sentiment classification task on 10,000 product reviews. Which is more appropriate and why?",
+          "options": {
+            "A": "GPT-2 \u2014 it is a larger model so always outperforms BERT",
+            "B": "BERT \u2014 its bidirectional encoder pre-trained with masked LM captures full sentence context, making it better suited for classification tasks. Fine-tune by adding a [CLS] token classification head and optimising with categorical cross-entropy",
+            "C": "Neither \u2014 only train a model from scratch for sentiment analysis",
+            "D": "GPT-2 \u2014 its causal LM objective is inherently better for understanding sentiment"
+          },
+          "answer": "B",
+          "explanation": "Sentiment classification is an understanding task requiring full contextual representation of the input sentence. BERT's bidirectional attention encodes both left and right context simultaneously \u2014 optimal for this. GPT-2's causal (left-to-right) attention is sub-optimal for classification. Fine-tuning BERT: prepend [CLS], pass through encoder, extract [CLS] embedding, apply classification head. Standard approach achieves ~94% accuracy on SST-2 (Devlin et al., 2018).",
+          "source": "Devlin et al. BERT. NAACL, 2019; Wang et al. GLUE Benchmark. ICLR, 2019. https://gluebenchmark.com"
+        }
+      ]
+    }
+  ],
+  "table_of_contents": [
+    {
+      "mq": 1,
+      "title": "MQ-1 \u00b7 Biological and Artificial Neurons",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q06-MQ1-01",
+        "Q06-MQ1-02",
+        "Q06-MQ1-03",
+        "Q06-MQ1-04",
+        "Q06-MQ1-05"
+      ]
+    },
+    {
+      "mq": 2,
+      "title": "MQ-2 \u00b7 Backpropagation and Gradient Descent",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q06-MQ2-01",
+        "Q06-MQ2-02",
+        "Q06-MQ2-03",
+        "Q06-MQ2-04",
+        "Q06-MQ2-05"
+      ]
+    },
+    {
+      "mq": 3,
+      "title": "MQ-3 \u00b7 Convolutional Neural Networks",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q06-MQ3-01",
+        "Q06-MQ3-02",
+        "Q06-MQ3-03",
+        "Q06-MQ3-04",
+        "Q06-MQ3-05"
+      ]
+    },
+    {
+      "mq": 4,
+      "title": "MQ-4 \u00b7 Recurrent Networks and Transformers",
+      "bloom_mix": "2\u00d7L1, 2\u00d7L2, 1\u00d7L3",
+      "q_ids": [
+        "Q06-MQ4-01",
+        "Q06-MQ4-02",
+        "Q06-MQ4-03",
+        "Q06-MQ4-04",
+        "Q06-MQ4-05"
+      ]
+    }
+  ],
+  "totals": {
+    "mini_quizzes": 4,
+    "questions": 20,
+    "L1": 8,
+    "L2": 8,
+    "L3": 4
+  }
+}

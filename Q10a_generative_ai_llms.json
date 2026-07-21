@@ -1,0 +1,140 @@
+{
+  "module_id": "html-beginner",
+  "module_title": "HTML Beginner-L",
+  "type": "learning",
+  "difficulty": "Beginner",
+  "duration_min": 60,
+  "bloom_levels_covered": [
+    "L1 Remember",
+    "L2 Understand",
+    "L3 Apply"
+  ],
+  "companion_quiz": "HTML Beginner-Q",
+  "sources": [
+    {
+      "id": "S1",
+      "citation": "MDN Web Docs. HTML: HyperText Markup Language.",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTML",
+      "access": "Free."
+    },
+    {
+      "id": "S2",
+      "citation": "W3Schools. HTML Tutorial.",
+      "url": "https://www.w3schools.com/html",
+      "access": "Free."
+    },
+    {
+      "id": "S3",
+      "citation": "web.dev. Learn HTML. Google, 2023.",
+      "url": "https://web.dev/learn/html",
+      "access": "Free."
+    }
+  ],
+  "learning_objectives": [
+    "L1: Define HTML and explain its role alongside CSS and JavaScript.",
+    "L1: Identify the required elements of a valid HTML5 document.",
+    "L1: Name and describe: h1\u2013h6, p, a, img, ul, ol, li, div, span.",
+    "L2: Explain block-level vs inline elements with examples.",
+    "L2: Describe how src and href attributes work.",
+    "L2: Explain the parent-child relationship in the HTML DOM tree.",
+    "L3: Write a valid HTML5 page with heading, paragraph, image, link, and list.",
+    "L3: Debug an HTML snippet with a missing closing tag or broken image path."
+  ],
+  "mini_lessons": [
+    {
+      "ml": 1,
+      "title": "What is HTML?",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-1",
+      "concepts": [
+        {
+          "title": "HTML, CSS, and JavaScript",
+          "explanation": "HTML: structure and content. CSS: visual presentation. JavaScript: interactivity. HTML is always required.",
+          "worked_example": "News article: HTML=headline+paragraphs+image. CSS=fonts/layout. JS=carousel. Remove CSS: plain but readable. Remove HTML: nothing renders.",
+          "source_refs": [
+            "S1",
+            "S3"
+          ]
+        },
+        {
+          "title": "HTML5 Document Structure",
+          "explanation": "<!DOCTYPE html> \u2192 HTML5. <html lang='en'> \u2192 root. <head> \u2192 metadata (not visible). <body> \u2192 all visible content. <meta charset='UTF-8'> \u2192 correct rendering.",
+          "worked_example": "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>My Page</title></head><body><h1>Hello</h1></body></html>",
+          "source_refs": [
+            "S1",
+            "S3"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 2,
+      "title": "Core Tags and Attributes",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-2",
+      "concepts": [
+        {
+          "title": "Headings, Paragraphs, Text",
+          "explanation": "<h1>\u2013<h6>: h1 most important (one per page). <p>: paragraph. <strong>: bold semantic. <em>: italic. Never use headings for visual size only \u2014 use CSS.",
+          "worked_example": "<h1>Web Dev</h1><h2>Getting Started</h2><p>HTML is the <strong>foundation</strong> of every web page.</p>",
+          "source_refs": [
+            "S1",
+            "S2"
+          ]
+        },
+        {
+          "title": "Links, Images, Lists",
+          "explanation": "<a href='URL'>text</a>. target='_blank' opens new tab (add rel='noopener noreferrer'). <img src='path' alt='desc' width='300' height='200'>: self-closing, alt required. <ul>: bullets. <ol>: numbered. <li>: item.",
+          "worked_example": "<a href='https://example.com' target='_blank' rel='noopener'>Visit</a>\n<img src='cat.jpg' alt='Tabby cat' width='400' height='300'>\n<ul><li>HTML</li><li>CSS</li></ul>",
+          "source_refs": [
+            "S1",
+            "S2"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 3,
+      "title": "Block vs Inline and DOM",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-3",
+      "concepts": [
+        {
+          "title": "Block vs Inline",
+          "explanation": "Block: new line, full width \u2014 div, h1\u2013h6, p, ul, ol. Inline: flows in text \u2014 span, a, strong, em, img.",
+          "worked_example": "<div>Full row.</div><p>Paragraph <span>inline span</span> within text.</p>",
+          "source_refs": [
+            "S1",
+            "S3"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 4,
+      "title": "Forms and Semantic HTML",
+      "bloom": "L2-L3",
+      "companion_mini_quiz": "MQ-4",
+      "concepts": [
+        {
+          "title": "HTML Forms",
+          "explanation": "<form action='/submit' method='post'>. GET: URL/searches. POST: body/sensitive data. Inputs: text, email, password, checkbox, radio, submit. <label for='id'>: links to input for accessibility.",
+          "worked_example": "<form action='/login' method='post'><label for='e'>Email:</label><input type='email' id='e' name='email' required><input type='submit' value='Log In'></form>",
+          "source_refs": [
+            "S1",
+            "S3"
+          ]
+        },
+        {
+          "title": "Semantic HTML5",
+          "explanation": "<header>, <nav>, <main> (one per page), <section>, <article>, <aside>, <footer>. Benefits: accessibility, SEO, clean code.",
+          "worked_example": "Non-semantic: <div id='header'>. Semantic: <header><nav>...</nav></header><main>...</main>. Screen readers announce landmarks.",
+          "source_refs": [
+            "S1",
+            "S3"
+          ]
+        }
+      ]
+    }
+  ]
+}

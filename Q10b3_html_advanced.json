@@ -1,0 +1,141 @@
+{
+  "module_id": "introduction-to-ai",
+  "module_title": "Introduction to AI-L",
+  "type": "learning",
+  "difficulty": "Beginner",
+  "duration_min": 60,
+  "bloom_levels_covered": [
+    "L1 Remember",
+    "L2 Understand",
+    "L3 Apply"
+  ],
+  "companion_quiz": "Introduction to AI-Q",
+  "sources": [
+    {
+      "id": "S1",
+      "citation": "Russell & Norvig. AIMA 4th ed. Pearson, 2020.",
+      "url": "https://aima.cs.berkeley.edu",
+      "access": "Free chapter previews."
+    },
+    {
+      "id": "S2",
+      "citation": "MIT OCW 6.034 AI, Fall 2010.",
+      "url": "https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010",
+      "access": "Free."
+    },
+    {
+      "id": "S3",
+      "citation": "Stanford HAI. AI Definitions and Explainers.",
+      "url": "https://hai.stanford.edu",
+      "access": "Free."
+    },
+    {
+      "id": "S4",
+      "citation": "Turing. Computing Machinery and Intelligence. Mind, 1950.",
+      "url": "https://www.csee.umbc.edu/courses/471/papers/turing.pdf",
+      "access": "Free \u2014 public domain."
+    }
+  ],
+  "learning_objectives": [
+    "L1: Define artificial intelligence and distinguish narrow AI from general AI.",
+    "L1: Identify the four AIMA definitions of AI (thinking/acting humanly/rationally).",
+    "L1: Name key milestones: Turing test 1950, Dartmouth 1956, AlexNet 2012, Transformer 2017.",
+    "L2: Describe supervised, unsupervised, and reinforcement learning conceptually.",
+    "L2: Explain the Turing Test and its limitations as a measure of intelligence.",
+    "L2: Compare rule-based AI with machine learning approaches.",
+    "L3: Classify a real-world AI application by learning type, problem domain, and societal impact.",
+    "L3: Evaluate whether a system meets criteria for narrow vs general AI."
+  ],
+  "mini_lessons": [
+    {
+      "ml": 1,
+      "title": "What is Artificial Intelligence?",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-1",
+      "concepts": [
+        {
+          "title": "Defining AI: Four Perspectives",
+          "explanation": "Russell & Norvig organise AI into 2\u00d72: thinking vs acting, human vs rational standard. Modern AI focuses on rational agents \u2014 perceive via sensors, act via actuators to maximise a performance measure. Narrow AI: task-specific. AGI: human-level flexibility \u2014 does not exist as of 2026.",
+          "worked_example": "AlphaFold\u2192rational acting. GPT\u2192acting humanly. Deep Blue\u2192rational acting via alpha-beta search.",
+          "source_refs": [
+            "S1 Ch.1",
+            "S2 Lecture 1"
+          ]
+        },
+        {
+          "title": "The Turing Test and Its Limitations",
+          "explanation": "Turing (1950): if interrogator cannot distinguish machine from human via text, machine is 'intelligent'. Limitations: anthropocentric, gameable (ELIZA), excludes embodiment, Chinese Room argument (Searle 1980) \u2014 syntax \u2260 semantics.",
+          "worked_example": "ELIZA (1966): substitution rules only, no internal model \u2014 yet users believed it understood them.",
+          "source_refs": [
+            "S4",
+            "S1 Ch.1"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 2,
+      "title": "A Brief History of AI",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-2",
+      "concepts": [
+        {
+          "title": "Key Milestones",
+          "explanation": "1943 McCulloch-Pitts neuron. 1950 Turing paper. 1956 Dartmouth \u2014 'AI' coined. 1966 ELIZA. 1980s expert systems. 1987 Second AI Winter. 1997 Deep Blue. 2012 AlexNet. 2017 Transformer. 2020 AlphaFold. 2022+ LLMs.",
+          "worked_example": "Two AI Winters: promises outpaced results. Each revival needed new hardware (GPUs), data (internet scale), and methods (deep learning).",
+          "source_refs": [
+            "S1 Ch.1"
+          ]
+        },
+        {
+          "title": "Why Expert Systems Failed",
+          "explanation": "Hand-crafted rules: knowledge acquisition bottleneck, brittleness outside rule base, cannot learn. ML overcame these by learning from data.",
+          "worked_example": "MYCIN: 65\u201370% diagnostic accuracy, never deployed due to liability, brittleness, and integration barriers.",
+          "source_refs": [
+            "S1 Ch.1"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 3,
+      "title": "Learning Paradigms",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-3",
+      "concepts": [
+        {
+          "title": "Supervised, Unsupervised, Reinforcement Learning",
+          "explanation": "Supervised: learn f(X)\u2192y from labelled examples. Unsupervised: find patterns in unlabelled data. Reinforcement: agent maximises cumulative reward via trial and error. Self-supervised: model creates its own labels (e.g. next-token prediction).",
+          "worked_example": "Spam\u2192supervised. Customer segments\u2192unsupervised. AlphaGo\u2192RL. GPT pre-training\u2192self-supervised.",
+          "source_refs": [
+            "S1 Ch.1"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 4,
+      "title": "Intelligent Agents and PEAS",
+      "bloom": "L2-L3",
+      "companion_mini_quiz": "MQ-4",
+      "concepts": [
+        {
+          "title": "PEAS Framework",
+          "explanation": "Rational agent: selects actions maximising performance measure given percept history. PEAS: Performance, Environment, Actuators, Sensors. Environment properties: fully/partially observable, deterministic/stochastic, episodic/sequential, discrete/continuous, single/multi-agent.",
+          "worked_example": "Self-driving car PEAS \u2014 P: safe/fast/legal; E: roads/traffic/weather; A: steering/throttle/brake; S: cameras/LIDAR/GPS/radar.",
+          "source_refs": [
+            "S1 Ch.2"
+          ]
+        },
+        {
+          "title": "Four Agent Types",
+          "explanation": "Simple reflex: condition-action rules. Model-based: adds internal state. Goal-based: searches action sequences. Utility-based: maximises expected utility. Learning agents: improve over time.",
+          "worked_example": "Thermostat\u2192simple reflex. GPS navigator\u2192goal-based. Self-driving car\u2192utility-based+learning.",
+          "source_refs": [
+            "S1 Ch.2"
+          ]
+        }
+      ]
+    }
+  ]
+}

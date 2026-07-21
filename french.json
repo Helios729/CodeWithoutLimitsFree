@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.1",
+  "module_type": "translator",
+  "generated": "2026-06-26",
+  "verified_on": "2026-06-26",
+  "verification_policy": "Human verification recommended for any low/very-low-resource output before client delivery.",
+  "language": {
+    "name_en": "Brazilian Portuguese",
+    "autonym": "Português (Brasil)",
+    "iso_639_1": "pt",
+    "iso_639_3": "por",
+    "flores_200_code": "por_Latn",
+    "bcp_47": "pt-BR",
+    "script": "Latin",
+    "regions": [
+      "Brazil"
+    ],
+    "resource_level": "high"
+  },
+  "default_pivot_languages": [
+    "English"
+  ],
+  "recommended_resources": [
+    {
+      "name": "OPUS-MT (opus-mt-tc-big-en-pt)",
+      "type": "model",
+      "modality": "text",
+      "provider": "Helsinki-NLP",
+      "venue": "Tiedemann & Thottingal, EAMT 2020 (aclanthology.org/2020.eamt-1.61); Tiedemann et al., LRE 2023",
+      "license": "CC-BY-4.0",
+      "commercial_use": true,
+      "huggingface_id": "Helsinki-NLP/opus-mt-tc-big-en-pt",
+      "url": "https://huggingface.co/Helsinki-NLP/opus-mt-tc-big-en-pt",
+      "language_pairs": [
+        "en->pt",
+        "pt->en"
+      ],
+      "offline": "Lightweight per-pair Marian-NMT model — among the best for offline mobile.",
+      "notes": "Use the >>por<< prefix token to steer the target variant; ROMANCE family covers many pairs.",
+      "verified_on": "2026-06-26"
+    },
+    {
+      "name": "MADLAD-400-3B-MT",
+      "type": "model",
+      "modality": "text",
+      "provider": "Google",
+      "venue": "Kudugunta et al., NeurIPS 2023 (arXiv:2309.04662)",
+      "license": "Apache-2.0",
+      "commercial_use": true,
+      "huggingface_id": "google/madlad400-3b-mt",
+      "url": "https://huggingface.co/google/madlad400-3b-mt",
+      "language_pairs": [
+        "en<->pt",
+        "pt<->many"
+      ],
+      "offline": "GGUF 2–4-bit quantization brings the 3B model under ~1–2 GB.",
+      "notes": "MADLAD-400 distinguishes pt (Brazil) from pt-PT in its data.",
+      "verified_on": "2026-06-26"
+    },
+    {
+      "name": "NLLB-200 (distilled 600M)",
+      "type": "model",
+      "modality": "text",
+      "provider": "Meta AI",
+      "venue": "NLLB Team et al., 2022 (arXiv:2207.04672)",
+      "license": "CC-BY-NC-4.0",
+      "commercial_use": false,
+      "huggingface_id": "facebook/nllb-200-distilled-600M",
+      "url": "https://huggingface.co/facebook/nllb-200-distilled-600M",
+      "language_pairs": [
+        "eng_Latn<->por_Latn",
+        "por_Latn<->many"
+      ],
+      "offline": "Convert to CTranslate2 / quantize (int8) for low-RAM phones.",
+      "notes": "Strong low-resource coverage; non-commercial licence.",
+      "verified_on": "2026-06-26"
+    }
+  ],
+  "speech_to_text": {
+    "covered_by_seamless_m4t_v2": true,
+    "resources": [
+      {
+        "name": "SeamlessM4T v2 (large)",
+        "type": "model",
+        "modality": "speech+text (ASR, speech→text translation, S2ST, T2ST, T2TT)",
+        "provider": "Meta AI (Seamless Communication)",
+        "venue": "Seamless Communication et al., 2023 (arXiv:2312.05187)",
+        "license": "CC-BY-NC-4.0",
+        "commercial_use": false,
+        "huggingface_id": "facebook/seamless-m4t-v2-large",
+        "url": "https://huggingface.co/facebook/seamless-m4t-v2-large",
+        "language_pairs": [
+          "pt speech->text",
+          "pt speech->en text"
+        ],
+        "offline": "Large multimodal model (~2B+); run server-side or quantize/prune for device. Heavier than text-only MT.",
+        "notes": "Speech recognition + speech translation across ~100 languages; non-commercial licence.",
+        "verified_on": "2026-06-26"
+      }
+    ],
+    "note": "SeamlessM4T v2 supports Portuguese speech."
+  },
+  "integration_notes": "Models default to Brazilian usage; flag European Portuguese (pt-PT) separately if needed."
+}

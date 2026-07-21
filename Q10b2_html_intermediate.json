@@ -1,0 +1,148 @@
+{
+  "module_id": "natural-language-processing",
+  "module_title": "Natural Language Processing-L",
+  "type": "learning",
+  "difficulty": "Advanced",
+  "duration_min": 90,
+  "bloom_levels_covered": [
+    "L1 Remember",
+    "L2 Understand",
+    "L3 Apply"
+  ],
+  "companion_quiz": "Natural Language Processing-Q",
+  "sources": [
+    {
+      "id": "S1",
+      "citation": "MIT 6.S191 Intro to Deep Learning, 2024.",
+      "url": "http://introtodeeplearning.com",
+      "access": "Free."
+    },
+    {
+      "id": "S2",
+      "citation": "Goodfellow et al. Deep Learning. MIT Press, 2016.",
+      "url": "https://www.deeplearningbook.org",
+      "access": "Free."
+    },
+    {
+      "id": "S3",
+      "citation": "Stanford CS224N: NLP with Deep Learning, 2024.",
+      "url": "https://web.stanford.edu/class/cs224n",
+      "access": "Free."
+    },
+    {
+      "id": "S4",
+      "citation": "Devlin et al. BERT. arXiv:1810.04805, 2018.",
+      "url": "https://arxiv.org/abs/1810.04805",
+      "access": "Free."
+    },
+    {
+      "id": "S5",
+      "citation": "Hugging Face NLP Course.",
+      "url": "https://huggingface.co/learn/nlp-course",
+      "access": "Free."
+    }
+  ],
+  "learning_objectives": [
+    "L1: Identify steps in a standard NLP preprocessing pipeline.",
+    "L1: Define tokenisation, stemming, lemmatisation, BoW, TF-IDF, and word embeddings.",
+    "L1: State the difference between BERT (encoder-only) and GPT (decoder-only).",
+    "L2: Explain why TF-IDF outperforms raw counts for document retrieval.",
+    "L2: Describe how word2vec skip-gram produces semantic vectors.",
+    "L2: Explain how BERT's masked language modelling enables transfer learning.",
+    "L2: Compare sentiment analysis, NER, and machine translation as NLP tasks.",
+    "L3: Design a text classification pipeline from raw text to trained model.",
+    "L3: Diagnose why a sentiment model fails on negation/irony and propose remediation."
+  ],
+  "mini_lessons": [
+    {
+      "ml": 1,
+      "title": "Text Preprocessing and Representations",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-1",
+      "concepts": [
+        {
+          "title": "Preprocessing Pipeline",
+          "explanation": "(1) Lowercasing. (2) Tokenisation \u2014 word, subword (BPE/WordPiece), character. (3) Stop-word removal \u2014 useful for BoW, harmful for syntax-sensitive tasks (removes 'not'). (4) Stemming \u2014 fast but inaccurate. (5) Lemmatisation \u2014 accurate. Transformers use subword with minimal preprocessing.",
+          "worked_example": "GPT-2 BPE on 'The caf\u00e9 Wi-Fi is not working': ['The','caf\u00e9','Wi','-','Fi','is','n't','working'].",
+          "source_refs": [
+            "S2 Ch.2"
+          ]
+        },
+        {
+          "title": "BoW, TF-IDF, and Embeddings",
+          "explanation": "BoW: sparse count vector, ignores order/semantics. TF-IDF: TF\u00d7log(N/df_t) \u2014 upweights discriminative terms. Word embeddings: dense semantic vectors. Contextual (BERT/GPT): token vector depends on full context.",
+          "worked_example": "'the' in all 3 docs: IDF=0 \u2192 zeroed. 'chased' in 1 doc: IDF=1.099 \u2192 highest weight.",
+          "source_refs": [
+            "S2 Ch.6",
+            "S3 Lecture 2"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 2,
+      "title": "Word Embeddings and Seq2Seq",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-2",
+      "concepts": [
+        {
+          "title": "word2vec and GloVe",
+          "explanation": "Skip-gram: predict context words from centre word within window k. Negative sampling: distinguish real pairs from noise. GloVe: trains on global co-occurrence matrix. Both produce static embeddings.",
+          "worked_example": "vec(king)\u2212vec(man)+vec(woman)\u2248vec(queen). Relational structure as geometric offsets.",
+          "source_refs": [
+            "S3 Lecture 2"
+          ]
+        },
+        {
+          "title": "Seq2Seq and Attention",
+          "explanation": "Encoder-Decoder RNN: fixed context vector bottleneck. Bahdanau attention (2015): weighted sum over all encoder states at each decode step. Generalised to self-attention in Transformer (2017).",
+          "worked_example": "En\u2192Fr 'chat': attention peaks on encoder state for 'cat'. Near-diagonal for similar language pairs.",
+          "source_refs": [
+            "S3 Lecture 7"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 3,
+      "title": "BERT vs GPT",
+      "bloom": "L1-L2",
+      "companion_mini_quiz": "MQ-3",
+      "concepts": [
+        {
+          "title": "BERT and GPT Architectures",
+          "explanation": "BERT: encoder-only, bidirectional. Pre-trained with MLM (15% masked) + NSP. Best for understanding: classification, NER, QA. GPT: decoder-only, causal (left-to-right). Pre-trained with next-token prediction. Best for generation.",
+          "worked_example": "Fine-tuning BERT: BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2). Only classification head is random.",
+          "source_refs": [
+            "S4",
+            "S5"
+          ]
+        }
+      ]
+    },
+    {
+      "ml": 4,
+      "title": "NLP Tasks and Responsible NLP",
+      "bloom": "L2-L3",
+      "companion_mini_quiz": "MQ-4",
+      "concepts": [
+        {
+          "title": "Sentiment, NER, and MT",
+          "explanation": "Sentiment: document/aspect level; challenges: negation, irony. NER: IOB tagging, BERT-NER ~92 F1 on CoNLL-2003. MT: Transformer seq2seq, BLEU >40 = high quality.",
+          "worked_example": "IOB: 'Barack Obama visited Paris last June' \u2192 [B-PER,I-PER,O,B-LOC,O,B-DATE,I-DATE].",
+          "source_refs": [
+            "S3 Lectures 5-6"
+          ]
+        },
+        {
+          "title": "Bias and Limitations",
+          "explanation": "Embedding bias: gender stereotypes in word2vec. Training data bias: domain mismatch. Hallucination: fluent but factually wrong. Mitigations: debiasing, diverse data, RAG, model cards.",
+          "worked_example": "Negation failure: 'not boring at all' \u2192 NEGATIVE. Fix: augment with negation examples, fine-tune BERT.",
+          "source_refs": [
+            "S2 Ch.4"
+          ]
+        }
+      ]
+    }
+  ]
+}

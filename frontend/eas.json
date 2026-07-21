@@ -11,7 +11,10 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_BACKEND_URL": "http://localhost:8000"
+        "EXPO_PUBLIC_BACKEND_URL": "http://localhost:8000",
+        "EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID": "417260255640-iqhe0gvjk7jjtmn1jpfe661uo1rlqng6.apps.googleusercontent.com",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "417260255640-3p4no932buuk4iimdm724r187uukif4p.apps.googleusercontent.com",
+        "EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID": "REPLACE-WITH-IOS-OAUTH-CLIENT-ID.apps.googleusercontent.com"
       }
     },
     "preview": {
@@ -21,7 +24,10 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_BACKEND_URL": "https://codewithoutlimits.org"
+        "EXPO_PUBLIC_BACKEND_URL": "https://codewithoutlimits.org",
+        "EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID": "417260255640-iqhe0gvjk7jjtmn1jpfe661uo1rlqng6.apps.googleusercontent.com",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "417260255640-3p4no932buuk4iimdm724r187uukif4p.apps.googleusercontent.com",
+        "EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID": "REPLACE-WITH-IOS-OAUTH-CLIENT-ID.apps.googleusercontent.com"
       }
     },
     "production": {
@@ -31,7 +37,10 @@
         "buildType": "app-bundle"
       },
       "env": {
-        "EXPO_PUBLIC_BACKEND_URL": "https://codewithoutlimits.org"
+        "EXPO_PUBLIC_BACKEND_URL": "https://codewithoutlimits.org",
+        "EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID": "417260255640-iqhe0gvjk7jjtmn1jpfe661uo1rlqng6.apps.googleusercontent.com",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "417260255640-3p4no932buuk4iimdm724r187uukif4p.apps.googleusercontent.com",
+        "EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID": "REPLACE-WITH-IOS-OAUTH-CLIENT-ID.apps.googleusercontent.com"
       }
     }
   },

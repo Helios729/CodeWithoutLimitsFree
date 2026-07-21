@@ -81,7 +81,11 @@ mongo = AsyncIOMotorClient(mongo_url)
 db = mongo[os.environ["DB_NAME"]]
 
 EMERGENT_LLM_KEY = os.environ.get("EMERGENT_LLM_KEY", "")
-GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", "")
+GOOGLE_CLIENT_IDS = {
+    v.strip()
+    for v in os.environ.get("GOOGLE_CLIENT_IDS", os.environ.get("GOOGLE_CLIENT_ID", "")).split(",")
+    if v.strip()
+}
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-pro")
 FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000")
 STRIPE_API_KEY = os.environ.get("STRIPE_API_KEY", "")
@@ -189,20 +193,27 @@ async def root():
 async def auth_session(body: GoogleTokenIn):
     """Exchange a Google-issued ID token (obtained client-side via
     expo-auth-session's Google sign-in) for a persistent session_token.
-    Verifies the token's signature and audience directly against Google —
-    no third-party auth broker involved. Upserts the user by email so
-    repeated sign-ins never create duplicates."""
-    if not GOOGLE_CLIENT_ID:
-        raise HTTPException(500, "Server is not configured with GOOGLE_CLIENT_ID")
+    Verifies the token's signature directly against Google, then checks
+    the audience (aud) claim against every OAuth client ID we've issued
+    (Android, iOS, Web are each a distinct client ID, since Google mints
+    a token per-client) — no third-party auth broker involved. Upserts
+    the user by email so repeated sign-ins never create duplicates."""
+    if not GOOGLE_CLIENT_IDS:
+        raise HTTPException(500, "Server is not configured with GOOGLE_CLIENT_IDS")
     try:
+        # audience=None skips verify_oauth2_token's built-in single-audience
+        # check; we validate aud ourselves against the whole allowed set.
         data = google_id_token.verify_oauth2_token(
-            body.id_token, GoogleAuthRequest(), GOOGLE_CLIENT_ID
+            body.id_token, GoogleAuthRequest(), audience=None
         )
     except ValueError as e:
         raise HTTPException(401, f"Invalid Google ID token: {e}")
     except Exception as e:
         logger.exception("Google token verification failed")
         raise HTTPException(502, f"Google verification unreachable: {e}")
+
+    if data.get("aud") not in GOOGLE_CLIENT_IDS:
+        raise HTTPException(401, "Google token was not issued for this app")
 
     email = data.get("email")
     if not email:

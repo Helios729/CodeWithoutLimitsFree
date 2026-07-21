@@ -1,0 +1,52 @@
+{
+  "summary": "Seat-invite / Monthly Cooperative team-management feature verified end-to-end. Backend: 16/16 new pytest tests in /app/backend/tests/test_seat_invites.py all pass, covering GET /api/account/seats (monthly + free), POST /api/account/invite (owner happy path, non-owner 403, free 400 with 'Monthly Cooperative' copy, team-full 400), GET /api/account/invite/{token} (valid/expired/used/404, public — no auth required), POST /api/account/invite/accept (account_id swap verified in DB and via /auth/me, replay returns 400 'already been used', joinee's /usage/me flips to tier='monthly' with monthly_prompts_cap=250, monthly_usage row keyed by account_id confirms pool sharing), DELETE /api/account/seats/{user_id} (teammate moves to a NEW free personal account; self-removal blocked with 400 'cannot remove themselves'), and DELETE /api/account/invite/{token} for revoke. Full suite is 43/43 green (16 new + 27 prior regression). Frontend (mobile 390x844, real EXPO_BACKEND_URL, sessions injected into localStorage as auth_token): (1) monthly-owner Account screen shows 'Manage your team' testID='manage-team-btn'; (2) free-tier Account screen correctly HIDES manage-team-btn; (3) /account/seats renders '1 OF 3 SEATS USED', owner seat row with '· Owner · You', invite-label-input and invite-create-btn — clicking creates an invite and the result block exposes the join URL of shape '<base>/account/join?token=<12-hex>'; (4) /account/join?token=<valid> with a signed-in user shows testID='join-title' ('Join UI Owner on Code Without Limits?'), italic label '“Maria”', and testID='join-accept-btn'; signed-out user instead sees testID='join-signin-btn' that routes to /welcome with the join URL preserved. No deprecated Expo packages introduced in the new code (no expo-av/expo-barcode-scanner/expo-background-fetch).",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/account/seats", "issue": "seats list is capped to 10 via .to_list(10) and pending invites to 10. With seats_allowed=3 this is fine, but if seats_allowed ever increases the cap will silently truncate. /app/backend/server.py:604,609."},
+      {"endpoint": "POST /api/account/invite/accept", "issue": "Race-window note in the docstring claims the seat cap re-check is transactional, but Motor does not start a real MongoDB transaction here — two simultaneous accepts on the same single open seat could theoretically both pass count_documents and create a 4th seat. Low-risk for a 3-seat plan, but worth noting. /app/backend/server.py:712-715."},
+      {"endpoint": "POST /api/account/invite/accept", "issue": "Acceptance deletes the joinee's orphaned personal account but does NOT clean up monthly_usage / daily_usage / payments rows scoped to the old account_id. Likely fine (the joinee was on free), but mention if a paying user (day_pass) accepts a monthly invite — their previous account row is dropped while related usage stays orphaned."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/account/seats", "issues": ["Gate copy says 'invite up to 2 teammates' which is consistent with 3-seat plan (1 owner + 2). OK.", "After invite is created, the 'invite-result' block appears below the fold on a 390x844 viewport when the seats list is at the top of the scroll view; users might miss it. Consider scrolling to the result on success or moving the result block above the form."]},
+      {"screen": "/(tabs)/account", "issues": ["'Manage your team' link uses Ionicons + Text but lacks visual emphasis (no card background) compared to the surrounding statsCard/tierCard. Functional, but easy to overlook between the stats card and the tier list."]}
+    ],
+    "react_native_issues": [
+      {"component": "shadow* style props", "issue": "Pre-existing console warning 'shadow* style props are deprecated. Use boxShadow.' still present (not introduced by this iteration). Reference: /app/frontend/app/(tabs)/account.tsx:262-269 (tierCardActive)."},
+      {"component": "pointerEvents prop", "issue": "Pre-existing console warning 'props.pointerEvents is deprecated. Use style.pointerEvents.' carried over from previous iterations."}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_seat_invites.py",
+    "/app/backend/tests/conftest.py",
+    "/app/test_reports/pytest/seat_invites_results.xml",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Optional polish: auto-scroll to (or move above the form) the 'invite-result' block in /app/frontend/app/account/seats.tsx so newly created invite link is immediately visible on small screens.",
+    "Optional: replace .to_list(10) with .to_list(None) (or seats_allowed) in /app/backend/server.py:604,609 so the listing never silently truncates if seats_allowed changes later.",
+    "Optional doc: address the soft race window in POST /api/account/invite/accept (server.py:712-715) — either with a Mongo transaction or a $inc-and-check atomic update.",
+    "Carry-over: address pre-existing React Native Web deprecation warnings (shadow* → boxShadow, pointerEvents prop → style.pointerEvents). Not introduced by this iteration."
+  ],
+  "critical_code_review_comments": [
+    "All new endpoints correctly use the /api prefix via the apiRouter (server.py:597,625,666,694,738,750) — good.",
+    "POST /api/account/invite uses uuid.uuid4().hex[:12] (12 hex chars ≈ 48 bits). Acceptable for a 14-day single-use invite shared via private channels, but consider secrets.token_urlsafe(16) for stronger entropy.",
+    "GET /api/account/invite/{token} is correctly unauthenticated (matches the review request) and only returns owner_name + label — no account_id / created_by leak. Good.",
+    "DELETE /api/account/seats/{seat_user_id} creates a new account with seats_allowed=1, tier='free', is_account_owner=True for the removed teammate (server.py:765-777). Matches spec.",
+    "GET /api/account/seats does not require ownership — every seat on the account can read it. This matches the docstring 'Anyone on the account can read this so they know who else is on the team.'",
+    "FRONTEND_URL is read from /app/backend/.env and used to build join_url — verified the produced URL uses the public preview origin."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_seat_invites.py (NEW)"
+  ],
+  "success_rate": {"backend": "100% (16/16 new, 43/43 total)", "frontend": "100% (all 5 requested UI testIDs/flows verified)"},
+  "seed_data_creation": "Backend tests use the existing seed_user fixture in conftest.py (already cleans up after each test). For UI testing I temporarily seeded two users in Mongo with predictable session tokens (sess_UI_owner_token monthly+owner, sess_UI_free_token free) plus one invite token 'uitoken123abc'; all seeded rows were removed at the end of the run.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Seat-invite endpoints live under /api/account/* in server.py:597-778. New collection account_invites is indexed on token (unique) and account_id. The fixture pattern in conftest.py auto-cleans seeded users/accounts/sessions but does NOT clean account_invites or monthly_usage rows the seat tests touch — each test class explicitly deletes its own account_invites docs. For UI sessions you can write straight into Mongo and stash the session_token into web localStorage under key 'auth_token' (TOKEN_KEY in /app/frontend/src/lib/api.ts:14). When testing the join screen as a signed-in user, set auth_token AFTER calling page.goto('/welcome') so the WebStorage origin matches.",
+  "rca_of_issue": "n/a — no failures."
+}

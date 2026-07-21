@@ -1,0 +1,64 @@
+{
+  "summary": "Iteration 9 bug-fix verification for the four user-reported issues. BUG 1 (external links broken on web): FIXED via /app/frontend/src/lib/openExternal.ts. Verified on the public preview origin (390x844): /translator/haitian_creole renders 3 verified resource cards; tapping the Kreyòl-MT huggingface URL row triggers page.expect_popup() to https://huggingface.co/jhu-clsp/kreyol-mt in a new tab. On /resources the Coddy and Alison course cards open https://coddy.tech/ and https://alison.com/ in new tabs respectively (popup URLs captured). BUG 2 (18→17 CTA): FIXED. /programme module-bank CTA reads exactly 'Open the 17 Income Modules' (count=1); no 'Open the 18 Income Modules' anywhere on the page. /income still renders '17 MONETISABLE DIGITAL-ASSET MODULES' and the 'Why is Task 18 the same as Task 2?' callout — regression intact. BUG 4 (MIT licence card + LICENSE file): FIXED. /programme renders testID 'programme-mit-license' with title 'Licence — MIT (Open Educational Resource)', the three use/copy-modify/sell bullets, the © 2026 Carline Romain attribution box mentioning Mondial Connections & Community Changers Foundations, and the tappable testID 'programme-mit-license-link' labelled 'Read the full MIT License (opensource.org)'. Repo file /app/LICENSE exists with full MIT text and matching copyright. BUG 3 (programme structure weeks clickable): NOT FIXED — field-name mismatch between API and component. GET /api/programme returns each week as {week, title, description} (e.g. W1 'Phone as Production Studio', W3 'Choose One Income Module', W4 'Community Client Pilot') but /app/frontend/app/programme.tsx:125 derives the routing keyword from `w.theme || w.focus`, both of which are undefined for this payload. The keyword check therefore always misses, no `programme-week-N` testID is attached, no chevron-forward icon renders, the row stays a plain View, and weekTheme falls back to the placeholder string 'Week'. Playwright confirms: 0 elements match `[data-testid^=\"programme-week-\"]`, none of the week titles ('Phone as Production Studio', 'AI Basics', 'Choose One Income Module', 'Community Client Pilot', 'Packaging', 'Cooperative Marketplace') are present in the DOM. Regression checks all green: /api/income/modules count=17 + duplication_note present, /api/programme weeks=6 + 7 references, /api/translator 8 modules, /api/translator/haitian_creole HTTP 200, /api/resources reading_list.items=5 + open_online_courses.groups=4, /welcome renders the Kenscoff mountain SVG, /mission renders the pilot box. No new console errors beyond the carry-over RN-Web 'shadow*' deprecation warning.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Programme structure weeks (programme.tsx)",
+        "issue": "BUG 3 NOT FIXED. The component reads `w.theme || w.focus` at /app/frontend/app/programme.tsx:125 to decide the route, but the backend `/api/programme` returns each week as {week, title, description}. Both `theme` and `focus` are undefined, so `themeLc` is empty, every keyword check (income/asset/entrepreneur/monetis/translat/language/html/module/learn/quiz/assess) misses, `target` stays null, no `programme-week-N` testID is rendered, no chevron-forward icon appears, and the row remains a non-tappable View. weekTheme also falls back to the literal 'Week' placeholder because `w.theme || w.focus || 'Week'` resolves to 'Week'. Playwright reports 0 elements matching `[data-testid^=\"programme-week-\"]` and 0 occurrences of any actual week title ('Phone as Production Studio', 'AI Basics', 'Choose One Income Module', 'Community Client Pilot', 'Packaging', 'Cooperative Marketplace') on /programme.",
+        "testID": "programme-week-*",
+        "priority": "HIGH"
+      }
+    ],
+    "integration_issues": [
+      {
+        "flow": "Programme weeks → route to /income or /translator or /(tabs)/learn or /(tabs)/quiz",
+        "issue": "Field-name contract mismatch between backend and frontend. Either update programme.tsx to read `w.title || w.theme || w.focus` and `w.description || w.focus` (and `w.activities || []`), or update the backend payload in /app/backend/curriculum_data/*.json + content_extra.py to emit `theme`/`focus`/`activities`. Recommend the frontend-side fix because the existing API contract is already documented as `{week,title,description}` in the seed data.",
+        "affected_testIDs": ["programme-week-1", "programme-week-2", "programme-week-3", "programme-week-4", "programme-week-5", "programme-week-6"]
+      }
+    ],
+    "design_issues": [
+      {
+        "screen": "/programme",
+        "issues": [
+          "Because of the BUG 3 field mismatch, each week row currently shows only the W{n} badge and the literal placeholder text 'Week' with no description — the section looks visually broken until the field-name fix lands."
+        ]
+      }
+    ],
+    "react_native_issues": [
+      {"component": "shadow* style props", "issue": "Carry-over RN-Web console warning '\"shadow*\" style props are deprecated. Use \"boxShadow\".' Non-blocking, same as iterations 6–7."}
+    ]
+  },
+  "test_report_links": [
+    "/tmp/iter9/programme_top.jpg",
+    "/tmp/iter9/programme_weeks.jpg",
+    "/tmp/iter9/programme_license.jpg",
+    "/tmp/iter9/translator_hc_top.jpg",
+    "/tmp/iter9/translator_hc_scrolled.jpg",
+    "/tmp/iter9/resources_courses.jpg",
+    "/tmp/iter9/income_top.jpg"
+  ],
+  "action_items": [
+    "Fix BUG 3 by aligning programme.tsx with the actual /api/programme payload: replace `const themeLc = (w.theme || w.focus || '').toLowerCase();` with something like `const themeLc = (w.title || w.theme || w.focus || '').toLowerCase();` and update the render side to use `w.title || w.theme || w.focus || 'Week'` for the heading and `w.description || w.focus` for the body so the W1–W6 rows show their real titles and gain the chevron + testID + onPress. Re-test all six week rows after the fix — at minimum W3 'Choose One Income Module' should route to /income.",
+    "Optional (low priority): silence the RN-Web 'shadow*' deprecation warning by migrating to `boxShadow`."
+  ],
+  "critical_code_review_comments": [
+    "openExternal.ts is a clean fix and is now used everywhere a Linking.openURL used to be (Stripe checkout in account.tsx intentionally left on Linking.openURL — acceptable, Stripe expects same-tab redirect).",
+    "Programme structure routing logic at programme.tsx:121–164 looks correct in principle (TouchableOpacity vs View, chevron, testID interpolation, router.push targets) — only the source field name is wrong. One-line fix.",
+    "MIT license card markup is well-scoped: testIDs `programme-mit-license` (container) and `programme-mit-license-link` (CTA) are unique and trivially testable.",
+    "/app/LICENSE root file is a verbatim MIT license with the requested attribution line — matches the in-app attribution box."
+  ],
+  "updated_files": [],
+  "success_rate": {
+    "backend": "100% (regression endpoints all green: income/modules=17 + duplication_note, programme=6 weeks + 7 refs, translator=8 modules, translator/haitian_creole=200, resources reading=5/course_groups=4)",
+    "frontend": "75% (3 of 4 user-reported bugs verified fixed; BUG 3 still open due to a field-name mismatch between /api/programme and programme.tsx)"
+  },
+  "seed_data_creation": "None — every endpoint exercised here is public and reads from /app/backend/curriculum_data/*.json.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "After the main agent patches programme.tsx (replace `w.theme || w.focus` with `w.title || w.theme || w.focus` in the keyword extraction AND in the rendered weekTheme/sectionBody lines, and consider `w.activities || []` already-empty-safe), re-run /programme on mobile width and assert: (1) Playwright sees 6 elements at `[data-testid^=\"programme-week-\"]`; (2) tapping testID `programme-week-3` (theme 'Choose One Income Module') causes navigation to /income; (3) each row shows its real title text (Phone as Production Studio, AI Basics, etc.) instead of the placeholder 'Week'; (4) the chevron-forward icon is visible on routable rows. Backend payload field names are stable — do NOT touch /api/programme.",
+  "rca_of_issue": "BUG 3 root cause = field-name mismatch. /api/programme.programme_structure.weeks = [{week:int, title:str, description:str}, ...] (confirmed by curl, 6 weeks W1–W6). /app/frontend/app/programme.tsx line 125 derives the routing keyword from `(w.theme || w.focus || '').toLowerCase()` — both undefined for every row, so `themeLc` is the empty string, the if/else-if cascade never matches, `target` remains null, `Row` resolves to `View` (not TouchableOpacity), no testID, no onPress, no chevron, and the render-side `w.theme || w.focus || 'Week'` falls back to the literal word 'Week'. The fix is one line: derive themeLc from `(w.title || w.theme || w.focus || w.description || '')` and the rendered heading from `w.title || w.theme || w.focus`. Reproduction: open /programme on mobile, scroll to 'Entrepreneurship Programme Structure' — you see six rows each labelled only with a W{n} chip and the bare word 'Week', none tappable."
+}

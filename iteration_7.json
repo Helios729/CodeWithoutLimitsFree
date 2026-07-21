@@ -1,0 +1,45 @@
+{
+  "summary": "Iteration 10 verification — all three user-reported bug fixes PASS. BUG 1 (external links blocked by COOP): FIXED — /app/frontend/src/lib/openExternal.ts now routes web popups through `${EXPO_PUBLIC_BACKEND_URL}/api/go?url=...`. Verified live: on /translator/haitian_creole, tapping the Kreyòl-MT URL row triggers window.open('https://token-limit-enforcer.preview.emergentagent.com/api/go?url=https%3A%2F%2Fhuggingface.co%2Fjhu-clsp%2Fkreyol-mt'); on /resources, tapping the Coddy course card triggers window.open('.../api/go?url=https%3A%2F%2Fcoddy.tech%2F'). Backend GET /api/go validates allowlist: huggingface.co/coddy.tech/alison.com all return 302 with Location header equal to input URL; evil.example.com → 403; missing url param → 422; non-http(s) scheme → 400. BUG 2 (programme weeks routing to non-existent /(tabs)/learn): FIXED — programme.tsx now routes 'Phone as Production Studio' → /(tabs)/studio and 'AI Basics' → /(tabs)/home (with the additional keywords studio/phone/production/foundation/basic). Playwright confirmed all 6 testIDs render (programme-week-1..6), every week title appears in the DOM, tapping W1 and W2 navigates away from /programme to /welcome (auth-gate redirect from the tabs route, no 'Unmatched Route' page). BUG 3 (survey forms registry): FIXED — GET /api/forms returns 200 with count=39 (11 learning + 18 income + 8 translator + 2 programme-wide), first item is 'Introduction to AI' (kind=learning), every item has non-empty survey_title and module_id. Frontend /forms screen renders header 'Survey forms registry', surveys-total badge shows 39, 39 cards rendered, search input 'haitian' filters to the Haitian Creole translator card, survey_title 'Code Without Limits — Translator: Haitian Creole survey' is rendered in italic orange (rgb(200,76,49) = brand orange) and module_id is in monospace. Green 'Survey forms registry' tile exists at /(tabs)/home line 173 routing to /forms. Regression: /api/income/modules count=17, /api/programme returns 6 weeks, /api/translator returns 8 modules — all green. Backend pytest 14/14 PASS in 1.81s.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": [
+      {"component": "shadow* style props", "issue": "Carry-over RN-Web console warning: '\"shadow*\" style props are deprecated. Use \"boxShadow\".' Non-blocking, unchanged from iterations 6–9."}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iteration_10.py",
+    "/app/test_reports/pytest/iter10_results.xml",
+    "/tmp/iter10_forms.jpg",
+    "/tmp/iter10_prog_w1_dest.jpg",
+    "/tmp/iter10_translator_hc.jpg",
+    "/tmp/iter10_hf_click.jpg",
+    "/tmp/iter10_resources_coddy.jpg"
+  ],
+  "action_items": [
+    "Optional (low priority, unchanged from prior iterations): silence the RN-Web 'shadow*' deprecation warning by migrating affected components to `boxShadow`."
+  ],
+  "critical_code_review_comments": [
+    "/app/backend/server.py /api/go (lines 811–846) — host allowlist is correct, uses urlparse + exact-host or `.host` suffix match (no naive substring); rejects non-http(s) schemes with 400; FastAPI auto-generates 422 for missing query param. RedirectResponse status 302 is correct. Allowlist includes huggingface.co, coddy.tech, alison.com, docs.google.com, forms.gle, opensource.org, ocw.mit.edu, oli.cmu.edu and the rest of the resource hosts referenced in the curriculum.",
+    "/app/backend/server.py /api/forms (lines 867–937) — count derives from the actual MODULES/income/translator/programme registries so it stays in sync if any of those lists change. Note: spec text says '18 income' which matches the current 17 distinct income modules + duplicate Task #18 surfaced in income_list_summary; if the duplicate gets removed later the /forms count will drop to 38 and the iteration_10 test will need a re-baseline.",
+    "/app/frontend/app/programme.tsx — keyword-routing logic is now driven by `${heading} ${body}`.toLowerCase() so it works with the actual API payload `{week,title,description}`. Added studio/phone/production/foundation/basic keywords so 'Phone as Production Studio' → studio and 'AI Basics' → home as expected.",
+    "/app/frontend/src/lib/openExternal.ts — web-only branch is the right scope; native iOS/Android stays on Linking.openURL where COOP isolation does not exist. Encoded properly via encodeURIComponent."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iteration_10.py (new — 14 pytest tests for /api/forms, /api/go, and regression)"
+  ],
+  "success_rate": {
+    "backend": "100% (14/14 pytest)",
+    "frontend": "100% (3/3 user-reported bugs verified fixed end-to-end on the live preview)"
+  },
+  "seed_data_creation": "None. All endpoints exercised are public.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "If the user populates /app/backend/curriculum_data/survey_forms.json with form_url entries, /api/forms will start returning non-null form_url and the /forms screen will swap the 'Awaiting URL' pill for 'Linked ✓' and render an 'Open the Google Form' button per row (testID `form-open-{module_id}`) that calls openExternal(form_url) — same /api/go pathway. If the income_list_summary stops surfacing the Task #18 duplicate the /api/forms count will become 38 and the test_forms_kind_counts/income==18 assertion needs to drop to 17.",
+  "rca_of_issue": "All three fixes verified at the API and UI layers. BUG 1 RCA: cross-origin-isolated preview (COOP/COEP) blocked direct window.open(huggingface.co) with ERR_BLOCKED_BY_RESPONSE; fix routes web popups through same-origin /api/go which then issues a normal 302, freeing the popup from the opener's isolation context. BUG 2 RCA: previously /(tabs)/learn was a non-existent route; fix retargets to the real tabs studio + home routes and adds matching keywords for the actual API titles ('Phone as Production Studio', 'AI Basics'). BUG 3 RCA: there was no registry of every surveyable module before — fix adds a typed catalog endpoint plus a dedicated /forms screen so the user can mint Google Forms with consistent titles."
+}

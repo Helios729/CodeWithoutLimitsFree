@@ -1,0 +1,30 @@
+{
+  "summary": "Iteration 15 verification PASSED 11/11. Bug 1 (Languages): /api/programme.languages.programme_languages returns the exact 7-language ordered list [English, French, Haitian Creole, Brazilian Portuguese, Spanish, Bambara, Wolof]; note lists all 7 names and no longer contains 'step-by-step in English'; instruction_language mentions English + translator mode; translator_mode_core contains 'Haitian Creole'; translator_mode_best_effort contains 'Bambara'. Bug 2 (Quiz copy): (tabs)/quiz.tsx contains 'Each quiz is exactly 5 questions...' and no '10 questions'; quiz/[topicId].tsx eyebrow contains '5 questions' literal and no '10 questions'. Regression OK: /api/income/modules=200 with count=17, /=200, /healthz=200. Backend needed a manual supervisor restart for /api/programme to reflect updated JSON (content was loaded into memory at startup).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iteration_15.py",
+    "/app/test_reports/pytest/iteration_15.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Note: /api/programme served stale cached language data until backend was restarted (sudo supervisorctl restart backend). This is expected since app_content.json is loaded into memory at app startup; main agent should be aware that JSON curriculum edits require a backend restart to take effect."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iteration_15.py (new)"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 15 verified two content fixes (languages list + quiz '5 questions'). All 11 pytest cases in /app/backend/tests/test_iteration_15.py pass. If curriculum_data JSON files are edited again, restart backend via supervisor so /api/programme returns fresh content.",
+  "rca_of_issue": "N/A — verification only; both fixes are in place and behaving as specified."
+}

@@ -1,0 +1,38 @@
+{
+  "summary": "BUG 3 re-test only. Programme structure now renders real week titles ('Phone as Production Studio', 'AI Basics', 'Choose One Income Module', 'Community Client Pilot', 'Packaging and Pricing', 'Cooperative Marketplace'). 4 of 6 weeks are tappable with chevron-forward indicators (W1, W3, W4, W6). Tapping programme-week-3 ('Choose One Income Module') successfully routed to /income and the Income & Asset Module Bank list rendered. BUG 3 is FIXED.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "bug3_verification": {
+    "real_titles_render": true,
+    "verified_titles": ["Phone as Production Studio", "AI Basics", "Choose One Income Module", "Community Client Pilot", "Packaging and Pricing", "Cooperative Marketplace"],
+    "no_literal_week_placeholder": true,
+    "tappable_week_rows": ["programme-week-1", "programme-week-3", "programme-week-4", "programme-week-6"],
+    "tappable_count": 4,
+    "minimum_required": 3,
+    "tap_test": {
+      "tapped": "programme-week-3 (Choose One Income Module)",
+      "navigated_to": "/income",
+      "income_module_list_rendered": true,
+      "first_line": "Income & Asset Module Bank (Tasks 1\u201317)"
+    },
+    "screenshot": "/app/test_reports/programme_weeks_iter9_1.png"
+  },
+  "notes": [
+    "W2 (AI Basics) and W5 (Packaging and Pricing) intentionally have no route target as none of the keyword triggers match — this is correct behaviour, not a bug; the design only routes weeks whose theme/body matches the keyword set. Requirement was 'at least 3 tappable rows' — satisfied (4)."
+  ],
+  "test_report_links": ["/app/test_reports/iteration_9_1.json", "/app/test_reports/programme_weeks_iter9_1.png"],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "BUG 3 fully verified fixed in iteration_9_1. /app/frontend/app/programme.tsx now reads w.title || w.theme || w.focus for headings and routes weeks whose combined text matches an expanded keyword set. W3 'Choose One Income Module' -> /income works. No further work required on this bug.",
+  "rca_of_issue": "Root cause was a payload schema mismatch: the /api/programme backend returns weeks with fields {title, description, activities} but the frontend originally read only {theme, focus}, producing empty headings (or a literal 'Week' fallback). The expanded keyword set + dual-key read resolves it."
+}

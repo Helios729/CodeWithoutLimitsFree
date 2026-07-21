@@ -1,0 +1,47 @@
+{
+  "summary": "Iteration 6 — Income & Asset Module Bank, Programme overview, L10b-html tabs, and welcome SVG redesign verified end-to-end. Backend: 9/9 new pytest tests in /app/backend/tests/test_content_v6.py all pass against the public preview URL. GET /api/income/modules returns count=18 with full {id,slug,title,role_label,asset,languages,ai_basics_count} on every summary item; all 18 detail endpoints (/api/income/modules/{1..18}) resolve 200 and module 1 carries execution/energy_maximisation/why_it_monetises/community_multiplier/ai_basics_learned/languages; /api/income/modules/999 returns 404. GET /api/programme returns non-empty overview.summary, a 268-char core_rule string, 6 weeks under programme_structure.weeks, 5 programme_languages, and 7 references. GET /api/modules/L10b-html returns tabs == ['Beginner','Intermediate','Advanced'] and every one of the 12 submodules carries a valid difficulty (B1–B4 Beginner, I1–I4 Intermediate, A1–A4 Advanced) with prefixes stripped from titles. Regression: GET /api/modules still returns >=11 modules; first module detail still works; /api/quiz/generate still returns 401 (auth-protected) — no 500. Frontend (mobile 390x844, real EXPO_PUBLIC_BACKEND_URL, no auth): all five routes /welcome, /income, /income/1, /programme, /modules/L10b-html render without red-screen errors and contain the expected copy. /welcome now shows softened multi-layer mountain silhouettes behind 'Turn local knowledge into ownable assets.' with no broken images or pageerrors. /income shows the 18-card list with badges (French/Portuguese/Spanish/English/+1 etc.). /modules/L10b-html shows the three-tab pill bar; tapping 'Advanced' filters to A1 'Web Components' (B1 'What is HTML?' disappears) and titles never contain '[Beginner]/[Intermediate]/[Advanced]' prefixes. Screenshots saved to /tmp/iter6/.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": [
+      {"component": "shadow* / pointerEvents style props", "issue": "Pre-existing console warnings 'shadow* style props are deprecated. Use boxShadow.' and 'props.pointerEvents is deprecated. Use style.pointerEvents.' still present from prior iterations — not introduced by this iteration. Reference: /app/frontend/app/(tabs)/account.tsx and likely a few other screens."}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_content_v6.py",
+    "/app/test_reports/pytest/v6_content_results.xml",
+    "/tmp/iter6/welcome.jpg",
+    "/tmp/iter6/income_index.jpg",
+    "/tmp/iter6/income_detail_1.jpg",
+    "/tmp/iter6/programme.jpg",
+    "/tmp/iter6/modules_html.jpg",
+    "/tmp/iter6/modules_html_advanced.jpg"
+  ],
+  "action_items": [
+    "No new action items for this iteration — all four features pass backend + frontend smoke checks.",
+    "Carry-over (low priority): replace deprecated React Native Web shadow* props with boxShadow and pointerEvents prop with style.pointerEvents to silence console warnings.",
+    "Carry-over advisory note for main agent: expo CLI reports expected versions (expo@~54.0.35, expo-font@~14.0.12, expo-router@~6.0.24) are newer than installed (54.0.34 / 14.0.11 / 6.0.23). App functions fine on the current versions; consider bumping next iteration."
+  ],
+  "critical_code_review_comments": [
+    "content_extra.py loads JSONs once at import time — restart required to pick up edits to income_modules.json / app_content.json. This is a sensible trade-off (no per-request file IO) and matches the existing curriculum.py pattern.",
+    "GET /api/income/modules/{module_id} accepts the id as a string but compares with str(m.get('id')) so '1', 1, and '01' (becomes '01' != '1') behave correctly for integer IDs 1-18. Good.",
+    "GET /api/programme returns curated subset of app_content.json (overview, core_rule, curriculum, system_integration, module_bank_intro, shared_energy_to_income_workflow, languages, supplementary_modules, programme_structure, references). All required-by-spec fields verified present and non-empty.",
+    "module_detail now returns 'tabs' (server.py:726) and per-submodule 'difficulty' (server.py:732). Backwards-compatible for modules without tabs (returns []). Good.",
+    "All five new public endpoints (no auth) consume zero AI tokens — served straight from JSON. Matches the spec.",
+    "No MongoDB _id leak in any new endpoint."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_content_v6.py (NEW)"
+  ],
+  "success_rate": {"backend": "100% (9/9 new content tests pass)", "frontend": "100% (5/5 routes render + tab filtering verified)"},
+  "seed_data_creation": "No seed data required — all 5 new endpoints are public (no auth). Frontend routes were navigated to directly by URL on the public preview origin.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Income Bank + Programme + L10b-html tabs endpoints are public (no Bearer) and served from /app/backend/curriculum_data/*.json via /app/backend/content_extra.py — restart backend (sudo supervisorctl restart backend) to reload JSON edits. /api/modules/L10b-html now returns 'tabs' and per-submodule 'difficulty'; frontend filters submodules by the active tab. The L10b-html module merge in /app/backend/curriculum.py strips '[Beginner]/' '[Intermediate]/' '[Advanced]/' prefixes from submodule titles; if a future PR re-introduces these prefixes the test_content_v6.py::TestHtmlModuleTabs::test_module_has_three_tabs_and_difficulty test will fail. Welcome screen background is now a pure SVG (4-layer Kenscoff silhouette) — confirmed renders without broken image errors.",
+  "rca_of_issue": "n/a — no failures."
+}

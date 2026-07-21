@@ -1,0 +1,39 @@
+{
+  "summary": "Iteration 11 — Google Form survey wiring verified end-to-end. All 10 backend assertions + 5 frontend flows + regression sweep passed. Backend: 13/13 pytest cases green (intro-to-ai, L10b-html, python-fundamentals, income/1, income/2, income/17 all expose correct survey_form_url; income/18 + translator/haitian_creole correctly null; /api/forms returns count=39 with exactly 28 wired (kind=learning + kind=income), translator + programme kinds all null; /api/go?url=forms.gle 302 → forms.gle). Frontend: /forms page header 'Survey forms registry' renders, search 'introduction' filters to Intro to AI card showing 'LINKED ✓' pill and tap on 'Open the Google Form' opens a new tab that flows through /api/go and lands on docs.google.com Google Form. /income/1 bottom shows green 'Share your feedback (Google Form)' card with clipboard icon; tap opens Google Form popup. /income/18 has NO survey card. /translator/haitian_creole has NO survey card. /modules/L10b-html shows BOTH the green survey card AND the terracotta 'Reading List & Free Courses' card. Regression: /welcome renders mountains illustration + sign-in CTA, /resources shows Reading List + Courses, /api/income/modules count=17, /api/programme 200, /api/translator returns 8 modules.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iteration_11.py",
+    "/app/test_reports/pytest/iter11_results.xml",
+    "/tmp/iter11_forms_search.png",
+    "/tmp/iter11_income1_bottom.png",
+    "/tmp/iter11_income18_bottom.png",
+    "/tmp/iter11_translator.png",
+    "/tmp/iter11_l10b_bottom.png",
+    "/tmp/iter11_welcome.png",
+    "/tmp/iter11_resources_top.png"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "survey_forms.json mapping is clean and easy to extend — adding a new form is one JSON line.",
+    "_survey_form_url() lookup is centralised in server.py and reused for learning, income, and translator endpoints, which keeps the wiring DRY.",
+    "/api/go host allowlist already includes forms.gle, so cross-origin-isolation bypass works without extra config."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iteration_11.py (new)"
+  ],
+  "success_rate": {"backend": "100% (13/13)", "frontend": "100% (5/5 flows + regression)"},
+  "seed_data_creation": "None. Tests are read-only against existing seeded curriculum.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 11 wired 28 Google Form URLs in /app/backend/curriculum_data/survey_forms.json. Backend exposes survey_form_url on /api/modules/{id}, /api/income/modules/{id}, /api/translator/{key} (currently null for all translator/programme kinds). /api/forms aggregator returns count=39, 28 wired. Frontend shows green 'Share your feedback (Google Form)' card on module + income detail screens when URL present; the /forms registry page shows 'LINKED ✓' vs 'Awaiting URL' pills. External URL navigation routes through /api/go?url=... to bypass cross-origin-isolation. All passing — safe baseline for further survey wiring.",
+  "rca_of_issue": "N/A — no issues found."
+}

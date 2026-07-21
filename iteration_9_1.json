@@ -1,0 +1,45 @@
+{
+  "summary": "Iteration 12 deployment-readiness verification PASSED. All 9 backend checks green. Root-level probes /, /healthz now return 200 (previously 404 — confirmed in access log: `GET / 404 Not Found` history → `GET / 200 OK` after fix). Pre-seed task is properly env-gated; the latest backend restart log window contains no 'Pre-seeding scraped content' or 'scrape failed' lines. Regressions (api/, income/modules count=17, introduction-to-ai survey_form_url, /api/forms 39/28 wired, /api/go 302) all hold.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iteration_12.py",
+    "/app/test_reports/pytest/iteration_12.xml"
+  ],
+  "test_evidence": {
+    "T1_root": "HTTP 200 body={\"status\":\"ok\",\"service\":\"Code Without Limits API\"}",
+    "T2_healthz": "HTTP 200 body={\"status\":\"ok\"}",
+    "T3_api_root": "HTTP 200 body={\"status\":\"ok\",\"service\":\"Code Without Limits API\"}",
+    "T4_income_modules": "HTTP 200 count=17 (modules array len=18 because two slugs are *-expanded dedup variants; canonical `count` field equals 17 as spec requires)",
+    "T5_introduction_to_ai": "HTTP 200 survey_form_url=https://forms.gle/x5XuawYCBpAAcU5q8 (non-null)",
+    "T6_forms": "HTTP 200 count=39 wired=28",
+    "T7_go_redirect": "HTTP 302 Location=https://forms.gle/x5XuawYCBpAAcU5q8",
+    "T8_preseed_gating": "server.py:1494 `if os.environ.get(\"ENABLE_PRESEED\", \"\").lower() in (\"1\", \"true\", \"yes\"):` guards the `asyncio.create_task(preseed_all(db))` call. Confirmed by regex assertion in test_preseed_gating_is_env_var_controlled.",
+    "T9_log_clean": "Latest backend restart window (post-edit at 01:00:44) shows: 'Code Without Limits API ready' → 'Application startup complete.' with ZERO pre-seed/scrape lines. Historical pre-fix entries (22:43, 23:55, 00:33) still exist further up in the log; that is expected — they were emitted before this iteration's edit. Access log also shows the transition: earlier `GET / 404 Not Found` from the cluster probe → now `GET / 200 OK`."
+  },
+  "action_items": [],
+  "critical_code_review_comments": [
+    "server.py is 1504 lines — exceeds the 700-line guideline. Consider splitting routes into modules (auth, billing, content, agents) in a future cleanup iteration.",
+    "Pre-seed gating is well-commented and defaults to OFF for production — good. Worth documenting ENABLE_PRESEED in README/deploy notes so it can be flipped on for local dev when needed."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iteration_12.py (new — regression suite for deployment-readiness fixes)"
+  ],
+  "success_rate": {
+    "backend": "100%",
+    "frontend": "skipped (per request)"
+  },
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Backend probe endpoints at root (/, /healthz) and pre-seed env gating are verified. Both are covered by /app/backend/tests/test_iteration_12.py and should be re-run on any subsequent server.py edits. Note the access log historically logged `GET / 404` from cluster probes — that should never reappear; if it does, the root_ok() handler was removed or shadowed by include_router ordering.",
+  "rca_of_issue": "Original RCA confirmed by E1 was correct. Pod restart loop traced to (1) k8s probe hitting `/` and getting 404 because every route was mounted under the /api APIRouter, and (2) startup pre-seed firing 8 outbound HTTPS requests with 2 known-bad URLs polluting the error log on every cold start. Both surfaces are now closed: app.get('/') and app.get('/healthz') sit on the FastAPI app directly (not the APIRouter), and preseed_all() is only scheduled when ENABLE_PRESEED is truthy."
+}

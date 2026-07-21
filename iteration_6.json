@@ -1,0 +1,41 @@
+{
+  "summary": "Backend (22/22) and Frontend welcome-screen tests all PASS for Code Guardian. Health, content catalog (8 topics, MIT/Stanford/Berkeley/CMU/Caltech/NSF/ERIC/data.gov), Bearer auth, /auth/me, /usage/me (day_pass caps 6 prompts + 450,000 tokens), quota enforcement (free->429 upgrade msg, day_pass prompt cap, day_pass token cap, monthly 1M cap, expired day_pass auto-downgrade), real Gemini 2.5 Pro quiz generation (10 MCQs each with 4 options + source citation incl. url+institution), quiz submit scoring, /ai/chat (real tokens_charged>0), and Stripe checkout (day_pass $3 + monthly $10 both return live checkout.stripe.com URLs and cs_ session IDs). NO real Stripe purchases attempted. Frontend / route shows welcome screen with testID login-google-btn (52px touch target) and does NOT render tabs when localStorage has no auth_token.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "scraper preseed", "issue": "Two non-fatal scrape warnings during pre-seed: MIT 6.036 syllabus URL hits redirect loop, Caltech research-news category URL returns 404. Other sources for those topics still load; quizzes still generated successfully."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "all", "issues": ["Deprecation console warning: 'shadow*' style props are deprecated. Use 'boxShadow'. Non-blocking but should be migrated for RN Web/Expo 54 compatibility."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/conftest.py",
+    "/app/backend/tests/test_code_guardian.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "(Optional) Migrate `shadow*` StyleSheet props to `boxShadow` in the affected components to silence RN Web deprecation warning.",
+    "(Optional) Update two flaky source URLs in /app/backend/sources.py — MIT 6.036 syllabus (redirect loop) and Caltech research-news category (404) — so scrape pre-seed is fully clean."
+  ],
+  "critical_code_review_comments": [
+    "server.py: all routes prefixed with /api correctly; _id excluded everywhere via projection.",
+    "quota.py: pre-call assert_can_call + post-call record_usage pattern is correctly atomic via Mongo $inc upserts; day-pass expiry is auto-enforced inside get_account.",
+    "billing webhook is mounted on app (not router) so raw body is preserved before JSON parsing — correct.",
+    "Stripe key in .env is rk_live; webhook secret is empty (dev fallback explicitly documented)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/conftest.py (new)",
+    "/app/backend/tests/test_code_guardian.py (new)"
+  ],
+  "success_rate": {"backend": "100% (22/22)", "frontend": "100% (welcome screen flow)"},
+  "seed_data_creation": "Test users / accounts / sessions / daily_usage / monthly_usage seeded directly in MongoDB per test via `seed_user` fixture (prefixed TEST_) and cleaned up in fixture teardown. No persistent test data left behind.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Backend public URL is https://token-limit-enforcer.preview.emergentagent.com/api/*. To test protected endpoints, use the conftest `seed_user` fixture — it inserts a user + account + user_sessions row with Bearer token. EMERGENT_LLM_KEY drives real Gemini 2.5 Pro calls (quiz generation takes ~20s). STRIPE_API_KEY is LIVE; only verify checkout URL shape (checkout.stripe.com / cs_...). Never POST cards. The webhook handler accepts unsigned JSON when STRIPE_WEBHOOK_SECRET is unset (dev fallback)."
+}

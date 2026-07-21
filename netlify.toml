@@ -20,7 +20,7 @@
 # (e.g. Render, Fly.io, Railway).
 [[redirects]]
   from   = "/api/*"
-  to     = "https://REPLACE-WITH-YOUR-BACKEND-HOST.example.com/api/:splat"
+  to     = "https://railway.app/railway.schema.json/api/:splat"
   status = 200
   force  = true
 

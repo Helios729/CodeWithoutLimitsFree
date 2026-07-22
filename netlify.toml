@@ -20,7 +20,7 @@
 # (e.g. Render, Fly.io, Railway).
 [[redirects]]
   from   = "/api/*"
-  to     = "https://railway.app/railway.schema.json/api/:splat"
+  to     = https://railway.com/project/6bd0efe7-7b34-4a80-8ad9-ed8eefa38a0b?environmentId=3257fe95-34f6-4fa8-84c6-17c669ed9617
   status = 200
   force  = true
 
